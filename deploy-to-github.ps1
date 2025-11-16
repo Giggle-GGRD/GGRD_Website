@@ -13,7 +13,7 @@ Write-Host ""
 
 # Konfiguracja - ZMIEN TE WARTOSCI!
 # ============================================================
-$GITHUB_USERNAME = "eurotax"               # Twoja nazwa uzytkownika GitHub
+$GITHUB_USERNAME = "Giggle-GGRD"               # Twoja nazwa uzytkownika GitHub
 $REPO_NAME = "GGRD_Website"                # Nazwa repozytorium
 $REPO_DESCRIPTION = "Giggle Reloaded - Official Website | Fair Launch Memecoin on Solana"
 $REPO_VISIBILITY = "public"                # "public" lub "private"
