@@ -1,888 +1,1686 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Giggle Reloaded ($GGRD) – Meme Community on Solana</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta
-    name="description"
-    content="Giggle Reloaded ($GGRD) – Robin of Gains meme coin on Solana. 1,000,000 fixed supply, fair-launch via Meteora DBC, 10% of supply dedicated to Ukrainian children with cancer via Tabletochki Charity Foundation."
-  />
-  <link rel="icon" type="image/png" href="assets/ggrd-logo-512.png" />
-  <style>
-    :root {
-      --bg-main: #041b16;
-      --bg-card: rgba(8, 28, 25, 0.96);
-      --bg-chip: rgba(8, 40, 35, 0.85);
-      --accent: #00ff99;
-      --accent-soft: #00d18a;
-      --accent-yellow: #ffeb3b;
-      --accent-pink: #ff5ca8;
-      --text-main: #fdfdfd;
-      --text-muted: #b7d0cc;
-      --border-soft: rgba(0, 0, 0, 0.2);
-      --danger: #ff4d4f;
-      --max-width: 1160px;
-    }
-    * {
-      box-sizing: border-box;
-    }
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background:
-        radial-gradient(circle at top left, #25d366 0, transparent 55%),
-        radial-gradient(circle at top right, #ffd600 0, transparent 60%),
-        radial-gradient(circle at bottom, #00c2ff 0, transparent 60%),
-        #041b16;
-      color: var(--text-main);
-    }
-    a {
-      color: var(--accent-yellow);
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#09031a">
 
-    /* Top charity meme-banner */
-    .top-banner {
-      background: linear-gradient(90deg, #00ff99, #00c2ff, #ffd600);
-      color: #042b1b;
-      font-size: 13px;
-      padding: 8px 16px;
-      text-align: center;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    .top-banner span {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      max-width: var(--max-width);
-    }
-    .top-banner-emoji {
-      font-size: 16px;
-    }
+<title>GGRD — Robin of Gains | Fair-Launch Meme Coin on Solana</title>
+<meta name="description" content="Giggle Reloaded ($GGRD) — Robin of Gains. No presale. No tax. Fair launch via Meteora DBC. 10% of supply locked in a Charity Treasury multisig for Ukrainian children with cancer via Tabletochki Charity Foundation.">
 
-    /* NAVBAR */
-    header {
-      border-bottom: 1px solid var(--border-soft);
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      backdrop-filter: blur(14px);
-      background: rgba(4, 27, 22, 0.92);
-    }
-    .nav-inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 10px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .brand img {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.5);
-    }
-    .brand-text-main {
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      font-size: 14px;
-      text-transform: uppercase;
-    }
-    .brand-text-sub {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-    nav ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      font-size: 13px;
-    }
-    nav a {
-      color: var(--text-muted);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-    nav a:hover {
-      color: var(--accent);
-    }
+<link rel="canonical" href="https://ggrd.me/">
 
-    /* LAYOUT */
-    main {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 24px 16px 64px;
-    }
+<link rel="icon" type="image/png" href="assets/ggrd-logo-512.png">
 
-    /* HERO MEME BLOCK */
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
-      gap: 24px;
-      align-items: center;
-      padding: 26px 24px;
-      border-radius: 26px;
-      background:
-        radial-gradient(circle at top left, #00ff99 0, transparent 55%),
-        radial-gradient(circle at bottom, #00c2ff 0, transparent 60%),
-        #02130f;
-      border: 2px solid rgba(0, 0, 0, 0.5);
-      box-shadow:
-        0 18px 40px rgba(0, 0, 0, 0.45),
-        0 0 0 1px rgba(0, 0, 0, 0.65);
-      margin-bottom: 34px;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero:before {
-      content: "FAIR LAUNCH";
-      position: absolute;
-      bottom: -16px;
-      left: -10px;
-      font-size: 70px;
-      font-weight: 900;
-      letter-spacing: 0.08em;
-      color: rgba(0, 0, 0, 0.18);
-      transform: rotate(-12deg);
-      pointer-events: none;
-    }
-    .hero-left {
-      position: relative;
-      z-index: 1;
-    }
-    .hero-chip-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-    .hero-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: rgba(4, 27, 22, 0.85);
-      border: 1px solid rgba(0, 0, 0, 0.5);
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--accent-yellow);
-      font-weight: 700;
-    }
-    .hero-chip span {
-      color: var(--accent);
-    }
-    .hero-title {
-      font-size: clamp(30px, 4vw, 40px);
-      margin: 0 0 4px;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-    .hero-title span {
-      color: var(--accent-yellow);
-    }
-    .hero-subtitle {
-      margin: 0 0 12px;
-      font-size: 17px;
-      font-weight: 600;
-      color: var(--accent);
-    }
-    .hero-description {
-      margin: 0 0 10px;
-      font-size: 14px;
-      color: var(--text-main);
-    }
-    .hero-description em {
-      color: var(--accent-yellow);
-      font-style: normal;
-      font-weight: 600;
-    }
-    .hero-note {
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-    .hero-note strong {
-      color: var(--accent-yellow);
-    }
-    .hero-cta-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 14px;
-    }
-    .btn {
-      border-radius: 999px;
-      padding: 9px 18px;
-      font-size: 14px;
-      border: 2px solid rgba(0, 0, 0, 0.7);
-      cursor: pointer;
-      font-weight: 800;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      text-decoration: none;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      box-shadow: 0 4px 0 rgba(0, 0, 0, 0.55);
-      transition: transform 0.06s ease, box-shadow 0.06s ease, filter 0.1s ease;
-    }
-    .btn-primary {
-      background: linear-gradient(135deg, #00ff99, #00c2ff);
-      color: #03100b;
-    }
-    .btn-secondary {
-      background: rgba(4, 27, 22, 0.95);
-      color: var(--accent-yellow);
-    }
-    .btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 6px 0 rgba(0, 0, 0, 0.6);
-      text-decoration: none;
-      filter: brightness(1.03);
-    }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
-    .hero-right {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .hero-robin-card {
-      position: relative;
-      border-radius: 24px;
-      background: rgba(5, 22, 19, 0.96);
-      border: 2px solid rgba(0, 0, 0, 0.7);
-      padding: 8px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
-      max-width: 360px;
-      width: 100%;
-    }
-    .hero-robin-card img {
-      width: 100%;
-      border-radius: 18px;
-      display: block;
-    }
-    .hero-robin-pill {
-      position: absolute;
-      left: 12px;
-      bottom: 12px;
-      background: rgba(4, 27, 22, 0.92);
-      border-radius: 999px;
-      padding: 3px 10px;
-      font-size: 11px;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      border: 1px solid rgba(0, 0, 0, 0.6);
-    }
-    .hero-robin-pill span {
-      color: var(--accent-yellow);
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Giggle Reloaded">
+<meta property="og:url" content="https://ggrd.me/">
+<meta property="og:title" content="GGRD — Robin of Gains">
+<meta property="og:description" content="No presale. No tax. Fair launch via Meteora DBC. 10% of supply reserved for Ukrainian children with cancer via Tabletochki Charity Foundation.">
+<meta property="og:image" content="https://ggrd.me/assets/ggrd-og-banner.png">
 
-    /* GENERIC SECTIONS */
-    section {
-      margin-bottom: 26px;
-      padding: 18px 20px 20px;
-      border-radius: 22px;
-      background: var(--bg-card);
-      border: 1px solid var(--border-soft);
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
-    }
-    section h2 {
-      margin: 2px 0 8px;
-      font-size: 20px;
-    }
-    .section-kicker {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--accent-soft);
-      font-weight: 700;
-      margin-bottom: 2px;
-    }
-    section p {
-      margin: 0 0 8px;
-      color: var(--text-muted);
-      font-size: 14px;
-      line-height: 1.6;
-    }
-    .two-cols {
-      display: grid;
-      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-      gap: 16px;
-    }
-    .list {
-      list-style: disc;
-      padding-left: 18px;
-      margin: 6px 0 6px;
-      color: var(--text-muted);
-      font-size: 14px;
-    }
-    .mono {
-      font-family: "JetBrains Mono", "Fira Code", Menlo, Consolas, monospace;
-      font-size: 12px;
-      word-break: break-all;
-      color: var(--accent-yellow);
-    }
-    .chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: var(--bg-chip);
-      border: 1px solid rgba(0, 0, 0, 0.6);
-      font-size: 11px;
-      color: var(--text-muted);
-      margin: 2px 6px 2px 0;
-    }
-    .chip span {
-      font-weight: 700;
-      color: var(--accent-yellow);
-    }
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@ContactGiggle">
+<meta name="twitter:title" content="GGRD — Robin of Gains">
+<meta name="twitter:description" content="Fair-launch memecoin on Solana with 10% supply locked for Ukrainian children with cancer via Tabletochki Charity Foundation.">
+<meta name="twitter:image" content="https://ggrd.me/assets/ggrd-og-banner.png">
 
-    /* TOKEN GRID */
-    .token-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-      gap: 10px;
-      margin-top: 10px;
-    }
-    .token-card {
-      border-radius: 18px;
-      background: #061f1a;
-      border: 1px solid rgba(0, 0, 0, 0.6);
-      padding: 9px 11px 11px;
-      font-size: 13px;
-      position: relative;
-      overflow: hidden;
-    }
-    .token-card:before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top right, rgba(0, 255, 153, 0.16), transparent 55%);
-      pointer-events: none;
-    }
-    .token-card strong {
-      position: relative;
-      z-index: 1;
-    }
-    .token-pct {
-      font-size: 18px;
-      font-weight: 900;
-      color: var(--accent-yellow);
-      display: block;
-    }
-    .token-sub {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-    .token-card p {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin: 6px 0 4px;
-      position: relative;
-      z-index: 1;
-    }
+<style>
+/* RESET & BASE */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{
+  font-family:Inter,system-ui,-apple-system,sans-serif;
+  background:
+    radial-gradient(circle at 0% 0%,#ff6bd5 0,transparent 55%),
+    radial-gradient(circle at 100% 0%,#ffbf3c 0,transparent 55%),
+    radial-gradient(circle at 50% 100%,#3be8ff 0,transparent 55%),
+    #050316;
+  color:#f5f5ff;
+  line-height:1.6;
+  overflow-x:hidden;
+  padding-top:40px;
+}
+img{max-width:100%;display:block;height:auto}
+a{color:inherit;text-decoration:none}
+button{font:inherit;border:none;cursor:pointer;background:transparent}
 
-    /* NOTICE BOXES */
-    .warning-box,
-    .danger-box {
-      border-radius: 16px;
-      padding: 8px 10px;
-      font-size: 13px;
-      margin-top: 8px;
-    }
-    .warning-box {
-      border: 1px solid rgba(255, 235, 59, 0.7);
-      background: rgba(255, 235, 59, 0.08);
-      color: var(--text-muted);
-    }
-    .danger-box {
-      border: 1px solid rgba(255, 77, 79, 0.8);
-      background: rgba(255, 77, 79, 0.08);
-      color: var(--text-muted);
-    }
-    .warning-box strong {
-      color: var(--accent-yellow);
-    }
-    .danger-box strong {
-      color: var(--danger);
-    }
+/* CSS VARIABLES */
+:root{
+  --lime:#ff6bd5;
+  --sun:#ffd447;
+  --aqua:#46e6ff;
+  --ukraine-blue:#0057B7;
+  --ukraine-yellow:#FFD700;
+  --card:#120f2a;
+  --muted:#d0c7ff;
+  --fg:#fdfbff;
+  --glow-lime:0 0 20px rgba(255,107,213,.5),0 0 40px rgba(255,107,213,.25);
+  --glow-sun:0 0 20px rgba(255,212,71,.5),0 0 40px rgba(255,212,71,.25);
+}
 
-    /* COMMUNITY BANNER */
-    .community-hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
-      gap: 16px;
-      align-items: center;
-    }
-    .community-hero img {
-      width: 100%;
-      border-radius: 20px;
-      border: 2px solid rgba(0, 0, 0, 0.65);
-      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.7);
-      display: block;
-    }
+/* UTILITY CLASSES */
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+.section{padding:80px 0;position:relative}
+@media(max-width:768px){.section{padding:60px 0}}
 
-    footer {
-      border-top: 1px solid var(--border-soft);
-      padding: 14px;
-      font-size: 11px;
-      color: var(--text-muted);
-      text-align: center;
-      background: #02120d;
-    }
+.title{
+  font-family:Bangers,cursive;
+  font-size:clamp(48px,6vw,72px);
+  line-height:1.1;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  background:linear-gradient(135deg,#ff6bd5,#ffd447,#46e6ff);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  margin-bottom:24px;
+  text-align:center;
+}
 
-    @media (max-width: 880px) {
-      .hero {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      .hero:before {
-        display: none;
-      }
-      .two-cols {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      .community-hero {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      nav ul {
-        justify-content: flex-start;
-      }
-    }
-  </style>
+.subtitle{
+  font-size:clamp(20px,3vw,28px);
+  color:var(--muted);
+  text-align:center;
+  margin-bottom:48px;
+  font-weight:600;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:16px 40px;
+  font-size:18px;
+  font-weight:800;
+  text-transform:uppercase;
+  border-radius:999px;
+  transition:all .3s;
+  font-family:Bangers,cursive;
+  letter-spacing:.08em;
+  position:relative;
+  overflow:hidden;
+}
+
+.btn--primary{
+  background:linear-gradient(135deg,#ff6bd5,#ffd447);
+  color:#14061b;
+  box-shadow:var(--glow-lime);
+}
+.btn--primary:hover{
+  transform:translateY(-3px) scale(1.05);
+  box-shadow:0 0 30px rgba(255,107,213,.7),0 0 60px rgba(255,212,71,.5);
+}
+
+.btn--secondary{
+  background:linear-gradient(135deg,#ffd447,#ff9f1c);
+  color:#14061b;
+  box-shadow:var(--glow-sun);
+}
+.btn--secondary:hover{
+  transform:translateY(-3px) scale(1.05);
+  box-shadow:0 0 30px rgba(255,212,71,.7),0 0 60px rgba(255,159,28,.5);
+}
+
+.btn--outline{
+  border:3px solid var(--lime);
+  color:var(--lime);
+  background:rgba(9,3,26,.8);
+}
+.btn--outline:hover{
+  background:var(--lime);
+  color:#14061b;
+  box-shadow:var(--glow-lime);
+}
+
+.btn--aqua{
+  background:linear-gradient(135deg,var(--aqua),#2dd4ff);
+  color:#050316;
+}
+.btn--aqua:hover{
+  transform:translateY(-3px) scale(1.05);
+  box-shadow:0 0 30px rgba(70,230,255,.7);
+}
+
+/* UKRAINE BANNER */
+.ukraine-banner{
+  position:fixed;
+  top:0;left:0;right:0;
+  z-index:10000;
+  background:linear-gradient(90deg,var(--ukraine-blue),#003c90);
+  border-bottom:3px solid var(--ukraine-yellow);
+  padding:10px 16px;
+  text-align:center;
+  animation:slideDownBanner .5s ease-out;
+}
+.ukraine-banner__content{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
+  max-width:1400px;
+  margin:0 auto;
+}
+.ukraine-banner__text{
+  font-weight:700;
+  font-size:clamp(14px,2vw,16px);
+  color:#fff;
+  text-shadow:0 2px 4px rgba(0,0,0,.3);
+}
+.ukraine-banner__link{
+  color:var(--ukraine-yellow);
+  text-decoration:underline;
+  font-weight:800;
+  transition:all .3s;
+}
+.ukraine-banner__link:hover{
+  color:#fff;
+  text-shadow:0 0 8px var(--ukraine-yellow);
+}
+.ukraine-banner__close{
+  background:transparent;
+  color:#fff;
+  opacity:.7;
+  padding:4px 8px;
+  margin-left:auto;
+  cursor:pointer;
+  transition:all .3s;
+  font-size:18px;
+  line-height:1;
+}
+.ukraine-banner__close:hover{
+  opacity:1;
+  transform:scale(1.2);
+}
+@keyframes slideDownBanner{from{transform:translateY(-100%)}to{transform:translateY(0)}}
+@media(max-width:768px){
+  .ukraine-banner{padding:8px 12px}
+  .ukraine-banner__text{font-size:13px}
+  .ukraine-banner__close{font-size:16px}
+}
+
+/* HEADER */
+.header{
+  position:fixed;
+  top:40px;
+  left:0;right:0;
+  z-index:1000;
+  background:rgba(5,3,22,.95);
+  backdrop-filter:blur(14px);
+  border-bottom:2px solid rgba(255,107,213,.35);
+  transition:all .3s;
+}
+.header__inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:16px 24px;
+  max-width:1400px;
+  margin:0 auto;
+}
+.logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-family:Bangers,cursive;
+  font-size:28px;
+  letter-spacing:.08em;
+  color:var(--lime);
+  transition:all .3s;
+}
+.logo:hover{
+  transform:scale(1.06);
+  filter:drop-shadow(0 0 14px rgba(255,107,213,.7));
+}
+.logo__img{
+  width:48px;height:48px;
+  border-radius:50%;
+  border:2px solid var(--lime);
+  padding:4px;
+  background:radial-gradient(circle at 0 0,#ff6bd5,transparent 60%);
+}
+
+.nav{display:flex;gap:32px;align-items:center}
+.nav a{
+  font-weight:600;
+  font-size:16px;
+  transition:all .3s;
+  position:relative;
+  padding:8px 0;
+}
+.nav a::after{
+  content:'';
+  position:absolute;
+  bottom:0;left:0;right:0;
+  height:2px;
+  background:linear-gradient(90deg,#ff6bd5,#ffd447);
+  transform:scaleX(0);
+  transition:transform .3s;
+}
+.nav a:hover{color:var(--lime)}
+.nav a:hover::after{transform:scaleX(1)}
+
+.header__cta{display:flex;gap:12px}
+
+.mobile-toggle{display:none;flex-direction:column;gap:6px;padding:8px;cursor:pointer}
+.mobile-toggle span{
+  display:block;
+  width:28px;height:3px;
+  background:var(--lime);
+  border-radius:2px;
+  transition:all .3s;
+}
+
+@media(max-width:968px){
+  .nav{
+    display:none;
+    position:absolute;
+    top:100%;left:0;right:0;
+    background:rgba(5,3,22,.98);
+    flex-direction:column;
+    padding:24px;
+    gap:16px;
+    border-bottom:2px solid rgba(255,107,213,.35);
+  }
+  .nav.active{display:flex}
+  .mobile-toggle{display:flex}
+  .header__cta{flex-direction:column}
+  .btn{font-size:16px;padding:12px 28px}
+}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  overflow:hidden;
+  padding:120px 24px 80px;
+}
+.hero::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(255,107,213,.2),transparent 55%),
+    radial-gradient(circle at 85% 20%,rgba(255,212,71,.18),transparent 55%);
+  z-index:0;
+  animation:pulse 8s ease-in-out infinite;
+}
+.hero__content{
+  position:relative;
+  z-index:1;
+  text-align:center;
+  max-width:900px;
+}
+.hero__title{
+  font-family:Bangers,cursive;
+  font-size:clamp(56px,10vw,120px);
+  line-height:.95;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  background:linear-gradient(135deg,#ff6bd5 0,#ffd447 50%,#46e6ff 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  margin-bottom:20px;
+  animation:slideDown .8s ease-out,textGlow 3s ease-in-out infinite;
+}
+.hero__subtitle{
+  font-family:Bangers,cursive;
+  font-size:clamp(24px,4vw,42px);
+  color:var(--sun);
+  margin-bottom:16px;
+  letter-spacing:.1em;
+  animation:slideUp .8s ease-out .2s both;
+}
+.hero__tagline{
+  font-size:clamp(16px,2.5vw,22px);
+  color:var(--muted);
+  margin-bottom:26px;
+  font-weight:600;
+  animation:slideUp .8s ease-out .4s both;
+}
+.hero__tagline strong{color:var(--lime)}
+
+.hero__note{
+  font-size:14px;
+  color:var(--muted);
+  max-width:680px;
+  margin:0 auto 32px;
+}
+.hero__note strong{color:var(--sun)}
+
+.hero__mascot{
+  margin:32px 0 40px;
+  animation:float 4s ease-in-out infinite;
+}
+.hero__mascot img{
+  max-width:420px;
+  margin:0 auto;
+  border-radius:32px;
+  border:3px solid rgba(255,107,213,.7);
+  box-shadow:0 20px 40px rgba(0,0,0,.7);
+}
+
+.hero__cta{
+  display:flex;
+  gap:20px;
+  justify-content:center;
+  flex-wrap:wrap;
+  animation:slideUp .8s ease-out .6s both;
+}
+
+@media(max-width:768px){
+  .hero__cta{flex-direction:column;align-items:stretch}
+  .hero__mascot img{max-width:300px}
+}
+
+/* MARQUEE */
+.marquee{
+  background:linear-gradient(90deg,#ff6bd5,#ffd447,#46e6ff,#ff6bd5);
+  padding:18px 0;
+  overflow:hidden;
+  position:relative;
+}
+.marquee__content{display:flex;animation:scroll 25s linear infinite;white-space:nowrap}
+.marquee__item{
+  font-family:Bangers,cursive;
+  font-size:26px;
+  color:#14061b;
+  padding:0 48px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* STICKERS */
+.stickers{
+  display:flex;
+  gap:16px;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin:40px 0 48px;
+}
+.sticker{
+  background:linear-gradient(135deg,#1d1236,#281747);
+  border:3px solid var(--lime);
+  border-radius:999px;
+  padding:16px 32px;
+  font-weight:800;
+  font-size:18px;
+  font-family:Bangers,cursive;
+  letter-spacing:.08em;
+  transition:all .3s;
+  box-shadow:var(--glow-lime);
+}
+.sticker:nth-child(odd){transform:rotate(-2deg)}
+.sticker:nth-child(even){transform:rotate(2deg)}
+.sticker:hover{
+  transform:rotate(0deg) scale(1.08) translateY(-4px);
+  border-color:var(--sun);
+  box-shadow:var(--glow-sun);
+}
+
+/* ABOUT */
+.about{background:linear-gradient(180deg,transparent,rgba(18,15,42,.8),transparent)}
+.about__grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:48px;
+  align-items:center;
+}
+.about__text{max-width:540px}
+.about__text p{
+  font-size:18px;
+  line-height:1.8;
+  color:var(--muted);
+  margin-bottom:20px;
+}
+.about__text p:last-child{margin-bottom:0}
+.about__features{display:grid;gap:20px}
+.feature{
+  background:linear-gradient(135deg,var(--card),#1a1537);
+  border:2px solid var(--lime);
+  border-radius:20px;
+  padding:24px;
+  transition:all .3s;
+}
+.feature:hover{
+  transform:translateY(-4px);
+  border-color:var(--sun);
+  box-shadow:var(--glow-sun);
+}
+.feature__icon{font-size:36px;margin-bottom:12px}
+.feature__title{
+  font-family:Bangers,cursive;
+  font-size:22px;
+  color:var(--sun);
+  margin-bottom:8px;
+  letter-spacing:.08em;
+}
+.feature__desc{color:var(--muted);font-size:16px;line-height:1.6}
+@media(max-width:968px){
+  .about__grid{grid-template-columns:1fr;gap:40px}
+}
+
+/* TOKENOMICS */
+.tokenomics{background:radial-gradient(circle at 50% 50%,rgba(255,107,213,.08),transparent 70%)}
+.tokenomics__intro{
+  max-width:800px;
+  margin:0 auto 48px;
+  text-align:center;
+  color:var(--muted);
+  font-size:18px;
+  line-height:1.8;
+}
+.allocation{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:24px;
+  margin:48px auto;
+  max-width:1100px;
+}
+.allocation__item{
+  background:linear-gradient(135deg,var(--card),#1a1537);
+  border:3px solid var(--lime);
+  border-radius:24px;
+  padding:28px 24px;
+  transition:all .3s;
+  position:relative;
+  overflow:hidden;
+}
+.allocation__item::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:4px;
+  background:linear-gradient(90deg,#ff6bd5,#ffd447,#46e6ff);
+  transform:scaleX(0);
+  transition:transform .3s;
+}
+.allocation__item:hover{
+  transform:translateY(-6px);
+  box-shadow:var(--glow-lime);
+}
+.allocation__item:hover::before{transform:scaleX(1)}
+.allocation__percentage{
+  display:block;
+  font-family:Bangers,cursive;
+  font-size:48px;
+  color:var(--lime);
+  margin-bottom:8px;
+  letter-spacing:.08em;
+  line-height:1;
+}
+.allocation__label{
+  display:block;
+  font-weight:700;
+  font-size:18px;
+  color:var(--sun);
+  margin-bottom:12px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+.allocation__desc{font-size:14px;color:var(--muted);line-height:1.6}
+
+.security-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:24px;
+  margin-top:64px;
+}
+.security-card{
+  background:linear-gradient(135deg,#191437,#211b49);
+  border:3px solid var(--aqua);
+  border-radius:24px;
+  padding:32px 28px;
+  transition:all .3s;
+}
+.security-card:hover{
+  transform:translateY(-4px);
+  border-color:var(--lime);
+  box-shadow:0 0 20px rgba(70,230,255,.4);
+}
+.security-card__icon{font-size:48px;margin-bottom:16px;text-align:center}
+.security-card__title{
+  font-family:Bangers,cursive;
+  font-size:24px;
+  color:var(--sun);
+  margin-bottom:12px;
+  text-align:center;
+  letter-spacing:.08em;
+}
+.security-card__desc{color:var(--muted);font-size:15px;line-height:1.7;text-align:center}
+.security-card__list{margin-top:16px;padding-left:20px}
+.security-card__list li{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.8;
+  margin-bottom:8px;
+}
+.contract-box{
+  margin-top:48px;
+  padding:24px;
+  background:rgba(255,107,213,.06);
+  border:2px solid rgba(255,107,213,.4);
+  border-radius:20px;
+  max-width:800px;
+  margin-left:auto;
+  margin-right:auto;
+}
+.contract-box__title{
+  font-family:Bangers,cursive;
+  font-size:20px;
+  color:var(--lime);
+  margin-bottom:12px;
+  text-align:center;
+  letter-spacing:.08em;
+}
+.contract-box__address{
+  font-family:monospace;
+  font-size:clamp(12px,2vw,14px);
+  color:var(--fg);
+  word-break:break-all;
+  text-align:center;
+  background:rgba(5,3,22,.9);
+  padding:16px;
+  border-radius:12px;
+  border:1px solid rgba(255,107,213,.4);
+}
+
+/* HOW TO JOIN LAUNCH */
+.how{background:linear-gradient(180deg,transparent,rgba(70,230,255,.05),transparent)}
+.steps{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:28px;
+  margin-top:48px;
+}
+.step{
+  background:linear-gradient(135deg,#191437,#211b49);
+  border:3px solid var(--aqua);
+  border-radius:28px;
+  padding:36px 28px;
+  text-align:center;
+  transition:all .3s;
+  position:relative;
+  overflow:hidden;
+}
+.step::before{
+  content:'';
+  position:absolute;
+  top:-50%;right:-50%;
+  width:100%;height:100%;
+  background:radial-gradient(circle,rgba(70,230,255,.15),transparent);
+  transition:all .5s;
+}
+.step:hover{
+  transform:translateY(-6px);
+  border-color:var(--lime);
+}
+.step:hover::before{top:0;right:0}
+.step__icon{
+  font-size:72px;
+  margin-bottom:20px;
+  filter:drop-shadow(0 0 12px rgba(70,230,255,.6));
+}
+.step__title{
+  display:block;
+  font-size:24px;
+  margin-bottom:16px;
+  color:var(--sun);
+  font-weight:800;
+  font-family:Bangers,cursive;
+  letter-spacing:.08em;
+}
+.step__desc{color:var(--muted);line-height:1.7;font-size:16px}
+
+/* CHARITY */
+.charity{background:radial-gradient(circle at 30% 50%,rgba(255,212,71,.07),transparent 60%)}
+.charity__bubble{
+  background:linear-gradient(135deg,var(--card),#1a1537);
+  border:4px solid var(--sun);
+  border-radius:32px;
+  padding:40px;
+  max-width:760px;
+  margin:48px auto;
+  position:relative;
+  box-shadow:var(--glow-sun);
+}
+.charity__bubble::before{
+  content:'';
+  position:absolute;
+  bottom:-20px;left:48px;
+  width:40px;height:40px;
+  background:inherit;
+  border-right:4px solid var(--sun);
+  border-bottom:4px solid var(--sun);
+  transform:rotate(45deg);
+  clip-path:polygon(0 0,100% 0,100% 100%);
+}
+.charity__content{
+  font-size:18px;
+  line-height:1.8;
+  color:var(--muted);
+  text-align:center;
+}
+.charity__content strong{color:var(--sun);font-weight:800}
+.charity__wallet{
+  margin-top:32px;
+  padding:20px;
+  background:rgba(255,212,71,.08);
+  border:2px solid var(--sun);
+  border-radius:16px;
+  font-family:monospace;
+  font-size:14px;
+  word-break:break-all;
+  text-align:center;
+  color:var(--sun);
+}
+.charity__extra{
+  max-width:760px;
+  margin:24px auto 0;
+  font-size:14px;
+  color:var(--muted);
+  text-align:center;
+}
+
+/* WHITEPAPER */
+.whitepaper{background:linear-gradient(180deg,transparent,rgba(70,230,255,.05),transparent)}
+.whitepaper__highlight{
+  background:linear-gradient(135deg,var(--card),#1a1537);
+  border:3px solid var(--aqua);
+  border-radius:24px;
+  padding:32px;
+  max-width:900px;
+  margin:48px auto 32px;
+  position:relative;
+}
+.whitepaper__highlight h3{
+  font-family:Bangers,cursive;
+  font-size:28px;
+  color:var(--aqua);
+  margin-bottom:20px;
+  text-align:center;
+  letter-spacing:.08em;
+}
+.whitepaper__highlight p{
+  color:var(--muted);
+  font-size:16px;
+  line-height:1.8;
+  margin-bottom:16px;
+}
+.whitepaper__stats{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:20px;
+  margin-top:32px;
+}
+.whitepaper__stat{
+  background:rgba(70,230,255,.05);
+  border:2px solid var(--aqua);
+  border-radius:16px;
+  padding:20px;
+  text-align:center;
+  transition:all .3s;
+}
+.whitepaper__stat:hover{
+  transform:translateY(-4px);
+  border-color:var(--lime);
+  box-shadow:0 0 16px rgba(70,230,255,.4);
+}
+.whitepaper__stat-value{
+  display:block;
+  font-family:Bangers,cursive;
+  font-size:32px;
+  color:var(--lime);
+  margin-bottom:8px;
+  letter-spacing:.08em;
+}
+.whitepaper__stat-label{
+  font-size:14px;
+  color:var(--muted);
+  text-transform:uppercase;
+  font-weight:700;
+  letter-spacing:.08em;
+}
+
+/* ROADMAP */
+.roadmap{background:linear-gradient(180deg,transparent,rgba(18,15,42,.8),transparent)}
+.stamps{
+  display:grid;
+  gap:32px;
+  max-width:800px;
+  margin:48px auto;
+}
+.stamp{
+  background:linear-gradient(135deg,var(--card),#1a1537);
+  border:3px dashed var(--lime);
+  border-radius:24px;
+  padding:32px;
+  transition:all .3s;
+  position:relative;
+}
+.stamp::before{
+  content:'✓';
+  position:absolute;
+  top:-16px;right:24px;
+  width:48px;height:48px;
+  background:var(--lime);
+  color:#14061b;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+  font-weight:900;
+  opacity:0;
+  transition:all .3s;
+}
+.stamp.completed::before{opacity:1}
+.stamp:hover{
+  transform:translateX(8px);
+  border-color:var(--sun);
+  box-shadow:var(--glow-sun);
+}
+.stamp__phase{
+  font-family:Bangers,cursive;
+  font-size:24px;
+  color:var(--sun);
+  margin-bottom:12px;
+  letter-spacing:.08em;
+}
+.stamp__desc{color:var(--muted);font-size:16px;line-height:1.7}
+
+/* COMMUNITY IMAGE */
+.community-grid{
+  display:grid;
+  grid-template-columns:1.1fr 1fr;
+  gap:32px;
+  align-items:center;
+  margin-top:40px;
+}
+@media(max-width:968px){
+  .community-grid{grid-template-columns:1fr}
+}
+.community-grid img{
+  border-radius:24px;
+  border:3px solid rgba(255,107,213,.6);
+  box-shadow:0 18px 40px rgba(0,0,0,.7);
+}
+
+/* FOOTER */
+.footer{
+  background:linear-gradient(180deg,transparent,rgba(5,3,22,.97));
+  border-top:2px solid rgba(255,107,213,.35);
+  padding:60px 0 32px;
+}
+.footer__content{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:40px;
+  margin-bottom:48px;
+}
+.footer__section h3{
+  font-family:Bangers,cursive;
+  font-size:22px;
+  color:var(--lime);
+  margin-bottom:20px;
+  letter-spacing:.08em;
+}
+.footer__links{display:flex;flex-direction:column;gap:12px}
+.footer__links a{
+  color:var(--muted);
+  font-size:16px;
+  transition:all .3s;
+}
+.footer__links a:hover{
+  color:var(--lime);
+  transform:translateX(4px);
+}
+.footer__socials{display:flex;gap:16px}
+.footer__social{
+  width:48px;height:48px;
+  border:2px solid var(--lime);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:24px;
+  transition:all .3s;
+  background:linear-gradient(135deg,rgba(255,107,213,.15),transparent);
+}
+.footer__social:hover{
+  transform:translateY(-4px) scale(1.1);
+  border-color:var(--sun);
+  box-shadow:var(--glow-sun);
+  background:linear-gradient(135deg,rgba(255,212,71,.15),transparent);
+}
+.footer__disclaimer{
+  background:rgba(18,15,42,.9);
+  border:2px solid rgba(255,107,213,.35);
+  border-radius:20px;
+  padding:32px;
+  margin:32px 0;
+  max-width:900px;
+  margin-left:auto;
+  margin-right:auto;
+}
+.footer__disclaimer h4{
+  font-family:Bangers,cursive;
+  font-size:20px;
+  color:var(--sun);
+  margin-bottom:16px;
+  letter-spacing:.08em;
+}
+.footer__disclaimer p{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.8;
+  margin-bottom:16px;
+  text-align:left;
+}
+.footer__disclaimer p:last-child{margin-bottom:0}
+.footer__bottom{
+  text-align:center;
+  padding-top:32px;
+  border-top:1px solid rgba(255,107,213,.25);
+  color:var(--muted);
+  font-size:14px;
+}
+
+/* ANIMATIONS */
+@keyframes slideDown{from{opacity:0;transform:translateY(-30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}
+@keyframes pulse{0%,100%{opacity:.6}50%{opacity:.9}}
+@keyframes textGlow{0%,100%{filter:drop-shadow(0 0 8px rgba(255,107,213,.5))}50%{filter:drop-shadow(0 0 16px rgba(255,212,71,.7))}}
+
+/* FOCUS STATES */
+a:focus-visible,button:focus-visible{
+  outline:3px solid var(--lime);
+  outline-offset:4px;
+  border-radius:4px;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:12px}
+::-webkit-scrollbar-track{background:#130c2e}
+::-webkit-scrollbar-thumb{
+  background:linear-gradient(180deg,#ff6bd5,#ffd447);
+  border-radius:6px;
+}
+::-webkit-scrollbar-thumb:hover{
+  background:linear-gradient(180deg,#ffd447,#ff6bd5);
+}
+</style>
 </head>
+
 <body>
-  <!-- Charity banner – Tabletochki only (Donation Policy) -->
-  <div class="top-banner">
-    <span>
-      <span class="top-banner-emoji">🎗️</span>
-      10% OF ALL GGRD TOKENS ARE LOCKED IN A CHARITY TREASURY MULTISIG AND USED
-      EXCLUSIVELY TO SUPPORT UKRAINIAN CHILDREN WITH CANCER AND THEIR FAMILIES
-      VIA TABLETOCHKI CHARITY FOUNDATION.
+
+<!-- UKRAINE BANNER -->
+<div class="ukraine-banner" id="ukraineBanner">
+  <div class="ukraine-banner__content">
+    <span class="ukraine-banner__text">
+      🇺🇦 10% of all GGRD tokens are locked in a Charity Treasury multisig dedicated to Ukrainian children with cancer and their families via Tabletochki Charity Foundation.
     </span>
+    <a href="#charity" class="ukraine-banner__link">Learn more →</a>
+    <button class="ukraine-banner__close" id="closeBanner" aria-label="Close banner">×</button>
   </div>
+</div>
 
-  <!-- NAVBAR -->
-  <header>
-    <div class="nav-inner">
-      <div class="brand">
-        <img src="assets/ggrd-logo-512.png" alt="GGRD logo" />
-        <div>
-          <div class="brand-text-main">GIGGLE RELOADED · $GGRD</div>
-          <div class="brand-text-sub">Robin of Gains · Solana Meme Community</div>
-        </div>
-      </div>
-      <nav>
-        <ul>
-          <li><a href="#launch">Launch</a></li>
-          <li><a href="#tokenomics">Tokenomics</a></li>
-          <li><a href="#charity">Charity</a></li>
-          <li><a href="#security">Security</a></li>
-          <li><a href="#docs">Docs</a></li>
-          <li><a href="#community">Community</a></li>
-        </ul>
-      </nav>
+<!-- HEADER -->
+<header class="header" id="header">
+  <div class="header__inner">
+    <a href="#hero" class="logo">
+      <img src="assets/ggrd-logo-512.png" alt="GGRD Logo" class="logo__img">
+      <span>GGRD</span>
+    </a>
+
+    <nav class="nav" id="nav">
+      <a href="#about">About</a>
+      <a href="#tokenomics">Tokenomics</a>
+      <a href="#how">Fair Launch</a>
+      <a href="#charity">Charity</a>
+      <a href="#whitepaper">Whitepaper</a>
+      <a href="#roadmap">Roadmap</a>
+    </nav>
+
+    <div class="header__cta">
+      <a href="https://x.com/ContactGiggle" target="_blank" rel="noopener" class="btn btn--secondary">Follow X</a>
+      <a href="https://t.me/GGRDofficial" target="_blank" rel="noopener" class="btn btn--primary">Join TG</a>
     </div>
-  </header>
 
-  <main>
-    <!-- HERO – meme style -->
-    <section class="hero" id="top">
-      <div class="hero-left">
-        <div class="hero-chip-row">
-          <div class="hero-chip">Solana · Meme Coin</div>
-          <div class="hero-chip"><span>No Presale</span> · No Team Dump</div>
-          <div class="hero-chip"><span>DBC</span> Launch on Meteora</div>
-        </div>
+    <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
 
-        <h1 class="hero-title">
-          JOIN THE <span>GIGGLE RELOADED</span> COMMUNITY
-        </h1>
-        <p class="hero-subtitle">
-          Robin Hood–style fair-launch memecoin with 1,000,000 fixed supply.
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero__content">
+    <h1 class="hero__title">Giggle Reloaded</h1>
+    <p class="hero__subtitle">Robin of Gains · $GGRD</p>
+    <p class="hero__tagline">
+      Steal from rich curves, give to the community – with
+      <strong>10% of supply locked for Ukrainian children with cancer</strong>
+      via Tabletochki Charity Foundation. 🏹
+    </p>
+
+    <div class="hero__mascot">
+      <img src="assets/ggrd-robin-main.png" alt="Giggle Reloaded Robin of Gains hero banner">
+    </div>
+
+    <p class="hero__note">
+      <strong>Launch status:</strong> the Meteora Dynamic Bonding Curve (DBC) fair launch and LP migration
+      will be announced exclusively on this website and in official Telegram / X channels.
+      Until the official mint and DBC addresses are published here,
+      <strong>GGRD is not tradable</strong>.
+    </p>
+
+    <div class="hero__cta">
+      <a href="#how" class="btn btn--primary">How the Fair Launch Works</a>
+      <a href="GGRD_Whitepaper_EN.html" target="_blank" rel="noopener" class="btn btn--outline">Read Whitepaper (EN)</a>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee__content">
+    <span class="marquee__item">🏹 FAIR-LAUNCH DBC</span>
+    <span class="marquee__item">💸 ZERO TAX</span>
+    <span class="marquee__item">🔒 MULTISIG TREASURIES</span>
+    <span class="marquee__item">🇺🇦 10% CHARITY TREASURY</span>
+    <span class="marquee__item">🦊 ROBIN OF GAINS</span>
+    <span class="marquee__item">🏹 FAIR-LAUNCH DBC</span>
+    <span class="marquee__item">💸 ZERO TAX</span>
+    <span class="marquee__item">🔒 MULTISIG TREASURIES</span>
+    <span class="marquee__item">🇺🇦 TABLETOCHKI ONLY</span>
+    <span class="marquee__item">🦊 ROBIN OF GAINS</span>
+  </div>
+</div>
+
+<!-- STICKERS -->
+<div class="container">
+  <div class="stickers">
+    <div class="sticker">🏹 FAIR LAUNCH ON SOLANA</div>
+    <div class="sticker">💸 0% BUY / SELL TAX</div>
+    <div class="sticker">🇺🇦 10% CHARITY TREASURY</div>
+    <div class="sticker">🔒 SQUADS MULTISIG</div>
+    <div class="sticker">📊 ON-CHAIN TRANSPARENCY</div>
+    <div class="sticker">🦊 PURE MEME ENERGY</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="section about" id="about">
+  <div class="container">
+    <h2 class="title">About GGRD</h2>
+    <p class="subtitle">The Robin Hood of Solana — meme coin with a real on-chain charity engine</p>
+
+    <div class="about__grid">
+      <div class="about__text">
+        <p>
+          In the forest of degen curves, <strong>Giggle Reloaded ($GGRD)</strong> appears as
+          the <strong>Robin of Gains</strong> – a fair-launch Solana meme coin with
+          fixed <strong>1,000,000 GGRD</strong> supply, no presale and 0% trading tax.
         </p>
-        <p class="hero-description">
-          <em>Giggle Reloaded ($GGRD)</em> is a Solana meme coin built around a
-          simple idea: <strong>no presale, no VC, no private deals</strong>.
-          Everyone enters through the same public Dynamic Bonding Curve (DBC) on
-          Meteora, with transparent multisig treasuries and
-          <strong>0% trading tax</strong>.
+        <p>
+          40% of the supply is sold publicly through a
+          <strong>Meteora Dynamic Bonding Curve (DBC)</strong>.
+          The remaining 60% lives in named, public multisig treasuries:
+          Charity, Liquidity, Community, Team, Marketing and Treasury Reserve –
+          all described in the whitepaper.
         </p>
-        <p class="hero-description">
-          <strong>10% of the total supply (100,000 GGRD)</strong> is locked in
-          a dedicated Charity Treasury multisig and used only for on-chain
-          donations to <strong>Tabletochki Charity Foundation</strong>, helping
-          Ukrainian children with cancer and their families.
-        </p>
-
-        <div class="hero-cta-row">
-          <a
-            class="btn btn-primary"
-            href="https://t.me/GGRDofficial"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            🚀 Join Official Telegram
-          </a>
-          <a
-            class="btn btn-secondary"
-            href="GGRD_Whitepaper_EN.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            📄 Read Whitepaper (EN)
-          </a>
-        </div>
-
-        <p class="hero-note">
-          <strong>Launch status:</strong> DBC fair launch and LP creation will
-          be announced only via this website and official Telegram / X. Until
-          the official contract and DBC addresses are published here,
-          <strong>GGRD is not tradable</strong>.
+        <p>
+          <strong>10% of total supply (100,000 GGRD)</strong> is locked in a
+          dedicated <strong>Charity Treasury multisig</strong> that can only be used
+          for donations to <strong>Tabletochki Charity Foundation</strong>,
+          supporting Ukrainian children with cancer and their families.
         </p>
       </div>
 
-      <div class="hero-right">
-        <div class="hero-robin-card">
-          <img
-            src="assets/ggrd-robin-hero.png"
-            alt="Giggle Reloaded Robin Hood meme banner"
-          />
-          <div class="hero-robin-pill">
-            <span>ROBIN OF GAINS</span> · Solana
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAIR LAUNCH -->
-    <section id="launch">
-      <div class="section-kicker">Fair-launch path</div>
-      <h2>How the Meteora DBC Launch Works</h2>
-      <div class="two-cols">
-        <div>
-          <p>
-            GGRD uses a public <strong>Dynamic Bonding Curve (DBC)</strong> on
-            Meteora instead of private seed rounds. There is no presale and no
-            team allocation off-chain – everyone joins directly on-chain under
-            the same rules.
+      <div class="about__features">
+        <div class="feature">
+          <div class="feature__icon">🏹</div>
+          <h3 class="feature__title">Pure Fair Launch</h3>
+          <p class="feature__desc">
+            No presale, no VC, no private deals. Everyone joins the DBC under the
+            same rules, with migration to LP around 80k USDC on the curve.
           </p>
-          <ol class="list">
-            <li>Prepare a Solana wallet (for example Phantom or Backpack).</li>
-            <li>Fund it with SOL and USDC on Solana.</li>
-            <li>
-              When the fair launch begins, this page and
-              <strong>@GGRDofficial</strong> / <strong>@ContactGiggle</strong>
-              will publish the official DBC and token mint addresses.
-            </li>
-            <li>
-              You will be able to buy GGRD directly from the curve using USDC
-              until the migration threshold (around <strong>80,000 USDC</strong>
-              in curve TVL) is reached.
-            </li>
-            <li>
-              After migration, liquidity is moved to a standard AMM pool (for
-              example via Jupiter / Raydium) and trading continues there with
-              0% tax.
-            </li>
-          </ol>
         </div>
-        <div>
-          <div class="chip"><span>Fixed supply:</span> 1,000,000 GGRD</div>
-          <div class="chip"><span>Decimals:</span> 6</div>
-          <div class="chip"><span>Tax:</span> 0% trading tax</div>
-          <div class="chip"><span>Migration target:</span> ~80k USDC TVL</div>
 
-          <div class="warning-box">
-            <strong>Safety note:</strong>
-            Do not buy any token claiming to be “GGRD” before the official
-            addresses are published on this website and the official channels.
-            Any pre-launch token should be treated as a scam.
-          </div>
+        <div class="feature">
+          <div class="feature__icon">🇺🇦</div>
+          <h3 class="feature__title">Tabletochki Charity Treasury</h3>
+          <p class="feature__desc">
+            10% of supply is locked in a 3/4 multisig dedicated exclusively to
+            donations for <strong>Ukrainian children with cancer and their families</strong>
+            via Tabletochki Charity Foundation.
+          </p>
+        </div>
+
+        <div class="feature">
+          <div class="feature__icon">🛡️</div>
+          <h3 class="feature__title">0% Tax & No Traps</h3>
+          <p class="feature__desc">
+            0% buy/sell tax, no fee switch, no blacklist functions, freeze authority set
+            to none. Token behaviour matches the security rules from the whitepaper.
+          </p>
         </div>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
 
-    <!-- TOKENOMICS – aligned with whitepaper -->
-    <section id="tokenomics">
-      <div class="section-kicker">Tokenomics & distribution</div>
-      <h2>1,000,000 GGRD – Meme Supply, Serious Structure</h2>
-      <p>
-        The total supply of <strong>1,000,000 GGRD</strong> is permanently
-        fixed. There is no mint function and no hidden emissions. Token
-        allocation follows the model defined in the
-        <a href="GGRD_Whitepaper_EN.html" target="_blank" rel="noopener noreferrer">official whitepaper</a>.
-      </p>
-      <p>
-        <strong>40% of supply (400,000 GGRD)</strong> is sold via the Meteora
-        DBC fair launch. The remaining
-        <strong>60% (600,000 GGRD)</strong> is held in named multisig treasuries
-        for charity, liquidity, community incentives, team, marketing and
-        strategic reserve.
-      </p>
+<!-- TOKENOMICS -->
+<section class="section tokenomics" id="tokenomics">
+  <div class="container">
+    <h2 class="title">Tokenomics</h2>
+    <p class="subtitle">1,000,000 GGRD — fixed supply, transparent allocation, meme soul</p>
 
-      <div class="token-grid">
-        <div class="token-card">
-          <strong class="token-pct">40%</strong>
-          <strong>Meteora DBC (Public Sale)</strong>
-          <div class="token-sub">400,000 GGRD</div>
-          <p>Fair-launch sale only – no presale, no private VC deals.</p>
-        </div>
+    <div class="tokenomics__intro">
+      Total supply is <strong>1,000,000 GGRD</strong> with 6 decimals. There is no mint function
+      and no extra emissions. <strong>40% of supply (400,000 GGRD)</strong> is sold via the
+      Meteora DBC fair launch. The remaining <strong>60% (600,000 GGRD)</strong> is held in named
+      multisig treasuries for charity, liquidity, community, team, marketing and long-term reserve.
+      The technical migration threshold of the DBC is around <strong>80,000 USDC</strong>.
+    </div>
 
-        <div class="token-card">
-          <strong class="token-pct">10%</strong>
-          <strong>Charity Treasury (Tabletochki)</strong>
-          <div class="token-sub">100,000 GGRD</div>
-          <p>Donations for Ukrainian children with cancer and their families.</p>
-          <div class="mono">
-            Multisig: C96zqEjGh22yuZknVrasLyr2j5b2xsMnbTUiu2WKLK9w
-          </div>
-        </div>
+    <h3 style="font-family:Bangers,cursive;font-size:32px;color:var(--lime);text-align:center;margin:48px 0 32px;letter-spacing:.08em">
+      Token Allocation
+    </h3>
 
-        <div class="token-card">
-          <strong class="token-pct">10%</strong>
-          <strong>LP Policy & Liquidity Expansion</strong>
-          <div class="token-sub">100,000 GGRD</div>
-          <p>Used to deepen and support long-term liquidity after DBC migration.</p>
-          <div class="mono">
-            Multisig: 8vFQrPpdE3uyd4JRdE7jUhyzTF8ZBVnuvqFTpsAA4SLY
-          </div>
-        </div>
-
-        <div class="token-card">
-          <strong class="token-pct">7%</strong>
-          <strong>Community Distribution / Airdrops</strong>
-          <div class="token-sub">70,000 GGRD</div>
-          <p>Quests, early supporters, meme wars and ecosystem incentives.</p>
-          <div class="mono">
-            Multisig: D3JWCu9egWYHEf1xvxBqSJJ6PBsHU3HkMjJZDW3ZQ37D
-          </div>
-        </div>
-
-        <div class="token-card">
-          <strong class="token-pct">7%</strong>
-          <strong>Team (Vested)</strong>
-          <div class="token-sub">70,000 GGRD</div>
-          <p>Vested allocation for core contributors, released gradually.</p>
-          <div class="mono">
-            Multisig: 7xXhueJp5LTr4jNwcWPn4oFurqJM9W5hxQRRWBCWLnDY
-          </div>
-        </div>
-
-        <div class="token-card">
-          <strong class="token-pct">8%</strong>
-          <strong>Marketing & Partnerships</strong>
-          <div class="token-sub">80,000 GGRD</div>
-          <p>Campaigns, listings, influencer collabs and ecosystem growth.</p>
-          <div class="mono">
-            Multisig: 2RgWCdtsvU4VYcR1nZJS2XN5utBzA88vHbEyHuutHkvG
-          </div>
-        </div>
-
-        <div class="token-card">
-          <strong class="token-pct">18%</strong>
-          <strong>Treasury Operations / Reserve</strong>
-          <div class="token-sub">180,000 GGRD</div>
-          <p>Long-term strategic reserve, aligned with the whitepaper.</p>
-          <div class="mono">
-            Multisig: 5UAgVqKBNFoT6WrANGFdjqbTXJRGXPzHcNhG5LK4n9mj
-          </div>
-        </div>
+    <div class="allocation">
+      <div class="allocation__item">
+        <span class="allocation__percentage">40%</span>
+        <span class="allocation__label">Meteora DBC (Public Sale)</span>
+        <p class="allocation__desc">
+          400,000 GGRD – fair-launch sale on Meteora. No presale, no whitelist, no private allocations.
+        </p>
       </div>
-    </section>
 
-    <!-- CHARITY TREASURY – strictly per Donation Policy -->
-    <section id="charity">
-      <div class="section-kicker">Charity Treasury</div>
-      <h2>10% Meme Supply, Real Impact – Tabletochki Only</h2>
-      <div class="two-cols">
-        <div>
-          <p>
-            The GGRD Charity Treasury is a dedicated on-chain wallet holding
-            <strong>100,000 GGRD (10% of total supply)</strong>. It is managed
-            by a 3/4 Squads multisig and has
-            <strong>exactly one purpose</strong>:
-            supporting <strong>Ukrainian children with cancer and their families</strong>,
-            especially those affected by war.
-          </p>
-          <p>
-            Under the Donation Policy, the
-            <strong>only beneficiary</strong> of this treasury is
-            <strong>Tabletochki Charity Foundation</strong>.
-            Funds cannot be used for team incentives, marketing, liquidity,
-            CEX fees or any profit-oriented activity. The treasury may only:
-          </p>
-          <ul class="list">
-            <li>swap GGRD into assets accepted by Tabletochki (e.g. USDC),</li>
-            <li>
-              send on-chain donations to official Tabletochki wallets / payment
-              gateways.
-            </li>
+      <div class="allocation__item">
+        <span class="allocation__percentage">10%</span>
+        <span class="allocation__label">Charity Treasury (🇺🇦)</span>
+        <p class="allocation__desc">
+          100,000 GGRD locked in a dedicated Charity Treasury multisig, used only for
+          donations to <strong>Tabletochki Charity Foundation</strong>.
+        </p>
+      </div>
+
+      <div class="allocation__item">
+        <span class="allocation__percentage">10%</span>
+        <span class="allocation__label">LP Policy & Liquidity</span>
+        <p class="allocation__desc">
+          100,000 GGRD for deepening and supporting long-term LP after DBC migration according
+          to the LP policy described in the whitepaper.
+        </p>
+      </div>
+
+      <div class="allocation__item">
+        <span class="allocation__percentage">7%</span>
+        <span class="allocation__label">Community / Airdrops</span>
+        <p class="allocation__desc">
+          70,000 GGRD for quests, community rewards, early supporters and other on-chain incentives.
+        </p>
+      </div>
+
+      <div class="allocation__item">
+        <span class="allocation__percentage">7%</span>
+        <span class="allocation__label">Team (Vested)</span>
+        <p class="allocation__desc">
+          70,000 GGRD vested for core contributors, released gradually in line with the vesting schedule.
+        </p>
+      </div>
+
+      <div class="allocation__item">
+        <span class="allocation__percentage">8%</span>
+        <span class="allocation__label">Marketing & Partnerships</span>
+        <p class="allocation__desc">
+          80,000 GGRD for marketing, listings, partnerships and ecosystem collaborations.
+        </p>
+      </div>
+
+      <div class="allocation__item">
+        <span class="allocation__percentage">18%</span>
+        <span class="allocation__label">Treasury Operations / Reserve</span>
+        <p class="allocation__desc">
+          180,000 GGRD as a long-term project reserve, used according to the rules described in
+          the Treasury section of the whitepaper.
+        </p>
+      </div>
+    </div>
+
+    <h3 style="font-family:Bangers,cursive;font-size:32px;color:var(--aqua);text-align:center;margin:64px 0 32px;letter-spacing:.08em">
+      Security & Transparency
+    </h3>
+
+    <div class="security-grid">
+      <div class="security-card">
+        <div class="security-card__icon">🔐</div>
+        <h4 class="security-card__title">Multisig Control</h4>
+        <p class="security-card__desc">
+          Mint and metadata authority managed by Squads 3/4 multisigs – no single wallet can
+          unilaterally change critical parameters.
+        </p>
+      </div>
+
+      <div class="security-card">
+        <div class="security-card__icon">❄️</div>
+        <h4 class="security-card__title">No Freeze Authority</h4>
+        <p class="security-card__desc">
+          <code>freeze_authority = None</code>. The team cannot freeze user funds – matching
+          the security assumptions in the whitepaper.
+        </p>
+      </div>
+
+      <div class="security-card">
+        <div class="security-card__icon">📊</div>
+        <h4 class="security-card__title">DBC Launch Logic</h4>
+        <div class="security-card__desc">
+          <ul class="security-card__list">
+            <li>No presale or whitelist</li>
+            <li>Migration near ~80k USDC curve TVL</li>
+            <li>Programmatic move from curve to LP</li>
+            <li>Fair pricing based on bonding curve</li>
           </ul>
-          <p>
-            All donation-related communication uses
-            <strong>charity@ggrd.me</strong> and the official multisig:
-          </p>
-          <p class="mono">
-            Charity Treasury multisig: C96zqEjGh22yuZknVrasLyr2j5b2xsMnbTUiu2WKLK9w
-          </p>
-        </div>
-
-        <div>
-          <h3>Planned 10-Month Donation Schedule</h3>
-          <p>
-            After the DBC migrates to an LP and trading stabilises, the Charity
-            Treasury follows a roughly 10-month programme:
-          </p>
-          <ul class="list">
-            <li>each month a defined portion of GGRD is swapped to USDC,</li>
-            <li>
-              swaps respect strict daily and monthly volume caps versus average
-              trading volume,
-            </li>
-            <li>
-              at the end of each month, a single on-chain donation is sent to
-              Tabletochki,
-            </li>
-            <li>
-              every transaction is published in public transparency reports.
-            </li>
-          </ul>
-
-          <div class="warning-box">
-            <strong>Transparency:</strong>
-            Every swap and donation will be traceable on-chain, with summaries
-            linking the Charity Treasury multisig and the official Tabletochki
-            infrastructure.
-          </div>
-
-          <div class="danger-box">
-            <strong>Disclaimer:</strong>
-            Tabletochki Charity Foundation does not promote, manage or recommend
-            the GGRD token or any related products. All donations are unilateral
-            decisions of the GGRD project.
-          </div>
         </div>
       </div>
-    </section>
 
-    <!-- SECURITY -->
-    <section id="security">
-      <div class="section-kicker">Security & risk</div>
-      <h2>No Hidden Tax, No Fee Switch, No Blacklists</h2>
+      <div class="security-card">
+        <div class="security-card__icon">🔍</div>
+        <h4 class="security-card__title">Full Transparency</h4>
+        <p class="security-card__desc">
+          All multisig addresses are public. Transactions from Charity, LP and other treasuries are
+          published with on-chain proofs and periodic reports.
+        </p>
+      </div>
+
+      <div class="security-card">
+        <div class="security-card__icon">🛡️</div>
+        <h4 class="security-card__title">0% Tax & No Blacklists</h4>
+        <p class="security-card__desc">
+          There is no buy or sell tax, no fee switch, no blacklist or blocking logic in the token.
+        </p>
+      </div>
+
+      <div class="security-card">
+        <div class="security-card__icon">📜</div>
+        <h4 class="security-card__title">Open Documentation</h4>
+        <p class="security-card__desc">
+          The full economic model and charity rules are documented in the whitepaper and Donation Policy.
+        </p>
+      </div>
+    </div>
+
+    <div class="contract-box">
+      <h4 class="contract-box__title">📜 GGRD Mint Address</h4>
+      <div class="contract-box__address">
+        To be announced at launch via this website and official channels. Do not trust any “GGRD” mint address that is not published here.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO JOIN FAIR LAUNCH -->
+<section class="section how" id="how">
+  <div class="container">
+    <h2 class="title">Fair Launch — How It Will Work</h2>
+    <p class="subtitle">When the DBC goes live, you will be able to join the curve in four simple steps</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step__icon">💳</div>
+        <strong class="step__title">Get a Solana Wallet</strong>
+        <div class="step__desc">
+          Install a wallet like Phantom or Backpack and fund it with SOL and USDC on Solana.
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step__icon">🔗</div>
+        <strong class="step__title">Use Official DBC Link</strong>
+        <div class="step__desc">
+          When launch starts, this site and <strong>@GGRDofficial</strong> will publish the only valid Meteora DBC link and GGRD mint address.
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step__icon">⚖️</div>
+        <strong class="step__title">Buy on the Curve</strong>
+        <div class="step__desc">
+          Swap USDC for GGRD directly on the bonding curve. Everyone enters under the same rules until the migration threshold is reached.
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step__icon">🎉</div>
+        <strong class="step__title">LP Migration & Trading</strong>
+        <div class="step__desc">
+          After migration near ~80k USDC, liquidity moves to an AMM pool and trading continues with 0% tax. All details will be announced in advance.
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:48px">
+      <a href="https://t.me/GGRDofficial" target="_blank" rel="noopener" class="btn btn--primary" style="font-size:20px;padding:18px 40px">
+        🚀 Get Launch Updates on Telegram
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CHARITY -->
+<section class="section charity" id="charity">
+  <div class="container">
+    <h2 class="title">Charity Treasury</h2>
+    <p class="subtitle">10% of supply for Ukrainian children with cancer – via Tabletochki only 🇺🇦</p>
+
+    <div class="charity__bubble">
+      <div class="charity__content">
+        <p>
+          The <strong>GGRD Charity Treasury</strong> holds
+          <strong>100,000 GGRD (10% of total supply)</strong> in a dedicated Squads 3/4 multisig.
+          Its <strong>single purpose</strong> is to fund on-chain donations for
+          <strong>Ukrainian children with cancer and their families</strong>.
+        </p>
+
+        <p>
+          According to the Donation Policy, the <strong>only beneficiary</strong> of this treasury is
+          <strong>Tabletochki Charity Foundation</strong>. Tokens from this wallet may only be:
+        </p>
+
+        <p>
+          – swapped into assets accepted by Tabletochki (for example USDC), and<br>
+          – sent to official Tabletochki wallets or payment gateways.
+        </p>
+
+        <p>
+          After DBC migration and initial market stabilisation, the Charity Treasury follows a
+          roughly <strong>10-month schedule</strong>: each month a defined portion of GGRD is
+          swapped under strict volume limits and a single on-chain donation is executed.
+          All operations are published in public reports.
+        </p>
+      </div>
+
+      <div class="charity__wallet">
+        <strong>Charity Treasury multisig</strong><br>
+        C96zqEjGh22yuZknVrasLyr2j5b2xsMnbTUiu2WKLK9w<br><br>
+        <strong>Charity contact e-mail</strong><br>
+        charity@ggrd.me
+      </div>
+    </div>
+
+    <p class="charity__extra">
+      <strong>Disclaimer:</strong> Tabletochki Charity Foundation does not promote, manage or recommend
+      the GGRD token or any related products. All donations are unilateral decisions of the GGRD project
+      executed via Tabletochki’s official infrastructure.
+    </p>
+
+    <div style="text-align:center;margin-top:40px">
+      <a href="https://tabletochki.org/" target="_blank" rel="noopener" class="btn btn--secondary" style="font-size:18px;padding:16px 36px">
+        Visit Tabletochki Foundation →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- WHITEPAPER -->
+<section class="section whitepaper" id="whitepaper">
+  <div class="container">
+    <h2 class="title">Whitepaper</h2>
+    <p class="subtitle">All economic and charity mechanics in one place 📜</p>
+
+    <div class="whitepaper__highlight">
+      <h3>🦊 Giggle Reloaded ($GGRD) — Technical Overview</h3>
+
       <p>
-        GGRD is designed to behave like a standard, transparent SPL token:
+        <strong>GGRD</strong> is a fair-launch Solana memecoin with a fixed supply of
+        <strong>1,000,000 tokens</strong>. It combines high-energy meme culture with a transparent,
+        on-chain charity mechanism for <strong>Ukrainian children with cancer and families affected by war</strong>,
+        executed exclusively via <strong>Tabletochki Charity Foundation</strong>.
       </p>
-      <ul class="list">
-        <li>0% built-in buy or sell tax; no owner-controlled fee switch,</li>
-        <li>no hidden blacklisting or transfer blocking for users,</li>
-        <li>
-          token authorities follow the security model from the whitepaper
-          (for example: mint authority revoked after launch, freeze authority
-          set to none, metadata authority migrated away from a single EO wallet).
-        </li>
-      </ul>
-      <div class="warning-box">
-        <strong>DYOR:</strong>
-        Always verify the token mint address using the official links on this
-        website and cross-check with Solscan and Meteora before interacting
-        with any contract that claims to be GGRD.
-      </div>
-    </section>
 
-    <!-- DOCS -->
-    <section id="docs">
-      <div class="section-kicker">Documentation</div>
-      <h2>Whitepaper & Donation Policy</h2>
       <p>
-        All technical and economic details of Giggle Reloaded are described in
-        the official whitepaper. The rules for the Charity Treasury are defined
-        in a separate Donation Policy.
+        Launch is conducted through a <strong>Meteora Dynamic Bonding Curve (DBC)</strong> using USDC
+        as quote asset, with migration to an LP pool near an <strong>80,000 USDC</strong> technical threshold.
+        40% of supply is sold on the curve, while 60% is distributed between dedicated multisig treasuries.
       </p>
-      <ul class="list">
-        <li>
-          <a href="GGRD_Whitepaper_EN.html" target="_blank" rel="noopener noreferrer">
-            Giggle Reloaded Whitepaper (EN)
-          </a>
-        </li>
-        <li>
-          Donation Policy – GGRD Charity Treasury (EN) will be published on the
-          main domain <strong>ggrd.me</strong> together with this site.
-        </li>
-      </ul>
-    </section>
 
-    <!-- COMMUNITY -->
-    <section id="community">
-      <div class="section-kicker">Community</div>
-      <h2>Where the Giggles Happen</h2>
-      <div class="community-hero">
-        <div>
-          <p>
-            GGRD is a meme project first, but it takes transparency and
-            charitable impact seriously. All important updates about the DBC
-            launch, LP migration, airdrops and donations are announced through:
-          </p>
-          <ul class="list">
-            <li>
-              Telegram – Official Channel:
-              <a href="https://t.me/GGRDofficial" target="_blank" rel="noopener noreferrer">@GGRDofficial</a>
-            </li>
-            <li>
-              Telegram – Community chat:
-              <a href="https://t.me/GGRDchat" target="_blank" rel="noopener noreferrer">@GGRDchat</a>
-            </li>
-            <li>
-              X (Twitter):
-              <a href="https://x.com/ContactGiggle" target="_blank" rel="noopener noreferrer">@ContactGiggle</a>
-            </li>
-            <li>Main website: <strong>ggrd.me</strong></li>
-          </ul>
-          <p>
-            Join the community, share memes, and help shape how the fair launch
-            and charity mechanics evolve – always within the guardrails defined
-            in the whitepaper and Donation Policy.
-          </p>
+      <p>
+        Security architecture includes 0% trading tax, no freeze authority, no presale or VC allocations,
+        and 3/4 Squads multisigs controlling treasuries and metadata. All details, including the full
+        Donation Policy and Charity Treasury rules, are described in the document.
+      </p>
+
+      <div class="whitepaper__stats">
+        <div class="whitepaper__stat">
+          <span class="whitepaper__stat-value">1,000,000</span>
+          <span class="whitepaper__stat-label">Total Supply</span>
         </div>
-        <div>
-          <img
-            src="assets/ggrd-robin-square.png"
-            alt="Giggle Reloaded meme community banner"
-          />
+        <div class="whitepaper__stat">
+          <span class="whitepaper__stat-value">40%</span>
+          <span class="whitepaper__stat-label">DBC Public Sale</span>
+        </div>
+        <div class="whitepaper__stat">
+          <span class="whitepaper__stat-value">10%</span>
+          <span class="whitepaper__stat-label">Charity Treasury</span>
+        </div>
+        <div class="whitepaper__stat">
+          <span class="whitepaper__stat-value">80k USDC</span>
+          <span class="whitepaper__stat-label">Migration Target</span>
+        </div>
+        <div class="whitepaper__stat">
+          <span class="whitepaper__stat-value">3 / 4</span>
+          <span class="whitepaper__stat-label">Multisig Threshold</span>
+        </div>
+        <div class="whitepaper__stat">
+          <span class="whitepaper__stat-value">0%</span>
+          <span class="whitepaper__stat-label">Trading Tax</span>
         </div>
       </div>
-    </section>
-  </main>
+    </div>
 
-  <footer>
-    Giggle Reloaded ($GGRD) is a community-driven meme coin on Solana. Nothing
-    on this website is financial advice. Always do your own research and never
-    invest money you cannot afford to lose.
-  </footer>
+    <div style="text-align:center;margin-top:48px">
+      <a href="GGRD_Whitepaper_EN.html" target="_blank" rel="noopener" class="btn btn--aqua" style="font-size:20px;padding:18px 40px">
+        📖 Open Full Whitepaper (HTML)
+      </a>
+    </div>
+
+    <div style="max-width:700px;margin:48px auto 0;padding:24px;background:rgba(70,230,255,.06);border:2px solid rgba(70,230,255,.35);border-radius:16px">
+      <p style="color:var(--muted);font-size:15px;line-height:1.8;text-align:center">
+        <strong style="color:var(--aqua)">Highlights:</strong><br>
+        Meteora DBC launch • Public multisig treasuries • Tabletochki Charity Treasury • 10-month donation schedule •
+        LP policy and migration rules • Risk disclosures and legal disclaimers.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section class="section roadmap" id="roadmap">
+  <div class="container">
+    <h2 class="title">Roadmap</h2>
+    <p class="subtitle">From meme idea to on-chain charity engine 🗺️</p>
+
+    <div class="stamps">
+      <div class="stamp completed">
+        <h3 class="stamp__phase">Phase 1 — Setting the Bow</h3>
+        <p class="stamp__desc">
+          ✓ Token concept & tokenomics<br>
+          ✓ Multisig structure design<br>
+          ✓ Website, whitepaper & Donation Policy<br>
+          ✓ Initial community channels opened
+        </p>
+      </div>
+
+      <div class="stamp">
+        <h3 class="stamp__phase">Phase 2 — DBC Fair Launch</h3>
+        <p class="stamp__desc">
+          🎯 Launch of Meteora DBC<br>
+          🎯 First holders and curve participants<br>
+          🎯 LP migration near 80k USDC<br>
+          🎯 First listing on Solana aggregators
+        </p>
+      </div>
+
+      <div class="stamp">
+        <h3 class="stamp__phase">Phase 3 — Growing the Forest</h3>
+        <p class="stamp__desc">
+          🎯 Community campaigns and airdrops<br>
+          🎯 CoinGecko & CoinMarketCap submissions<br>
+          🎯 First monthly donations from Charity Treasury<br>
+          🎯 Public dashboards for charity and treasury flows
+        </p>
+      </div>
+
+      <div class="stamp">
+        <h3 class="stamp__phase">Phase 4 — Meme Kingdom</h3>
+        <p class="stamp__desc">
+          🎯 Further CEX listings (as feasible)<br>
+          🎯 Experiments with community governance<br>
+          🎯 Regular charity contributions via Tabletochki<br>
+          🎯 Expanding the Robin of Gains meme culture
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMUNITY -->
+<section class="section" id="community">
+  <div class="container">
+    <h2 class="title">Community</h2>
+    <p class="subtitle">Where all the giggles, memes and treasury reports live</p>
+
+    <div class="community-grid">
+      <div>
+        <p style="color:var(--muted);font-size:16px;line-height:1.8;">
+          All important updates about the DBC launch, LP migration, airdrops and monthly
+          donations from the Charity Treasury are announced through official channels:
+        </p>
+        <ul style="margin:18px 0 0;padding-left:20px;color:var(--muted);font-size:16px;line-height:1.8;">
+          <li>Telegram — Official Channel:
+            <a href="https://t.me/GGRDofficial" target="_blank" rel="noopener">@GGRDofficial</a>
+          </li>
+          <li>Telegram — Community Chat:
+            <a href="https://t.me/GGRDchat" target="_blank" rel="noopener">@GGRDchat</a>
+          </li>
+          <li>X (Twitter):
+            <a href="https://x.com/ContactGiggle" target="_blank" rel="noopener">@ContactGiggle</a>
+          </li>
+          <li>Main website: <strong>ggrd.me</strong></li>
+        </ul>
+
+        <p style="color:var(--muted);font-size:16px;line-height:1.8;margin-top:18px;">
+          Join the Robin of Gains pack, share memes, track charity progress and help shape how the
+          project evolves – always within the guardrails defined in the whitepaper and Donation Policy.
+        </p>
+      </div>
+
+      <div>
+        <img src="assets/ggrd-robin-community.png" alt="Giggle Reloaded community meme banner">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__content">
+      <div class="footer__section">
+        <h3>Quick Links</h3>
+        <div class="footer__links">
+          <a href="#about">About GGRD</a>
+          <a href="#tokenomics">Tokenomics</a>
+          <a href="#how">Fair Launch</a>
+          <a href="#charity">Charity Treasury</a>
+          <a href="#whitepaper">Whitepaper</a>
+          <a href="#roadmap">Roadmap</a>
+        </div>
+      </div>
+
+      <div class="footer__section">
+        <h3>Resources</h3>
+        <div class="footer__links">
+          <a href="https://solscan.io" target="_blank" rel="noopener">Solscan Explorer</a>
+          <a href="https://jup.ag" target="_blank" rel="noopener">Jupiter Aggregator</a>
+          <a href="https://dexscreener.com/solana" target="_blank" rel="noopener">DEXScreener</a>
+          <a href="GGRD_Whitepaper_EN.html" target="_blank" rel="noopener">Open Whitepaper (EN)</a>
+        </div>
+      </div>
+
+      <div class="footer__section">
+        <h3>Community</h3>
+        <div class="footer__socials">
+          <a href="https://x.com/ContactGiggle" target="_blank" rel="noopener" class="footer__social" aria-label="X (Twitter)">𝕏</a>
+          <a href="https://t.me/GGRDofficial" target="_blank" rel="noopener" class="footer__social" aria-label="Telegram">✈️</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer__disclaimer">
+      <h4>⚠️ Legal & Charity Disclaimer</h4>
+
+      <p>
+        <strong>Parody character:</strong> “Robin of Gains” is an original parody character created
+        for Giggle Reloaded. The project is not affiliated with any existing Robin Hood brand or IP.
+      </p>
+
+      <p>
+        <strong>Meme coin warning:</strong> GGRD is a meme coin with no intrinsic value or expectation of
+        financial return. It is intended for entertainment purposes only.
+      </p>
+
+      <p>
+        <strong>Investment risk:</strong> Cryptocurrency investments are highly volatile and risky.
+        You can lose 100% of your funds. Never invest more than you can afford to lose and always
+        do your own research (DYOR).
+      </p>
+
+      <p>
+        <strong>Not financial advice:</strong> Nothing on this website constitutes financial, legal
+        or tax advice.
+      </p>
+
+      <p>
+        <strong>Charity transparency:</strong> All Charity Treasury transactions will be executed on-chain
+        from the dedicated multisig and published in periodic reports. Donations are made exclusively
+        via the official infrastructure of Tabletochki Charity Foundation.
+      </p>
+
+      <p>
+        <strong>Independence of Tabletochki:</strong> Tabletochki Charity Foundation does not promote,
+        endorse or manage the GGRD token. The Foundation is only a recipient of donations decided
+        unilaterally by the GGRD project.
+      </p>
+    </div>
+
+    <div class="footer__bottom">
+      <p>© 2024 Giggle Reloaded. Built with 💜 by the community. All rights reserved.</p>
+      <p style="margin-top:12px;font-size:12px;opacity:.7">
+        Not affiliated with any other “Giggle” projects or tokens.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Ukraine banner close
+const ukraineBanner = document.getElementById('ukraineBanner');
+const closeBanner = document.getElementById('closeBanner');
+closeBanner.addEventListener('click', () => {
+  ukraineBanner.style.transform = 'translateY(-100%)';
+  ukraineBanner.style.opacity = '0';
+  setTimeout(() => {
+    ukraineBanner.style.display = 'none';
+    document.body.style.paddingTop = '0';
+    document.getElementById('header').style.top = '0';
+  }, 300);
+});
+
+// Mobile menu toggle
+const mobileToggle = document.getElementById('mobileToggle');
+const nav = document.getElementById('nav');
+mobileToggle.addEventListener('click', () => {
+  nav.classList.toggle('active');
+});
+nav.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => nav.classList.remove('active'));
+});
+
+// Duplicate marquee for smooth loop
+const marqueeContent = document.querySelector('.marquee__content');
+if (marqueeContent) {
+  const clone = marqueeContent.cloneNode(true);
+  marqueeContent.parentNode.appendChild(clone);
+}
+
+// Header hide/show on scroll
+let lastScroll = 0;
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => {
+  const currentScroll = window.pageYOffset;
+  if (currentScroll <= 0) {
+    header.style.transform = 'translateY(0)';
+    return;
+  }
+  if (currentScroll > lastScroll && currentScroll > 100) {
+    header.style.transform = 'translateY(-100%)';
+  } else {
+    header.style.transform = 'translateY(0)';
+  }
+  lastScroll = currentScroll;
+});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    const href = this.getAttribute('href');
+    if (href !== '#') {
+      e.preventDefault();
+      const target = document.querySelector(href);
+      if (target) {
+        const headerOffset = 120;
+        const elementPosition = target.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+      }
+    }
+  });
+});
+
+// Simple intersection animation
+const animateOnScroll = () => {
+  const elements = document.querySelectorAll('.allocation__item, .step, .feature, .stamp, .security-card, .whitepaper__stat');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.animation = 'slideUp 0.6s ease-out forwards';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  elements.forEach(el => {
+    el.style.opacity = '0';
+    observer.observe(el);
+  });
+};
+window.addEventListener('load', animateOnScroll);
+
+// Konami Easter egg
+let konamiCode = [];
+const konamiPattern = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+document.addEventListener('keydown', (e) => {
+  konamiCode.push(e.key);
+  konamiCode = konamiCode.slice(-10);
+  if (konamiCode.join(',') === konamiPattern.join(',')) {
+    document.body.style.animation = 'pulse 2s ease-in-out 3';
+    setTimeout(() => {
+      alert('🦊 Robin of Gains approves! You found the secret!\n\nAll charity rules are in the whitepaper and Donation Policy. 🇺🇦');
+    }, 500);
+  }
+});
+
+console.log('%c🏹 GGRD - Robin of Gains 🦊', 'color: #ff6bd5; font-size: 24px; font-weight: bold;');
+console.log('%cWelcome to the pack, fellow degen!', 'color: #ffd447; font-size: 16px;');
+console.log('%c🇺🇦 10% of supply is locked in a Charity Treasury for Ukrainian children with cancer via Tabletochki Charity Foundation.', 'color: #FFD700; font-size: 13px;');
+console.log('%c📜 Read the full whitepaper: GGRD_Whitepaper_EN.html', 'color: #46e6ff; font-size: 12px;');
+</script>
+
 </body>
 </html>
