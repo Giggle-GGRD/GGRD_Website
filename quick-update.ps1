@@ -49,7 +49,7 @@ if ($answer -eq "T" -or $answer -eq "t" -or $answer -eq "Y" -or $answer -eq "y")
         Write-Host "  SUKCES - Zmiany wypushowane!" -ForegroundColor Green
         Write-Host "========================================" -ForegroundColor Green
         Write-Host ""
-        Write-Host "Sprawdz: https://github.com/eurotax/GGRD_Website" -ForegroundColor Cyan
+        Write-Host "Sprawdz: https://github.com/giggle-ggrd/GGRD_Website" -ForegroundColor Cyan
         
         # Jesli GitHub Pages jest skonfigurowane
         Write-Host ""

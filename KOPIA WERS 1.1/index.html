@@ -158,7 +158,7 @@ button{font:inherit;border:none;cursor:pointer;background:transparent}
   border-bottom:3px solid var(--ukraine-yellow);
   padding:10px 16px;
   text-align:center;
-  box-shadow:0 4px 12px rgba(0,0,0,.4);
+  animation:slideDownBanner .5s ease-out;
 }
 .ukraine-banner__content{
   display:flex;
@@ -193,19 +193,18 @@ button{font:inherit;border:none;cursor:pointer;background:transparent}
   margin-left:auto;
   cursor:pointer;
   transition:all .3s;
-  font-size:20px;
+  font-size:18px;
   line-height:1;
-  border:none;
-  font-weight:700;
 }
 .ukraine-banner__close:hover{
   opacity:1;
   transform:scale(1.2);
 }
+@keyframes slideDownBanner{from{transform:translateY(-100%)}to{transform:translateY(0)}}
 @media(max-width:768px){
   .ukraine-banner{padding:8px 12px}
   .ukraine-banner__text{font-size:13px}
-  .ukraine-banner__close{font-size:18px;padding:2px 6px}
+  .ukraine-banner__close{font-size:16px}
 }
 
 /* HEADER */
@@ -214,10 +213,10 @@ button{font:inherit;border:none;cursor:pointer;background:transparent}
   top:40px;
   left:0;right:0;
   z-index:1000;
-  background:rgba(5,3,22,.98);
+  background:rgba(5,3,22,.95);
   backdrop-filter:blur(14px);
   border-bottom:2px solid rgba(255,107,213,.35);
-  box-shadow:0 4px 20px rgba(0,0,0,.5);
+  transition:all .3s;
 }
 .header__inner{
   display:flex;
@@ -305,7 +304,7 @@ button{font:inherit;border:none;cursor:pointer;background:transparent}
   justify-content:center;
   position:relative;
   overflow:hidden;
-  padding:140px 24px 80px;
+  padding:120px 24px 80px;
 }
 .hero::before{
   content:'';
@@ -361,6 +360,18 @@ button{font:inherit;border:none;cursor:pointer;background:transparent}
 }
 .hero__note strong{color:var(--sun)}
 
+.hero__mascot{
+  margin:32px 0 40px;
+  animation:float 4s ease-in-out infinite;
+}
+.hero__mascot img{
+  max-width:420px;
+  margin:0 auto;
+  border-radius:32px;
+  border:3px solid rgba(255,107,213,.7);
+  box-shadow:0 20px 40px rgba(0,0,0,.7);
+}
+
 .hero__cta{
   display:flex;
   gap:20px;
@@ -371,6 +382,7 @@ button{font:inherit;border:none;cursor:pointer;background:transparent}
 
 @media(max-width:768px){
   .hero__cta{flex-direction:column;align-items:stretch}
+  .hero__mascot img{max-width:300px}
 }
 
 /* MARQUEE */
@@ -790,7 +802,22 @@ button{font:inherit;border:none;cursor:pointer;background:transparent}
 }
 .stamp__desc{color:var(--muted);font-size:16px;line-height:1.7}
 
-/* COMMUNITY */
+/* COMMUNITY IMAGE */
+.community-grid{
+  display:grid;
+  grid-template-columns:1.1fr 1fr;
+  gap:32px;
+  align-items:center;
+  margin-top:40px;
+}
+@media(max-width:968px){
+  .community-grid{grid-template-columns:1fr}
+}
+.community-grid img{
+  border-radius:24px;
+  border:3px solid rgba(255,107,213,.6);
+  box-shadow:0 18px 40px rgba(0,0,0,.7);
+}
 
 /* FOOTER */
 .footer{
@@ -886,123 +913,6 @@ a:focus-visible,button:focus-visible{
   border-radius:4px;
 }
 
-/* CONTRACT CARDS */
-.contract-card{
-  background:linear-gradient(135deg,var(--card),#1a1537);
-  border:3px solid var(--aqua);
-  border-radius:24px;
-  padding:28px;
-  transition:all .3s;
-  position:relative;
-  overflow:hidden;
-}
-.contract-card::before{
-  content:'';
-  position:absolute;
-  top:-50%;right:-50%;
-  width:100%;height:100%;
-  background:radial-gradient(circle,rgba(70,230,255,.12),transparent);
-  transition:all .5s;
-}
-.contract-card:hover{
-  transform:translateY(-4px);
-  border-color:var(--lime);
-  box-shadow:0 0 24px rgba(70,230,255,.4);
-}
-.contract-card:hover::before{top:0;right:0}
-.contract-card__header{
-  display:flex;
-  align-items:center;
-  gap:16px;
-  margin-bottom:20px;
-  position:relative;
-  z-index:1;
-}
-.contract-card__icon{
-  font-size:48px;
-  filter:drop-shadow(0 0 8px rgba(70,230,255,.6));
-}
-.contract-card__title{
-  font-family:Bangers,cursive;
-  font-size:22px;
-  color:var(--lime);
-  margin-bottom:4px;
-  letter-spacing:.08em;
-}
-.contract-card__label{
-  font-size:14px;
-  color:var(--muted);
-  text-transform:uppercase;
-  font-weight:700;
-  letter-spacing:.08em;
-}
-.contract-card__address{
-  font-family:monospace;
-  font-size:clamp(11px,1.5vw,13px);
-  color:var(--fg);
-  word-break:break-all;
-  background:rgba(5,3,22,.9);
-  padding:16px;
-  border-radius:12px;
-  border:2px solid rgba(70,230,255,.3);
-  margin-bottom:16px;
-  position:relative;
-  z-index:1;
-  line-height:1.6;
-}
-.contract-card__actions{
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-  position:relative;
-  z-index:1;
-}
-.contract-card__copy{
-  padding:10px 20px;
-  background:linear-gradient(135deg,#ff6bd5,#ffd447);
-  color:#14061b;
-  border:none;
-  border-radius:999px;
-  font-weight:800;
-  font-size:14px;
-  font-family:Bangers,cursive;
-  letter-spacing:.08em;
-  cursor:pointer;
-  transition:all .3s;
-  box-shadow:0 0 12px rgba(255,107,213,.4);
-}
-.contract-card__copy:hover{
-  transform:translateY(-2px) scale(1.05);
-  box-shadow:0 0 20px rgba(255,107,213,.6);
-}
-.contract-card__copy.copied{
-  background:linear-gradient(135deg,#4ade80,#22c55e);
-  color:#fff;
-}
-.contract-card__link{
-  padding:10px 20px;
-  background:rgba(70,230,255,.15);
-  color:var(--aqua);
-  border:2px solid var(--aqua);
-  border-radius:999px;
-  font-weight:700;
-  font-size:14px;
-  transition:all .3s;
-  text-decoration:none;
-  display:inline-flex;
-  align-items:center;
-}
-.contract-card__link:hover{
-  background:var(--aqua);
-  color:#050316;
-  transform:translateY(-2px);
-  box-shadow:0 0 16px rgba(70,230,255,.5);
-}
-@media(max-width:768px){
-  .contract-card__actions{flex-direction:column}
-  .contract-card__copy,.contract-card__link{width:100%;justify-content:center}
-}
-
 /* SCROLLBAR */
 ::-webkit-scrollbar{width:12px}
 ::-webkit-scrollbar-track{background:#130c2e}
@@ -1040,7 +950,6 @@ a:focus-visible,button:focus-visible{
     <nav class="nav" id="nav">
       <a href="#about">About</a>
       <a href="#tokenomics">Tokenomics</a>
-      <a href="#contracts">Contracts</a>
       <a href="#how">Fair Launch</a>
       <a href="#charity">Charity</a>
       <a href="#whitepaper">Whitepaper</a>
@@ -1068,6 +977,10 @@ a:focus-visible,button:focus-visible{
       <strong>10% of supply locked for Ukrainian children with cancer</strong>
       via Tabletochki Charity Foundation. 🏹
     </p>
+
+    <div class="hero__mascot">
+      <img src="img/ggrd-robin-main.png" alt="Giggle Reloaded Robin of Gains hero banner">
+    </div>
 
     <p class="hero__note">
       <strong>Launch status:</strong> the Meteora Dynamic Bonding Curve (DBC) fair launch and LP migration
@@ -1322,198 +1235,6 @@ a:focus-visible,button:focus-visible{
   </div>
 </section>
 
-<!-- CONTRACT ADDRESSES -->
-<section class="section contracts" id="contracts" style="background:radial-gradient(circle at 70% 50%,rgba(70,230,255,.08),transparent 60%)">
-  <div class="container">
-    <h2 class="title">Smart Contracts & Multisigs</h2>
-    <p class="subtitle">All on-chain addresses — verify before you ape 🔍</p>
-
-    <div style="max-width:900px;margin:0 auto 48px;text-align:center;color:var(--muted);font-size:16px;line-height:1.8;padding:24px;background:rgba(255,107,213,.06);border:2px solid rgba(255,107,213,.3);border-radius:16px">
-      <strong style="color:var(--lime)">⚠️ Security reminder:</strong> Always verify contract addresses from official sources.
-      All addresses below are the only legitimate GGRD contracts and multisigs. Do not trust any other addresses claiming to be GGRD.
-    </div>
-
-    <h3 style="font-family:Bangers,cursive;font-size:32px;color:var(--aqua);text-align:center;margin:0 0 32px;letter-spacing:.08em">
-      Token Contract
-    </h3>
-
-    <div style="display:grid;grid-template-columns:1fr;gap:24px;max-width:900px;margin:0 auto 64px">
-      <div class="contract-card">
-        <div class="contract-card__header">
-          <div class="contract-card__icon">🪙</div>
-          <div>
-            <h4 class="contract-card__title">GGRD Token Mint</h4>
-            <div class="contract-card__label">Solana SPL Token</div>
-          </div>
-        </div>
-        <div class="contract-card__address" id="mintAddress">TR97dHmm8nXVndTcxew21138AchNgrk2BhEJGXMybdE</div>
-        <div class="contract-card__actions">
-          <button class="contract-card__copy" onclick="copyAddress('mintAddress', this)">
-            📋 Copy Address
-          </button>
-          <a href="https://solscan.io/token/TR97dHmm8nXVndTcxew21138AchNgrk2BhEJGXMybdE" target="_blank" rel="noopener" class="contract-card__link">
-            View on Solscan →
-          </a>
-          <a href="https://jup.ag/tokens/TR97dHmm8nXVndTcxew21138AchNgrk2BhEJGXMybdE" target="_blank" rel="noopener" class="contract-card__link">
-            View on Jupiter →
-          </a>
-        </div>
-      </div>
-
-      <div class="contract-card">
-        <div class="contract-card__header">
-          <div class="contract-card__icon">🔐</div>
-          <div>
-            <h4 class="contract-card__title">Metadata Authority</h4>
-            <div class="contract-card__label">Wallet with update authority</div>
-          </div>
-        </div>
-        <div class="contract-card__address" id="metadataAddress">AKwQ4QuqFRxgEWfWoM1GAKvwnxRqrqG8e8Qa8Yo9Mpqu</div>
-        <div class="contract-card__actions">
-          <button class="contract-card__copy" onclick="copyAddress('metadataAddress', this)">
-            📋 Copy Address
-          </button>
-          <a href="https://solscan.io/account/AKwQ4QuqFRxgEWfWoM1GAKvwnxRqrqG8e8Qa8Yo9Mpqu" target="_blank" rel="noopener" class="contract-card__link">
-            View on Solscan →
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <h3 style="font-family:Bangers,cursive;font-size:32px;color:var(--lime);text-align:center;margin:0 0 32px;letter-spacing:.08em">
-      Treasury Multisigs (Squads 3/4)
-    </h3>
-
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:24px;margin-bottom:48px">
-      <div class="contract-card">
-        <div class="contract-card__header">
-          <div class="contract-card__icon">🇺🇦</div>
-          <div>
-            <h4 class="contract-card__title">Charity Treasury</h4>
-            <div class="contract-card__label" style="color:var(--sun)">10% supply (100,000 GGRD)</div>
-          </div>
-        </div>
-        <div class="contract-card__address" id="charityAddress">C96zqEjGh22yuZknVrasLyr2j5b2xsMnbTUiu2WKLK9w</div>
-        <div class="contract-card__actions">
-          <button class="contract-card__copy" onclick="copyAddress('charityAddress', this)">
-            📋 Copy Address
-          </button>
-          <a href="https://solscan.io/account/C96zqEjGh22yuZknVrasLyr2j5b2xsMnbTUiu2WKLK9w" target="_blank" rel="noopener" class="contract-card__link">
-            View on Solscan →
-          </a>
-        </div>
-      </div>
-
-      <div class="contract-card">
-        <div class="contract-card__header">
-          <div class="contract-card__icon">💧</div>
-          <div>
-            <h4 class="contract-card__title">LP Policy Treasury</h4>
-            <div class="contract-card__label" style="color:var(--sun)">10% supply (100,000 GGRD)</div>
-          </div>
-        </div>
-        <div class="contract-card__address" id="lpAddress">8vFQrPpdE3uyd4JRdE7jUhyzTF8ZBVnuvqFTpsAA4SLY</div>
-        <div class="contract-card__actions">
-          <button class="contract-card__copy" onclick="copyAddress('lpAddress', this)">
-            📋 Copy Address
-          </button>
-          <a href="https://solscan.io/account/8vFQrPpdE3uyd4JRdE7jUhyzTF8ZBVnuvqFTpsAA4SLY" target="_blank" rel="noopener" class="contract-card__link">
-            View on Solscan →
-          </a>
-        </div>
-      </div>
-
-      <div class="contract-card">
-        <div class="contract-card__header">
-          <div class="contract-card__icon">🎁</div>
-          <div>
-            <h4 class="contract-card__title">Community/Airdrops</h4>
-            <div class="contract-card__label" style="color:var(--sun)">7% supply (70,000 GGRD)</div>
-          </div>
-        </div>
-        <div class="contract-card__address" id="communityAddress">D3JWCu9egWYHEf1xvxBqSJJ6PBsHU3HkMjJZDW3ZQ37D</div>
-        <div class="contract-card__actions">
-          <button class="contract-card__copy" onclick="copyAddress('communityAddress', this)">
-            📋 Copy Address
-          </button>
-          <a href="https://solscan.io/account/D3JWCu9egWYHEf1xvxBqSJJ6PBsHU3HkMjJZDW3ZQ37D" target="_blank" rel="noopener" class="contract-card__link">
-            View on Solscan →
-          </a>
-        </div>
-      </div>
-
-      <div class="contract-card">
-        <div class="contract-card__header">
-          <div class="contract-card__icon">👥</div>
-          <div>
-            <h4 class="contract-card__title">Team Vesting</h4>
-            <div class="contract-card__label" style="color:var(--sun)">7% supply (70,000 GGRD)</div>
-          </div>
-        </div>
-        <div class="contract-card__address" id="teamAddress">7xXhueJp5LTr4jNwcWPn4oFurqJM9W5hxQRRWBCWLnDY</div>
-        <div class="contract-card__actions">
-          <button class="contract-card__copy" onclick="copyAddress('teamAddress', this)">
-            📋 Copy Address
-          </button>
-          <a href="https://solscan.io/account/7xXhueJp5LTr4jNwcWPn4oFurqJM9W5hxQRRWBCWLnDY" target="_blank" rel="noopener" class="contract-card__link">
-            View on Solscan →
-          </a>
-        </div>
-      </div>
-
-      <div class="contract-card">
-        <div class="contract-card__header">
-          <div class="contract-card__icon">📢</div>
-          <div>
-            <h4 class="contract-card__title">Marketing & Partnerships</h4>
-            <div class="contract-card__label" style="color:var(--sun)">8% supply (80,000 GGRD)</div>
-          </div>
-        </div>
-        <div class="contract-card__address" id="marketingAddress">2RgWCdtsvU4VYcR1nZJS2XN5utBzA88vHbEyHuutHkvG</div>
-        <div class="contract-card__actions">
-          <button class="contract-card__copy" onclick="copyAddress('marketingAddress', this)">
-            📋 Copy Address
-          </button>
-          <a href="https://solscan.io/account/2RgWCdtsvU4VYcR1nZJS2XN5utBzA88vHbEyHuutHkvG" target="_blank" rel="noopener" class="contract-card__link">
-            View on Solscan →
-          </a>
-        </div>
-      </div>
-
-      <div class="contract-card">
-        <div class="contract-card__header">
-          <div class="contract-card__icon">🏦</div>
-          <div>
-            <h4 class="contract-card__title">Treasury Reserve</h4>
-            <div class="contract-card__label" style="color:var(--sun)">18% supply (180,000 GGRD)</div>
-          </div>
-        </div>
-        <div class="contract-card__address" id="treasuryAddress">5UAgVqKBNFoT6WrANGFdjqbTXJRGXPzHcNhG5LK4n9mj</div>
-        <div class="contract-card__actions">
-          <button class="contract-card__copy" onclick="copyAddress('treasuryAddress', this)">
-            📋 Copy Address
-          </button>
-          <a href="https://solscan.io/account/5UAgVqKBNFoT6WrANGFdjqbTXJRGXPzHcNhG5LK4n9mj" target="_blank" rel="noopener" class="contract-card__link">
-            View on Solscan →
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <div style="max-width:800px;margin:48px auto 0;padding:28px;background:linear-gradient(135deg,var(--card),#1a1537);border:3px solid var(--aqua);border-radius:20px;text-align:center">
-      <p style="color:var(--muted);font-size:15px;line-height:1.8;margin-bottom:16px">
-        <strong style="color:var(--aqua)">🔍 Transparency note:</strong><br>
-        All multisig wallets use <strong>Squads Protocol</strong> with 3/4 signature threshold.
-        Every transaction requires approval from at least 3 out of 4 signers.
-      </p>
-      <p style="color:var(--muted);font-size:14px;line-height:1.8;margin-bottom:0">
-        All treasury operations are public and can be tracked on Solscan.
-        Monthly charity reports will be published on this website and official channels.
-      </p>
-    </div>
-  </div>
-</section>
-
 <!-- HOW TO JOIN FAIR LAUNCH -->
 <section class="section how" id="how">
   <div class="container">
@@ -1729,7 +1450,7 @@ a:focus-visible,button:focus-visible{
       <div class="stamp">
         <h3 class="stamp__phase">Phase 4 — Meme Kingdom</h3>
         <p class="stamp__desc">
-          🎯 Major CEX listings: Binance, Kucoin, OKX, Bybit<br>
+          🎯 Further CEX listings (as feasible)<br>
           🎯 Experiments with community governance<br>
           🎯 Regular charity contributions via Tabletochki<br>
           🎯 Expanding the Robin of Gains meme culture
@@ -1745,7 +1466,8 @@ a:focus-visible,button:focus-visible{
     <h2 class="title">Community</h2>
     <p class="subtitle">Where all the giggles, memes and treasury reports live</p>
 
-    <div>
+    <div class="community-grid">
+      <div>
         <p style="color:var(--muted);font-size:16px;line-height:1.8;">
           All important updates about the DBC launch, LP migration, airdrops and monthly
           donations from the Charity Treasury are announced through official channels:
@@ -1768,7 +1490,11 @@ a:focus-visible,button:focus-visible{
           project evolves – always within the guardrails defined in the whitepaper and Donation Policy.
         </p>
       </div>
-  </div>
+
+      <div>
+        <img src="img/ggrd-robin-community.png" alt="Giggle Reloaded community meme banner">
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1781,7 +1507,6 @@ a:focus-visible,button:focus-visible{
         <div class="footer__links">
           <a href="#about">About GGRD</a>
           <a href="#tokenomics">Tokenomics</a>
-          <a href="#contracts">Smart Contracts</a>
           <a href="#how">Fair Launch</a>
           <a href="#charity">Charity Treasury</a>
           <a href="#whitepaper">Whitepaper</a>
@@ -1858,17 +1583,13 @@ a:focus-visible,button:focus-visible{
 // Ukraine banner close
 const ukraineBanner = document.getElementById('ukraineBanner');
 const closeBanner = document.getElementById('closeBanner');
-const header = document.getElementById('header');
-
 closeBanner.addEventListener('click', () => {
-  ukraineBanner.style.transition = 'transform 0.3s, opacity 0.3s';
   ukraineBanner.style.transform = 'translateY(-100%)';
   ukraineBanner.style.opacity = '0';
-  
   setTimeout(() => {
     ukraineBanner.style.display = 'none';
     document.body.style.paddingTop = '0';
-    header.style.top = '0';
+    document.getElementById('header').style.top = '0';
   }, 300);
 });
 
@@ -1888,6 +1609,23 @@ if (marqueeContent) {
   const clone = marqueeContent.cloneNode(true);
   marqueeContent.parentNode.appendChild(clone);
 }
+
+// Header hide/show on scroll
+let lastScroll = 0;
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => {
+  const currentScroll = window.pageYOffset;
+  if (currentScroll <= 0) {
+    header.style.transform = 'translateY(0)';
+    return;
+  }
+  if (currentScroll > lastScroll && currentScroll > 100) {
+    header.style.transform = 'translateY(-100%)';
+  } else {
+    header.style.transform = 'translateY(0)';
+  }
+  lastScroll = currentScroll;
+});
 
 // Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1937,25 +1675,6 @@ document.addEventListener('keydown', (e) => {
     }, 500);
   }
 });
-
-// Copy address to clipboard
-function copyAddress(elementId, button) {
-  const addressElement = document.getElementById(elementId);
-  const address = addressElement.textContent;
-  
-  navigator.clipboard.writeText(address).then(() => {
-    const originalText = button.textContent;
-    button.textContent = '✅ Copied!';
-    button.classList.add('copied');
-    
-    setTimeout(() => {
-      button.textContent = originalText;
-      button.classList.remove('copied');
-    }, 2000);
-  }).catch(err => {
-    alert('Failed to copy: ' + err);
-  });
-}
 
 console.log('%c🏹 GGRD - Robin of Gains 🦊', 'color: #ff6bd5; font-size: 24px; font-weight: bold;');
 console.log('%cWelcome to the pack, fellow degen!', 'color: #ffd447; font-size: 16px;');
