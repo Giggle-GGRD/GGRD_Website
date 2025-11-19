@@ -584,6 +584,12 @@ button{font:inherit;border:none;cursor:pointer;background:transparent}
   padding:16px;
   border-radius:12px;
   border:1px solid rgba(255,107,213,.4);
+  transition:all .3s;
+}
+.contract-box__address:hover{
+  background:rgba(70,230,255,.12);
+  border-color:var(--aqua);
+  transform:scale(1.02);
 }
 
 /* HOW TO JOIN LAUNCH */
@@ -1315,8 +1321,16 @@ a:focus-visible,button:focus-visible{
 
     <div class="contract-box">
       <h4 class="contract-box__title">📜 GGRD Mint Address</h4>
-      <div class="contract-box__address">
-        To be announced at launch via this website and official channels. Do not trust any “GGRD” mint address that is not published here.
+      <div class="contract-box__address" id="mainMintAddress" style="cursor:pointer" onclick="copyAddress('mainMintAddress', this)" title="Click to copy">
+        TR97dHmm8nXVndTcxew21138AchNgrk2BhEJGXMybdE
+      </div>
+      <div style="text-align:center;margin-top:20px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <a href="https://solscan.io/token/TR97dHmm8nXVndTcxew21138AchNgrk2BhEJGXMybdE" target="_blank" rel="noopener" class="btn btn--outline" style="font-size:14px;padding:10px 24px">
+          View on Solscan →
+        </a>
+        <a href="https://jup.ag/tokens/TR97dHmm8nXVndTcxew21138AchNgrk2BhEJGXMybdE" target="_blank" rel="noopener" class="btn btn--outline" style="font-size:14px;padding:10px 24px">
+          View on Jupiter →
+        </a>
       </div>
     </div>
   </div>
