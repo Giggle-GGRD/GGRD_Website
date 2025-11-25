@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giggle Reloaded ($GGRD) — Whitepaper v1.1</title>
+    <title>Giggle Reloaded ($GGRD) — Whitepaper v1.3</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
         
@@ -163,6 +163,16 @@
             font-size: 10pt;
         }
         
+        pre {
+            background-color: #f5f5f5;
+            padding: 0.5cm;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 9pt;
+            margin: 0.5cm 0;
+        }
+        
         /* Blockquotes */
         blockquote {
             background-color: #f0fdf4;
@@ -292,8 +302,8 @@
     </div>
     
     <div class="meta">
-        <p><strong>Version:</strong> 1.1</p>
-        <p><strong>Date:</strong> November 15, 2025</p>
+        <p><strong>Version:</strong> 1.3</p>
+        <p><strong>Date:</strong> November 25, 2025</p>
         <p><strong>Network:</strong> Solana Mainnet-Beta</p>
         <p><strong>Website:</strong> https://ggrd.me</p>
     </div>
@@ -310,13 +320,15 @@
         <li><a href="#launch-mechanism"><span>5. Launch Mechanism — Meteora Dynamic Bonding Curve</span></a></li>
         <li><a href="#liquidity"><span>6. Liquidity & Trading Post-Migration</span></a></li>
         <li><a href="#charity"><span>7. Charity Treasury & Donation Policy</span></a></li>
-        <li><a href="#governance"><span>8. Governance, Multisigs & Future DAO</span></a></li>
-        <li><a href="#roadmap"><span>9. Development Roadmap & Milestones</span></a></li>
-        <li><a href="#marketing"><span>10. Marketing, Community & Communication</span></a></li>
-        <li><a href="#security"><span>11. Security & Risk Management</span></a></li>
-        <li><a href="#legal"><span>12. Legal Disclaimers</span></a></li>
-        <li><a href="#contact"><span>13. Contact & Support</span></a></li>
-        <li><a href="#summary"><span>14. Summary</span></a></li>
+        <li><a href="#rewards"><span>8. Community Rewards Program (Telegram Bot)</span></a></li>
+        <li><a href="#governance"><span>9. Governance, Multisigs & Future DAO</span></a></li>
+        <li><a href="#roadmap"><span>10. Development Roadmap & Milestones</span></a></li>
+        <li><a href="#marketing"><span>11. Marketing, Community & Communication</span></a></li>
+        <li><a href="#security"><span>12. Security & Risk Management</span></a></li>
+        <li><a href="#legal"><span>13. Legal Disclaimers</span></a></li>
+        <li><a href="#contact"><span>14. Contact & Support</span></a></li>
+        <li><a href="#summary"><span>15. Summary</span></a></li>
+        <li><a href="#appendices"><span>Appendices (A, B, C)</span></a></li>
     </ul>
 </div>
 
@@ -342,18 +354,18 @@
     <li><strong>Curve Allocation:</strong> 40% of total supply (400,000 GGRD) allocated to the DBC</li>
     <li><strong>Treasury Allocation:</strong> 60% of total supply (600,000 GGRD) allocated to multisig-controlled treasuries</li>
     <li><strong>Charitable Component:</strong> 10% of total supply (100,000 GGRD) reserved in a dedicated Charity Treasury for transparent donations to Ukrainian charities, including the Tabletochki foundation</li>
-    <li><strong>Security Architecture:</strong> 0% tax, no hidden fee-switches, no freeze authority, no presale or VC allocation, and a comprehensive suite of Squads v4 multisigs (3/4 threshold)</li>
+    <li><strong>Security Architecture:</strong> 0% tax, no hidden fee-switches, no freeze authority, no presale or VC allocation, and a comprehensive suite of Squads v4 multisigs (3/4 threshold) for Treasury, Charity, LP Policy, Marketing, Distribution and Team funds</li>
 </ul>
 
 <h3>Deployment Status & Addresses</h3>
 
 <div class="warning">
     <p><strong>⚠️ Important Notice:</strong></p>
-    <p>At the time of publication (November 15, 2025):</p>
+    <p>At the time of publication (November 25, 2025):</p>
     <ul>
         <li>The Meteora DBC and LP for GGRD are <strong>not yet deployed</strong>.</li>
         <li>The GGRD token mint address, on-chain metadata URI, DBC pool address, LP addresses and trading links <strong>do not yet exist in final form</strong>.</li>
-        <li>All addresses will be published <strong>only after deployment</strong> via official channels.</li>
+        <li>The <strong>only project-side addresses that should be treated as final at this stage</strong> are the public multisig wallets listed in Section 4 and the official URLs of the Tabletochki foundation (Section 7.5).</li>
     </ul>
 </div>
 
@@ -363,6 +375,8 @@
     <li>Official Telegram announcement channel: <strong>https://t.me/GGRDofficial</strong></li>
     <li>Official Telegram community chat: <strong>https://t.me/GGRDchat</strong></li>
 </ul>
+
+<p>Any token, pool, or "official" address not confirmed through these channels should be assumed to be unauthorised or potentially malicious.</p>
 
 <div class="page-break"></div>
 
@@ -454,7 +468,7 @@
     </tr>
     <tr>
         <td>Mint Address</td>
-        <td>TBA - Will be announced via official channels after deployment</td>
+        <td>Will be announced via official channels after deployment</td>
     </tr>
 </table>
 
@@ -463,7 +477,7 @@
 <ul>
     <li><strong>Standard:</strong> SPL Token + Metaplex Token Metadata</li>
     <li><strong>Logo:</strong> 512×512 PNG, intended to be hosted on a permanent storage layer (e.g. Irys / Arweave)</li>
-    <li><strong>On-Chain Metadata:</strong> Final on-chain metadata URI and associated media links (logo, JSON metadata) will be announced only via official channels once confirmed on Solana explorers</li>
+    <li><strong>On-Chain Metadata:</strong> Final on-chain metadata URI and associated media links will be announced only via official channels once confirmed on Solana explorers. Holders are expected to verify these independently using reputable explorers (Solscan, Solana Explorer, SolanaFM).</li>
 </ul>
 
 <h2>Token Authorities</h2>
@@ -477,7 +491,7 @@
 </ul>
 
 <div class="warning">
-    <p><strong>Verification Required:</strong> Until official announcements are made and on-chain state is verified, all references to the authority configuration in this document should be treated as design intent rather than a legal guarantee.</p>
+    <p><strong>Verification Required:</strong> The project will publicly announce and verify, via official channels and explorers, when mint authority has been revoked, any freeze authority is disabled, and metadata update authority is no longer in the control of any team key. Until such announcements are made and on-chain state is verified, all references to the authority configuration in this document should be treated as design intent rather than a legal guarantee.</p>
 </div>
 
 <div class="page-break"></div>
@@ -618,6 +632,8 @@
     <li><strong>80,000 USDC</strong> is the <strong>actual technical migration threshold</strong> — once the quote balance on the DBC reaches or exceeds this value, the pool becomes eligible for migration to a Meteora DAMM v2 liquidity pool</li>
 </ul>
 
+<p>The <code>liquidityWeights</code> array splits the 400,000 GGRD allocated to the curve into 16 segments with progressively higher weights in later segments. Full values are provided in <strong>Appendix A</strong>, making early segments more accessible to smaller participants while discouraging domination by a single large buyer.</p>
+
 <h2>5.2. Fee Structure</h2>
 
 <p>The DBC uses a <strong>time-decaying fee schedule</strong>:</p>
@@ -645,7 +661,7 @@
     </tr>
     <tr>
         <td>Dynamic Fees</td>
-        <td>Disabled</td>
+        <td>Disabled (<code>dynamicFeeEnabled = false</code>)</td>
     </tr>
     <tr>
         <td>Migration Fee</td>
@@ -653,7 +669,7 @@
     </tr>
     <tr>
         <td>Fee Receiver / Claimer</td>
-        <td>Main Treasury multisig</td>
+        <td>Main Treasury multisig <code>5UAgVqKBNFoT6WrANGFdjqbTXJRGXPzHcNhG5LK4n9mj</code></td>
     </tr>
 </table>
 
@@ -685,10 +701,10 @@
 <p>Key migration-related parameters:</p>
 
 <ul>
-    <li><strong>Migration Option:</strong> 1 (migrate to LP / TO_LP-style behaviour)</li>
+    <li><strong>Migration Option:</strong> <code>migrationOption = 1</code> (migrate to LP / TO_LP-style behaviour)</li>
     <li><strong>Migration Fee:</strong> 0% (no extra fee charged to the project at migration)</li>
-    <li><strong>Leftover Receiver & Fee Claimer:</strong> Main Treasury multisig</li>
-    <li><strong>Pool Creator Transfer:</strong> After migration, the pool creator is transferred to the LP Policy multisig: <code>8vFQrPpdE3uyd4JRdE7jUhyzTF8ZBVnuvqFTpsAA4SLY</code></li>
+    <li><strong>Leftover Receiver & Fee Claimer:</strong> Main Treasury multisig <code>5UAgVqKBNFoT6WrANGFdjqbTXJRGXPzHcNhG5LK4n9mj</code></li>
+    <li><strong>Pool Creator Transfer:</strong> After migration, the pool creator is transferred to the LP Policy multisig: <code>newCreator = 8vFQrPpdE3uyd4JRdE7jUhyzTF8ZBVnuvqFTpsAA4SLY</code></li>
 </ul>
 
 <div class="info">
@@ -699,6 +715,8 @@
         <li>Immediately after DAMM v2 pool creation, pool creator/authority is transferred to the <strong>LP Policy multisig</strong>, typically within minutes from deployment, minimising any window in which a single wallet controls LP parameters</li>
     </ol>
 </div>
+
+<p>The aim is to ensure that post-migration liquidity is controlled by a multisig rather than a single developer wallet, significantly reducing rug-pull risk.</p>
 
 <div class="page-break"></div>
 
@@ -785,6 +803,10 @@
     <li>A "kill-switch" or pause mechanism may be used to temporarily suspend conversions if market conditions become extremely unfavourable or if price impact exceeds predefined thresholds</li>
 </ul>
 
+<div class="info">
+    <p><strong>Clarification:</strong> This is an <strong>operational policy</strong> executed via multisig approvals (i.e., pausing or delaying transactions) and should not be interpreted as an on-chain enforced pause function unless explicitly implemented and disclosed in future smart contract releases.</p>
+</div>
+
 <h3>Goals</h3>
 
 <ul>
@@ -810,6 +832,8 @@
 </ul>
 
 <p>For <strong>questions regarding charity operations</strong>, holders are expected to use the official Telegram community chat: <strong>https://t.me/GGRDchat</strong></p>
+
+<p>The project does <strong>not</strong> use email for individual charity or support inquiries.</p>
 
 <div class="warning">
     <p><strong>Verification Required:</strong> Official charity-related addresses and links should always be verified directly via:</p>
@@ -848,8 +872,8 @@
 <h3>Official Links (as of publication)</h3>
 
 <ul>
-    <li><strong>Website:</strong> https://tabletochki.org/</li>
-    <li><strong>Crypto donation page (Whitepay):</strong> https://pay.whitepay.com/crypto-jars/6ff2ec87-058b-43ed-b33b-c036da57da7d</li>
+    <li><strong>Website:</strong> <a href="https://tabletochki.org/">https://tabletochki.org/</a></li>
+    <li><strong>Crypto donation page (Whitepay):</strong> <a href="https://pay.whitepay.com/crypto-jars/6ff2ec87-058b-43ed-b33b-c036da57da7d">https://pay.whitepay.com/crypto-jars/6ff2ec87-058b-43ed-b33b-c036da57da7d</a></li>
 </ul>
 
 <div class="info">
@@ -858,9 +882,85 @@
 
 <div class="page-break"></div>
 
-<h1 id="governance">8. Governance, Multisigs & Future DAO</h1>
+<h1 id="rewards">8. Community Rewards Program (Telegram Bot)</h1>
 
-<h2>8.1. Current Decision Structure</h2>
+<h2>8.1. Program Overview</h2>
+
+<p>Automated Telegram bot distributing <strong>40,000+ GGRD</strong> across 6 reward tiers.</p>
+
+<div class="info">
+    <p><strong>Bot:</strong> @GGRD_Rewards_Bot</p>
+</div>
+
+<div class="warning">
+    <p><strong>Important:</strong> Joining Telegram does not require any purchase. Some reward tiers may require on-chain holding verification and/or purchase proof. All rewards are <strong>limited</strong>, <strong>discretionary</strong>, may be adjusted, and are not guaranteed.</p>
+</div>
+
+<h2>8.2. Reward Structure</h2>
+
+<table>
+    <tr>
+        <th>Task</th>
+        <th>Reward</th>
+        <th>Requirements</th>
+    </tr>
+    <tr>
+        <td><strong>Task 1</strong></td>
+        <td>10 GGRD + lottery entry (2k GGRD prize)</td>
+        <td>Basic participation</td>
+    </tr>
+    <tr>
+        <td><strong>Task 2</strong></td>
+        <td>20 GGRD (max 300 participants)</td>
+        <td>Purchase proof required</td>
+    </tr>
+    <tr>
+        <td><strong>Task 3 TOP 100</strong></td>
+        <td>50 GGRD each (first 100 holders ≥2,500 GGRD)</td>
+        <td>Hold ≥2,500 GGRD on Day 0</td>
+    </tr>
+    <tr>
+        <td><strong>Task 3 Lottery</strong></td>
+        <td>10,000 GGRD grand prize</td>
+        <td>Hold ≥2,500 GGRD on Day 0 AND Day 7</td>
+    </tr>
+    <tr>
+        <td><strong>Biggest Holder</strong></td>
+        <td>20,000 GGRD</td>
+        <td>Highest 30-day average balance</td>
+    </tr>
+    <tr>
+        <td><strong>Referrals</strong></td>
+        <td>5 GGRD each (10k pool)</td>
+        <td>Day 10 payout, verified referrals</td>
+    </tr>
+</table>
+
+<h2>8.3. Timeline</h2>
+
+<ul>
+    <li><strong>Day 0:</strong> LP launch → TOP 100 snapshot</li>
+    <li><strong>Day 7:</strong> Lottery qualification check</li>
+    <li><strong>Day 10:</strong> Referral payouts</li>
+    <li><strong>Days 1-30:</strong> Daily snapshots for average balance</li>
+    <li><strong>Day 30:</strong> Biggest holder award</li>
+</ul>
+
+<h2>8.4. Key Features</h2>
+
+<ul>
+    <li><strong>Dual-snapshot anti-gaming:</strong> Day 0 + Day 7 requirement prevents quick dumps</li>
+    <li><strong>30-day consistency tracking:</strong> Rewards long-term holding over speculation</li>
+    <li><strong>On-chain verification:</strong> Balance checks via Helius RPC</li>
+    <li><strong>Public leaderboards:</strong> Transparent ranking system</li>
+    <li><strong>Day 10 referral delay:</strong> Prevents immediate dump after referral signup</li>
+</ul>
+
+<div class="page-break"></div>
+
+<h1 id="governance">9. Governance, Multisigs & Future DAO</h1>
+
+<h2>9.1. Current Decision Structure</h2>
 
 <p>At launch, governance is based on a <strong>multisig-first</strong> security model:</p>
 
@@ -876,7 +976,7 @@
 
 <p>This structure is designed to prevent any single private key from unilaterally draining liquidity or charity funds.</p>
 
-<h2>8.2. Role of Telegram in Governance</h2>
+<h2>9.2. Role of Telegram in Governance</h2>
 
 <p>Telegram is used as the primary <strong>consultation and communication</strong> layer:</p>
 
@@ -889,7 +989,7 @@
     <p><strong>Note:</strong> Telegram polls and discussions are <strong>not</strong> formal or binding governance mechanisms but serve as an important input into on-chain decision-making.</p>
 </div>
 
-<h2>8.3. On-Chain Governance (Future DAO)</h2>
+<h2>9.3. On-Chain Governance (Future DAO)</h2>
 
 <p>In later phases, the project aims to introduce a <strong>DAO-style on-chain governance layer</strong>, potentially using Realms or another Solana-native governance framework. The intended model is:</p>
 
@@ -911,7 +1011,7 @@
     <p><strong>Important:</strong> Participation in governance does <strong>not</strong> grant any legal ownership or equity in any entity. It is a <strong>protocol-level mechanism</strong> for influencing project direction and treasury usage, not a shareholder structure.</p>
 </div>
 
-<h2>8.4. Planned On-Chain Programmes (Anchor)</h2>
+<h2>9.4. Planned On-Chain Programmes (Future)</h2>
 
 <p>As the project matures, the following on-chain programmes may be implemented using Anchor or similar tooling:</p>
 
@@ -926,13 +1026,13 @@
 
 <div class="page-break"></div>
 
-<h1 id="roadmap">9. Development Roadmap & Milestones</h1>
+<h1 id="roadmap">10. Development Roadmap & Milestones</h1>
 
 <div class="warning">
     <p><strong>Disclaimer:</strong> The roadmap below presents <strong>non-binding, indicative targets</strong> rather than promises or guarantees.</p>
 </div>
 
-<h2>9.1. Launch Phase (Day 1–7)</h2>
+<h2>10.1. Launch Phase (Day 1–7)</h2>
 
 <h3>Indicative Targets:</h3>
 <ul>
@@ -951,7 +1051,7 @@
     <li>Start regular communication on X and Telegram</li>
 </ul>
 
-<h2>9.2. Growth Phase (Week 2–4)</h2>
+<h2>10.2. Growth Phase (Week 2–4)</h2>
 
 <h3>Indicative Targets:</h3>
 <ul>
@@ -960,7 +1060,7 @@
     <li>Migration to DAMM v2 completed (post-80k USDC threshold)</li>
     <li>3,000+ Telegram members</li>
     <li>2,000+ X followers</li>
-    <li>Listing on Jupiter aggregator</li>
+    <li>Indexed and tradable via Jupiter (aggregator)</li>
 </ul>
 
 <h3>Key Activities:</h3>
@@ -971,7 +1071,7 @@
     <li>Launch first meme/engagement campaigns and educational content</li>
 </ul>
 
-<h2>9.3. Expansion Phase (Month 2–3)</h2>
+<h2>10.3. Expansion Phase (Month 2–3)</h2>
 
 <h3>Indicative Targets:</h3>
 <ul>
@@ -990,7 +1090,7 @@
     <li>Deploy early versions of merkle distributor / reward contracts where appropriate</li>
 </ul>
 
-<h2>9.4. Maturity Phase (Month 4–6)</h2>
+<h2>10.4. Maturity Phase (Month 4–6)</h2>
 
 <h3>Indicative Targets:</h3>
 <ul>
@@ -1010,9 +1110,9 @@
 
 <div class="page-break"></div>
 
-<h1 id="marketing">10. Marketing, Community & Communication</h1>
+<h1 id="marketing">11. Marketing, Community & Communication</h1>
 
-<h2>10.1. Official Channels</h2>
+<h2>11.1. Official Channels</h2>
 
 <table>
     <tr>
@@ -1021,19 +1121,19 @@
     </tr>
     <tr>
         <td>Official Website</td>
-        <td>https://ggrd.me</td>
+        <td><a href="https://ggrd.me">https://ggrd.me</a></td>
     </tr>
     <tr>
         <td>Official X (Twitter)</td>
-        <td>https://x.com/ContactGiggle</td>
+        <td><a href="https://x.com/ContactGiggle">https://x.com/ContactGiggle</a></td>
     </tr>
     <tr>
         <td>Telegram Announcement Channel</td>
-        <td>https://t.me/GGRDofficial</td>
+        <td><a href="https://t.me/GGRDofficial">https://t.me/GGRDofficial</a></td>
     </tr>
     <tr>
         <td>Telegram Community Chat</td>
-        <td>https://t.me/GGRDchat</td>
+        <td><a href="https://t.me/GGRDchat">https://t.me/GGRDchat</a></td>
     </tr>
 </table>
 
@@ -1041,7 +1141,7 @@
     <p><strong>Security Notice:</strong> Only channels <strong>explicitly linked</strong> from the official website should be considered official. Any other channel or account claiming to represent GGRD should be treated with caution.</p>
 </div>
 
-<h2>10.2. Communication Rules</h2>
+<h2>11.2. Communication Rules</h2>
 
 <ul>
     <li>All critical announcements (launch dates, contract addresses, charity reports, governance proposals) will be published on <strong>https://ggrd.me</strong> and in <strong>@GGRDofficial</strong></li>
@@ -1049,7 +1149,7 @@
     <li>The team does <strong>not</strong> provide official project support via email or private DMs. Any unsolicited messages asking for funds, seed phrases, or private keys are scams</li>
 </ul>
 
-<h2>10.3. Branding & Content Strategy</h2>
+<h2>11.3. Branding & Content Strategy</h2>
 
 <p>The project's branding combines a <strong>"Robin Hood" meme aesthetic</strong> with a modern crypto-native visual style:</p>
 
@@ -1068,7 +1168,7 @@
 
 <p>Marketing efforts focus on transparency, education and long-term community building rather than aggressive short-term hype.</p>
 
-<h2>10.4. Community Incentives</h2>
+<h2>11.4. Community Incentives</h2>
 
 <p>Planned community incentives include:</p>
 
@@ -1082,9 +1182,9 @@
 
 <div class="page-break"></div>
 
-<h1 id="security">11. Security & Risk Management</h1>
+<h1 id="security">12. Security & Risk Management</h1>
 
-<h2>11.1. Security Measures</h2>
+<h2>12.1. Security Measures</h2>
 
 <p>Planned and implemented security measures include:</p>
 
@@ -1097,7 +1197,7 @@
     <li><strong>LP Security:</strong> Post-migration LP controlled by a multisig, with the intention to use time-locks and transparent LP policies</li>
 </ul>
 
-<h2>11.2. Risk Categories</h2>
+<h2>12.2. Risk Categories</h2>
 
 <h3>Market Risk</h3>
 <ul>
@@ -1126,7 +1226,7 @@
     <li>Dependence on the responsible behaviour of multisig signers and governance participants</li>
 </ul>
 
-<h2>11.3. Mitigation Strategies</h2>
+<h2>12.3. Mitigation Strategies</h2>
 
 <ul>
     <li>Careful curve design to avoid extreme early concentration of supply</li>
@@ -1139,23 +1239,23 @@
 
 <div class="page-break"></div>
 
-<h1 id="legal">12. Legal Disclaimers</h1>
+<h1 id="legal">13. Legal Disclaimers</h1>
 
-<h2>12.1. Not Financial Advice</h2>
+<h2>13.1. Not Financial Advice</h2>
 
 <p>This document does not constitute financial, investment, legal or tax advice. Each person should independently, and with professional advisers where appropriate, assess risks associated with acquiring or holding GGRD. Nothing in this whitepaper should be interpreted as a recommendation to buy, sell or hold GGRD.</p>
 
-<h2>12.2. High-Risk Investment</h2>
+<h2>13.2. High-Risk Investment</h2>
 
 <div class="warning">
     <p><strong>⚠️ WARNING:</strong> Cryptocurrency investments, especially memecoins, involve a high risk of losing the entire invested amount. Past performance, including performance of other tokens or markets, does not guarantee future results. Only invest what you can afford to lose entirely.</p>
 </div>
 
-<h2>12.3. No Guarantees</h2>
+<h2>13.3. No Guarantees</h2>
 
 <p>There are no guarantees regarding price, liquidity, exchange listings, future utility, revenues, profits or overall project success. Participation in GGRD is entirely voluntary and at the participant's own risk.</p>
 
-<h2>12.4. Token Nature</h2>
+<h2>13.4. Token Nature</h2>
 
 <p>GGRD is <strong>not</strong> a share, bond or other equity instrument in any legal entity. Holding GGRD does <strong>not</strong> grant:</p>
 
@@ -1165,27 +1265,27 @@
     <li>Enforceable governance rights outside of the protocol-level mechanisms described herein</li>
 </ul>
 
-<h2>12.5. Regulatory Risk</h2>
+<h2>13.5. Regulatory Risk</h2>
 
 <p>The legal status of tokens and DAOs varies by jurisdiction and may change over time. Participants are solely responsible for determining whether acquiring, holding or using GGRD is legal in their jurisdiction and for complying with any applicable laws, including tax obligations.</p>
 
-<h2>12.6. Smart Contract Risk</h2>
+<h2>13.6. Smart Contract Risk</h2>
 
 <p>Even widely used and audited smart contracts may contain undiscovered vulnerabilities. All on-chain interactions carry inherent technical risk. Users should always verify contract addresses, use trusted wallets and keep software up to date.</p>
 
-<h2>12.7. No Refunds</h2>
+<h2>13.7. No Refunds</h2>
 
 <p>On-chain transactions are typically irreversible. The project does not offer refunds, chargebacks or guaranteed buybacks. All transactions in GGRD and related assets are final.</p>
 
-<h2>12.8. Restricted Jurisdictions</h2>
+<h2>13.8. Restricted Jurisdictions</h2>
 
 <p>Participation may be restricted or prohibited for residents of certain countries (including but not limited to the USA and jurisdictions subject to international sanctions). The project does not specifically target or solicit participants from such jurisdictions. Participants are responsible for ensuring that they are not violating local laws by engaging with the project.</p>
 
-<h2>12.9. Charity Component Disclaimer</h2>
+<h2>13.9. Charity Component Disclaimer</h2>
 
 <p>While 10% of total supply is allocated to the Charity Treasury and there is a clear intention to support Ukrainian children and families affected by war, <strong>no specific donation volume, frequency or outcome is guaranteed</strong>. Actual donations will depend on market conditions, governance decisions and operational feasibility. The project commits to transparency and reporting but cannot guarantee any particular charitable impact beyond the donations that are effectively executed on-chain.</p>
 
-<h2>12.10. Governance and DAO Disclaimer</h2>
+<h2>13.10. Governance and DAO Disclaimer</h2>
 
 <p>Any future DAO or on-chain governance mechanisms are protocol-level tools only. Participation in governance:</p>
 
@@ -1197,9 +1297,9 @@
 
 <div class="page-break"></div>
 
-<h1 id="contact">13. Contact & Support</h1>
+<h1 id="contact">14. Contact & Support</h1>
 
-<h2>13.1. Official Communication Channels</h2>
+<h2>14.1. Official Communication Channels</h2>
 
 <table>
     <tr>
@@ -1208,25 +1308,25 @@
     </tr>
     <tr>
         <td>Website</td>
-        <td>https://ggrd.me</td>
+        <td><a href="https://ggrd.me">https://ggrd.me</a></td>
     </tr>
     <tr>
         <td>X (Twitter)</td>
-        <td>https://x.com/ContactGiggle</td>
+        <td><a href="https://x.com/ContactGiggle">https://x.com/ContactGiggle</a></td>
     </tr>
     <tr>
         <td>Telegram Announcement Channel</td>
-        <td>https://t.me/GGRDofficial</td>
+        <td><a href="https://t.me/GGRDofficial">https://t.me/GGRDofficial</a></td>
     </tr>
     <tr>
         <td>Telegram Community Chat</td>
-        <td>https://t.me/GGRDchat</td>
+        <td><a href="https://t.me/GGRDchat">https://t.me/GGRDchat</a></td>
     </tr>
 </table>
 
 <p>All critical information (including contract addresses, DBC and LP links, and charity reports) will be first or simultaneously published on <strong>https://ggrd.me</strong> and in <strong>@GGRDofficial</strong>.</p>
 
-<h2>13.2. Support Policy</h2>
+<h2>14.2. Support Policy</h2>
 
 <ul>
     <li>The project does <strong>not</strong> operate any official support email address</li>
@@ -1234,7 +1334,7 @@
     <li>Team members will never ask for private keys, seed phrases or direct transfers in DMs. Any such requests are scams</li>
 </ul>
 
-<h2>13.3. Explorers & Tools</h2>
+<h2>14.3. Explorers & Tools</h2>
 
 <p>For independent verification, users are encouraged to use:</p>
 
@@ -1245,35 +1345,35 @@
     </tr>
     <tr>
         <td>Solscan</td>
-        <td>https://solscan.io</td>
+        <td><a href="https://solscan.io">https://solscan.io</a></td>
     </tr>
     <tr>
         <td>Solana Explorer</td>
-        <td>https://explorer.solana.com</td>
+        <td><a href="https://explorer.solana.com">https://explorer.solana.com</a></td>
     </tr>
     <tr>
         <td>SolanaFM</td>
-        <td>https://solana.fm</td>
+        <td><a href="https://solana.fm">https://solana.fm</a></td>
     </tr>
     <tr>
         <td>Meteora</td>
-        <td>https://app.meteora.ag</td>
+        <td><a href="https://app.meteora.ag">https://app.meteora.ag</a></td>
     </tr>
     <tr>
         <td>Jupiter</td>
-        <td>https://jup.ag</td>
+        <td><a href="https://jup.ag">https://jup.ag</a></td>
     </tr>
     <tr>
         <td>DEXScreener</td>
-        <td>https://dexscreener.com</td>
+        <td><a href="https://dexscreener.com">https://dexscreener.com</a></td>
     </tr>
     <tr>
         <td>Birdeye</td>
-        <td>https://birdeye.so</td>
+        <td><a href="https://birdeye.so">https://birdeye.so</a></td>
     </tr>
     <tr>
         <td>Squads Dashboard</td>
-        <td>https://app.squads.so</td>
+        <td><a href="https://app.squads.so">https://app.squads.so</a></td>
     </tr>
 </table>
 
@@ -1281,7 +1381,7 @@
 
 <div class="page-break"></div>
 
-<h1 id="summary">14. Summary</h1>
+<h1 id="summary">15. Summary</h1>
 
 <p><strong>Giggle Reloaded ($GGRD)</strong> is designed as:</p>
 
@@ -1307,11 +1407,106 @@
     <p style="font-size: 14pt; font-weight: 600; color: #666666;">Let's make GGRD legendary — with transparency, memes and verifiable impact.</p>
 </div>
 
+<div class="page-break"></div>
+
+<h1 id="appendices">Appendices (Informational)</h1>
+
+<h2>Appendix A — DBC Configuration (Key Fields)</h2>
+
+<p>The following fields are provided for transparency and reproducibility and reflect the configuration described in Section 5.<br>
+<strong>Note:</strong> addresses and deployment artefacts (mint, DBC, LP) may remain <strong>TBD</strong> until on-chain deployment is completed and verified.</p>
+
+<pre>
+{
+  "baseToken": {
+    "symbol": "GGRD",
+    "mint": "TBD (announced post-deployment)",
+    "decimals": 6,
+    "totalSupply": 1000000
+  },
+  "quoteToken": {
+    "symbol": "USDC",
+    "mint": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+    "decimals": 6
+  },
+  "curveAllocation": 400000,
+  "initialMarketCapDesignUSDC": 10000,
+  "migrationMarketCapDesignUSDC": 300000,
+  "migrationQuoteThresholdUSDC": 80000,
+  "percentageSupplyOnMigration": 0.40,
+  "buildCurveMode": 3,
+  "liquidityWeights": [15, 18, 22, 25, 28, 30, 32, 32, 32, 33, 35, 37, 40, 43, 48, 50]
+}
+</pre>
+
+<h2>Appendix B — Glossary (Selected)</h2>
+
+<table>
+    <tr>
+        <th>Term</th>
+        <th>Definition</th>
+    </tr>
+    <tr>
+        <td><strong>DBC (Dynamic Bonding Curve)</strong></td>
+        <td>A primary sale mechanism where price changes algorithmically based on demand and curve parameters.</td>
+    </tr>
+    <tr>
+        <td><strong>DAMM v2</strong></td>
+        <td>A concentrated-liquidity AMM pool model used by Meteora for post-migration trading liquidity.</td>
+    </tr>
+    <tr>
+        <td><strong>Migration Quote Threshold</strong></td>
+        <td>A technical threshold (in quote asset units, here USDC) after which the pool becomes eligible for migration to the permanent AMM.</td>
+    </tr>
+    <tr>
+        <td><strong>Migration Market Cap (Design Target)</strong></td>
+        <td>A design parameter used to shape the curve; it is not a promise or guaranteed valuation.</td>
+    </tr>
+    <tr>
+        <td><strong>Multisig (Squads)</strong></td>
+        <td>A wallet requiring approvals from multiple independent signers to execute transactions.</td>
+    </tr>
+    <tr>
+        <td><strong>FDV (Fully Diluted Valuation)</strong></td>
+        <td>Implied market cap using total token supply; <strong>FDV is not guaranteed</strong> and is often not equal to realised liquidity.</td>
+    </tr>
+</table>
+
+<h2>Appendix C — Illustrative Price Scenarios (Non-Predictive)</h2>
+
+<div class="warning">
+    <p><strong>Disclaimer:</strong> This appendix is provided to improve readability and support user education.<br>
+    <strong>It is not a price forecast, not financial advice, and does not imply probability of any outcome.</strong></p>
+</div>
+
+<p>Implied price is a simple ratio:</p>
+<p><strong>Implied Price = Market Cap / Total Supply</strong></p>
+<p>For a total supply of <strong>1,000,000 GGRD</strong>, the following values are purely illustrative:</p>
+
+<table>
+    <tr>
+        <th>Market Cap (USD)</th>
+        <th>Implied Price (USD)</th>
+    </tr>
+    <tr><td>10,000</td><td>0.0100</td></tr>
+    <tr><td>80,000</td><td>0.0800</td></tr>
+    <tr><td>300,000</td><td>0.3000</td></tr>
+    <tr><td>1,000,000</td><td>1.0000</td></tr>
+    <tr><td>10,000,000</td><td>10.0000</td></tr>
+    <tr><td>50,000,000</td><td>50.0000</td></tr>
+    <tr><td>100,000,000</td><td>100.0000</td></tr>
+</table>
+
+<div class="info">
+    <p><strong>Important:</strong> Market cap, liquidity depth, exchange availability and sell-through conditions can differ materially. These examples are not forecasts and should not be used as investment expectations.</p>
+</div>
+
 <div class="footer">
     <p><strong>Document Control</strong></p>
-    <p>Version: 1.1 | Last Updated: November 15, 2025 | Next Review: [Post-Deployment]</p>
-    <p>Latest Version: https://ggrd.me/whitepaper</p>
-    <p style="margin-top: 0.5cm;">For questions or clarifications, please refer to the official channels listed in Section 13.</p>
+    <p>Version: 1.3 | Last Updated: November 25, 2025 | Next Review: [Post-Deployment]</p>
+    <p><strong>Revision Notes:</strong> Fixed section numbering; clarified operational pause policy; improved terminology; moved DBC details to Appendix; added glossary and non-predictive charts/scenario table</p>
+    <p>Latest Version: <a href="https://ggrd.me/whitepaper">https://ggrd.me/whitepaper</a></p>
+    <p style="margin-top: 0.5cm;">For questions or clarifications, please refer to the official channels listed in Section 14.</p>
 </div>
 
 </div>
