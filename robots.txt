@@ -1,0 +1,13 @@
+# robots.txt for ggrd.me
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://ggrd.me/sitemap.xml
+
+# Crawl-delay (optional, adjust if needed)
+# Crawl-delay: 1
+
+# Disallow specific paths (if any)
+# Disallow: /admin/
+# Disallow: /private/
