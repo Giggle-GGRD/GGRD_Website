@@ -64,14 +64,11 @@ Jeśli chcesz przetestować stronę bez grafik, możesz użyć placeholderów.
 
 ---
 
-### 📧 Opcjonalne: Email charity@ggrd.me
+### 📧 Email contact@ggrd.me
 
-**Gdzie używany:** `index.html` linia ~894 (sekcja Charity)
+**Gdzie używany:** `index.html` sekcja Community
 
-**Opcje:**
-1. Skonfiguruj email forwarding w Hostinger
-2. Usuń email z sekcji (zostaw tylko multisig address)
-3. Zmień na `contact@ggrd.me`
+**Status:** ✅ Dodany jako contact@ggrd.me
 
 ---
 
@@ -98,7 +95,7 @@ Jeśli chcesz przetestować stronę bez grafik, możesz użyć placeholderów.
 ### ⏳ Do Zrobienia:
 - [ ] Stworzyć folder `img/`
 - [ ] Dodać 4 grafiki (logo, og-banner, robin-main, robin-community)
-- [ ] Zdecydować o emailu charity@ggrd.me
+- [x] Dodano email contact@ggrd.me
 - [ ] (Opcjonalnie) Wygenerować PDF whitepaper
 - [ ] Przetestować stronę lokalnie (otworzyć index.html)
 - [ ] Wypushować na GitHub

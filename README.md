@@ -1,18 +1,18 @@
-﻿# GGRD - Giggle Reloaded
+# GGRD - Giggle Reloaded
 
 **The Robin Hood of Solana** - Fair Launch Memecoin with Charitable Impact
 
 ## About GGRD
 
-Giggle Reloaded ($GGRD) is a fair-launch Solana memecoin with a fixed supply of 1,000,000 tokens, designed to combine meme-coin speculation with transparent, on-chain charity supporting Ukrainian war victims.
+Giggle Reloaded ($GGRD) is a fair-launch Solana memecoin with a fixed supply of 1,000,000 tokens, designed to combine meme-coin speculation with transparent, on-chain charity supporting pediatric cancer programs through community-selected verified organizations.
 
 ### Key Features
 
-- Fair Launch via Meteora Dynamic Bonding Curve
-- Zero Tax - No buy/sell tax, no hidden fees
-- 10% for Charity - Supporting Ukrainian children with cancer
-- Multisig Security - 3/4 Squads multisig control
-- Transparent Tokenomics - Fully documented and verifiable
+- **Fair Launch** via Meteora Dynamic Bonding Curve (DBC)
+- **Zero Tax** - No buy/sell tax, no hidden fees
+- **10% for Charity** - Community-voted pediatric cancer support
+- **Multisig Security** - 3/4 Squads multisig control
+- **Transparent Tokenomics** - Fully documented and verifiable
 
 ## Tokenomics
 
@@ -30,18 +30,33 @@ Giggle Reloaded ($GGRD) is a fair-launch Solana memecoin with a fixed supply of 
 
 ## Official Links
 
-- Website: https://ggrd.me
-- Twitter: https://twitter.com/ContactGiggle
-- Telegram: https://t.me/GGRDchat
-- Announcements: https://t.me/GGRDofficial
-- Whitepaper: https://ggrd.me/GGRD_Whitepaper_EN.pdf
+- **Website:** https://ggrd.me
+- **X (Twitter):** https://x.com/ContactGiggle
+- **Telegram Channel:** https://t.me/GGRDofficial
+- **Telegram Chat:** https://t.me/GGRDchat
+- **Whitepaper (HTML):** https://ggrd.me/GGRD_Whitepaper_EN.html
+- **Whitepaper (PDF):** https://ggrd.me/GGRD_Whitepaper_EN.pdf
 
-## Charity Partner
+## Charity Program
 
-**Tabletochki Charity Foundation** - Supporting Ukrainian children with cancer and families affected by war since 2012.
+The GGRD Charity Treasury holds **10% of total supply (100,000 GGRD)** in a dedicated Squads 3/4 multisig. Beneficiaries are selected through a community governance process:
 
-- Website: https://tabletochki.org/
-- Verified crypto donations accepted
+1. **Nomination** - Community members nominate verified pediatric oncology charities
+2. **Vetting** - Organizations verified against eligibility criteria
+3. **Voting** - Community votes to select the beneficiary
+4. **Execution** - Donations executed via multisig with public proofs
+
+All donations are transparent, on-chain, and documented with transaction links.
+
+## Contract Addresses
+
+- **GGRD Mint:** `TR97dHmm8nXVndTcxew21138AchNgrk2BhEJGXMybdE`
+- **Charity Treasury:** `C96zqEjGh22yuZknVrasLyr2j5b2xsMnbTUiu2WKLK9w`
+- **LP Policy Treasury:** `8vFQrPpdE3uyd4JRdE7jUhyzTF8ZBVnuvqFTpsAA4SLY`
+- **Community Treasury:** `D3JWCu9egWYHEf1xvxBqSJJ6PBsHU3HkMjJZDW3ZQ37D`
+- **Team Vesting:** `7xXhueJp5LTr4jNwcWPn4oFurqJM9W5hxQRRWBCWLnDY`
+- **Marketing Treasury:** `2RgWCdtsvU4VYcR1nZJS2XN5utBzA88vHbEyHuutHkvG`
+- **Treasury Reserve:** `5UAgVqKBNFoT6WrANGFdjqbTXJRGXPzHcNhG5LK4n9mj`
 
 ## Security
 
@@ -51,16 +66,21 @@ Giggle Reloaded ($GGRD) is a fair-launch Solana memecoin with a fixed supply of 
 - **No Presale:** Fair launch only via DBC
 - **No VC Allocation:** 100% community distribution
 
+## Verification Links
+
+- [Solscan](https://solscan.io/token/TR97dHmm8nXVndTcxew21138AchNgrk2BhEJGXMybdE)
+- [Solana Explorer](https://explorer.solana.com/address/TR97dHmm8nXVndTcxew21138AchNgrk2BhEJGXMybdE)
+- [Jupiter](https://jup.ag/tokens/TR97dHmm8nXVndTcxew21138AchNgrk2BhEJGXMybdE)
+- [GeckoTerminal](https://www.geckoterminal.com/solana/pools/HWzDBQcPpmGk5J9EXaLQnF4TfndP2pYAzCxBTyfjbnUb)
+
 ## Disclaimer
 
-GGRD is a memecoin with **no intrinsic value or expectation of financial return**. This is a high-risk investment. Only invest what you can afford to lose. Always do your own research (DYOR).
+GGRD is a memecoin with **no intrinsic value or expectation of financial return**. This is a high-risk investment. You can lose 100% of your funds. Never invest more than you can afford to lose. Always do your own research (DYOR).
 
-## License
-
-This project is open source. See LICENSE file for details.
+Nothing on this website or repository constitutes financial, legal, or tax advice.
 
 ---
 
-**Built by the GGRD community**
+**Built with 💜 by the GGRD community**
 
 *From the people, for the people.*

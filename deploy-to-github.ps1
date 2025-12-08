@@ -133,15 +133,15 @@ $readmeContent = @'
 
 ## About GGRD
 
-Giggle Reloaded ($GGRD) is a fair-launch Solana memecoin with a fixed supply of 1,000,000 tokens, designed to combine meme-coin speculation with transparent, on-chain charity supporting Ukrainian war victims.
+Giggle Reloaded ($GGRD) is a fair-launch Solana memecoin with a fixed supply of 1,000,000 tokens, designed to combine meme-coin speculation with transparent, on-chain charity supporting pediatric cancer programs through community-selected verified organizations.
 
 ### Key Features
 
-- Fair Launch via Meteora Dynamic Bonding Curve
-- Zero Tax - No buy/sell tax, no hidden fees
-- 10% for Charity - Supporting Ukrainian children with cancer
-- Multisig Security - 3/4 Squads multisig control
-- Transparent Tokenomics - Fully documented and verifiable
+- **Fair Launch** via Meteora Dynamic Bonding Curve (DBC)
+- **Zero Tax** - No buy/sell tax, no hidden fees
+- **10% for Charity** - Community-voted pediatric cancer support
+- **Multisig Security** - 3/4 Squads multisig control
+- **Transparent Tokenomics** - Fully documented and verifiable
 
 ## Tokenomics
 
@@ -159,18 +159,15 @@ Giggle Reloaded ($GGRD) is a fair-launch Solana memecoin with a fixed supply of 
 
 ## Official Links
 
-- Website: https://ggrd.me
-- Twitter: https://twitter.com/ContactGiggle
-- Telegram: https://t.me/GGRDchat
-- Announcements: https://t.me/GGRDofficial
-- Whitepaper: https://ggrd.me/GGRD_Whitepaper_EN.pdf
+- **Website:** https://ggrd.me
+- **X (Twitter):** https://x.com/ContactGiggle
+- **Telegram Channel:** https://t.me/GGRDofficial
+- **Telegram Chat:** https://t.me/GGRDchat
+- **Whitepaper:** https://ggrd.me/GGRD_Whitepaper_EN.html
 
-## Charity Partner
+## Charity Program
 
-**Tabletochki Charity Foundation** - Supporting Ukrainian children with cancer and families affected by war since 2012.
-
-- Website: https://tabletochki.org/
-- Verified crypto donations accepted
+The GGRD Charity Treasury holds **10% of total supply (100,000 GGRD)** in a dedicated Squads 3/4 multisig. Beneficiaries are selected through community governance: nomination, vetting, and public vote. Donations are executed via multisig with public proofs.
 
 ## Security
 
@@ -183,10 +180,6 @@ Giggle Reloaded ($GGRD) is a fair-launch Solana memecoin with a fixed supply of 
 ## Disclaimer
 
 GGRD is a memecoin with **no intrinsic value or expectation of financial return**. This is a high-risk investment. Only invest what you can afford to lose. Always do your own research (DYOR).
-
-## License
-
-This project is open source. See LICENSE file for details.
 
 ---
 
