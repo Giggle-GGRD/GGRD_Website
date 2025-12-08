@@ -23,14 +23,14 @@
 <meta property="og:url" content="https://ggrd.me/">
 <meta property="og:title" content="Giggle Reloaded (GGRD) – Solana Fair Launch, Multisig Treasury &amp; Community Charity Vote">
 <meta property="og:description" content="Giggle Reloaded (GGRD) on Solana: fair launch via DBC, multisig treasuries, transparent reporting, and community-voted pediatric cancer support. Verify official links here.">
-<meta property="og:image" content="https://ggrd.me/img/ggrd-logo-512.png">
+<meta property="og:image" content="https://ggrd.me/img/ggrd-og-banner.png">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@ContactGiggle">
 <meta name="twitter:title" content="Giggle Reloaded (GGRD) – Robin of Gains">
 <meta name="twitter:description" content="Fair-launch memecoin on Solana with 10% supply locked for community-voted pediatric cancer support.">
-<meta name="twitter:image" content="https://ggrd.me/img/ggrd-logo-512.png">
+<meta name="twitter:image" content="https://ggrd.me/img/ggrd-og-banner.png">
 
 <!-- Structured Data: Organization -->
 <script type="application/ld+json">
@@ -1069,6 +1069,17 @@ a:focus-visible,button:focus-visible{
 }
 .verify-box__list li:last-child{border-bottom:none}
 .verify-box__list li strong{color:var(--lime)}
+
+/* FAQ SECTION */
+.faq{background:linear-gradient(180deg,transparent,rgba(70,230,255,.05),transparent)}
+.faq__grid{display:grid;gap:20px;max-width:900px;margin:48px auto 0}
+.faq__item{background:linear-gradient(135deg,var(--card),#1a1537);border:2px solid var(--aqua);border-radius:20px;transition:all .3s}
+.faq__item:hover{border-color:var(--lime);box-shadow:0 0 20px rgba(70,230,255,.3)}
+.faq__item summary{padding:24px;font-size:18px;font-weight:700;color:var(--sun);cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;font-family:Bangers,cursive;letter-spacing:.08em}
+.faq__item summary::-webkit-details-marker{display:none}
+.faq__item summary::after{content:'▼';font-size:14px;transition:transform .3s;color:var(--lime)}
+.faq__item[open] summary::after{transform:rotate(180deg)}
+.faq__item p{padding:0 24px 24px;color:var(--muted);font-size:16px;line-height:1.7;margin:0}
 </style>
 </head>
 
@@ -1919,6 +1930,46 @@ a:focus-visible,button:focus-visible{
           project evolves – always within the guardrails defined in the whitepaper and Donation Policy.
         </p>
       </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section faq" id="faq">
+  <div class="container">
+    <h2 class="title">FAQ</h2>
+    <p class="subtitle">Common questions about GGRD</p>
+
+    <div class="faq__grid">
+      <details class="faq__item">
+        <summary>What is the official GGRD contract address (mint)?</summary>
+        <p>The official GGRD mint address is published on this website and in the official announcement channels. Always copy-paste the address from official sources and verify it on a Solana explorer before trading.</p>
+      </details>
+
+      <details class="faq__item">
+        <summary>How do I avoid scams and fake pools?</summary>
+        <p>Do not trust direct messages. Use only links published on ggrd.me and the official X/Telegram channels. Verify the mint address, pool address, and token details on a trusted explorer. Start with a small test transaction.</p>
+      </details>
+
+      <details class="faq__item">
+        <summary>How is the charity beneficiary selected?</summary>
+        <p>The beneficiary is selected through a community process: nomination, vetting, and a public vote. Donations are executed via multisig treasury operations and documented with public proofs and transaction links.</p>
+      </details>
+
+      <details class="faq__item">
+        <summary>What is the focus of the charity program?</summary>
+        <p>The charity program is focused on pediatric cancer support. Specific beneficiaries are chosen by community vote from a vetted shortlist.</p>
+      </details>
+
+      <details class="faq__item">
+        <summary>Is the Rewards Bot official and how do payouts work?</summary>
+        <p>The Rewards Bot is part of the community program. Task verification occurs off-chain, while payouts are executed on-chain via a multisig distribution treasury. Reward batches should be reported with transaction links for transparency.</p>
+      </details>
+
+      <details class="faq__item">
+        <summary>Does GGRD have buy or sell taxes?</summary>
+        <p>GGRD is intended to have no buy/sell tax. Always verify token mechanics and official announcements before interacting with any pool or contract.</p>
+      </details>
+    </div>
   </div>
 </section>
 
