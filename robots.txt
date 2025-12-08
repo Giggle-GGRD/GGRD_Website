@@ -2,7 +2,6 @@
 User-agent: *
 Allow: /
 
-# Sitemaps
 Sitemap: https://ggrd.me/sitemap.xml
 
 # Crawl-delay (optional, adjust if needed)
