@@ -1,29 +1,47 @@
-# GGRD Website
+# Giggle Reloaded (GGRD) — Official Website
 
-Official static website for Giggle Reloaded (GGRD): [https://ggrd.me](https://ggrd.me)
+> The meme token that gives back. Fixed supply. USDC presale. Charity on-chain. BSC Mainnet.
 
-## Current Scope (BSC Mainnet)
-- Token: GGRD on BNB Smart Chain mainnet
-- Token contract: `0xA0d5663d57b7D7EF975D2F02BcAEaf5c94c671f9`
-- Presale contract: `0xd8983534dd3c369d85127f6C9B85d98768139387`
-- Payment asset in presale: USDC (`0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d`)
-- Governance: Safe multisig (2/3) + timelocks
+🌐 **Live site:** [ggrd.me](https://ggrd.me)  
+💬 **Telegram:** [@GGRDofficial](https://t.me/GGRDofficial)  
+𝕏 **Twitter/X:** [@ContactGiggle](https://x.com/ContactGiggle)
 
-## Main Files
-- `index.html` - landing page with tokenomics, live presale dashboard (stages, raised funds), wallet interaction panel, and mobile CTA quick actions
-- `GGRD_Whitepaper_EN.html` - whitepaper v3.1 (BSC)
-- `donation-policy.html` - charity operations policy
+---
 
-## Deploy (GitHub Pages)
-Run in `C:\ggrd-staking-fixed\GGRD_Website`:
+## Token
 
-```powershell
-Set-Location 'C:\ggrd-staking-fixed\GGRD_Website'
-git add .
-git commit -m "Update website and whitepaper to BSC mainnet v3.1"
-git push origin main
-```
+| Field | Value |
+|-------|-------|
+| Name | Giggle Reloaded |
+| Symbol | GGRD |
+| Chain | BNB Smart Chain (chainId 56) |
+| Total Supply | 10,000,000 (fixed) |
+| Transfer Tax | 0% |
+| Contract | `0xA0d5663d57b7D7EF975D2F02BcAEaf5c94c671f9` |
 
-## Notes
-- Always verify contract addresses on BscScan before publishing announcements.
-- Keep tokenomics text aligned with `ggrd-bsc-contracts` deployment artifacts.
+## Presale
+
+- **Escrow:** `0xd8983534dd3c369d85127f6C9B85d98768139387`
+- **Period:** 2026-03-10 → 2026-03-31
+- **Softcap:** 20,000 USDC | **Hardcap:** 31,250 USDC
+- 4 stages — price increases each stage
+- Success: 80% LP / 20% marketing · Failure: 100% refund
+
+## Files
+
+| File | Description |
+|------|-------------|
+| `index.html` | Main landing page (meme-style, single file) |
+| `GGRD_Whitepaper_EN.html` | Technical whitepaper v4.0 |
+| `GGRD_Whitepaper_EN.pdf` | Whitepaper PDF |
+| `donation-policy.html` | Donation/charity policy |
+| `img/` | Logos and OG images |
+| `robots.txt` / `sitemap.xml` | SEO |
+
+## Deployment
+
+Site is deployed via GitHub Pages using the `CNAME` → `ggrd.me`.
+
+---
+
+*This is a high-risk crypto asset. DYOR. NFA.*
