@@ -1693,6 +1693,7 @@ footer {
 </style>
 <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@walletconnect/ethereum-provider@2.10.0/dist/index.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
 </head>
 <body>
 
@@ -1748,7 +1749,7 @@ footer {
           <div class="wm-wallet-icon" style="background:#3B99FC20">📱</div>
           <div class="wm-wallet-info">
             <div class="wm-wallet-name">WalletConnect</div>
-            <div class="wm-wallet-desc">QR code — 300+ portfeli mobilnych</div>
+            <div class="wm-wallet-desc">QR code — 300+ mobile wallets</div>
           </div>
           <span class="wm-badge wm-badge-yellow">Mobile</span>
         </button>
@@ -2016,7 +2017,8 @@ footer {
 
         <!-- Network warning -->
         <div class="w-network-warn" id="w-network-warn">
-          ⚠ Wrong network. Please switch to BNB Smart Chain (chainId 56).
+          ⚠ Wrong network detected. 
+          <button id="w-switch-bsc-btn" style="background:var(--yellow);color:#000;border:none;padding:4px 12px;border-radius:4px;font-weight:700;font-size:0.65rem;cursor:pointer;margin-left:6px">Switch to BSC</button>
         </div>
 
         <!-- Input -->
@@ -2449,8 +2451,9 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 </script>
 
 <script>
-// ===== PRESALE WIDGET WEB3 v6 =====
-// v6 fixes: WC downgrade 2.10.0 (working UMD), legacy provider detection
+// ===== PRESALE WIDGET WEB3 v7 =====
+// v6: WC 2.10.0 UMD, legacy provider detection
+// v7: local QR, mobile deeplinks, network warn, chain validation, ethers.parseUnits
 (function () {
 
   /* ─── stałe ─────────────────────────────────── */
@@ -2502,7 +2505,7 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
     const s=getStage(); if(!s) return "0.00";
     return (v/(s.priceScaled/1e8)).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
   }
-  function toBigInt18(v) { return BigInt(Math.round(v*1e6))*BigInt(1_000_000_000_000); }
+  function toPayAmount(v) { return ethers.parseUnits(String(v), 18); }
 
   async function fetchRaised() {
     try {
@@ -2549,44 +2552,118 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
     setStatus('Select wallet');
   });
 
-  /* ─── QR renderer (pure canvas — zero deps) ─── */
+  /* ─── mobile detection ─────────────────────────── */
+  const isMobile = /Android|iPhone|iPad|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+  /* ─── QR renderer (local — no external API) ──── */
   function renderQR(uri) {
-    // Użyj API qrserver jako img — niezawodne, nie wymaga JS lib
     const wrap = $('wm-qr-img-wrap');
     if(!wrap) return;
     wrap.innerHTML = '';
-    const img = document.createElement('img');
-    img.style.cssText = 'width:220px;height:220px;border:3px solid #FFE000;display:block;';
-    img.alt = 'WalletConnect QR';
-    // qrserver.com — darmowe publiczne API, działa zawsze
-    img.src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(uri)}&bgcolor=0f0f0f&color=FFE000&margin=2`;
-    img.onerror = () => {
-      // fallback: pokaż URI do skopiowania
-      wrap.innerHTML = `<div style="color:#888;font-size:0.65rem;word-break:break-all;padding:1rem;border:1px solid #333;max-width:220px">${uri}</div>`;
-    };
-    wrap.appendChild(img);
-    // kopiuj URI
+
+    // Mobile: show deep link buttons instead of QR
+    if(isMobile) {
+      const wcUri = encodeURIComponent(uri);
+      const links = [
+        {name:'Trust Wallet', url:`https://link.trustwallet.com/wc?uri=${wcUri}`, color:'#3375BB'},
+        {name:'MetaMask', url:`https://metamask.app.link/wc?uri=${wcUri}`, color:'#F6851B'},
+        {name:'Binance', url:`bnc://wc?uri=${wcUri}`, color:'#F0B90B'},
+      ];
+      const container = document.createElement('div');
+      container.style.cssText = 'display:flex;flex-direction:column;gap:8px;width:100%;padding:0 1rem';
+      links.forEach(l => {
+        const a = document.createElement('a');
+        a.href = l.url;
+        a.textContent = `Open ${l.name}`;
+        a.style.cssText = `display:block;padding:12px;text-align:center;border-radius:8px;font-weight:700;font-size:0.8rem;color:#fff;background:${l.color};text-decoration:none`;
+        container.appendChild(a);
+      });
+      // Also add generic WC deep link
+      const wcLink = document.createElement('a');
+      wcLink.href = `wc:${uri.replace('wc:','')}`;
+      wcLink.textContent = 'Open any WC wallet';
+      wcLink.style.cssText = 'display:block;padding:10px;text-align:center;border:1px solid #444;border-radius:8px;font-size:0.7rem;color:#aaa;margin-top:4px;text-decoration:none';
+      container.appendChild(wcLink);
+      wrap.appendChild(container);
+    } else {
+      // Desktop: generate QR locally
+      if(typeof QRCode !== 'undefined' && QRCode.toCanvas) {
+        const canvas = document.createElement('canvas');
+        canvas.style.cssText = 'border:3px solid #FFE000;display:block;margin:0 auto';
+        QRCode.toCanvas(canvas, uri, {width:220, margin:2, color:{dark:'#FFE000',light:'#0f0f0f'}}, err => {
+          if(err) { fallbackQR(wrap, uri); return; }
+          wrap.appendChild(canvas);
+        });
+      } else {
+        // Fallback if qrcode.js didn't load
+        fallbackQR(wrap, uri);
+      }
+    }
+    // Copy URI button
     const copyBtn = $('wm-copy-uri');
     if(copyBtn) { copyBtn.style.display='block'; copyBtn.onclick=()=>{navigator.clipboard.writeText(uri).then(()=>{copyBtn.textContent='✓ Copied!';setTimeout(()=>{copyBtn.textContent='📋 Copy URI';},2000);}); }; }
   }
 
+  function fallbackQR(wrap, uri) {
+    // External API as last resort
+    const img = document.createElement('img');
+    img.style.cssText = 'width:220px;height:220px;border:3px solid #FFE000;display:block;margin:0 auto';
+    img.alt = 'WalletConnect QR';
+    img.src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(uri)}&bgcolor=0f0f0f&color=FFE000&margin=2`;
+    img.onerror = () => { wrap.innerHTML = `<div style="color:#888;font-size:0.65rem;word-break:break-all;padding:1rem;border:1px solid #333;max-width:220px">${uri}</div>`; };
+    wrap.appendChild(img);
+  }
+
   /* ─── BSC switch ─────────────────────────────── */
+  let currentEthProvider = null; // track active provider for chain switch
+
   async function ensureBSC(eth) {
     const ch = await eth.request({method:'eth_chainId'});
-    if(parseInt(ch,16)===BSC_CHAIN_ID) return;
+    if(parseInt(ch,16)===BSC_CHAIN_ID) { updateNetworkState(true); return; }
     setStatus("Switching to BSC…",'warn');
     try {
       await eth.request({method:'wallet_switchEthereumChain',params:[{chainId:'0x38'}]});
+      updateNetworkState(true);
     } catch(e) {
-      if(e.code===4902) await eth.request({method:'wallet_addEthereumChain',params:[{
-        chainId:'0x38',chainName:'BNB Smart Chain',
-        nativeCurrency:{name:'BNB',symbol:'BNB',decimals:18},
-        rpcUrls:['https://bsc-dataseed1.binance.org/'],
-        blockExplorerUrls:['https://bscscan.com/']
-      }]});
-      else throw e;
+      if(e.code===4902) {
+        await eth.request({method:'wallet_addEthereumChain',params:[{
+          chainId:'0x38',chainName:'BNB Smart Chain',
+          nativeCurrency:{name:'BNB',symbol:'BNB',decimals:18},
+          rpcUrls:['https://bsc-dataseed1.binance.org/'],
+          blockExplorerUrls:['https://bscscan.com/']
+        }]});
+        updateNetworkState(true);
+      } else {
+        updateNetworkState(false);
+        throw e;
+      }
     }
   }
+
+  /* ─── centralized network state (BŁĄD 4) ──────── */
+  function updateNetworkState(isCorrectChain) {
+    const warn = $('w-network-warn');
+    if(!warn) return;
+    if(isCorrectChain) {
+      warn.style.display = 'none';
+      if(btn && connected) btn.disabled = false;
+    } else {
+      warn.style.display = 'block';
+      if(btn && connected) { btn.disabled = true; setStatus('⚠ Switch to BSC to continue','err'); }
+    }
+  }
+
+  // Switch button handler
+  $('w-switch-bsc-btn')?.addEventListener('click', async () => {
+    const eth = currentEthProvider || (wcInstance) || window.ethereum;
+    if(!eth) { setStatus('No wallet connected','err'); return; }
+    try {
+      await ensureBSC(eth);
+      setStatus('Ready! Enter USDC amount and click BUY','ok');
+    } catch(e) {
+      setStatus('Failed to switch network — do it manually in your wallet','err');
+    }
+  });
 
   /* ─── EIP-6963: wykryj dostępne portfele ──────── */
   const eip6963Providers = {};
@@ -2686,6 +2763,7 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
       const accounts = await eth.request({method:'eth_requestAccounts'});
       if(!accounts?.length) throw new Error("No accounts returned");
       userAddr = accounts[0];
+      currentEthProvider = eth;
       await ensureBSC(eth);
       provider = new ethers.BrowserProvider(eth);
       signer   = await provider.getSigner();
@@ -2747,6 +2825,23 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
       const accounts = wc.accounts;
       if(!accounts?.length) throw new Error("No accounts after connect");
       userAddr = accounts[0];
+      currentEthProvider = wc;
+
+      // BŁĄD 7: validate chain after WC connect
+      const wcChainId = wc.chainId || parseInt(await wc.request({method:'eth_chainId'}),16);
+      if(wcChainId !== BSC_CHAIN_ID) {
+        console.log('[WC] Wrong chain:', wcChainId, '— attempting switch to BSC');
+        try {
+          await wc.request({method:'wallet_switchEthereumChain',params:[{chainId:'0x38'}]});
+          updateNetworkState(true);
+        } catch(switchErr) {
+          console.warn('[WC] Chain switch failed:', switchErr);
+          updateNetworkState(false);
+        }
+      } else {
+        updateNetworkState(true);
+      }
+
       provider = new ethers.BrowserProvider(wc);
       signer   = await provider.getSigner();
       onConnected();
@@ -2805,11 +2900,23 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
     if(isNaN(usdcVal)||usdcVal<50)  { setStatus("Minimum: 50 USDC",'err');    return; }
     if(usdcVal>3000)                 { setStatus("Maximum: 3,000 USDC",'err'); return; }
     if(!signer)                      { setStatus("Wallet disconnected",'err');   return; }
+
+    // Chain check before TX (BŁĄD 7)
+    try {
+      const net = await provider.getNetwork();
+      if(Number(net.chainId) !== BSC_CHAIN_ID) {
+        updateNetworkState(false);
+        setStatus("⚠ Wrong network — switch to BSC first",'err');
+        btn.disabled=false;
+        return;
+      }
+    } catch(_) {}
+
     btn.disabled=true;
     try {
       setStatus("Checking allowance…",'warn');
       const usdc      = new ethers.Contract(USDC_ADDR,ERC20_ABI,signer);
-      const payAmount = toBigInt18(usdcVal);
+      const payAmount = toPayAmount(usdcVal);
       const allowance = BigInt(await usdc.allowance(userAddr,PRESALE_ADDR));
       if(allowance<payAmount) {
         setStatus("Step 1/2 — Approve USDC in wallet…",'warn');
@@ -2822,7 +2929,7 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
       const presale = new ethers.Contract(PRESALE_ADDR,BUY_ABI,signer);
       await (await presale.buy(payAmount)).wait();
       const ggrd=calcGGRD(usdcVal);
-      setStatus(`🎉 Gotowe! ~${ggrd} GGRD leci do Ciebie!`,'ok');
+      setStatus(`🎉 Done! ~${ggrd} GGRD headed your way!`,'ok');
       btn.textContent="✅ ZAKUPIONO!"; btn.className='w-connect-btn'; setStep(3);
       fetchRaised();
       ['🎉','🚀','😂','💸','🟡'].forEach((em,i)=>{
@@ -2861,8 +2968,9 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
     setTimeout(()=>{ requestEIP6963(); updateWalletButtons(); }, 1500);
     // Log WC load status for debugging
     const wcPkg = window["@walletconnect/ethereum-provider"];
-    console.log('[GGRD v6] WC pkg loaded:', !!wcPkg, wcPkg ? (wcPkg.EthereumProvider ? 'EthereumProvider OK' : 'keys: '+Object.keys(wcPkg).join(',')) : 'null');
-    console.log('[GGRD v6] window.ethereum:', !!window.ethereum, window.ethereum?.isMetaMask?'MetaMask':'', window.ethereum?.isTrust?'Trust':'', window.ethereum?.providers?.length||0, 'sub-providers');
+    console.log('[GGRD v7] WC pkg loaded:', !!wcPkg, wcPkg ? (wcPkg.EthereumProvider ? 'EthereumProvider OK' : 'keys: '+Object.keys(wcPkg).join(',')) : 'null');
+    console.log('[GGRD v7] window.ethereum:', !!window.ethereum, window.ethereum?.isMetaMask?'MetaMask':'', window.ethereum?.isTrust?'Trust':'', window.ethereum?.providers?.length||0, 'sub-providers');
+    console.log('[GGRD v7] Mobile:', isMobile);
     const se=document.createElement('style');
     se.textContent='@keyframes floatUp{from{transform:translateY(0);opacity:1}to{transform:translateY(-60vh);opacity:0}}';
     document.head.appendChild(se);
