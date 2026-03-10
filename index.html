@@ -2252,7 +2252,7 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
       return;
     }
     $('w-stage-val').textContent = s.label;
-    $('w-price-val').textContent = `$${(Number(s.price) / PRICE_SCALE * 1e8 / 1e8).toFixed(4)} USDC`;
+    $('w-price-val').textContent = `$${(Number(s.price) / 100_000_000).toFixed(4)} USDC`;
     $('w-next-price').textContent = s.nextPrice !== '—' ? `Next: $${s.nextPrice}` : 'Last stage';
   }
 
