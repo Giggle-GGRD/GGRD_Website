@@ -4,39 +4,26 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="index,follow">
-<meta name="theme-color" content="#09031a">
-
-<title>Giggle Reloaded (GGRD) – Solana Fair Launch, Multisig Treasury &amp; Community Charity Vote</title>
-<meta name="description" content="Giggle Reloaded (GGRD) on Solana: fair launch via DBC, multisig treasury, and a community charity vote for pediatric cancer support. Verify official links here.">
-
+<meta name="theme-color" content="#081017">
+<title>Giggle Reloaded (GGRD) - BSC Mainnet, USDC Presale, Safe Governance</title>
+<meta name="description" content="Giggle Reloaded (GGRD) on BNB Smart Chain: fixed-supply token, USDC presale escrow, Safe plus timelock governance, staking and charity vesting. Verify official addresses on BscScan.">
 <link rel="canonical" href="https://ggrd.me/">
-
 <link rel="icon" type="image/png" href="img/ggrd-logo-512.png">
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-
-<!-- Open Graph -->
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Giggle Reloaded">
 <meta property="og:url" content="https://ggrd.me/">
-<meta property="og:title" content="Giggle Reloaded (GGRD) – Solana Fair Launch, Multisig Treasury &amp; Community Charity Vote">
-<meta property="og:description" content="Giggle Reloaded (GGRD) on Solana: fair launch via DBC, multisig treasury, and a community charity vote for pediatric cancer support. Verify official links here.">
+<meta property="og:title" content="Giggle Reloaded (GGRD) - BSC Mainnet Technical Overview">
+<meta property="og:description" content="USDC presale escrow, Safe governance, timelocks, staking and charity vesting on BNB Smart Chain.">
 <meta property="og:image" content="https://ggrd.me/img/ggrd-og-banner.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Giggle Reloaded (GGRD) banner">
-<meta name="twitter:image:alt" content="Giggle Reloaded (GGRD) banner">
-
-<!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@ContactGiggle">
-<meta name="twitter:title" content="Giggle Reloaded (GGRD) – Robin of Gains">
-<meta name="twitter:description" content="Fair-launch memecoin on Solana via DBC with multisig treasury and a community charity vote for pediatric cancer support.">
+<meta name="twitter:title" content="Giggle Reloaded (GGRD) - BSC Mainnet Technical Overview">
+<meta name="twitter:description" content="Fixed-supply token with USDC presale escrow, Safe governance and transparent on-chain operations.">
 <meta name="twitter:image" content="https://ggrd.me/img/ggrd-og-banner.png">
-
-<!-- Structured Data: Organization -->
+<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -51,18 +38,6 @@
   ]
 }
 </script>
-
-<!-- Structured Data: WebSite -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Giggle Reloaded",
-  "url": "https://ggrd.me"
-}
-</script>
-
-<!-- Structured Data: FAQPage -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -70,2083 +45,1489 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is the official GGRD contract address (mint)?",
+      "name": "What is the official GGRD token contract address?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The official GGRD mint address is published on this website and in the official announcement channels. Always copy-paste the address from official sources and verify it on a Solana explorer before trading."
+        "text": "The official GGRD token contract is 0xA0d5663d57b7D7EF975D2F02BcAEaf5c94c671f9 on BNB Smart Chain mainnet."
       }
     },
     {
       "@type": "Question",
-      "name": "How do I avoid scams and fake pools?",
+      "name": "Which asset can be used in the presale?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Do not trust direct messages. Use only links published on ggrd.me and the official X/Telegram channels. Verify the mint address, pool address, and token details on a trusted explorer. Start with a small test transaction."
+        "text": "The current presale accepts only USDC on BNB Smart Chain."
       }
     },
     {
       "@type": "Question",
-      "name": "How is the charity beneficiary selected?",
+      "name": "How are raised funds split after successful finalize?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The beneficiary is selected through a community process: nomination, vetting, and a public vote. Donations are executed via multisig treasury operations and documented with public proofs and transaction links."
+        "text": "PresaleEscrow8020 splits raised USDC as 80 percent to liquidity wallet and 20 percent to marketing wallet."
       }
     },
     {
       "@type": "Question",
-      "name": "What is the focus of the charity program?",
+      "name": "Does GGRD have transfer taxes?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The charity program is focused on pediatric cancer support. Specific beneficiaries are chosen by community vote from a vetted shortlist."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is the Rewards Bot official and how do payouts work?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "The Rewards Bot is part of the community program. Task verification occurs off-chain, while payouts are executed on-chain via a multisig distribution treasury. Reward batches should be reported with transaction links for transparency."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Does GGRD have buy or sell taxes?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "GGRD is intended to have no buy/sell tax. Always verify token mechanics and official announcements before interacting with any pool or contract."
+        "text": "GGRD token design is 0 percent transfer tax with no blacklist and no freeze logic."
       }
     }
   ]
 }
 </script>
-
 <style>
-/* RESET & BASE */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-body{
-  font-family:Inter,system-ui,-apple-system,sans-serif;
+:root {
+  --bg: #081017;
+  --bg-soft: #0d1b26;
+  --card: #122635;
+  --line: #27465e;
+  --text: #ebf5ff;
+  --muted: #9bb6ca;
+  --accent: #79f0b4;
+  --accent-2: #f6d365;
+  --warn: #ff8a5b;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Space Grotesk", sans-serif;
+  color: var(--text);
   background:
-    radial-gradient(circle at 0% 0%,#ff6bd5 0,transparent 55%),
-    radial-gradient(circle at 100% 0%,#ffbf3c 0,transparent 55%),
-    radial-gradient(circle at 50% 100%,#3be8ff 0,transparent 55%),
-    #050316;
-  color:#f5f5ff;
-  line-height:1.6;
-  overflow-x:hidden;
-}
-img{max-width:100%;display:block;height:auto}
-a{color:inherit;text-decoration:none}
-button{font:inherit;border:none;cursor:pointer;background:transparent}
-
-/* CSS VARIABLES */
-:root{
-  --lime:#ff6bd5;
-  --sun:#ffd447;
-  --aqua:#46e6ff;
-  --card:#120f2a;
-  --muted:#d0c7ff;
-  --fg:#fdfbff;
-  --glow-lime:0 0 20px rgba(255,107,213,.5),0 0 40px rgba(255,107,213,.25);
-  --glow-sun:0 0 20px rgba(255,212,71,.5),0 0 40px rgba(255,212,71,.25);
-}
-
-/* UTILITY CLASSES */
-.container{max-width:1200px;margin:0 auto;padding:0 24px}
-.section{padding:80px 0;position:relative}
-@media(max-width:768px){.section{padding:60px 0}}
-
-.title{
-  font-family:Bangers,cursive;
-  font-size:clamp(48px,6vw,72px);
-  line-height:1.1;
-  letter-spacing:.06em;
-  text-transform:uppercase;
-  background:linear-gradient(135deg,#ff6bd5,#ffd447,#46e6ff);
-  -webkit-background-clip:text;
-  background-clip:text;
-  -webkit-text-fill-color:transparent;
-  margin-bottom:24px;
-  text-align:center;
-}
-
-.subtitle{
-  font-size:clamp(20px,3vw,28px);
-  color:var(--muted);
-  text-align:center;
-  margin-bottom:48px;
-  font-weight:600;
-}
-
-.btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:16px 40px;
-  font-size:18px;
-  font-weight:800;
-  text-transform:uppercase;
-  border-radius:999px;
-  transition:all .3s;
-  font-family:Bangers,cursive;
-  letter-spacing:.08em;
-  position:relative;
-  overflow:hidden;
-}
-
-.btn--primary{
-  background:linear-gradient(135deg,#ff6bd5,#ffd447);
-  color:#14061b;
-  box-shadow:var(--glow-lime);
-}
-.btn--primary:hover{
-  transform:translateY(-3px) scale(1.05);
-  box-shadow:0 0 30px rgba(255,107,213,.7),0 0 60px rgba(255,212,71,.5);
-}
-
-.btn--secondary{
-  background:linear-gradient(135deg,#ffd447,#ff9f1c);
-  color:#14061b;
-  box-shadow:var(--glow-sun);
-}
-.btn--secondary:hover{
-  transform:translateY(-3px) scale(1.05);
-  box-shadow:0 0 30px rgba(255,212,71,.7),0 0 60px rgba(255,159,28,.5);
-}
-
-.btn--outline{
-  border:3px solid var(--lime);
-  color:var(--lime);
-  background:rgba(9,3,26,.8);
-}
-.btn--outline:hover{
-  background:var(--lime);
-  color:#14061b;
-  box-shadow:var(--glow-lime);
-}
-
-.btn--aqua{
-  background:linear-gradient(135deg,var(--aqua),#2dd4ff);
-  color:#050316;
-}
-.btn--aqua:hover{
-  transform:translateY(-3px) scale(1.05);
-  box-shadow:0 0 30px rgba(70,230,255,.7);
-}
-
-/* HEADER */
-.header{
-  position:fixed;
-  top:0;
-  left:0;right:0;
-  z-index:1000;
-  background:rgba(5,3,22,.98);
-  backdrop-filter:blur(14px);
-  border-bottom:2px solid rgba(255,107,213,.35);
-  box-shadow:0 4px 20px rgba(0,0,0,.5);
-}
-.header__inner{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:16px 24px;
-  max-width:1400px;
-  margin:0 auto;
-}
-.logo{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  font-family:Bangers,cursive;
-  font-size:28px;
-  letter-spacing:.08em;
-  color:var(--lime);
-  transition:all .3s;
-}
-.logo:hover{
-  transform:scale(1.06);
-  filter:drop-shadow(0 0 14px rgba(255,107,213,.7));
-}
-.logo__img{
-  width:48px;height:48px;
-  border-radius:50%;
-  border:2px solid var(--lime);
-  padding:4px;
-  background:radial-gradient(circle at 0 0,#ff6bd5,transparent 60%);
-}
-
-.nav{display:flex;gap:32px;align-items:center}
-.nav a{
-  font-weight:600;
-  font-size:16px;
-  transition:all .3s;
-  position:relative;
-  padding:8px 0;
-}
-.nav a::after{
-  content:'';
-  position:absolute;
-  bottom:0;left:0;right:0;
-  height:2px;
-  background:linear-gradient(90deg,#ff6bd5,#ffd447);
-  transform:scaleX(0);
-  transition:transform .3s;
-}
-.nav a:hover{color:var(--lime)}
-.nav a:hover::after{transform:scaleX(1)}
-
-.header__cta{display:flex;gap:12px}
-
-.mobile-toggle{display:none;flex-direction:column;gap:6px;padding:8px;cursor:pointer}
-.mobile-toggle span{
-  display:block;
-  width:28px;height:3px;
-  background:var(--lime);
-  border-radius:2px;
-  transition:all .3s;
-}
-
-@media(max-width:968px){
-  .nav{
-    display:none;
-    position:absolute;
-    top:100%;left:0;right:0;
-    background:rgba(5,3,22,.98);
-    flex-direction:column;
-    padding:24px;
-    gap:16px;
-    border-bottom:2px solid rgba(255,107,213,.35);
-  }
-  .nav.active{display:flex}
-  .mobile-toggle{display:flex}
-  .header__cta{flex-direction:column}
-  .btn{font-size:16px;padding:12px 28px}
-}
-
-/* HERO */
-.hero{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  position:relative;
-  overflow:hidden;
-  padding:140px 24px 80px;
-}
-.hero::before{
-  content:'';
-  position:absolute;
-  inset:0;
-  background:
-    radial-gradient(circle at 50% 0%,rgba(255,107,213,.2),transparent 55%),
-    radial-gradient(circle at 85% 20%,rgba(255,212,71,.18),transparent 55%);
-  z-index:0;
-  animation:pulse 8s ease-in-out infinite;
-}
-.hero__content{
-  position:relative;
-  z-index:1;
-  text-align:center;
-  max-width:900px;
-}
-.hero__title{
-  font-family:Bangers,cursive;
-  font-size:clamp(56px,10vw,120px);
-  line-height:.95;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  background:linear-gradient(135deg,#ff6bd5 0,#ffd447 50%,#46e6ff 100%);
-  -webkit-background-clip:text;
-  background-clip:text;
-  -webkit-text-fill-color:transparent;
-  margin-bottom:20px;
-  animation:slideDown .8s ease-out,textGlow 3s ease-in-out infinite;
-}
-.hero__subtitle{
-  font-family:Bangers,cursive;
-  font-size:clamp(24px,4vw,42px);
-  color:var(--sun);
-  margin-bottom:16px;
-  letter-spacing:.1em;
-  animation:slideUp .8s ease-out .2s both;
-}
-.hero__tagline{
-  font-size:clamp(16px,2.5vw,22px);
-  color:var(--muted);
-  margin-bottom:26px;
-  font-weight:600;
-  animation:slideUp .8s ease-out .4s both;
-}
-.hero__tagline strong{color:var(--lime)}
-
-.hero__note{
-  font-size:14px;
-  color:var(--muted);
-  max-width:680px;
-  margin:0 auto 32px;
-}
-.hero__note strong{color:var(--sun)}
-
-.hero__cta{
-  display:flex;
-  gap:20px;
-  justify-content:center;
-  flex-wrap:wrap;
-  animation:slideUp .8s ease-out .6s both;
-}
-
-@media(max-width:768px){
-  .hero__cta{flex-direction:column;align-items:stretch}
-}
-
-/* MARQUEE */
-.marquee{
-  background:linear-gradient(90deg,#ff6bd5,#ffd447,#46e6ff,#ff6bd5);
-  padding:18px 0;
-  overflow:hidden;
-  position:relative;
-}
-.marquee__content{display:flex;animation:scroll 25s linear infinite;white-space:nowrap}
-.marquee__item{
-  font-family:Bangers,cursive;
-  font-size:26px;
-  color:#14061b;
-  padding:0 48px;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-}
-@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-
-/* STICKERS */
-.stickers{
-  display:flex;
-  gap:16px;
-  flex-wrap:wrap;
-  justify-content:center;
-  margin:40px 0 48px;
-}
-.sticker{
-  background:linear-gradient(135deg,#1d1236,#281747);
-  border:3px solid var(--lime);
-  border-radius:999px;
-  padding:16px 32px;
-  font-weight:800;
-  font-size:18px;
-  font-family:Bangers,cursive;
-  letter-spacing:.08em;
-  transition:all .3s;
-  box-shadow:var(--glow-lime);
-}
-.sticker:nth-child(odd){transform:rotate(-2deg)}
-.sticker:nth-child(even){transform:rotate(2deg)}
-.sticker:hover{
-  transform:rotate(0deg) scale(1.08) translateY(-4px);
-  border-color:var(--sun);
-  box-shadow:var(--glow-sun);
-}
-
-/* ABOUT */
-.about{background:linear-gradient(180deg,transparent,rgba(18,15,42,.8),transparent)}
-.about__grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:48px;
-  align-items:center;
-}
-.about__text{max-width:540px}
-.about__text p{
-  font-size:18px;
-  line-height:1.8;
-  color:var(--muted);
-  margin-bottom:20px;
-}
-.about__text p:last-child{margin-bottom:0}
-.about__features{display:grid;gap:20px}
-.feature{
-  background:linear-gradient(135deg,var(--card),#1a1537);
-  border:2px solid var(--lime);
-  border-radius:20px;
-  padding:24px;
-  transition:all .3s;
-}
-.feature:hover{
-  transform:translateY(-4px);
-  border-color:var(--sun);
-  box-shadow:var(--glow-sun);
-}
-.feature__icon{font-size:36px;margin-bottom:12px}
-.feature__title{
-  font-family:Bangers,cursive;
-  font-size:22px;
-  color:var(--sun);
-  margin-bottom:8px;
-  letter-spacing:.08em;
-}
-.feature__desc{color:var(--muted);font-size:16px;line-height:1.6}
-@media(max-width:968px){
-  .about__grid{grid-template-columns:1fr;gap:40px}
-}
-
-/* TOKENOMICS */
-.tokenomics{background:radial-gradient(circle at 50% 50%,rgba(255,107,213,.08),transparent 70%)}
-.tokenomics__intro{
-  max-width:800px;
-  margin:0 auto 48px;
-  text-align:center;
-  color:var(--muted);
-  font-size:18px;
-  line-height:1.8;
-}
-.allocation{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:24px;
-  margin:48px auto;
-  max-width:1100px;
-}
-.allocation__item{
-  background:linear-gradient(135deg,var(--card),#1a1537);
-  border:3px solid var(--lime);
-  border-radius:24px;
-  padding:28px 24px;
-  transition:all .3s;
-  position:relative;
-  overflow:hidden;
-}
-.allocation__item::before{
-  content:'';
-  position:absolute;
-  top:0;left:0;right:0;
-  height:4px;
-  background:linear-gradient(90deg,#ff6bd5,#ffd447,#46e6ff);
-  transform:scaleX(0);
-  transition:transform .3s;
-}
-.allocation__item:hover{
-  transform:translateY(-6px);
-  box-shadow:var(--glow-lime);
-}
-.allocation__item:hover::before{transform:scaleX(1)}
-.allocation__percentage{
-  display:block;
-  font-family:Bangers,cursive;
-  font-size:48px;
-  color:var(--lime);
-  margin-bottom:8px;
-  letter-spacing:.08em;
-  line-height:1;
-}
-.allocation__label{
-  display:block;
-  font-weight:700;
-  font-size:18px;
-  color:var(--sun);
-  margin-bottom:12px;
-  text-transform:uppercase;
-  letter-spacing:.08em;
-}
-.allocation__desc{font-size:14px;color:var(--muted);line-height:1.6}
-
-.security-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:24px;
-  margin-top:64px;
-}
-.security-card{
-  background:linear-gradient(135deg,#191437,#211b49);
-  border:3px solid var(--aqua);
-  border-radius:24px;
-  padding:32px 28px;
-  transition:all .3s;
-}
-.security-card:hover{
-  transform:translateY(-4px);
-  border-color:var(--lime);
-  box-shadow:0 0 20px rgba(70,230,255,.4);
-}
-.security-card__icon{font-size:48px;margin-bottom:16px;text-align:center}
-.security-card__title{
-  font-family:Bangers,cursive;
-  font-size:24px;
-  color:var(--sun);
-  margin-bottom:12px;
-  text-align:center;
-  letter-spacing:.08em;
-}
-.security-card__desc{color:var(--muted);font-size:15px;line-height:1.7;text-align:center}
-.security-card__list{margin-top:16px;padding-left:20px}
-.security-card__list li{
-  color:var(--muted);
-  font-size:14px;
-  line-height:1.8;
-  margin-bottom:8px;
-}
-.contract-box{
-  margin-top:48px;
-  padding:24px;
-  background:rgba(255,107,213,.06);
-  border:2px solid rgba(255,107,213,.4);
-  border-radius:20px;
-  max-width:800px;
-  margin-left:auto;
-  margin-right:auto;
-}
-.contract-box__title{
-  font-family:Bangers,cursive;
-  font-size:20px;
-  color:var(--lime);
-  margin-bottom:12px;
-  text-align:center;
-  letter-spacing:.08em;
-}
-.contract-box__address{
-  font-family:monospace;
-  font-size:clamp(12px,2vw,14px);
-  color:var(--fg);
-  word-break:break-all;
-  text-align:center;
-  background:rgba(5,3,22,.9);
-  padding:16px;
-  border-radius:12px;
-  border:1px solid rgba(255,107,213,.4);
-  transition:all .3s;
-}
-.contract-box__address:hover{
-  background:rgba(70,230,255,.12);
-  border-color:var(--aqua);
-  transform:scale(1.02);
-}
-
-/* HOW TO JOIN LAUNCH */
-.how{background:linear-gradient(180deg,transparent,rgba(70,230,255,.05),transparent)}
-.steps{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:28px;
-  margin-top:48px;
-}
-.step{
-  background:linear-gradient(135deg,#191437,#211b49);
-  border:3px solid var(--aqua);
-  border-radius:28px;
-  padding:36px 28px;
-  text-align:center;
-  transition:all .3s;
-  position:relative;
-  overflow:hidden;
-}
-.step::before{
-  content:'';
-  position:absolute;
-  top:-50%;right:-50%;
-  width:100%;height:100%;
-  background:radial-gradient(circle,rgba(70,230,255,.15),transparent);
-  transition:all .5s;
-}
-.step:hover{
-  transform:translateY(-6px);
-  border-color:var(--lime);
-}
-.step:hover::before{top:0;right:0}
-.step__icon{
-  font-size:72px;
-  margin-bottom:20px;
-  filter:drop-shadow(0 0 12px rgba(70,230,255,.6));
-}
-.step__title{
-  display:block;
-  font-size:24px;
-  margin-bottom:16px;
-  color:var(--sun);
-  font-weight:800;
-  font-family:Bangers,cursive;
-  letter-spacing:.08em;
-}
-.step__desc{color:var(--muted);line-height:1.7;font-size:16px}
-
-/* CHARITY */
-.charity{background:radial-gradient(circle at 30% 50%,rgba(255,212,71,.07),transparent 60%)}
-.charity__bubble{
-  background:linear-gradient(135deg,var(--card),#1a1537);
-  border:4px solid var(--sun);
-  border-radius:32px;
-  padding:40px;
-  max-width:760px;
-  margin:48px auto;
-  position:relative;
-  box-shadow:var(--glow-sun);
-}
-.charity__bubble::before{
-  content:'';
-  position:absolute;
-  bottom:-20px;left:48px;
-  width:40px;height:40px;
-  background:inherit;
-  border-right:4px solid var(--sun);
-  border-bottom:4px solid var(--sun);
-  transform:rotate(45deg);
-  clip-path:polygon(0 0,100% 0,100% 100%);
-}
-.charity__content{
-  font-size:18px;
-  line-height:1.8;
-  color:var(--muted);
-  text-align:center;
-}
-.charity__content strong{color:var(--sun);font-weight:800}
-.charity__wallet{
-  margin-top:32px;
-  padding:20px;
-  background:rgba(255,212,71,.08);
-  border:2px solid var(--sun);
-  border-radius:16px;
-  font-family:monospace;
-  font-size:14px;
-  word-break:break-all;
-  text-align:center;
-  color:var(--sun);
-}
-.charity__extra{
-  max-width:760px;
-  margin:24px auto 0;
-  font-size:14px;
-  color:var(--muted);
-  text-align:center;
-}
-
-/* WHITEPAPER */
-.whitepaper{background:linear-gradient(180deg,transparent,rgba(70,230,255,.05),transparent)}
-.whitepaper__highlight{
-  background:linear-gradient(135deg,var(--card),#1a1537);
-  border:3px solid var(--aqua);
-  border-radius:24px;
-  padding:32px;
-  max-width:900px;
-  margin:48px auto 32px;
-  position:relative;
-}
-.whitepaper__highlight h3{
-  font-family:Bangers,cursive;
-  font-size:28px;
-  color:var(--aqua);
-  margin-bottom:20px;
-  text-align:center;
-  letter-spacing:.08em;
-}
-.whitepaper__highlight p{
-  color:var(--muted);
-  font-size:16px;
-  line-height:1.8;
-  margin-bottom:16px;
-}
-.whitepaper__stats{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:20px;
-  margin-top:32px;
-}
-.whitepaper__stat{
-  background:rgba(70,230,255,.05);
-  border:2px solid var(--aqua);
-  border-radius:16px;
-  padding:20px;
-  text-align:center;
-  transition:all .3s;
-}
-.whitepaper__stat:hover{
-  transform:translateY(-4px);
-  border-color:var(--lime);
-  box-shadow:0 0 16px rgba(70,230,255,.4);
-}
-.whitepaper__stat-value{
-  display:block;
-  font-family:Bangers,cursive;
-  font-size:32px;
-  color:var(--lime);
-  margin-bottom:8px;
-  letter-spacing:.08em;
-}
-.whitepaper__stat-label{
-  font-size:14px;
-  color:var(--muted);
-  text-transform:uppercase;
-  font-weight:700;
-  letter-spacing:.08em;
-}
-
-/* ROADMAP */
-.roadmap{background:linear-gradient(180deg,transparent,rgba(18,15,42,.8),transparent)}
-.stamps{
-  display:grid;
-  gap:32px;
-  max-width:800px;
-  margin:48px auto;
-}
-.stamp{
-  background:linear-gradient(135deg,var(--card),#1a1537);
-  border:3px dashed var(--lime);
-  border-radius:24px;
-  padding:32px;
-  transition:all .3s;
-  position:relative;
-}
-.stamp::before{
-  content:'✓';
-  position:absolute;
-  top:-16px;right:24px;
-  width:48px;height:48px;
-  background:var(--lime);
-  color:#14061b;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:28px;
-  font-weight:900;
-  opacity:0;
-  transition:all .3s;
-}
-.stamp.completed::before{opacity:1}
-.stamp:hover{
-  transform:translateX(8px);
-  border-color:var(--sun);
-  box-shadow:var(--glow-sun);
-}
-.stamp__phase{
-  font-family:Bangers,cursive;
-  font-size:24px;
-  color:var(--sun);
-  margin-bottom:12px;
-  letter-spacing:.08em;
-}
-.stamp__desc{color:var(--muted);font-size:16px;line-height:1.7}
-
-/* FOOTER */
-.footer{
-  background:linear-gradient(180deg,transparent,rgba(5,3,22,.97));
-  border-top:2px solid rgba(255,107,213,.35);
-  padding:60px 0 32px;
-}
-.footer__content{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:40px;
-  margin-bottom:48px;
-}
-.footer__section h3{
-  font-family:Bangers,cursive;
-  font-size:22px;
-  color:var(--lime);
-  margin-bottom:20px;
-  letter-spacing:.08em;
-}
-.footer__links{display:flex;flex-direction:column;gap:12px}
-.footer__links a{
-  color:var(--muted);
-  font-size:16px;
-  transition:all .3s;
-}
-.footer__links a:hover{
-  color:var(--lime);
-  transform:translateX(4px);
-}
-.footer__socials{display:flex;gap:16px}
-.footer__social{
-  width:48px;height:48px;
-  border:2px solid var(--lime);
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:24px;
-  transition:all .3s;
-  background:linear-gradient(135deg,rgba(255,107,213,.15),transparent);
-}
-.footer__social:hover{
-  transform:translateY(-4px) scale(1.1);
-  border-color:var(--sun);
-  box-shadow:var(--glow-sun);
-  background:linear-gradient(135deg,rgba(255,212,71,.15),transparent);
-}
-.footer__disclaimer{
-  background:rgba(18,15,42,.9);
-  border:2px solid rgba(255,107,213,.35);
-  border-radius:20px;
-  padding:32px;
-  margin:32px 0;
-  max-width:900px;
-  margin-left:auto;
-  margin-right:auto;
-}
-.footer__disclaimer h4{
-  font-family:Bangers,cursive;
-  font-size:20px;
-  color:var(--sun);
-  margin-bottom:16px;
-  letter-spacing:.08em;
-}
-.footer__disclaimer p{
-  color:var(--muted);
-  font-size:14px;
-  line-height:1.8;
-  margin-bottom:16px;
-  text-align:left;
-}
-.footer__disclaimer p:last-child{margin-bottom:0}
-.footer__bottom{
-  text-align:center;
-  padding-top:32px;
-  border-top:1px solid rgba(255,107,213,.25);
-  color:var(--muted);
-  font-size:14px;
-}
-
-/* ANIMATIONS */
-@keyframes slideDown{from{opacity:0;transform:translateY(-30px)}to{opacity:1;transform:translateY(0)}}
-@keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}
-@keyframes pulse{0%,100%{opacity:.6}50%{opacity:.9}}
-@keyframes textGlow{0%,100%{filter:drop-shadow(0 0 8px rgba(255,107,213,.5))}50%{filter:drop-shadow(0 0 16px rgba(255,212,71,.7))}}
-
-/* FOCUS STATES */
-a:focus-visible,button:focus-visible{
-  outline:3px solid var(--lime);
-  outline-offset:4px;
-  border-radius:4px;
-}
-
-/* CONTRACT CARDS */
-.contract-card{
-  background:linear-gradient(135deg,var(--card),#1a1537);
-  border:3px solid var(--aqua);
-  border-radius:24px;
-  padding:28px;
-  transition:all .3s;
-  position:relative;
-  overflow:hidden;
-}
-.contract-card::before{
-  content:'';
-  position:absolute;
-  top:-50%;right:-50%;
-  width:100%;height:100%;
-  background:radial-gradient(circle,rgba(70,230,255,.12),transparent);
-  transition:all .5s;
-}
-.contract-card:hover{
-  transform:translateY(-4px);
-  border-color:var(--lime);
-  box-shadow:0 0 24px rgba(70,230,255,.4);
-}
-.contract-card:hover::before{top:0;right:0}
-.contract-card__header{
-  display:flex;
-  align-items:center;
-  gap:16px;
-  margin-bottom:20px;
-  position:relative;
-  z-index:1;
-}
-.contract-card__icon{
-  font-size:48px;
-  filter:drop-shadow(0 0 8px rgba(70,230,255,.6));
-}
-.contract-card__title{
-  font-family:Bangers,cursive;
-  font-size:22px;
-  color:var(--lime);
-  margin-bottom:4px;
-  letter-spacing:.08em;
-}
-.contract-card__label{
-  font-size:14px;
-  color:var(--muted);
-  text-transform:uppercase;
-  font-weight:700;
-  letter-spacing:.08em;
-}
-.contract-card__address{
-  font-family:monospace;
-  font-size:clamp(11px,1.5vw,13px);
-  color:var(--fg);
-  word-break:break-all;
-  background:rgba(5,3,22,.9);
-  padding:16px;
-  border-radius:12px;
-  border:2px solid rgba(70,230,255,.3);
-  margin-bottom:16px;
-  position:relative;
-  z-index:1;
-  line-height:1.6;
-}
-.contract-card__actions{
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-  position:relative;
-  z-index:1;
-}
-.contract-card__copy{
-  padding:10px 20px;
-  background:linear-gradient(135deg,#ff6bd5,#ffd447);
-  color:#14061b;
-  border:none;
-  border-radius:999px;
-  font-weight:800;
-  font-size:14px;
-  font-family:Bangers,cursive;
-  letter-spacing:.08em;
-  cursor:pointer;
-  transition:all .3s;
-  box-shadow:0 0 12px rgba(255,107,213,.4);
-}
-.contract-card__copy:hover{
-  transform:translateY(-2px) scale(1.05);
-  box-shadow:0 0 20px rgba(255,107,213,.6);
-}
-.contract-card__copy.copied{
-  background:linear-gradient(135deg,#4ade80,#22c55e);
-  color:#fff;
-}
-.contract-card__link{
-  padding:10px 20px;
-  background:rgba(70,230,255,.15);
-  color:var(--aqua);
-  border:2px solid var(--aqua);
-  border-radius:999px;
-  font-weight:700;
-  font-size:14px;
-  transition:all .3s;
-  text-decoration:none;
-  display:inline-flex;
-  align-items:center;
-}
-.contract-card__link:hover{
-  background:var(--aqua);
-  color:#050316;
-  transform:translateY(-2px);
-  box-shadow:0 0 16px rgba(70,230,255,.5);
-}
-@media(max-width:768px){
-  .contract-card__actions{flex-direction:column}
-  .contract-card__copy,.contract-card__link{width:100%;justify-content:center}
-}
-
-/* SCROLLBAR */
-::-webkit-scrollbar{width:12px}
-::-webkit-scrollbar-track{background:#130c2e}
-::-webkit-scrollbar-thumb{
-  background:linear-gradient(180deg,#ff6bd5,#ffd447);
-  border-radius:6px;
-}
-::-webkit-scrollbar-thumb:hover{
-  background:linear-gradient(180deg,#ffd447,#ff6bd5);
-}
-
-/* VERIFY BOX */
-.verify-box{
-  background:rgba(70,230,255,.08);
-  border:2px solid var(--aqua);
-  border-radius:16px;
-  padding:20px;
-  margin:32px auto;
-  max-width:800px;
-}
-.verify-box__title{
-  font-family:Bangers,cursive;
-  font-size:18px;
-  color:var(--aqua);
-  margin-bottom:12px;
-  text-align:center;
-}
-.verify-box__list{
-  list-style:none;
-  padding:0;
-  margin:0;
-}
-.verify-box__list li{
-  color:var(--muted);
-  font-size:14px;
-  padding:8px 0;
-  border-bottom:1px solid rgba(70,230,255,.15);
-}
-.verify-box__list li:last-child{border-bottom:none}
-.verify-box__list li strong{color:var(--lime)}
-
-/* FAQ SECTION */
-.faq{background:linear-gradient(180deg,transparent,rgba(70,230,255,.05),transparent)}
-.faq__grid{display:grid;gap:20px;max-width:900px;margin:48px auto 0}
-.faq__item{background:linear-gradient(135deg,var(--card),#1a1537);border:2px solid var(--aqua);border-radius:20px;transition:all .3s}
-.faq__item:hover{border-color:var(--lime);box-shadow:0 0 20px rgba(70,230,255,.3)}
-.faq__item summary{padding:24px;font-size:18px;font-weight:700;color:var(--sun);cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;font-family:Bangers,cursive;letter-spacing:.08em}
-.faq__item summary::-webkit-details-marker{display:none}
-.faq__item summary::after{content:'▼';font-size:14px;transition:transform .3s;color:var(--lime)}
-.faq__item[open] summary::after{transform:rotate(180deg)}
-.faq__item p{padding:0 24px 24px;color:var(--muted);font-size:16px;line-height:1.7;margin:0}
+    radial-gradient(circle at 10% 10%, rgba(121,240,180,0.18), transparent 42%),
+    radial-gradient(circle at 90% 0%, rgba(246,211,101,0.13), transparent 38%),
+    linear-gradient(180deg, #081017, #091824 28%, #0a131b 100%);
+  line-height: 1.6;
+}
+a { color: inherit; text-decoration: none; }
+.container { width: min(1160px, 92vw); margin: 0 auto; }
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(8,16,23,0.88);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(121,240,180,0.22);
+}
+.header-inner {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 1px;
+  font-size: 28px;
+}
+.brand img { width: 40px; height: 40px; }
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-size: 14px;
+  color: var(--muted);
+}
+.nav a:hover { color: var(--accent); }
+.hero {
+  padding: 72px 0 36px;
+}
+.kicker {
+  display: inline-block;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--accent-2);
+  border: 1px solid rgba(246,211,101,0.4);
+  border-radius: 999px;
+  padding: 6px 12px;
+  margin-bottom: 18px;
+}
+.hero h1 {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: clamp(44px, 9vw, 86px);
+  line-height: 0.95;
+  margin: 0 0 14px;
+  letter-spacing: 1.2px;
+}
+.hero p {
+  margin: 0;
+  max-width: 840px;
+  color: #d5e8f7;
+  font-size: 18px;
+}
+.hero-grid {
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 14px;
+}
+.stat {
+  background: linear-gradient(145deg, rgba(18,38,53,0.9), rgba(10,24,35,0.95));
+  border: 1px solid rgba(121,240,180,0.25);
+  border-radius: 14px;
+  padding: 16px;
+}
+.stat .v {
+  display: block;
+  font-weight: 700;
+  font-size: 26px;
+  color: var(--accent);
+}
+.stat .l {
+  color: var(--muted);
+  font-size: 13px;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+.btn {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 18px;
+  font-weight: 700;
+  font-size: 14px;
+  transition: 0.2s ease;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn-primary {
+  background: var(--accent);
+  color: #032113;
+  border-color: rgba(121,240,180,0.6);
+}
+.btn-secondary {
+  background: rgba(121,240,180,0.1);
+  color: var(--accent);
+}
+.section { padding: 56px 0; }
+.section h2 {
+  margin: 0 0 10px;
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 1px;
+  font-size: 46px;
+}
+.section .lead {
+  margin: 0 0 22px;
+  color: var(--muted);
+  font-size: 17px;
+}
+.grid {
+  display: grid;
+  gap: 16px;
+}
+.grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.grid-3 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.card {
+  background: linear-gradient(145deg, rgba(18,38,53,0.94), rgba(10,24,35,0.96));
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px;
+}
+.card h3 {
+  margin: 0 0 8px;
+  font-size: 19px;
+}
+.card p {
+  margin: 0;
+  color: var(--muted);
+}
+.table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(12,24,34,0.95);
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 680px;
+}
+th, td {
+  text-align: left;
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(39,70,94,0.5);
+  font-size: 14px;
+}
+th {
+  color: #a8e7c6;
+  background: rgba(121,240,180,0.08);
+  font-weight: 700;
+}
+.code {
+  display: block;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 13px;
+  word-break: break-all;
+  color: #d8f6e6;
+  background: rgba(121,240,180,0.08);
+  border: 1px solid rgba(121,240,180,0.24);
+  border-radius: 10px;
+  padding: 10px;
+  margin: 8px 0 12px;
+}
+.addr-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.btn-mini {
+  font-size: 12px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.02);
+  color: #d9edf9;
+}
+.warning {
+  border: 1px solid rgba(255,138,91,0.45);
+  background: rgba(255,138,91,0.08);
+  color: #ffd9cc;
+  border-radius: 14px;
+  padding: 14px;
+}
+.presale-kpis {
+  margin-bottom: 16px;
+}
+.kpi {
+  background: linear-gradient(145deg, rgba(18,38,53,0.94), rgba(10,24,35,0.96));
+  border: 1px solid rgba(121,240,180,0.24);
+  border-radius: 14px;
+  padding: 16px;
+}
+.kpi-label {
+  display: block;
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.kpi-value {
+  display: block;
+  font-size: 24px;
+  font-weight: 700;
+  color: #dbffeb;
+}
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+}
+.status-pill-neutral {
+  color: #d7ebfa;
+  border: 1px solid rgba(155,182,202,0.45);
+  background: rgba(155,182,202,0.1);
+}
+.status-pill-live {
+  color: #08341f;
+  border: 1px solid rgba(121,240,180,0.8);
+  background: rgba(121,240,180,0.9);
+}
+.status-pill-success {
+  color: #062a1a;
+  border: 1px solid rgba(121,240,180,0.86);
+  background: rgba(121,240,180,0.96);
+}
+.status-pill-fail {
+  color: #ffe7dc;
+  border: 1px solid rgba(255,138,91,0.66);
+  background: rgba(255,138,91,0.22);
+}
+.progress-wrap {
+  width: 100%;
+  height: 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(9,24,36,0.94);
+  overflow: hidden;
+  margin-top: 2px;
+}
+.progress-bar {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--accent), #8df7d8);
+  transition: width 0.2s ease;
+}
+.progress-caption {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 10px 0 0;
+}
+.wallet-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.wallet-badge {
+  display: inline-flex;
+  border: 1px solid rgba(121,240,180,0.4);
+  background: rgba(121,240,180,0.1);
+  border-radius: 999px;
+  font-size: 12px;
+  padding: 6px 10px;
+  color: #c1f9de;
+}
+.wallet-address {
+  font-family: Consolas, Monaco, monospace;
+  font-size: 12px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(155,182,202,0.28);
+  padding: 6px 9px;
+  border-radius: 10px;
+}
+.form-label {
+  font-size: 13px;
+  color: var(--muted);
+}
+.form-input {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: rgba(9,24,36,0.9);
+  color: var(--text);
+  font-size: 15px;
+  padding: 10px 12px;
+  outline: none;
+}
+.form-input:focus {
+  border-color: rgba(121,240,180,0.45);
+  box-shadow: 0 0 0 2px rgba(121,240,180,0.1);
+}
+.hint {
+  font-size: 12px;
+  color: var(--muted);
+}
+.hint.warn {
+  color: #ffd9cc;
+}
+.hint.ok {
+  color: #c1f9de;
+}
+.wallet-metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.metric {
+  border: 1px solid rgba(39,70,94,0.58);
+  border-radius: 12px;
+  padding: 10px;
+  background: rgba(12,24,34,0.8);
+}
+.metric span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+}
+.metric strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 16px;
+}
+.kpi-sub {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.presale-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+.stage-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 84px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 5px 10px;
+  border: 1px solid rgba(155,182,202,0.45);
+  background: rgba(155,182,202,0.1);
+  color: #d7ebfa;
+}
+.stage-pill-active {
+  border-color: rgba(121,240,180,0.9);
+  background: rgba(121,240,180,0.92);
+  color: #042417;
+}
+.stage-pill-upcoming {
+  border-color: rgba(246,211,101,0.65);
+  background: rgba(246,211,101,0.18);
+  color: #f7e9b3;
+}
+.stage-pill-closed {
+  border-color: rgba(155,182,202,0.45);
+  background: rgba(155,182,202,0.1);
+  color: #d7ebfa;
+}
+.stage-pill-soldout {
+  border-color: rgba(255,138,91,0.72);
+  background: rgba(255,138,91,0.22);
+  color: #ffe7dc;
+}
+.wallet-actions-grid {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.wallet-actions-grid .btn {
+  width: 100%;
+  text-align: center;
+}
+.btn:disabled,
+.btn-mini:disabled {
+  opacity: 0.56;
+  cursor: not-allowed;
+  transform: none;
+}
+.btn-success-soft {
+  background: rgba(121,240,180,0.18);
+  color: #d2ffe9;
+  border-color: rgba(121,240,180,0.5);
+}
+.presale-cta-mobile {
+  display: none;
+  position: sticky;
+  bottom: 10px;
+  z-index: 6;
+  margin-top: 16px;
+  padding: 10px;
+  border: 1px solid rgba(121,240,180,0.3);
+  border-radius: 14px;
+  background: rgba(7,18,27,0.94);
+  backdrop-filter: blur(6px);
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.faq details {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  margin-bottom: 10px;
+  background: rgba(12,24,34,0.9);
+}
+.faq summary {
+  cursor: pointer;
+  padding: 14px;
+  font-weight: 700;
+}
+.faq p {
+  margin: 0;
+  padding: 0 14px 14px;
+  color: var(--muted);
+}
+.footer {
+  border-top: 1px solid rgba(121,240,180,0.2);
+  padding: 28px 0 36px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.footer a { color: #d0f4e2; }
+@media (max-width: 760px) {
+  .nav { display: none; }
+  .section h2 { font-size: 38px; }
+  .hero p { font-size: 16px; }
+  .wallet-metrics { grid-template-columns: 1fr; }
+  .wallet-actions-grid { grid-template-columns: 1fr; }
+  .presale-meta { align-items: flex-start; }
+  .presale-cta-mobile { display: grid; }
+  .presale-cta-mobile .btn { width: 100%; padding: 13px 12px; }
+}
 </style>
 </head>
-
 <body>
-
-<!-- HEADER -->
-<header class="header" id="header">
-  <div class="header__inner">
-    <a href="#hero" class="logo">
-      <img src="img/ggrd-logo-512.png" alt="GGRD Logo" class="logo__img" width="48" height="48">
+<header class="header">
+  <div class="container header-inner">
+    <a class="brand" href="#top">
+      <img src="img/ggrd-logo-512.png" alt="GGRD logo">
       <span>GGRD</span>
     </a>
-
-    <nav class="nav" id="nav">
-      <a href="#about">About</a>
+    <nav class="nav">
+      <a href="#overview">Overview</a>
       <a href="#tokenomics">Tokenomics</a>
       <a href="#contracts">Contracts</a>
-      <a href="#how">Fair Launch</a>
+      <a href="#presale">Presale</a>
       <a href="#charity">Charity</a>
-      <a href="donation-policy.html">Donation Policy</a>
-      <a href="#rewards">Rewards</a>
       <a href="#whitepaper">Whitepaper</a>
       <a href="#roadmap">Roadmap</a>
+      <a href="#faq">FAQ</a>
     </nav>
-
-    <div class="header__cta">
-      <a href="https://x.com/ContactGiggle" target="_blank" rel="noopener" class="btn btn--secondary">Follow X</a>
-      <a href="https://t.me/GGRDofficial" target="_blank" rel="noopener" class="btn btn--primary">Join TG</a>
-    </div>
-
-    <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </button>
   </div>
 </header>
 
-<!-- HERO -->
-<section class="hero" id="hero">
-  <div class="hero__content">
-    <h1 class="hero__title">Giggle Reloaded (GGRD) – Robin of Gains</h1>
-    <p class="hero__subtitle">Fair Launch on Solana · $GGRD</p>
-    <p class="hero__tagline">
-      Steal from rich curves, give to the community – with
-      <strong>10% of supply locked for community-voted pediatric cancer support</strong>. 🏹
-    </p>
-
-    <p class="hero__note">
-      <strong>Single source of truth:</strong> Only trade using official links published here on ggrd.me
-      and in the official Telegram / X channels. DBC/pool links are announced only through official channels.
-    </p>
-
-    <div class="hero__cta">
-      <a href="#how" class="btn btn--primary">How the Fair Launch Works</a>
-      <a href="GGRD_Whitepaper_EN.html" target="_blank" rel="noopener" class="btn btn--outline">Read Whitepaper (EN)</a>
-    </div>
-  </div>
-</section>
-
-<!-- GECKOTERMINAL VERIFICATION BADGE -->
-<section class="verified-section" style="padding: 40px 0; text-align: center; background: linear-gradient(135deg, rgba(157, 255, 0, 0.05) 0%, rgba(157, 255, 0, 0) 100%);">
-  <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
-    
-    <div style="display: inline-block; padding: 12px 32px; background: rgba(255,255,255,0.95); border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); backdrop-filter: blur(10px); border: 2px solid rgba(157, 255, 0, 0.3);">
-      
-      <p style="font-size: 14px; color: #666; margin: 0 0 12px 0; font-weight: 600; letter-spacing: 0.5px;">
-        VERIFIED ON
-      </p>
-      
-      <a href="https://www.geckoterminal.com/solana/pools/HWzDBQcPpmGk5J9EXaLQnF4TfndP2pYAzCxBTyfjbnUb" 
-         target="_blank" 
-         rel="noopener noreferrer"
-         style="display: inline-flex; align-items: center; gap: 12px; text-decoration: none; transition: transform 0.2s ease, opacity 0.2s ease;"
-         onmouseover="this.style.transform='scale(1.05)'; this.style.opacity='0.8';"
-         onmouseout="this.style.transform='scale(1)'; this.style.opacity='1';">
-        
-        <img src="img/geckoterminal_light.svg" 
-             alt="GeckoTerminal" 
-             style="height: 48px; width: auto; display: block;"
-             width="192" height="48"
-             onerror="this.src='img/geckoterminal_light.png'">
-      </a>
-      
-      <p style="font-size: 12px; color: #999; margin: 12px 0 0 0; font-weight: 500;">
-        Track $GGRD live on GeckoTerminal
-      </p>
-      
-    </div>
-    
-  </div>
-</section>
-
-<!-- MARQUEE -->
-<div class="marquee">
-  <div class="marquee__content">
-    <span class="marquee__item">🏹 FAIR-LAUNCH DBC</span>
-    <span class="marquee__item">💸 ZERO TAX</span>
-    <span class="marquee__item">🔒 MULTISIG TREASURIES</span>
-    <span class="marquee__item">&#x1F49A; 10% CHARITY TREASURY</span>
-    <span class="marquee__item">🦊 ROBIN OF GAINS</span>
-    <span class="marquee__item">🏹 FAIR-LAUNCH DBC</span>
-    <span class="marquee__item">💸 ZERO TAX</span>
-    <span class="marquee__item">🔒 MULTISIG TREASURIES</span>
-    <span class="marquee__item">💚 COMMUNITY VOTE</span>
-    <span class="marquee__item">🦊 ROBIN OF GAINS</span>
-  </div>
-</div>
-
-<!-- STICKERS -->
-<div class="container">
-  <div class="stickers">
-    <div class="sticker">🏹 FAIR LAUNCH ON SOLANA</div>
-    <div class="sticker">💸 0% BUY / SELL TAX</div>
-    <div class="sticker">&#x1F49A; 10% CHARITY TREASURY</div>
-    <div class="sticker">🔒 SQUADS MULTISIG</div>
-    <div class="sticker">📋 ON-CHAIN TRANSPARENCY</div>
-    <div class="sticker">🦊 PURE MEME ENERGY</div>
-  </div>
-</div>
-
-<!-- ABOUT -->
-<section class="section about" id="about">
-  <div class="container">
-    <h2 class="title">About GGRD</h2>
-    <p class="subtitle">The Robin Hood of Solana – meme coin with a real on-chain charity engine</p>
-
-    <div class="about__grid">
-      <div class="about__text">
-        <p>
-          In the forest of degen curves, <strong>Giggle Reloaded ($GGRD)</strong> appears as
-          the <strong>Robin of Gains</strong> – a fair-launch Solana meme coin with
-          fixed <strong>1,000,000 GGRD</strong> supply, no presale and 0% trading tax.
-        </p>
-        <p>
-          40% of the supply is sold publicly through a
-          <strong>Meteora Dynamic Bonding Curve (DBC)</strong>.
-          The remaining 60% lives in named, public multisig treasuries:
-          Charity, Liquidity, Community, Team, Marketing and Treasury Reserve –
-          all described in the whitepaper.
-        </p>
-        <p>
-          <strong>10% of total supply (100,000 GGRD)</strong> is locked in a
-          dedicated <strong>Charity Treasury multisig</strong> for donations to
-          <strong>community-selected pediatric oncology organizations</strong>,
-          supporting children with cancer and their families.
-        </p>
-      </div>
-
-      <div class="about__features">
-        <div class="feature">
-          <div class="feature__icon">🏹</div>
-          <h3 class="feature__title">Pure Fair Launch</h3>
-          <p class="feature__desc">
-            No presale, no VC, no private deals. Everyone joins the DBC under the
-            same rules, with migration to LP around 80k USDC on the curve.
-          </p>
-        </div>
-
-        <div class="feature">
-          <div class="feature__icon">💚</div>
-          <h3 class="feature__title">Charity Treasury</h3>
-          <p class="feature__desc">
-            10% of supply is locked in a 3/4 multisig dedicated to
-            <strong>pediatric cancer support</strong>. Beneficiaries are selected
-            via community nomination, vetting, and public vote.
-          </p>
-        </div>
-
-        <div class="feature">
-          <div class="feature__icon">🛡️</div>
-          <h3 class="feature__title">0% Tax &amp; No Traps</h3>
-          <p class="feature__desc">
-            0% buy/sell tax, no fee switch, no blacklist functions, freeze authority set
-            to none. Token behaviour matches the security rules from the whitepaper.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TOKENOMICS -->
-<section class="section tokenomics" id="tokenomics">
-  <div class="container">
-    <h2 class="title">Tokenomics</h2>
-    <p class="subtitle">1,000,000 GGRD – fixed supply, transparent allocation, meme soul</p>
-
-    <div class="tokenomics__intro">
-      Total supply is <strong>1,000,000 GGRD</strong> with 6 decimals. There is no mint function
-      and no extra emissions. <strong>40% of supply (400,000 GGRD)</strong> is sold via the
-      Meteora DBC fair launch. The remaining <strong>60% (600,000 GGRD)</strong> is held in named
-      multisig treasuries for charity, liquidity, community, team, marketing and long-term reserve.
-      The technical migration threshold of the DBC is around <strong>80,000 USDC</strong>.
-    </div>
-
-    <h3 style="font-family:Bangers,cursive;font-size:32px;color:var(--lime);text-align:center;margin:48px 0 32px;letter-spacing:.08em">
-      Token Allocation
-    </h3>
-
-    <div class="allocation">
-      <div class="allocation__item">
-        <span class="allocation__percentage">40%</span>
-        <span class="allocation__label">Meteora DBC (Public Sale)</span>
-        <p class="allocation__desc">
-          400,000 GGRD – fair-launch sale on Meteora. No presale, no whitelist, no private allocations.
-        </p>
-      </div>
-
-      <div class="allocation__item">
-        <span class="allocation__percentage">10%</span>
-        <span class="allocation__label">Charity Treasury</span>
-        <p class="allocation__desc">
-          100,000 GGRD locked in a dedicated Charity Treasury multisig, used for
-          donations to <strong>community-voted pediatric oncology organizations</strong>.
-        </p>
-      </div>
-
-      <div class="allocation__item">
-        <span class="allocation__percentage">10%</span>
-        <span class="allocation__label">LP Policy &amp; Liquidity</span>
-        <p class="allocation__desc">
-          100,000 GGRD for deepening and supporting long-term LP after DBC migration according
-          to the LP policy described in the whitepaper.
-        </p>
-      </div>
-
-      <div class="allocation__item">
-        <span class="allocation__percentage">7%</span>
-        <span class="allocation__label">Community / Airdrops</span>
-        <p class="allocation__desc">
-          70,000 GGRD for quests, community rewards, early supporters and other on-chain incentives.
-        </p>
-      </div>
-
-      <div class="allocation__item">
-        <span class="allocation__percentage">7%</span>
-        <span class="allocation__label">Team (Vested)</span>
-        <p class="allocation__desc">
-          70,000 GGRD vested for core contributors, released gradually in line with the vesting schedule.
-        </p>
-      </div>
-
-      <div class="allocation__item">
-        <span class="allocation__percentage">8%</span>
-        <span class="allocation__label">Marketing &amp; Partnerships</span>
-        <p class="allocation__desc">
-          80,000 GGRD for marketing, listings, partnerships and ecosystem collaborations.
-        </p>
-      </div>
-
-      <div class="allocation__item">
-        <span class="allocation__percentage">18%</span>
-        <span class="allocation__label">Treasury Operations / Reserve</span>
-        <p class="allocation__desc">
-          180,000 GGRD as a long-term project reserve, used according to the rules described in
-          the Treasury section of the whitepaper.
-        </p>
-      </div>
-    </div>
-
-    <h3 style="font-family:Bangers,cursive;font-size:32px;color:var(--aqua);text-align:center;margin:64px 0 32px;letter-spacing:.08em">
-      Security &amp; Transparency
-    </h3>
-
-    <div class="security-grid">
-      <div class="security-card">
-        <div class="security-card__icon">🔐</div>
-        <h4 class="security-card__title">Multisig Control</h4>
-        <p class="security-card__desc">
-          Mint and metadata authority managed by Squads 3/4 multisigs – no single wallet can
-          unilaterally change critical parameters.
-        </p>
-      </div>
-
-      <div class="security-card">
-        <div class="security-card__icon">❄️</div>
-        <h4 class="security-card__title">No Freeze Authority</h4>
-        <p class="security-card__desc">
-          <code>freeze_authority = None</code>. The team cannot freeze user funds – matching
-          the security assumptions in the whitepaper.
-        </p>
-      </div>
-
-      <div class="security-card">
-        <div class="security-card__icon">📋</div>
-        <h4 class="security-card__title">DBC Launch Logic</h4>
-        <div class="security-card__desc">
-          <ul class="security-card__list">
-            <li>No presale or whitelist</li>
-            <li>Migration near ~80k USDC curve TVL</li>
-            <li>Programmatic move from curve to LP</li>
-            <li>Fair pricing based on bonding curve</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="security-card">
-        <div class="security-card__icon">🔓</div>
-        <h4 class="security-card__title">Full Transparency</h4>
-        <p class="security-card__desc">
-          All multisig addresses are public. Transactions from Charity, LP and other treasuries are
-          published with on-chain proofs and periodic reports.
-        </p>
-      </div>
-
-      <div class="security-card">
-        <div class="security-card__icon">🛡️</div>
-        <h4 class="security-card__title">0% Tax &amp; No Blacklists</h4>
-        <p class="security-card__desc">
-          There is no buy or sell tax, no fee switch, no blacklist or blocking logic in the token.
-        </p>
-      </div>
-
-      <div class="security-card">
-        <div class="security-card__icon">📄</div>
-        <h4 class="security-card__title">Open Documentation</h4>
-        <p class="security-card__desc">
-          The full economic model and charity rules are documented in the whitepaper and Donation Policy.
-        </p>
-      </div>
-    </div>
-
-    <div class="contract-box">
-      <h4 class="contract-box__title">📄 GGRD Mint Address</h4>
-      <div class="contract-box__address" id="mainMintAddress" style="cursor:pointer" onclick="copyAddress('mainMintAddress', this)" title="Click to copy">
-        TR97dHmm8nXVndTcxew21138AchNgrk2BhEJGXMybdE
-      </div>
-      <div style="text-align:center;margin-top:20px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-        <a href="https://solscan.io/token/TR97dHmm8nXVndTcxew21138AchNgrk2BhEJGXMybdE" target="_blank" rel="noopener" class="btn btn--outline" style="font-size:14px;padding:10px 24px">
-          View on Solscan
-        </a>
-        <a href="https://jup.ag/tokens/TR97dHmm8nXVndTcxew21138AchNgrk2BhEJGXMybdE" target="_blank" rel="noopener" class="btn btn--outline" style="font-size:14px;padding:10px 24px">
-          View on Jupiter
-        </a>
-        <a href="https://www.geckoterminal.com/solana/pools/HWzDBQcPpmGk5J9EXaLQnF4TfndP2pYAzCxBTyfjbnUb" target="_blank" rel="noopener" class="btn btn--outline" style="font-size:14px;padding:10px 24px">
-          View on GeckoTerminal
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTRACT ADDRESSES -->
-<section class="section contracts" id="contracts" style="background:radial-gradient(circle at 70% 50%,rgba(70,230,255,.08),transparent 60%)">
-  <div class="container">
-    <h2 class="title">Smart Contracts &amp; Multisigs</h2>
-    <p class="subtitle">All on-chain addresses – verify before you ape 🔓</p>
-
-    <div class="verify-box">
-      <h3 class="verify-box__title">🔒 How to Verify Official Links</h3>
-      <ul class="verify-box__list">
-        <li><strong>Single source of truth:</strong> ggrd.me and official X/TG channels are the only places for official links.</li>
-        <li><strong>Copy-paste addresses</strong> directly from this page – never type manually.</li>
-        <li><strong>Verify on Solscan</strong> or Solana Explorer before any transaction.</li>
-        <li><strong>Never trust DMs</strong> – team will never ask for funds or private keys.</li>
-        <li><strong>Start small</strong> – test with a small amount first.</li>
-      </ul>
-    </div>
-
-    <h3 style="font-family:Bangers,cursive;font-size:32px;color:var(--aqua);text-align:center;margin:0 0 32px;letter-spacing:.08em">
-      Token Contract
-    </h3>
-
-    <div style="display:grid;grid-template-columns:1fr;gap:24px;max-width:900px;margin:0 auto 64px">
-      <div class="contract-card">
-        <div class="contract-card__header">
-          <div class="contract-card__icon">🪙</div>
-          <div>
-            <h4 class="contract-card__title">GGRD Token Mint</h4>
-            <div class="contract-card__label">Solana SPL Token</div>
-          </div>
-        </div>
-        <div class="contract-card__address" id="mintAddress">TR97dHmm8nXVndTcxew21138AchNgrk2BhEJGXMybdE</div>
-        <div class="contract-card__actions">
-          <button class="contract-card__copy" onclick="copyAddress('mintAddress', this)">
-            📋 Copy Address
-          </button>
-          <a href="https://solscan.io/token/TR97dHmm8nXVndTcxew21138AchNgrk2BhEJGXMybdE" target="_blank" rel="noopener" class="contract-card__link">
-            View on Solscan
-          </a>
-          <a href="https://jup.ag/tokens/TR97dHmm8nXVndTcxew21138AchNgrk2BhEJGXMybdE" target="_blank" rel="noopener" class="contract-card__link">
-            View on Jupiter
-          </a>
-        </div>
-      </div>
-
-      <div class="contract-card">
-        <div class="contract-card__header">
-          <div class="contract-card__icon">🔐</div>
-          <div>
-            <h4 class="contract-card__title">Metadata Authority</h4>
-            <div class="contract-card__label">Wallet with update authority</div>
-          </div>
-        </div>
-        <div class="contract-card__address" id="metadataAddress">AKwQ4QuqFRxgEWfWoM1GAKvwnxRqrqG8e8Qa8Yo9Mpqu</div>
-        <div class="contract-card__actions">
-          <button class="contract-card__copy" onclick="copyAddress('metadataAddress', this)">
-            📋 Copy Address
-          </button>
-          <a href="https://solscan.io/account/AKwQ4QuqFRxgEWfWoM1GAKvwnxRqrqG8e8Qa8Yo9Mpqu" target="_blank" rel="noopener" class="contract-card__link">
-            View on Solscan
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <h3 style="font-family:Bangers,cursive;font-size:32px;color:var(--lime);text-align:center;margin:0 0 32px;letter-spacing:.08em">
-      Treasury Multisigs (Squads 3/4)
-    </h3>
-
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:24px;margin-bottom:48px">
-      <div class="contract-card">
-        <div class="contract-card__header">
-          <div class="contract-card__icon">💚</div>
-          <div>
-            <h4 class="contract-card__title">Charity Treasury</h4>
-            <div class="contract-card__label" style="color:var(--sun)">10% supply (100,000 GGRD)</div>
-          </div>
-        </div>
-        <div class="contract-card__address" id="charityAddress">C96zqEjGh22yuZknVrasLyr2j5b2xsMnbTUiu2WKLK9w</div>
-        <div class="contract-card__actions">
-          <button class="contract-card__copy" onclick="copyAddress('charityAddress', this)">
-            📋 Copy Address
-          </button>
-          <a href="https://solscan.io/account/C96zqEjGh22yuZknVrasLyr2j5b2xsMnbTUiu2WKLK9w" target="_blank" rel="noopener" class="contract-card__link">
-            View on Solscan
-          </a>
-        </div>
-      </div>
-
-      <div class="contract-card">
-        <div class="contract-card__header">
-          <div class="contract-card__icon">💧</div>
-          <div>
-            <h4 class="contract-card__title">LP Policy Treasury</h4>
-            <div class="contract-card__label" style="color:var(--sun)">10% supply (100,000 GGRD)</div>
-          </div>
-        </div>
-        <div class="contract-card__address" id="lpAddress">8vFQrPpdE3uyd4JRdE7jUhyzTF8ZBVnuvqFTpsAA4SLY</div>
-        <div class="contract-card__actions">
-          <button class="contract-card__copy" onclick="copyAddress('lpAddress', this)">
-            📋 Copy Address
-          </button>
-          <a href="https://solscan.io/account/8vFQrPpdE3uyd4JRdE7jUhyzTF8ZBVnuvqFTpsAA4SLY" target="_blank" rel="noopener" class="contract-card__link">
-            View on Solscan
-          </a>
-        </div>
-      </div>
-
-      <div class="contract-card">
-        <div class="contract-card__header">
-          <div class="contract-card__icon">🎉</div>
-          <div>
-            <h4 class="contract-card__title">Community/Airdrops</h4>
-            <div class="contract-card__label" style="color:var(--sun)">7% supply (70,000 GGRD)</div>
-          </div>
-        </div>
-        <div class="contract-card__address" id="communityAddress">D3JWCu9egWYHEf1xvxBqSJJ6PBsHU3HkMjJZDW3ZQ37D</div>
-        <div class="contract-card__actions">
-          <button class="contract-card__copy" onclick="copyAddress('communityAddress', this)">
-            📋 Copy Address
-          </button>
-          <a href="https://solscan.io/account/D3JWCu9egWYHEf1xvxBqSJJ6PBsHU3HkMjJZDW3ZQ37D" target="_blank" rel="noopener" class="contract-card__link">
-            View on Solscan
-          </a>
-        </div>
-      </div>
-
-      <div class="contract-card">
-        <div class="contract-card__header">
-          <div class="contract-card__icon">👥</div>
-          <div>
-            <h4 class="contract-card__title">Team Vesting</h4>
-            <div class="contract-card__label" style="color:var(--sun)">7% supply (70,000 GGRD)</div>
-          </div>
-        </div>
-        <div class="contract-card__address" id="teamAddress">7xXhueJp5LTr4jNwcWPn4oFurqJM9W5hxQRRWBCWLnDY</div>
-        <div class="contract-card__actions">
-          <button class="contract-card__copy" onclick="copyAddress('teamAddress', this)">
-            📋 Copy Address
-          </button>
-          <a href="https://solscan.io/account/7xXhueJp5LTr4jNwcWPn4oFurqJM9W5hxQRRWBCWLnDY" target="_blank" rel="noopener" class="contract-card__link">
-            View on Solscan
-          </a>
-        </div>
-      </div>
-
-      <div class="contract-card">
-        <div class="contract-card__header">
-          <div class="contract-card__icon">📢</div>
-          <div>
-            <h4 class="contract-card__title">Marketing &amp; Partnerships</h4>
-            <div class="contract-card__label" style="color:var(--sun)">8% supply (80,000 GGRD)</div>
-          </div>
-        </div>
-        <div class="contract-card__address" id="marketingAddress">2RgWCdtsvU4VYcR1nZJS2XN5utBzA88vHbEyHuutHkvG</div>
-        <div class="contract-card__actions">
-          <button class="contract-card__copy" onclick="copyAddress('marketingAddress', this)">
-            📋 Copy Address
-          </button>
-          <a href="https://solscan.io/account/2RgWCdtsvU4VYcR1nZJS2XN5utBzA88vHbEyHuutHkvG" target="_blank" rel="noopener" class="contract-card__link">
-            View on Solscan
-          </a>
-        </div>
-      </div>
-
-      <div class="contract-card">
-        <div class="contract-card__header">
-          <div class="contract-card__icon">🏦</div>
-          <div>
-            <h4 class="contract-card__title">Treasury Reserve</h4>
-            <div class="contract-card__label" style="color:var(--sun)">18% supply (180,000 GGRD)</div>
-          </div>
-        </div>
-        <div class="contract-card__address" id="treasuryAddress">5UAgVqKBNFoT6WrANGFdjqbTXJRGXPzHcNhG5LK4n9mj</div>
-        <div class="contract-card__actions">
-          <button class="contract-card__copy" onclick="copyAddress('treasuryAddress', this)">
-            📋 Copy Address
-          </button>
-          <a href="https://solscan.io/account/5UAgVqKBNFoT6WrANGFdjqbTXJRGXPzHcNhG5LK4n9mj" target="_blank" rel="noopener" class="contract-card__link">
-            View on Solscan
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <div style="max-width:800px;margin:48px auto 0;padding:28px;background:linear-gradient(135deg,var(--card),#1a1537);border:3px solid var(--aqua);border-radius:20px;text-align:center">
-      <p style="color:var(--muted);font-size:15px;line-height:1.8;margin-bottom:16px">
-        <strong style="color:var(--aqua)">🔓 Transparency note:</strong><br>
-        All multisig wallets use <strong>Squads Protocol</strong> with 3/4 signature threshold.
-        Every transaction requires approval from at least 3 out of 4 signers.
-      </p>
-      <p style="color:var(--muted);font-size:14px;line-height:1.8;margin-bottom:0">
-        All treasury operations are public and can be tracked on Solscan.
-        Charity reports will be published on this website and official channels.
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- HOW TO JOIN FAIR LAUNCH -->
-<section class="section how" id="how">
-  <div class="container">
-    <h2 class="title">Fair Launch – How It Will Work</h2>
-    <p class="subtitle">When the DBC goes live, you will be able to join the curve in four simple steps</p>
-
-    <div class="steps">
-      <div class="step">
-        <div class="step__icon">💳</div>
-        <strong class="step__title">Get a Solana Wallet</strong>
-        <div class="step__desc">
-          Install a wallet like Phantom or Backpack and fund it with SOL and USDC on Solana.
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="step__icon">🔗</div>
-        <strong class="step__title">Use Official DBC Link</strong>
-        <div class="step__desc">
-          When launch starts, this site and <strong>@GGRDofficial</strong> will publish the only valid Meteora DBC link and GGRD mint address.
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="step__icon">➡️</div>
-        <strong class="step__title">Buy on the Curve</strong>
-        <div class="step__desc">
-          Swap USDC for GGRD directly on the bonding curve. Everyone enters under the same rules until the migration threshold is reached.
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="step__icon">🎯</div>
-        <strong class="step__title">LP Migration &amp; Trading</strong>
-        <div class="step__desc">
-          After migration near ~80k USDC, liquidity moves to an AMM pool and trading continues with 0% tax. All details will be announced in advance.
-        </div>
-      </div>
-    </div>
-
-    <div style="text-align:center;margin-top:48px">
-      <a href="https://t.me/GGRDofficial" target="_blank" rel="noopener" class="btn btn--primary" style="font-size:20px;padding:18px 40px">
-        🚀 Get Launch Updates on Telegram
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- CHARITY -->
-<section class="section charity" id="charity">
-  <div class="container">
-    <h2 class="title">Charity Treasury</h2>
-    <p class="subtitle">10% of supply for community-voted pediatric cancer support 💚</p>
-
-    <div class="charity__bubble">
-      <div class="charity__content">
-        <p>
-          The <strong>GGRD Charity Treasury</strong> holds
-          <strong>100,000 GGRD (10% of total supply)</strong> in a dedicated Squads 3/4 multisig.
-          Its <strong>exclusive purpose</strong> is to fund on-chain donations for
-          <strong>children with cancer and their families</strong>.
-        </p>
-
-        <p>
-          According to the <a href="donation-policy.html" style="color:var(--sun)">Donation Policy</a>, beneficiaries are selected through a
-          <strong>community governance process</strong>:
-        </p>
-
-        <p>
-          – <strong>Nomination:</strong> Community members nominate verified pediatric oncology charities<br>
-          – <strong>Vetting:</strong> Organizations are verified against eligibility criteria<br>
-          – <strong>Voting:</strong> Community votes to select the beneficiary<br>
-          – <strong>Execution:</strong> Donations are executed via multisig with public proofs
-        </p>
-
-        <p>
-          After DBC migration and initial market stabilisation, the Charity Treasury follows a
-          planned distribution schedule. All operations are documented with transaction links
-          and published in public reports.
-        </p>
-      </div>
-
-      <div class="charity__wallet">
-        <strong>Charity Treasury multisig</strong><br>
-        C96zqEjGh22yuZknVrasLyr2j5b2xsMnbTUiu2WKLK9w
-      </div>
-    </div>
-
-    <p class="charity__extra">
-      <strong>Disclaimer:</strong> Charitable organizations selected as beneficiaries do not promote, manage or recommend
-      the GGRD token or any related products. All donations are unilateral decisions of the GGRD community
-      executed via the selected organization's official donation infrastructure.
-    </p>
-
-    <div style="text-align:center;margin-top:40px">
-      <a href="donation-policy.html" class="btn btn--secondary" style="font-size:18px;padding:16px 36px">
-        Read Full Donation Policy
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- COMMUNITY REWARDS -->
-<section class="section" id="rewards" style="background:linear-gradient(180deg,transparent,rgba(255,107,213,.08),transparent)">
-  <div class="container">
-    <h2 class="title">Community Rewards 🎉</h2>
-    <p class="subtitle">40,000+ GGRD via Telegram Bot</p>
-
-    <div style="max-width:900px;margin:48px auto;text-align:center;padding:32px;background:linear-gradient(135deg,var(--card),#1a1537);border:3px solid var(--lime);border-radius:24px">
-      <p style="color:var(--muted);font-size:18px;margin-bottom:20px">
-        Join <strong style="color:var(--lime)">@GGRD_Rewards_Bot</strong> to earn GGRD through tasks, competitions &amp; referrals!
-      </p>
-      <a href="https://t.me/GGRD_Rewards_Bot" target="_blank" rel="noopener" class="btn btn--primary" style="font-size:20px;padding:18px 40px">
-        🤖 Join Rewards Bot
-      </a>
-    </div>
-
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin:48px 0">
-      <div class="security-card">
-        <div class="security-card__icon">✅</div>
-        <h4 class="security-card__title">Social: 10 GGRD</h4>
-        <p class="security-card__desc">+ 2k lottery | Join TG + wallet</p>
-      </div>
-      <div class="security-card">
-        <div class="security-card__icon">💰</div>
-        <h4 class="security-card__title">Purchase: 20 GGRD</h4>
-        <p class="security-card__desc">Buy 5+ USD | Max 300</p>
-      </div>
-      <div class="security-card">
-        <div class="security-card__icon">🏆</div>
-        <h4 class="security-card__title">TOP 100: 50 GGRD</h4>
-        <p class="security-card__desc">First 100 holders ≥2,500</p>
-      </div>
-      <div class="security-card">
-        <div class="security-card__icon">🎰</div>
-        <h4 class="security-card__title">Lottery: 10k GGRD</h4>
-        <p class="security-card__desc">Hold 2,500+ Day 0 &amp; 7</p>
-      </div>
-      <div class="security-card">
-        <div class="security-card__icon">📋</div>
-        <h4 class="security-card__title">Biggest: 20k GGRD</h4>
-        <p class="security-card__desc">Highest 30-day avg</p>
-      </div>
-      <div class="security-card">
-        <div class="security-card__icon">👥</div>
-        <h4 class="security-card__title">Referral: 5 GGRD</h4>
-        <p class="security-card__desc">10k pool | Day 10</p>
-      </div>
-    </div>
-
-    <div style="text-align:center">
-      <p style="color:var(--lime);font-size:24px;font-weight:800;font-family:Bangers,cursive">Total: 53,000+ GGRD</p>
-    </div>
-  </div>
-</section>
-
-<!-- WHITEPAPER -->
-<section class="section whitepaper" id="whitepaper">
-  <div class="container">
-    <h2 class="title">Whitepaper</h2>
-    <p class="subtitle">All economic and charity mechanics in one place 📄</p>
-
-    <div class="whitepaper__highlight">
-      <h3>🦊 Giggle Reloaded ($GGRD) – Technical Overview</h3>
-
+<main id="top">
+  <section class="hero" id="overview">
+    <div class="container">
+      <span class="kicker">BSC Mainnet Live</span>
+      <h1>Giggle Reloaded (GGRD)</h1>
       <p>
-        <strong>GGRD</strong> is a fair-launch Solana memecoin with a fixed supply of
-        <strong>1,000,000 tokens</strong>. It combines high-energy meme culture with a transparent,
-        on-chain charity mechanism for <strong>children with cancer</strong>,
-        executed via community-selected verified charitable organizations.
+        Fixed-supply token on BNB Smart Chain with USDC presale escrow, Safe plus timelock governance,
+        staking controls and transparent charity vesting.
       </p>
-
-      <p>
-        Launch is conducted through a <strong>Meteora Dynamic Bonding Curve (DBC)</strong> using USDC
-        as quote asset, with migration to an LP pool near an <strong>80,000 USDC</strong> technical threshold.
-        40% of supply is sold on the curve, while 60% is distributed between dedicated multisig treasuries.
-      </p>
-
-      <p>
-        Security architecture includes 0% trading tax, no freeze authority, no presale or VC allocations,
-        and 3/4 Squads multisigs controlling treasuries and metadata. All details, including the full
-        Donation Policy and Charity Treasury rules, are described in the document.
-      </p>
-
-      <div class="whitepaper__stats">
-        <div class="whitepaper__stat">
-          <span class="whitepaper__stat-value">1,000,000</span>
-          <span class="whitepaper__stat-label">Total Supply</span>
-        </div>
-        <div class="whitepaper__stat">
-          <span class="whitepaper__stat-value">40%</span>
-          <span class="whitepaper__stat-label">DBC Public Sale</span>
-        </div>
-        <div class="whitepaper__stat">
-          <span class="whitepaper__stat-value">10%</span>
-          <span class="whitepaper__stat-label">Charity Treasury</span>
-        </div>
-        <div class="whitepaper__stat">
-          <span class="whitepaper__stat-value">80k USDC</span>
-          <span class="whitepaper__stat-label">Migration Target</span>
-        </div>
-        <div class="whitepaper__stat">
-          <span class="whitepaper__stat-value">3 / 4</span>
-          <span class="whitepaper__stat-label">Multisig Threshold</span>
-        </div>
-        <div class="whitepaper__stat">
-          <span class="whitepaper__stat-value">0%</span>
-          <span class="whitepaper__stat-label">Trading Tax</span>
-        </div>
+      <div class="hero-grid">
+        <div class="stat"><span class="v">10,000,000</span><span class="l">Fixed supply</span></div>
+        <div class="stat"><span class="v">0%</span><span class="l">Transfer tax</span></div>
+        <div class="stat"><span class="v">USDC</span><span class="l">Presale payment asset</span></div>
+        <div class="stat"><span class="v">2 / 3</span><span class="l">Safe multisig threshold</span></div>
+      </div>
+      <div class="actions">
+        <a class="btn btn-primary" href="GGRD_Whitepaper_EN.html">Open Whitepaper</a>
+        <a class="btn btn-secondary" href="https://bscscan.com/token/0xA0d5663d57b7D7EF975D2F02BcAEaf5c94c671f9" target="_blank" rel="noopener">Verify token on BscScan</a>
       </div>
     </div>
+  </section>
 
-    <div style="text-align:center;margin-top:48px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
-      <a href="GGRD_Whitepaper_EN.html" target="_blank" rel="noopener" class="btn btn--aqua" style="font-size:20px;padding:18px 40px">
-        📄 Open Full Whitepaper (HTML)
-      </a>
-      <a href="GGRD_Whitepaper_EN.pdf" target="_blank" rel="noopener" class="btn btn--primary" style="font-size:20px;padding:18px 40px">
-        ⬇️ Download PDF
-      </a>
-    </div>
-
-    <div style="max-width:700px;margin:48px auto 0;padding:24px;background:rgba(70,230,255,.06);border:2px solid rgba(70,230,255,.35);border-radius:16px">
-      <p style="color:var(--muted);font-size:15px;line-height:1.8;text-align:center">
-        <strong style="color:var(--aqua)">Highlights:</strong><br>
-        Meteora DBC launch • Public multisig treasuries • Community-voted Charity Treasury • Planned donation schedule •
-        LP policy and migration rules • Risk disclosures and legal disclaimers.
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- ROADMAP -->
-<section class="section roadmap" id="roadmap">
-  <div class="container">
-    <h2 class="title">Roadmap</h2>
-    <p class="subtitle">From meme idea to on-chain charity engine 🗺️</p>
-
-    <div class="stamps">
-      <div class="stamp completed">
-        <h3 class="stamp__phase">Phase 1 – Setting the Bow</h3>
-        <p class="stamp__desc">
-          ✓ Token concept &amp; tokenomics<br>
-          ✓ Multisig structure design<br>
-          ✓ Website, whitepaper &amp; Donation Policy<br>
-          ✓ Initial community channels opened
-        </p>
+  <section class="section" id="tokenomics">
+    <div class="container">
+      <h2>Tokenomics</h2>
+      <p class="lead">Model aligned to mainnet contracts and v3.1 assumptions.</p>
+      <div class="grid grid-3">
+        <div class="card"><h3>Immutable rules</h3><p>No post-deploy mint. No blacklist. No freeze. 0% transfer tax.</p></div>
+        <div class="card"><h3>Governance</h3><p>Safe multisig plus 48h and 72h timelocks for critical operations.</p></div>
+        <div class="card"><h3>Presale logic</h3><p>USDC escrow with deterministic success split, refund path and claim vesting.</p></div>
       </div>
 
-      <div class="stamp">
-        <h3 class="stamp__phase">Phase 2 – DBC Fair Launch</h3>
-        <p class="stamp__desc">
-          → Launch of Meteora DBC<br>
-          → First holders and curve participants<br>
-          → LP migration near 80k USDC<br>
-          → First listing on Solana aggregators
-        </p>
+      <h3 style="margin:28px 0 10px;font-size:24px">Core allocation model</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Component</th><th>Amount</th><th>Share</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Presale allocation cap</td><td>3,000,000 GGRD</td><td>30%</td><td>Hard token cap inside PresaleEscrow8020.</td></tr>
+            <tr><td>Charity allocation</td><td>2,000,000 GGRD</td><td>20%</td><td>Released through CharityVesting403030 (40/30/30).</td></tr>
+            <tr><td>Staking reward cap</td><td>3,000,000 GGRD</td><td>30%</td><td>Lifetime reward funding cap in staking contract.</td></tr>
+            <tr><td>Operations and liquidity</td><td>2,000,000 GGRD</td><td>20%</td><td>Governance-controlled operational distribution.</td></tr>
+          </tbody>
+        </table>
       </div>
 
-      <div class="stamp">
-        <h3 class="stamp__phase">Phase 3 – Growing the Forest</h3>
-        <p class="stamp__desc">
-          → Community campaigns and airdrops<br>
-          → CoinGecko &amp; CoinMarketCap submissions<br>
-          → First community vote for charity beneficiary<br>
-          → First donation from Charity Treasury
-        </p>
+      <h3 style="margin:28px 0 10px;font-size:24px">Presale stages (USDC)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Stage</th><th>Window</th><th>Allocation</th><th>Price (USDC)</th><th>Wallet cap</th></tr></thead>
+          <tbody>
+            <tr><td>Stage 1</td><td>Days 1-5</td><td>1,000,000 GGRD</td><td>0.0085</td><td>500 USDC</td></tr>
+            <tr><td>Stage 2</td><td>Days 6-10</td><td>800,000 GGRD</td><td>0.0100</td><td>750 USDC</td></tr>
+            <tr><td>Stage 3</td><td>Days 11-16</td><td>700,000 GGRD</td><td>0.0115</td><td>1,000 USDC</td></tr>
+            <tr><td>Stage 4</td><td>Days 17-21</td><td>500,000 GGRD</td><td>0.0134</td><td>1,500 USDC</td></tr>
+          </tbody>
+        </table>
       </div>
 
-      <div class="stamp">
-        <h3 class="stamp__phase">Phase 4 – Meme Kingdom</h3>
-        <p class="stamp__desc">
-          → Exploration of CEX listing opportunities<br>
-          → Experiments with community governance<br>
-          → Regular charity contributions via selected organizations<br>
-          → Expanding the Robin of Gains meme culture
-        </p>
+      <div class="warning" style="margin-top:18px">
+        Finalize success split: 80% raised USDC to liquidity wallet and 20% to marketing wallet. If softcap is not reached, buyers can refund 100% of contributed USDC.
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- COMMUNITY -->
-<section class="section" id="community">
-  <div class="container">
-    <h2 class="title">Community</h2>
-    <p class="subtitle">Where all the giggles, memes and treasury reports live</p>
+  <section class="section" id="contracts">
+    <div class="container">
+      <h2>Official addresses</h2>
+      <p class="lead">Verify every address on BscScan before interaction.</p>
+      <div class="grid grid-2">
+        <article class="card">
+          <h3>GGRD token</h3>
+          <span class="code" id="addr-token">0xA0d5663d57b7D7EF975D2F02BcAEaf5c94c671f9</span>
+          <div class="addr-actions">
+            <button class="btn-mini" onclick="copyAddress('addr-token', this)">Copy</button>
+            <a class="btn-mini" href="https://bscscan.com/token/0xA0d5663d57b7D7EF975D2F02BcAEaf5c94c671f9" target="_blank" rel="noopener">BscScan</a>
+          </div>
+        </article>
 
-    <div>
-        <p style="color:var(--muted);font-size:16px;line-height:1.8;">
-          All important updates about the DBC launch, LP migration, airdrops and
-          donations from the Charity Treasury are announced through official channels:
-        </p>
-        <ul style="margin:18px 0 0;padding-left:20px;color:var(--muted);font-size:16px;line-height:1.8;">
-          <li>Telegram – Official Channel:
-            <a href="https://t.me/GGRDofficial" target="_blank" rel="noopener" style="color:var(--aqua)">@GGRDofficial</a>
-          </li>
-          <li>Telegram – Community Chat:
-            <a href="https://t.me/GGRDchat" target="_blank" rel="noopener" style="color:var(--aqua)">@GGRDchat</a>
-          </li>
-          <li>X (Twitter):
-            <a href="https://x.com/ContactGiggle" target="_blank" rel="noopener" style="color:var(--aqua)">@ContactGiggle</a>
-          </li>
-          <li>Main website: <strong>ggrd.me</strong></li>
-          <li>Email (listings & verification only): <a href="mailto:contact@ggrd.me" style="color:var(--aqua)">contact@ggrd.me</a></li>
-        </ul>
+        <article class="card">
+          <h3>PresaleEscrow8020</h3>
+          <span class="code" id="addr-presale">0xd8983534dd3c369d85127f6C9B85d98768139387</span>
+          <div class="addr-actions">
+            <button class="btn-mini" onclick="copyAddress('addr-presale', this)">Copy</button>
+            <a class="btn-mini" href="https://bscscan.com/address/0xd8983534dd3c369d85127f6C9B85d98768139387" target="_blank" rel="noopener">BscScan</a>
+          </div>
+        </article>
 
-        <p style="color:var(--muted);font-size:16px;line-height:1.8;margin-top:18px;">
-          Join the Robin of Gains pack, share memes, track charity progress and help shape how the
-          project evolves – always within the guardrails defined in the whitepaper and Donation Policy.
-        </p>
+        <article class="card">
+          <h3>GGRDStakingMultiV1</h3>
+          <span class="code" id="addr-staking">0x05d803135bc09e9E5006CA75C533377D7Ea0A34b</span>
+          <div class="addr-actions">
+            <button class="btn-mini" onclick="copyAddress('addr-staking', this)">Copy</button>
+            <a class="btn-mini" href="https://bscscan.com/address/0x05d803135bc09e9E5006CA75C533377D7Ea0A34b" target="_blank" rel="noopener">BscScan</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>CharityVesting403030</h3>
+          <span class="code" id="addr-charity-vesting">0xE2993F0C8D2020dD9866E2d6dC5AA1D62b7C8fDC</span>
+          <div class="addr-actions">
+            <button class="btn-mini" onclick="copyAddress('addr-charity-vesting', this)">Copy</button>
+            <a class="btn-mini" href="https://bscscan.com/address/0xE2993F0C8D2020dD9866E2d6dC5AA1D62b7C8fDC" target="_blank" rel="noopener">BscScan</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>MerkleAirdrop</h3>
+          <span class="code" id="addr-airdrop">0x9F64E78185ee697783E0c9ebA0F66131FFCedBD6</span>
+          <div class="addr-actions">
+            <button class="btn-mini" onclick="copyAddress('addr-airdrop', this)">Copy</button>
+            <a class="btn-mini" href="https://bscscan.com/address/0x9F64E78185ee697783E0c9ebA0F66131FFCedBD6" target="_blank" rel="noopener">BscScan</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Timelock short (48h)</h3>
+          <span class="code" id="addr-short">0xBC4655E8D5A4A4B16bD30db2fFBC94Ed05AbcE87</span>
+          <div class="addr-actions">
+            <button class="btn-mini" onclick="copyAddress('addr-short', this)">Copy</button>
+            <a class="btn-mini" href="https://bscscan.com/address/0xBC4655E8D5A4A4B16bD30db2fFBC94Ed05AbcE87" target="_blank" rel="noopener">BscScan</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Timelock long (72h)</h3>
+          <span class="code" id="addr-long">0xd4b5f94f7cF8Eb79bEd2f3Aa5693d9F97D573E31</span>
+          <div class="addr-actions">
+            <button class="btn-mini" onclick="copyAddress('addr-long', this)">Copy</button>
+            <a class="btn-mini" href="https://bscscan.com/address/0xd4b5f94f7cF8Eb79bEd2f3Aa5693d9F97D573E31" target="_blank" rel="noopener">BscScan</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>USDC pay token</h3>
+          <span class="code" id="addr-usdc">0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d</span>
+          <div class="addr-actions">
+            <button class="btn-mini" onclick="copyAddress('addr-usdc', this)">Copy</button>
+            <a class="btn-mini" href="https://bscscan.com/token/0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d" target="_blank" rel="noopener">BscScan</a>
+          </div>
+        </article>
       </div>
-  </div>
-</section>
 
-<!-- FAQ -->
-<section class="section faq" id="faq">
-  <div class="container">
-    <h2 class="title">FAQ</h2>
-    <p class="subtitle">Common questions about GGRD</p>
-
-    <div class="faq__grid">
-      <details class="faq__item">
-        <summary>What is the official GGRD contract address (mint)?</summary>
-        <p>The official GGRD mint address is published on this website and in the official announcement channels. Always copy-paste the address from official sources and verify it on a Solana explorer before trading.</p>
-      </details>
-
-      <details class="faq__item">
-        <summary>How do I avoid scams and fake pools?</summary>
-        <p>Do not trust direct messages. Use only links published on ggrd.me and the official X/Telegram channels. Verify the mint address, pool address, and token details on a trusted explorer. Start with a small test transaction.</p>
-      </details>
-
-      <details class="faq__item">
-        <summary>How is the charity beneficiary selected?</summary>
-        <p>The beneficiary is selected through a community process: nomination, vetting, and a public vote. Donations are executed via multisig treasury operations and documented with public proofs and transaction links.</p>
-      </details>
-
-      <details class="faq__item">
-        <summary>What is the focus of the charity program?</summary>
-        <p>The charity program is focused on pediatric cancer support. Specific beneficiaries are chosen by community vote from a vetted shortlist.</p>
-      </details>
-
-      <details class="faq__item">
-        <summary>Is the Rewards Bot official and how do payouts work?</summary>
-        <p>The Rewards Bot is part of the community program. Task verification occurs off-chain, while payouts are executed on-chain via a multisig distribution treasury. Reward batches should be reported with transaction links for transparency.</p>
-      </details>
-
-      <details class="faq__item">
-        <summary>Does GGRD have buy or sell taxes?</summary>
-        <p>GGRD is intended to have no buy/sell tax. Always verify token mechanics and official announcements before interacting with any pool or contract.</p>
-      </details>
+      <h3 style="margin:26px 0 10px;font-size:24px">Governance and operations safes (2/3)</h3>
+      <div class="grid grid-2">
+        <article class="card"><h3>Governance Safe</h3><span class="code" id="addr-safe-gov">0x28218d08f6D2084eBd7CeF3f582139E7417b6300</span><div class="addr-actions"><button class="btn-mini" onclick="copyAddress('addr-safe-gov', this)">Copy</button><a class="btn-mini" href="https://bscscan.com/address/0x28218d08f6D2084eBd7CeF3f582139E7417b6300" target="_blank" rel="noopener">BscScan</a></div></article>
+        <article class="card"><h3>Liquidity Safe</h3><span class="code" id="addr-safe-liq">0x7677AC2712d161e7F75fC4316E8B3dC3FaC01009</span><div class="addr-actions"><button class="btn-mini" onclick="copyAddress('addr-safe-liq', this)">Copy</button><a class="btn-mini" href="https://bscscan.com/address/0x7677AC2712d161e7F75fC4316E8B3dC3FaC01009" target="_blank" rel="noopener">BscScan</a></div></article>
+        <article class="card"><h3>Marketing Safe</h3><span class="code" id="addr-safe-mkt">0xF2922343AdF6F2631A2f1e9b9b11c9d269f3874D</span><div class="addr-actions"><button class="btn-mini" onclick="copyAddress('addr-safe-mkt', this)">Copy</button><a class="btn-mini" href="https://bscscan.com/address/0xF2922343AdF6F2631A2f1e9b9b11c9d269f3874D" target="_blank" rel="noopener">BscScan</a></div></article>
+        <article class="card"><h3>Charity Safe A</h3><span class="code" id="addr-safe-charity">0xd58B8D79deC67F8731267B929D24A4923Bac59a3</span><div class="addr-actions"><button class="btn-mini" onclick="copyAddress('addr-safe-charity', this)">Copy</button><a class="btn-mini" href="https://bscscan.com/address/0xd58B8D79deC67F8731267B929D24A4923Bac59a3" target="_blank" rel="noopener">BscScan</a></div></article>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- FOOTER -->
+    <section class="section" id="presale">
+    <div class="container">
+      <h2>Presale dashboard</h2>
+      <p class="lead">Live on-chain status for PresaleEscrow8020 on BSC mainnet, including stage progress and wallet actions.</p>
+
+      <div class="grid grid-3 presale-kpis">
+        <article class="kpi">
+          <span class="kpi-label">Presale status</span>
+          <span class="kpi-value"><span class="status-pill status-pill-neutral" id="ps-status">Loading...</span></span>
+          <span class="kpi-sub" id="ps-stage-context">Fetching stage context from chain...</span>
+        </article>
+        <article class="kpi">
+          <span class="kpi-label">Current stage</span>
+          <span class="kpi-value" id="ps-stage">--</span>
+        </article>
+        <article class="kpi">
+          <span class="kpi-label">Window (UTC)</span>
+          <span class="kpi-value" id="ps-window" style="font-size:14px;font-weight:600;line-height:1.4">--</span>
+        </article>
+        <article class="kpi">
+          <span class="kpi-label">Raised USDC</span>
+          <span class="kpi-value" id="ps-raised">--</span>
+        </article>
+        <article class="kpi">
+          <span class="kpi-label">Softcap / Hardcap</span>
+          <span class="kpi-value" id="ps-caps" style="font-size:16px">--</span>
+        </article>
+        <article class="kpi">
+          <span class="kpi-label">Sold GGRD</span>
+          <span class="kpi-value" id="ps-sold">--</span>
+        </article>
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-bar" id="ps-progress"></div>
+      </div>
+      <p class="progress-caption" id="ps-progress-caption">Loading presale hardcap progress...</p>
+      <div class="presale-meta">
+        <p class="hint" id="ps-last-update">Last sync: --</p>
+        <a class="btn-mini" href="https://bscscan.com/address/0xd8983534dd3c369d85127f6C9B85d98768139387" target="_blank" rel="noopener">Open Presale on BscScan</a>
+      </div>
+
+      <div class="table-wrap" style="margin-top:18px">
+        <table>
+          <thead>
+            <tr>
+              <th>Stage</th>
+              <th>Window (UTC)</th>
+              <th>Price (USDC)</th>
+              <th>Wallet cap (USDC)</th>
+              <th>Sold (GGRD)</th>
+              <th>Raised (USDC)</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Stage 1</td>
+              <td id="stage1-window">--</td>
+              <td id="stage1-price">--</td>
+              <td id="stage1-wallet-cap">--</td>
+              <td id="stage1-sold">--</td>
+              <td id="stage1-raised">--</td>
+              <td id="stage1-status"><span class="stage-pill">--</span></td>
+            </tr>
+            <tr>
+              <td>Stage 2</td>
+              <td id="stage2-window">--</td>
+              <td id="stage2-price">--</td>
+              <td id="stage2-wallet-cap">--</td>
+              <td id="stage2-sold">--</td>
+              <td id="stage2-raised">--</td>
+              <td id="stage2-status"><span class="stage-pill">--</span></td>
+            </tr>
+            <tr>
+              <td>Stage 3</td>
+              <td id="stage3-window">--</td>
+              <td id="stage3-price">--</td>
+              <td id="stage3-wallet-cap">--</td>
+              <td id="stage3-sold">--</td>
+              <td id="stage3-raised">--</td>
+              <td id="stage3-status"><span class="stage-pill">--</span></td>
+            </tr>
+            <tr>
+              <td>Stage 4</td>
+              <td id="stage4-window">--</td>
+              <td id="stage4-price">--</td>
+              <td id="stage4-wallet-cap">--</td>
+              <td id="stage4-sold">--</td>
+              <td id="stage4-raised">--</td>
+              <td id="stage4-status"><span class="stage-pill">--</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grid grid-2" style="margin-top:16px">
+        <article class="card">
+          <h3>Wallet interaction</h3>
+          <p>Connect wallet to buy with USDC, then claim or refund according to finalized result.</p>
+          <div class="wallet-row" style="margin-top:12px">
+            <span class="wallet-badge">Connected wallet</span>
+            <span class="wallet-address" id="wallet-address">Not connected</span>
+          </div>
+          <div class="wallet-actions-grid">
+            <button class="btn btn-secondary" id="btn-connect">Connect wallet</button>
+            <button class="btn btn-secondary" id="btn-refresh">Refresh data</button>
+          </div>
+          <div style="margin-top:12px">
+            <label class="form-label" for="buy-amount">USDC amount</label>
+            <input class="form-input" id="buy-amount" type="number" min="50" step="0.01" placeholder="e.g. 100">
+            <p class="hint" id="quote-hint">Estimated output: --</p>
+          </div>
+          <div class="wallet-actions-grid">
+            <button class="btn btn-secondary" id="btn-approve">Approve USDC</button>
+            <button class="btn btn-primary" id="btn-buy">Buy GGRD</button>
+          </div>
+          <div class="wallet-actions-grid">
+            <button class="btn btn-secondary" id="btn-claim">Claim tokens</button>
+            <button class="btn btn-secondary" id="btn-refund">Refund USDC</button>
+          </div>
+          <p class="hint" id="ps-action-status" style="margin-top:12px">Connect wallet to enable transactions.</p>
+        </article>
+
+        <article class="card">
+          <h3>Your presale state</h3>
+          <p>Real-time values from USDC and PresaleEscrow8020 contracts.</p>
+          <div class="wallet-metrics" style="margin-top:12px">
+            <div class="metric"><span>USDC balance</span><strong id="wm-usdc">--</strong></div>
+            <div class="metric"><span>USDC allowance</span><strong id="wm-allowance">--</strong></div>
+            <div class="metric"><span>Contributed (USDC)</span><strong id="wm-contributed">--</strong></div>
+            <div class="metric"><span>Purchased (GGRD)</span><strong id="wm-purchased">--</strong></div>
+            <div class="metric"><span>Claimable now (GGRD)</span><strong id="wm-claimable">--</strong></div>
+          </div>
+          <div class="warning" style="margin-top:14px">
+            Security note: always verify this presale address before approving funds: <span class="code" style="margin-top:8px">0xd8983534dd3c369d85127f6C9B85d98768139387</span>
+          </div>
+        </article>
+      </div>
+
+
+      <div class="presale-cta-mobile">
+        <button class="btn btn-secondary" id="btn-connect-mobile">Connect</button>
+        <button class="btn btn-primary" id="btn-buy-mobile">Buy GGRD</button>
+      </div>
+
+      <div class="grid grid-2" style="margin-top:16px">
+        <div class="card"><h3>1) Prepare wallet</h3><p>Use BSC mainnet wallet and keep a small BNB balance for gas.</p></div>
+        <div class="card"><h3>2) Acquire USDC</h3><p>Presale accepts only USDC on BSC (0x8AC7...580d).</p></div>
+        <div class="card"><h3>3) Approve and buy</h3><p>Approve USDC to presale contract, then call buy(payIn). Minimum buy is 50 USDC.</p></div>
+        <div class="card"><h3>4) Finalize and claim</h3><p>On success: 50% immediate claim plus 50% linear vesting over 60 days. On failure: full refund.</p></div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section" id="charity">
+    <div class="container">
+      <h2>Charity allocation</h2>
+      <p class="lead">20% allocation with vesting safeguards and public tracking.</p>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>Contracted vesting model</h3>
+          <p>CharityVesting403030 uses 40/30/30 split with 12-month cliff and 24-month linear release.</p>
+        </div>
+        <div class="card">
+          <h3>Operational wallet</h3>
+          <p>Current Charity A/B/C recipient setup is mapped to address 0xd58B...59a3 by project decision.</p>
+        </div>
+      </div>
+      <div class="actions" style="margin-top:20px">
+        <a class="btn btn-secondary" href="donation-policy.html">Read donation policy</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="whitepaper">
+    <div class="container">
+      <h2>Whitepaper</h2>
+      <p class="lead">Updated technical document aligned to BSC mainnet deployment and v3.1 constraints.</p>
+      <div class="grid grid-3">
+        <div class="card"><h3>Token and governance</h3><p>Fixed supply, 0% tax, Safe plus timelock ownership model.</p></div>
+        <div class="card"><h3>Presale mechanics</h3><p>USDC-only escrow, stage caps, finalize split, refund and claim formulas.</p></div>
+        <div class="card"><h3>Post-launch modules</h3><p>Staking guardrails, charity vesting and airdrop round governance.</p></div>
+      </div>
+      <div class="actions" style="margin-top:20px">
+        <a class="btn btn-primary" href="GGRD_Whitepaper_EN.html">Open full whitepaper</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="roadmap">
+    <div class="container">
+      <h2>Roadmap</h2>
+      <p class="lead">Execution path from deployment to operational maturity.</p>
+      <div class="grid grid-2">
+        <div class="card"><h3>Phase 1 - Completed</h3><p>Mainnet deployment, verification, Safe setup, presale funded to 3,000,000 GGRD cap.</p></div>
+        <div class="card"><h3>Phase 2 - Active</h3><p>Presale participation, monitoring and transparent reporting.</p></div>
+        <div class="card"><h3>Phase 3 - Next</h3><p>Finalize, LP pair creation, 12-month LP lock, staking initialization.</p></div>
+        <div class="card"><h3>Phase 4 - Ongoing</h3><p>Charity vesting releases, airdrop rounds, community and ecosystem expansion.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section faq" id="faq">
+    <div class="container">
+      <h2>FAQ</h2>
+      <p class="lead">Most common operational questions.</p>
+      <details><summary>What is the official token address?</summary><p>0xA0d5663d57b7D7EF975D2F02BcAEaf5c94c671f9 on BSC mainnet.</p></details>
+      <details><summary>Which crypto is accepted in presale?</summary><p>Only USDC on BNB Smart Chain in the current contract setup.</p></details>
+      <details><summary>What are presale caps?</summary><p>Softcap 20,000 USDC, hardcap 31,250 USDC, min buy 50 USDC, global max per wallet 3,000 USDC.</p></details>
+      <details><summary>How do claims work after successful finalize?</summary><p>50% immediate plus 50% linear vesting over 60 days.</p></details>
+      <details><summary>Does token have tax or blacklist?</summary><p>No transfer tax, no blacklist and no freeze logic.</p></details>
+    </div>
+  </section>
+</main>
+
 <footer class="footer">
   <div class="container">
-    <div class="footer__content">
-      <div class="footer__section">
-        <h3>Quick Links</h3>
-        <div class="footer__links">
-          <a href="#about">About GGRD</a>
-          <a href="#tokenomics">Tokenomics</a>
-          <a href="#contracts">Smart Contracts</a>
-          <a href="#how">Fair Launch</a>
-          <a href="#charity">Charity Treasury</a>
-          <a href="#whitepaper">Whitepaper</a>
-          <a href="#roadmap">Roadmap</a>
-        </div>
-      </div>
-
-      <div class="footer__section">
-        <h3>Resources</h3>
-        <div class="footer__links">
-          <a href="https://solscan.io/token/TR97dHmm8nXVndTcxew21138AchNgrk2BhEJGXMybdE" target="_blank" rel="noopener">Solscan</a>
-          <a href="https://explorer.solana.com/address/TR97dHmm8nXVndTcxew21138AchNgrk2BhEJGXMybdE" target="_blank" rel="noopener">Solana Explorer</a>
-          <a href="https://jup.ag/tokens/TR97dHmm8nXVndTcxew21138AchNgrk2BhEJGXMybdE" target="_blank" rel="noopener">Jupiter</a>
-          <a href="https://www.geckoterminal.com/solana/pools/HWzDBQcPpmGk5J9EXaLQnF4TfndP2pYAzCxBTyfjbnUb" target="_blank" rel="noopener">GeckoTerminal</a>
-          <a href="GGRD_Whitepaper_EN.html" target="_blank" rel="noopener">Whitepaper (HTML)</a>
-          <a href="GGRD_Whitepaper_EN.pdf" target="_blank" rel="noopener">Whitepaper (PDF)</a>
-        </div>
-      </div>
-
-      <div class="footer__section">
-        <h3>Community</h3>
-        <div class="footer__socials">
-          <a href="https://x.com/ContactGiggle" target="_blank" rel="noopener" class="footer__social" aria-label="X (Twitter)">𝕏</a>
-          <a href="https://t.me/GGRDofficial" target="_blank" rel="noopener" class="footer__social" aria-label="Telegram">✈️</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="footer__disclaimer">
-      <h4>⚠️ Legal &amp; Charity Disclaimer</h4>
-
-      <p>
-        <strong>Parody character:</strong> "Robin of Gains" is an original parody character created
-        for Giggle Reloaded. The project is not affiliated with any existing Robin Hood brand or IP.
-      </p>
-
-      <p>
-        <strong>Meme coin warning:</strong> GGRD is a meme coin with no intrinsic value or expectation of
-        financial return. It is intended for entertainment purposes only.
-      </p>
-
-      <p>
-        <strong>Investment risk:</strong> Cryptocurrency investments are highly volatile and risky.
-        You can lose 100% of your funds. Never invest more than you can afford to lose and always
-        do your own research (DYOR).
-      </p>
-
-      <p>
-        <strong>Not financial advice:</strong> Nothing on this website constitutes financial, legal
-        or tax advice.
-      </p>
-
-      <p>
-        <strong>Charity transparency:</strong> All Charity Treasury transactions will be executed on-chain
-        from the dedicated multisig and published in periodic reports. Beneficiaries are selected through
-        a community governance process: nomination, vetting, and public vote. Donations are executed via
-        the selected organization's official donation infrastructure with public proofs.
-      </p>
-
-      <p>
-        <strong>Independence of beneficiaries:</strong> Charitable organizations selected as beneficiaries
-        do not promote, endorse or manage the GGRD token. They are recipients of donations decided
-        by the GGRD community through governance.
-      </p>
-    </div>
-
-    <div class="footer__bottom">
-      <p style="margin-bottom:8px">
-        <strong>Official:</strong> <a href="https://ggrd.me" style="color:#9DFF00">ggrd.me</a> · 
-        <strong>Docs:</strong> <a href="GGRD_Whitepaper_EN.html">Whitepaper</a> · <a href="donation-policy.html">Donation Policy</a> · 
-        <strong>Community:</strong> <a href="https://t.me/GGRDofficial" target="_blank" rel="noopener">Telegram</a> · <a href="https://x.com/ContactGiggle" target="_blank" rel="noopener">X</a>
-      </p>
-      <p style="margin-bottom:8px">
-        <strong>Contact:</strong> <a href="mailto:contact@ggrd.me" style="color:#9DFF00">contact@ggrd.me</a> <span style="opacity:.7">(listings & verification only)</span>
-      </p>
-      <p style="font-size:12px;opacity:.7;margin-bottom:12px">
-        ⚠️ Not financial advice. Verify all links before interacting. Not affiliated with any other "Giggle" projects.
-      </p>
-      <p>© 2025 Giggle Reloaded ($GGRD). All rights reserved.</p>
-    </div>
+    <p><strong>Official links:</strong> <a href="https://ggrd.me">ggrd.me</a> | <a href="GGRD_Whitepaper_EN.html">Whitepaper</a> | <a href="donation-policy.html">Donation Policy</a></p>
+    <p><strong>BscScan:</strong> <a href="https://bscscan.com/token/0xA0d5663d57b7D7EF975D2F02BcAEaf5c94c671f9" target="_blank" rel="noopener">Token</a> | <a href="https://bscscan.com/address/0xd8983534dd3c369d85127f6C9B85d98768139387" target="_blank" rel="noopener">Presale</a> | <a href="https://bscscan.com/address/0x05d803135bc09e9E5006CA75C533377D7Ea0A34b" target="_blank" rel="noopener">Staking</a></p>
+    <p><strong>Community:</strong> <a href="https://t.me/GGRDofficial" target="_blank" rel="noopener">Telegram</a> | <a href="https://x.com/ContactGiggle" target="_blank" rel="noopener">X</a></p>
+    <p style="font-size:12px">Risk warning: GGRD is a high-risk crypto asset. Nothing on this website is financial, legal or tax advice.</p>
   </div>
 </footer>
 
 <script>
-// Mobile menu toggle
-const mobileToggle = document.getElementById('mobileToggle');
-const nav = document.getElementById('nav');
-mobileToggle.addEventListener('click', () => {
-  nav.classList.toggle('active');
-});
-nav.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => nav.classList.remove('active'));
-});
+const PRESALE_CONFIG = {
+  chainId: 56,
+  chainHex: "0x38",
+  rpc: "https://bsc-dataseed.bnbchain.org",
+  presaleAddress: "0xd8983534dd3c369d85127f6C9B85d98768139387",
+  usdcAddress: "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d",
+  priceScale: 100000000n,
+  stageSeconds: [5 * 24 * 60 * 60, 10 * 24 * 60 * 60, 16 * 24 * 60 * 60, 21 * 24 * 60 * 60]
+};
 
-// Duplicate marquee for smooth loop
-const marqueeContent = document.querySelector('.marquee__content');
-if (marqueeContent) {
-  const clone = marqueeContent.cloneNode(true);
-  marqueeContent.parentNode.appendChild(clone);
+const PRESALE_ABI = [
+  "function payDecimals() view returns (uint8)",
+  "function saleDecimals() view returns (uint8)",
+  "function startTs() view returns (uint256)",
+  "function endTs() view returns (uint256)",
+  "function softcap() view returns (uint256)",
+  "function hardcap() view returns (uint256)",
+  "function minBuy() view returns (uint256)",
+  "function globalMaxPerWallet() view returns (uint256)",
+  "function tokenCap() view returns (uint256)",
+  "function currentStageId() view returns (uint8)",
+  "function totalRaised() view returns (uint256)",
+  "function totalSold() view returns (uint256)",
+  "function finalized() view returns (bool)",
+  "function succeeded() view returns (bool)",
+  "function finalizedAt() view returns (uint256)",
+  "function stageConfig(uint8) view returns (uint256 allocation, uint256 priceScaled, uint256 walletCap, uint256 sold, uint256 raised)",
+  "function contributed(address) view returns (uint256)",
+  "function purchased(address) view returns (uint256)",
+  "function claimable(address) view returns (uint256)",
+  "function quoteCurrentStage(uint256) view returns (uint8 stageId, uint256 tokenOut)",
+  "function buy(uint256 payIn)",
+  "function claim()",
+  "function refund()"
+];
+
+const ERC20_ABI = [
+  "function balanceOf(address) view returns (uint256)",
+  "function allowance(address owner, address spender) view returns (uint256)",
+  "function approve(address spender, uint256 amount) returns (bool)"
+];
+
+const state = {
+  readProvider: null,
+  browserProvider: null,
+  signer: null,
+  wallet: null,
+  presaleRead: null,
+  usdcRead: null,
+  presaleWrite: null,
+  usdcWrite: null,
+  payDecimals: 6,
+  saleDecimals: 18,
+  isBusy: false,
+  presaleFinalized: false,
+  presaleSucceeded: false,
+  currentStageId: 0
+};
+
+function copyAddress(id, btn) {
+  const v = document.getElementById(id).textContent.trim();
+  navigator.clipboard.writeText(v).then(() => {
+    const old = btn.textContent;
+    btn.textContent = "Copied";
+    setTimeout(() => { btn.textContent = old; }, 1200);
+  });
 }
 
-// Smooth scroll
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    const href = this.getAttribute('href');
-    if (href !== '#') {
-      e.preventDefault();
-      const target = document.querySelector(href);
-      if (target) {
-        const headerOffset = 100;
-        const elementPosition = target.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+function setText(id, text) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = text;
+}
+
+function setHtml(id, html) {
+  const el = document.getElementById(id);
+  if (el) el.innerHTML = html;
+}
+
+function fmtAmount(raw, decimals, fractionDigits = 2) {
+  const n = Number(ethers.formatUnits(raw, decimals));
+  if (!Number.isFinite(n)) return "0";
+  return n.toLocaleString("en-US", { maximumFractionDigits: fractionDigits });
+}
+
+function fmtTs(ts) {
+  const t = Number(ts);
+  if (!t) return "--";
+  return new Date(t * 1000).toISOString().replace("T", " ").replace(".000Z", " UTC");
+}
+
+function shortAddr(addr) {
+  if (!addr) return "Not connected";
+  return addr.slice(0, 8) + "..." + addr.slice(-6);
+}
+
+function asHint(message, cls = "") {
+  const el = document.getElementById("ps-action-status");
+  if (!el) return;
+  el.className = ("hint " + cls).trim();
+  el.textContent = message;
+}
+
+function parseUserAmount() {
+  const input = document.getElementById("buy-amount");
+  if (!input || !input.value) return null;
+  try {
+    return ethers.parseUnits(input.value, state.payDecimals);
+  } catch {
+    return null;
+  }
+}
+
+function stageWindowBounds(startTs, endTs, stageId) {
+  if (stageId < 1 || stageId > 4) return { start: 0, end: 0 };
+  const start = Number(startTs);
+  const cap = stageId === 1 ? 0 : PRESALE_CONFIG.stageSeconds[stageId - 2];
+  const startBound = start + cap;
+  const endBound = stageId === 4 ? Number(endTs) : start + PRESALE_CONFIG.stageSeconds[stageId - 1];
+  return { start: startBound, end: endBound };
+}
+
+function stageStatus(nowTs, startTs, endTs, stageId, soldRaw, allocRaw) {
+  const bounds = stageWindowBounds(startTs, endTs, stageId);
+  if (soldRaw >= allocRaw && allocRaw > 0n) return "Sold out";
+  if (nowTs < bounds.start) return "Upcoming";
+  if (nowTs >= bounds.start && nowTs < bounds.end) return "Active";
+  return "Closed";
+}
+
+function formatError(err) {
+  const e = err || {};
+  return e.shortMessage || e.reason || e.message || "Transaction failed";
+}
+
+function stageStatusClass(status) {
+  if (status === "Active") return "stage-pill stage-pill-active";
+  if (status === "Upcoming") return "stage-pill stage-pill-upcoming";
+  if (status === "Sold out") return "stage-pill stage-pill-soldout";
+  return "stage-pill stage-pill-closed";
+}
+
+function setStageBadge(stage, status) {
+  setHtml("stage" + stage + "-status", '<span class="' + stageStatusClass(status) + '">' + status + '</span>');
+}
+
+function updateLastSync() {
+  const now = new Date().toISOString().replace("T", " ").replace(".000Z", " UTC");
+  setText("ps-last-update", "Last sync: " + now);
+}
+
+function isPresaleOpen() {
+  return !state.presaleFinalized && state.currentStageId > 0;
+}
+
+function updateCtaState() {
+  const connectBtn = document.getElementById("btn-connect");
+  const connectMobileBtn = document.getElementById("btn-connect-mobile");
+  const refreshBtn = document.getElementById("btn-refresh");
+  const approveBtn = document.getElementById("btn-approve");
+  const buyBtn = document.getElementById("btn-buy");
+  const buyMobileBtn = document.getElementById("btn-buy-mobile");
+  const claimBtn = document.getElementById("btn-claim");
+  const refundBtn = document.getElementById("btn-refund");
+
+  if (connectBtn) {
+    connectBtn.textContent = state.wallet ? "Wallet connected" : "Connect wallet";
+    connectBtn.classList.toggle("btn-success-soft", Boolean(state.wallet));
+    connectBtn.disabled = state.isBusy;
+  }
+
+  if (connectMobileBtn) {
+    connectMobileBtn.textContent = state.wallet ? "Wallet ready" : "Connect";
+    connectMobileBtn.classList.toggle("btn-success-soft", Boolean(state.wallet));
+    connectMobileBtn.disabled = state.isBusy;
+  }
+
+  if (refreshBtn) refreshBtn.disabled = state.isBusy;
+
+  const canBuy = Boolean(state.wallet) && isPresaleOpen() && !state.isBusy;
+  const buyText = !state.wallet ? "Connect to buy" : (isPresaleOpen() ? "Buy GGRD" : "Presale unavailable");
+
+  if (buyBtn) {
+    buyBtn.textContent = buyText;
+    buyBtn.disabled = !canBuy;
+  }
+
+  if (buyMobileBtn) {
+    buyMobileBtn.textContent = buyText;
+    buyMobileBtn.disabled = !canBuy;
+  }
+
+  if (approveBtn) approveBtn.disabled = !state.wallet || !isPresaleOpen() || state.isBusy;
+  if (claimBtn) claimBtn.disabled = !state.wallet || !state.presaleFinalized || !state.presaleSucceeded || state.isBusy;
+  if (refundBtn) refundBtn.disabled = !state.wallet || !state.presaleFinalized || state.presaleSucceeded || state.isBusy;
+}
+
+async function runBusy(label, fn) {
+  if (state.isBusy) return;
+  state.isBusy = true;
+  updateCtaState();
+  asHint(label);
+  try {
+    await fn();
+  } catch (err) {
+    asHint("Transaction failed: " + formatError(err), "warn");
+  } finally {
+    state.isBusy = false;
+    updateCtaState();
+  }
+}
+
+async function refreshQuote() {
+  if (!state.presaleRead) return;
+  const payIn = parseUserAmount();
+  const quoteHint = document.getElementById("quote-hint");
+
+  if (!payIn || payIn <= 0n) {
+    if (quoteHint) quoteHint.className = "hint";
+    setText("quote-hint", "Estimated output: --");
+    return;
+  }
+
+  try {
+    const quote = await state.presaleRead.quoteCurrentStage(payIn);
+    const stageId = Number(quote[0]);
+    const out = quote[1];
+    if (stageId === 0) {
+      if (quoteHint) quoteHint.className = "hint warn";
+      setText("quote-hint", "Estimated output: presale not active");
+      return;
+    }
+
+    const outFmt = fmtAmount(out, state.saleDecimals, 4);
+    if (quoteHint) quoteHint.className = "hint ok";
+    setText("quote-hint", "Estimated output: " + outFmt + " GGRD (Stage " + stageId + ")");
+  } catch {
+    if (quoteHint) quoteHint.className = "hint";
+    setText("quote-hint", "Estimated output: --");
+  }
+}
+
+async function refreshWalletData() {
+  if (!state.wallet || !state.presaleRead || !state.usdcRead) {
+    setText("wm-usdc", "--");
+    setText("wm-allowance", "--");
+    setText("wm-contributed", "--");
+    setText("wm-purchased", "--");
+    setText("wm-claimable", "--");
+    return;
+  }
+
+  const [bal, allowance, contributed, purchased, claimable] = await Promise.all([
+    state.usdcRead.balanceOf(state.wallet),
+    state.usdcRead.allowance(state.wallet, PRESALE_CONFIG.presaleAddress),
+    state.presaleRead.contributed(state.wallet),
+    state.presaleRead.purchased(state.wallet),
+    state.presaleRead.claimable(state.wallet)
+  ]);
+
+  setText("wm-usdc", fmtAmount(bal, state.payDecimals, 2) + " USDC");
+  setText("wm-allowance", fmtAmount(allowance, state.payDecimals, 2) + " USDC");
+  setText("wm-contributed", fmtAmount(contributed, state.payDecimals, 2) + " USDC");
+  setText("wm-purchased", fmtAmount(purchased, state.saleDecimals, 2) + " GGRD");
+  setText("wm-claimable", fmtAmount(claimable, state.saleDecimals, 4) + " GGRD");
+}
+
+async function refreshPresaleData() {
+  if (!state.presaleRead) return;
+
+  const [startTs, endTs, totalRaised, totalSold, softcap, hardcap, minBuy, maxWallet, currentStageId, finalized, succeeded] = await Promise.all([
+    state.presaleRead.startTs(),
+    state.presaleRead.endTs(),
+    state.presaleRead.totalRaised(),
+    state.presaleRead.totalSold(),
+    state.presaleRead.softcap(),
+    state.presaleRead.hardcap(),
+    state.presaleRead.minBuy(),
+    state.presaleRead.globalMaxPerWallet(),
+    state.presaleRead.currentStageId(),
+    state.presaleRead.finalized(),
+    state.presaleRead.succeeded()
+  ]);
+
+  state.presaleFinalized = Boolean(finalized);
+  state.presaleSucceeded = Boolean(succeeded);
+  state.currentStageId = Number(currentStageId);
+
+  const nowTs = Math.floor(Date.now() / 1000);
+  let statusClass = "status-pill-neutral";
+  let statusText = "Awaiting status";
+  let stageContext = "Waiting for next on-chain state update.";
+
+  if (state.presaleFinalized && state.presaleSucceeded) {
+    statusClass = "status-pill-success";
+    statusText = "Finalized - Success";
+    stageContext = "Claim and vesting are active for buyers.";
+  } else if (state.presaleFinalized && !state.presaleSucceeded) {
+    statusClass = "status-pill-fail";
+    statusText = "Finalized - Failed";
+    stageContext = "Refund path is active for buyers.";
+  } else if (nowTs < Number(startTs)) {
+    statusClass = "status-pill-neutral";
+    statusText = "Not started";
+    stageContext = "Presale has not started yet.";
+  } else if (nowTs >= Number(endTs)) {
+    statusClass = "status-pill-neutral";
+    statusText = "Ended - awaiting finalize";
+    stageContext = "Presale ended; owner finalize is pending.";
+  } else {
+    statusClass = "status-pill-live";
+    statusText = "Live";
+    stageContext = state.currentStageId > 0 ? "Stage " + state.currentStageId + " is currently active." : "Presale is active.";
+  }
+
+  setHtml("ps-status", '<span class="status-pill ' + statusClass + '">' + statusText + '</span>');
+  setText("ps-stage-context", stageContext);
+
+  let stageText = "--";
+  if (state.currentStageId > 0) {
+    stageText = "Stage " + state.currentStageId;
+  } else if (nowTs < Number(startTs)) {
+    stageText = "Pre-start";
+  } else if (nowTs >= Number(endTs)) {
+    stageText = "Closed";
+  }
+
+  setText("ps-stage", stageText);
+  setText("ps-window", fmtTs(startTs) + " -> " + fmtTs(endTs));
+  setText("ps-raised", fmtAmount(totalRaised, state.payDecimals, 2) + " USDC");
+  setText("ps-caps", fmtAmount(softcap, state.payDecimals, 0) + " / " + fmtAmount(hardcap, state.payDecimals, 0) + " USDC");
+  setText("ps-sold", fmtAmount(totalSold, state.saleDecimals, 2) + " GGRD");
+
+  const progressPct = hardcap > 0n ? Number((totalRaised * 10000n) / hardcap) / 100 : 0;
+  const safePct = Math.max(0, Math.min(100, progressPct));
+  const bar = document.getElementById("ps-progress");
+  if (bar) bar.style.width = safePct.toFixed(2) + "%";
+  setText("ps-progress-caption", "Hardcap progress: " + safePct.toFixed(2) + "% (" + fmtAmount(totalRaised, state.payDecimals, 2) + " / " + fmtAmount(hardcap, state.payDecimals, 2) + " USDC)");
+
+  for (let stage = 1; stage <= 4; stage += 1) {
+    const cfg = await state.presaleRead.stageConfig(stage);
+    const allocation = cfg[0];
+    const priceScaled = cfg[1];
+    const walletCap = cfg[2];
+    const sold = cfg[3];
+    const raised = cfg[4];
+
+    const bounds = stageWindowBounds(startTs, endTs, stage);
+    const status = stageStatus(nowTs, startTs, endTs, stage, sold, allocation);
+    const price = Number(priceScaled) / Number(PRESALE_CONFIG.priceScale);
+
+    setText("stage" + stage + "-window", fmtTs(bounds.start) + " -> " + fmtTs(bounds.end));
+    setText("stage" + stage + "-price", price.toFixed(4));
+    setText("stage" + stage + "-wallet-cap", fmtAmount(walletCap, state.payDecimals, 0));
+    setText("stage" + stage + "-sold", fmtAmount(sold, state.saleDecimals, 2));
+    setText("stage" + stage + "-raised", fmtAmount(raised, state.payDecimals, 2));
+    setStageBadge(stage, status);
+  }
+
+  const quoteEl = document.getElementById("quote-hint");
+  if (quoteEl && quoteEl.textContent === "Estimated output: --") {
+    quoteEl.textContent = "Minimum buy: " + fmtAmount(minBuy, state.payDecimals, 2) + " USDC, global max per wallet: " + fmtAmount(maxWallet, state.payDecimals, 0) + " USDC";
+  }
+
+  updateLastSync();
+  updateCtaState();
+}
+
+async function refreshAll() {
+  try {
+    await refreshPresaleData();
+    await refreshWalletData();
+    await refreshQuote();
+  } catch (err) {
+    asHint("Read error: " + formatError(err), "warn");
+  }
+}
+
+async function connectWallet() {
+  if (!window.ethereum) {
+    asHint("No injected wallet detected. Install MetaMask.", "warn");
+    return;
+  }
+
+  try {
+    state.browserProvider = new ethers.BrowserProvider(window.ethereum);
+    await window.ethereum.request({ method: "eth_requestAccounts" });
+
+    const network = await state.browserProvider.getNetwork();
+    if (Number(network.chainId) !== PRESALE_CONFIG.chainId) {
+      try {
+        await window.ethereum.request({ method: "wallet_switchEthereumChain", params: [{ chainId: PRESALE_CONFIG.chainHex }] });
+      } catch (switchErr) {
+        if (switchErr && switchErr.code === 4902) {
+          await window.ethereum.request({
+            method: "wallet_addEthereumChain",
+            params: [{
+              chainId: "0x38",
+              chainName: "BNB Smart Chain",
+              nativeCurrency: { name: "BNB", symbol: "BNB", decimals: 18 },
+              rpcUrls: ["https://bsc-dataseed.bnbchain.org"],
+              blockExplorerUrls: ["https://bscscan.com"]
+            }]
+          });
+        } else {
+          throw switchErr;
+        }
       }
     }
-  });
-});
 
-// Simple intersection animation
-const animateOnScroll = () => {
-  const elements = document.querySelectorAll('.allocation__item, .step, .feature, .stamp, .security-card, .whitepaper__stat');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.animation = 'slideUp 0.6s ease-out forwards';
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-  elements.forEach(el => {
-    el.style.opacity = '0';
-    observer.observe(el);
-  });
-};
-window.addEventListener('load', animateOnScroll);
+    state.signer = await state.browserProvider.getSigner();
+    state.wallet = await state.signer.getAddress();
+    state.presaleWrite = state.presaleRead.connect(state.signer);
+    state.usdcWrite = state.usdcRead.connect(state.signer);
 
-// Copy address to clipboard
-function copyAddress(elementId, button) {
-  const addressElement = document.getElementById(elementId);
-  const address = addressElement.textContent;
-  
-  navigator.clipboard.writeText(address).then(() => {
-    const originalText = button.textContent;
-    button.textContent = '✅ Copied!';
-    button.classList.add('copied');
-    
-    setTimeout(() => {
-      button.textContent = originalText;
-      button.classList.remove('copied');
-    }, 2000);
-  }).catch(err => {
-    alert('Failed to copy: ' + err);
+    setText("wallet-address", shortAddr(state.wallet));
+    asHint("Wallet connected.", "ok");
+    updateCtaState();
+    await refreshWalletData();
+    await refreshQuote();
+  } catch (err) {
+    asHint("Connect error: " + formatError(err), "warn");
+  }
+}
+
+async function approveUsdc() {
+  if (!state.usdcWrite || !state.wallet) {
+    asHint("Connect wallet first.", "warn");
+    return;
+  }
+
+  const payIn = parseUserAmount();
+  if (!payIn || payIn <= 0n) {
+    asHint("Enter valid USDC amount.", "warn");
+    return;
+  }
+
+  await runBusy("Approval transaction submitted...", async () => {
+    const tx = await state.usdcWrite.approve(PRESALE_CONFIG.presaleAddress, payIn);
+    await tx.wait();
+    asHint("USDC allowance updated.", "ok");
+    await refreshWalletData();
   });
 }
 
-console.log('%c🏹 GGRD - Robin of Gains 🦊', 'color: #ff6bd5; font-size: 24px; font-weight: bold;');
-console.log('%cWelcome to the pack, fellow degen!', 'color: #ffd447; font-size: 16px;');
-console.log('%c10% of supply is locked in a Charity Treasury for community-voted pediatric cancer support.', 'color: #4ade80; font-size: 13px;');
-console.log('%c📄 Read the full whitepaper: GGRD_Whitepaper_EN.html', 'color: #46e6ff; font-size: 12px;');
-</script>
+async function buyTokens() {
+  if (!state.presaleWrite || !state.wallet) {
+    asHint("Connect wallet first.", "warn");
+    return;
+  }
 
+  if (!isPresaleOpen()) {
+    asHint("Presale is currently not open for new buys.", "warn");
+    return;
+  }
+
+  const payIn = parseUserAmount();
+  if (!payIn || payIn <= 0n) {
+    asHint("Enter valid USDC amount.", "warn");
+    return;
+  }
+
+  await runBusy("Buy transaction submitted...", async () => {
+    const allowance = await state.usdcRead.allowance(state.wallet, PRESALE_CONFIG.presaleAddress);
+    if (allowance < payIn) {
+      asHint("Allowance too low. Click 'Approve USDC' first.", "warn");
+      return;
+    }
+
+    const tx = await state.presaleWrite.buy(payIn);
+    await tx.wait();
+    asHint("Buy confirmed on-chain.", "ok");
+    await refreshAll();
+  });
+}
+
+async function claimTokens() {
+  if (!state.presaleWrite || !state.wallet) {
+    asHint("Connect wallet first.", "warn");
+    return;
+  }
+
+  await runBusy("Claim transaction submitted...", async () => {
+    const tx = await state.presaleWrite.claim();
+    await tx.wait();
+    asHint("Claim confirmed.", "ok");
+    await refreshAll();
+  });
+}
+
+async function refundUsdc() {
+  if (!state.presaleWrite || !state.wallet) {
+    asHint("Connect wallet first.", "warn");
+    return;
+  }
+
+  await runBusy("Refund transaction submitted...", async () => {
+    const tx = await state.presaleWrite.refund();
+    await tx.wait();
+    asHint("Refund confirmed.", "ok");
+    await refreshAll();
+  });
+}
+
+async function handleBuyCta() {
+  if (!state.wallet) {
+    await connectWallet();
+    return;
+  }
+  await buyTokens();
+}
+
+async function setupPresaleDashboard() {
+
+  if (!window.ethers) {
+    asHint("ethers library failed to load.", "warn");
+    return;
+  }
+
+  state.readProvider = new ethers.JsonRpcProvider(PRESALE_CONFIG.rpc);
+  state.presaleRead = new ethers.Contract(PRESALE_CONFIG.presaleAddress, PRESALE_ABI, state.readProvider);
+  state.usdcRead = new ethers.Contract(PRESALE_CONFIG.usdcAddress, ERC20_ABI, state.readProvider);
+
+  try {
+    const [payDecimals, saleDecimals] = await Promise.all([state.presaleRead.payDecimals(), state.presaleRead.saleDecimals()]);
+    state.payDecimals = Number(payDecimals);
+    state.saleDecimals = Number(saleDecimals);
+  } catch (err) {
+    asHint("Failed to load token decimals: " + formatError(err), "warn");
+  }
+
+  const buyInput = document.getElementById("buy-amount");
+  const connectBtn = document.getElementById("btn-connect");
+  const connectMobileBtn = document.getElementById("btn-connect-mobile");
+  const refreshBtn = document.getElementById("btn-refresh");
+  const approveBtn = document.getElementById("btn-approve");
+  const buyBtn = document.getElementById("btn-buy");
+  const buyMobileBtn = document.getElementById("btn-buy-mobile");
+  const claimBtn = document.getElementById("btn-claim");
+  const refundBtn = document.getElementById("btn-refund");
+
+  if (buyInput) buyInput.addEventListener("input", refreshQuote);
+  if (connectBtn) connectBtn.addEventListener("click", connectWallet);
+  if (connectMobileBtn) connectMobileBtn.addEventListener("click", connectWallet);
+  if (refreshBtn) refreshBtn.addEventListener("click", refreshAll);
+  if (approveBtn) approveBtn.addEventListener("click", approveUsdc);
+  if (buyBtn) buyBtn.addEventListener("click", handleBuyCta);
+  if (buyMobileBtn) buyMobileBtn.addEventListener("click", handleBuyCta);
+  if (claimBtn) claimBtn.addEventListener("click", claimTokens);
+  if (refundBtn) refundBtn.addEventListener("click", refundUsdc);
+
+  if (window.ethereum && window.ethereum.on) {
+    window.ethereum.on("accountsChanged", async (accounts) => {
+      if (!accounts || accounts.length === 0) {
+        state.wallet = null;
+        state.signer = null;
+        state.presaleWrite = null;
+        state.usdcWrite = null;
+        setText("wallet-address", "Not connected");
+        asHint("Wallet disconnected.", "warn");
+        updateCtaState();
+        await refreshWalletData();
+        return;
+      }
+      await connectWallet();
+    });
+
+    window.ethereum.on("chainChanged", () => {
+      window.location.reload();
+    });
+  }
+
+  updateCtaState();
+  await refreshAll();
+  setInterval(refreshAll, 30000);
+}
+
+setupPresaleDashboard();
+</script>
 </body>
 </html>
