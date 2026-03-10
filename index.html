@@ -1013,6 +1013,355 @@ footer {
   .cd-num { font-size: 2.2rem; min-width: 50px; }
   .hero-stats { gap: 1.5rem; }
 }
+/* ===== PRESALE WIDGET ===== */
+.widget-section {
+  background: linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%);
+  padding: 4rem 2rem 5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.widget-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 50%, rgba(255,224,0,0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.widget-wrap {
+  max-width: 480px;
+  margin: 0 auto;
+  background: #0d0d0d;
+  border: 1px solid rgba(255,224,0,0.4);
+  box-shadow: 0 0 40px rgba(255,224,0,0.08), 0 0 80px rgba(0,0,0,0.6);
+  position: relative;
+}
+
+.widget-wrap::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--yellow), var(--green), var(--yellow));
+  background-size: 200%;
+  animation: shimmer 3s linear infinite;
+}
+
+@keyframes shimmer { from{background-position:0%} to{background-position:200%} }
+
+.widget-header {
+  background: rgba(255,224,0,0.06);
+  border-bottom: 1px solid rgba(255,224,0,0.15);
+  padding: 1.2rem 1.5rem;
+  text-align: center;
+}
+
+.widget-title {
+  font-family: 'Bangers', cursive;
+  font-size: 1.5rem;
+  letter-spacing: 3px;
+  color: var(--yellow);
+  margin-bottom: 0.2rem;
+}
+
+.widget-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.62rem;
+  letter-spacing: 2px;
+  color: var(--green);
+  text-transform: uppercase;
+}
+
+.w-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: blink 1s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+.widget-body { padding: 1.5rem; }
+
+/* Stage + Price row */
+.w-stage-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.2rem;
+  padding: 0.8rem 1rem;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.w-stage-info .w-stage-lbl {
+  font-size: 0.58rem;
+  letter-spacing: 2px;
+  color: var(--gray);
+  text-transform: uppercase;
+}
+
+.w-stage-info .w-stage-val {
+  font-family: 'Bangers', cursive;
+  font-size: 1.3rem;
+  letter-spacing: 1px;
+  color: var(--green);
+}
+
+.w-price-info { text-align: right; }
+
+.w-price-info .w-price-lbl {
+  font-size: 0.58rem;
+  letter-spacing: 2px;
+  color: var(--gray);
+  text-transform: uppercase;
+}
+
+.w-price-info .w-price-val {
+  font-family: 'Bangers', cursive;
+  font-size: 1.3rem;
+  letter-spacing: 1px;
+  color: var(--yellow);
+}
+
+.w-next-price {
+  font-size: 0.6rem;
+  color: #555;
+}
+
+/* Progress */
+.w-raised-row {
+  margin-bottom: 0.6rem;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.68rem;
+  color: var(--gray);
+}
+
+.w-raised-row strong { color: var(--white); }
+
+.w-progress-outer {
+  background: #1a1a1a;
+  height: 10px;
+  border-radius: 0;
+  margin-bottom: 1.4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.w-progress-inner {
+  height: 100%;
+  background: linear-gradient(90deg, var(--yellow), var(--green));
+  transition: width 1s ease;
+  position: relative;
+  min-width: 4px;
+}
+
+.w-progress-inner::after {
+  content: '';
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 20px;
+  background: rgba(255,255,255,0.3);
+  filter: blur(4px);
+  animation: progress-glow 1.5s ease-in-out infinite;
+}
+@keyframes progress-glow { 0%,100%{opacity:0.4} 50%{opacity:1} }
+
+.w-softcap-line {
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 2px;
+  background: rgba(255,34,51,0.6);
+  left: 64%; /* 20000/31250 = 64% */
+}
+
+.w-softcap-lbl {
+  position: absolute;
+  top: -16px;
+  left: 64%;
+  transform: translateX(-50%);
+  font-size: 0.52rem;
+  color: var(--red);
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+/* Input area */
+.w-input-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 1rem;
+}
+
+.w-input-box {
+  background: #111;
+  border: 1px solid #222;
+  padding: 0.8rem;
+  transition: border-color 0.2s;
+  position: relative;
+}
+
+.w-input-box:focus-within { border-color: var(--yellow); }
+
+.w-input-lbl {
+  font-size: 0.58rem;
+  letter-spacing: 1.5px;
+  color: var(--gray);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.w-input-field {
+  background: none;
+  border: none;
+  outline: none;
+  color: var(--white);
+  font-family: 'Courier Prime', monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  width: 100%;
+}
+
+.w-input-field::placeholder { color: #333; }
+
+.w-input-currency {
+  font-size: 0.65rem;
+  color: var(--yellow);
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-top: 2px;
+  display: block;
+}
+
+.w-output-val {
+  font-family: 'Courier Prime', monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--green);
+}
+
+.w-min-note {
+  font-size: 0.62rem;
+  color: #444;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.w-min-note span { color: var(--gray); }
+
+/* Wallet / Buy button */
+.w-connect-btn {
+  width: 100%;
+  background: var(--yellow);
+  color: #000;
+  font-family: 'Bangers', cursive;
+  font-size: 1.5rem;
+  letter-spacing: 3px;
+  padding: 14px 20px;
+  border: none;
+  cursor: pointer;
+  display: block;
+  text-align: center;
+  transition: transform 0.1s, box-shadow 0.1s, background 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.w-connect-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.4s;
+}
+
+.w-connect-btn:hover::before { transform: translateX(100%); }
+.w-connect-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,224,0,0.3); }
+.w-connect-btn:active { transform: translateY(0); }
+.w-connect-btn:disabled { background: #333; color: #666; cursor: not-allowed; transform: none; box-shadow: none; }
+
+.w-connect-btn.approve-mode { background: #FF8C00; }
+.w-connect-btn.buying-mode { background: var(--green); }
+.w-connect-btn.error-mode { background: var(--red); color: #fff; }
+
+/* Steps */
+.w-steps {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin-top: 1.2rem;
+  border: 1px solid #1a1a1a;
+}
+
+.w-step {
+  flex: 1;
+  padding: 0.6rem 0;
+  text-align: center;
+  font-size: 0.58rem;
+  letter-spacing: 1px;
+  color: #333;
+  text-transform: uppercase;
+  border-right: 1px solid #1a1a1a;
+  transition: color 0.3s, background 0.3s;
+}
+.w-step:last-child { border-right: none; }
+.w-step.active { color: var(--yellow); background: rgba(255,224,0,0.05); }
+.w-step.done { color: var(--green); }
+
+/* Footer info */
+.widget-footer {
+  border-top: 1px solid #1a1a1a;
+  padding: 0.8rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.wf-claim {
+  font-size: 0.62rem;
+  color: var(--gray);
+}
+.wf-claim strong { color: var(--white); }
+
+.wf-secure {
+  font-size: 0.58rem;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Status message */
+.w-status {
+  font-size: 0.7rem;
+  text-align: center;
+  min-height: 1.2rem;
+  margin: 0.5rem 0;
+  color: var(--gray);
+  font-family: 'Courier Prime', monospace;
+}
+.w-status.ok  { color: var(--green); }
+.w-status.err { color: var(--red); }
+.w-status.warn { color: var(--yellow); }
+
+/* Network warning */
+.w-network-warn {
+  background: rgba(255,34,51,0.1);
+  border: 1px solid rgba(255,34,51,0.3);
+  padding: 0.6rem 1rem;
+  font-size: 0.68rem;
+  color: var(--red);
+  text-align: center;
+  display: none;
+  margin-bottom: 0.8rem;
+}
+
 </style>
 </head>
 <body>
@@ -1024,7 +1373,7 @@ footer {
     GGRD
   </a>
   <ul class="nav-links">
-    <li><a href="#presale">Presale</a></li>
+    <li><a href="#buy" style="color:var(--yellow);font-weight:700">BUY NOW ⚡</a></li><li><a href="#presale">Stages</a></li>
     <li><a href="#tokenomics">Tokenomics</a></li>
     <li><a href="#staking">Staking</a></li>
     <li><a href="#charity">Charity</a></li>
@@ -1170,6 +1519,103 @@ footer {
         <p class="why-text">Let's be honest — we're having fun. But fun with <strong>audited OpenZeppelin primitives</strong>, not fun with your life savings. DYOR. NFA.</p>
       </div>
     </div>
+  </div>
+</section>
+
+
+<!-- PRESALE WIDGET -->
+<section class="widget-section" id="buy">
+  <div class="section-inner">
+    <h2 class="section-title fade-up">BUY $GGRD NOW 🚀</h2>
+    <p class="section-sub fade-up">Direct on-chain purchase. USDC only. Your wallet, your keys, your GGRD.</p>
+    <div class="widget-wrap fade-up">
+
+      <div class="widget-header">
+        <div class="widget-title">BUY $GGRD PRESALE</div>
+        <div class="widget-badge">
+          <span class="w-dot"></span>
+          PRESALE LIVE · BSC MAINNET
+        </div>
+      </div>
+
+      <div class="widget-body">
+
+        <!-- Stage + Price -->
+        <div class="w-stage-row">
+          <div class="w-stage-info">
+            <div class="w-stage-lbl">Current Stage</div>
+            <div class="w-stage-val" id="w-stage-val">—</div>
+          </div>
+          <div class="w-price-info">
+            <div class="w-price-lbl">Price</div>
+            <div class="w-price-val" id="w-price-val">—</div>
+            <div class="w-next-price" id="w-next-price"></div>
+          </div>
+        </div>
+
+        <!-- Progress -->
+        <div style="position:relative;margin-bottom:1.5rem">
+          <div class="w-softcap-lbl">SOFTCAP</div>
+          <div class="w-raised-row">
+            <span>Raised: <strong id="w-raised-val">Loading...</strong></span>
+            <span id="w-pct">0%</span> of $31,250
+          </div>
+          <div class="w-progress-outer">
+            <div class="w-progress-inner" id="w-progress" style="width:0.5%"></div>
+            <div class="w-softcap-line"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:0.58rem;color:#333;margin-top:3px">
+            <span>$0</span><span>Softcap $20k</span><span>Hardcap $31,250</span>
+          </div>
+        </div>
+
+        <!-- Network warning -->
+        <div class="w-network-warn" id="w-network-warn">
+          ⚠ Wrong network. Please switch to BNB Smart Chain (chainId 56).
+        </div>
+
+        <!-- Input -->
+        <div class="w-input-grid">
+          <div class="w-input-box">
+            <span class="w-input-lbl">You Pay</span>
+            <input class="w-input-field" id="w-usdc-in" type="number" min="50" max="3000" step="10" placeholder="100" />
+            <span class="w-input-currency">USDC (BSC)</span>
+          </div>
+          <div class="w-input-box">
+            <span class="w-input-lbl">You Receive</span>
+            <div class="w-output-val" id="w-ggrd-out">0.00</div>
+            <span class="w-input-currency">GGRD</span>
+          </div>
+        </div>
+
+        <div class="w-min-note">Min <span>50 USDC</span> · Max <span>3,000 USDC</span> per wallet · Claim: 50% immediate + 50% over 60 days</div>
+
+        <!-- Status -->
+        <div class="w-status" id="w-status">Connect wallet to start</div>
+
+        <!-- Button -->
+        <button class="w-connect-btn" id="w-btn">CONNECT WALLET</button>
+
+        <!-- Steps -->
+        <div class="w-steps">
+          <div class="w-step active" id="ws-1">1. Connect</div>
+          <div class="w-step" id="ws-2">2. Approve USDC</div>
+          <div class="w-step" id="ws-3">3. Buy GGRD</div>
+        </div>
+
+      </div><!-- /body -->
+
+      <div class="widget-footer">
+        <div class="wf-claim">Claim: <strong>50% instant</strong> + 50% over 60 days</div>
+        <div class="wf-secure">🔒 On-chain escrow · No intermediary</div>
+      </div>
+
+    </div><!-- /widget-wrap -->
+
+    <p style="text-align:center;font-size:0.68rem;color:#333;margin-top:1.5rem" class="fade-up">
+      Presale contract: <a href="https://bscscan.com/address/0xd8983534dd3c369d85127f6C9B85d98768139387" target="_blank" rel="noopener" style="color:#444;text-decoration:underline">0xd8983534...9387 ↗</a>
+      · If softcap not reached → <strong style="color:var(--red)">100% refund</strong>
+    </p>
   </div>
 </section>
 
@@ -1534,5 +1980,294 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 </script>
 
+<script>
+// ===== PRESALE WIDGET WEB3 =====
+(function(){
+  const PRESALE_ADDR = "0xd8983534dd3c369d85127f6C9B85d98768139387";
+  const USDC_ADDR    = "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d";
+  const BSC_CHAIN_ID = 56;
+  const BSC_RPC      = "https://bsc-dataseed1.binance.org/";
+  const DECIMALS     = 18n;
+  const UNIT         = 10n ** 18n;
+
+  // Stage config (on-chain confirmed)
+  const STAGES = [
+    { end: new Date('2026-03-15T01:15:19Z'), price: 850000n,  label: "Stage 1", nextPrice: "0.0100" },
+    { end: new Date('2026-03-20T01:15:19Z'), price: 1000000n, label: "Stage 2", nextPrice: "0.0115" },
+    { end: new Date('2026-03-26T01:15:19Z'), price: 1150000n, label: "Stage 3", nextPrice: "0.0134" },
+    { end: new Date('2026-03-31T01:15:19Z'), price: 1340000n, label: "Stage 4", nextPrice: "—" },
+  ];
+  const PRICE_SCALE = 100_000_000n;
+  const HARDCAP = 31250n * UNIT;
+  const SOFTCAP = 20000n * UNIT;
+
+  // ABI fragments (minimal)
+  const PRESALE_ABI = [
+    "function totalRaised() view returns (uint256)",
+    "function finalized() view returns (bool)",
+    "function buy(uint256 payAmount)",
+  ];
+  const ERC20_ABI = [
+    "function balanceOf(address) view returns (uint256)",
+    "function allowance(address,address) view returns (uint256)",
+    "function approve(address,uint256) returns (bool)",
+    "function decimals() view returns (uint8)",
+  ];
+
+  // State
+  let provider, signer, userAddr;
+  let currentStep = 0; // 0=connect, 1=approve, 2=buy, 3=done
+  let raised = 0n;
+
+  // DOM refs
+  const $ = id => document.getElementById(id);
+  const btn      = $('w-btn');
+  const statusEl = $('w-status');
+  const usdcIn   = $('w-usdc-in');
+  const ggrdOut  = $('w-ggrd-out');
+  const progressEl = $('w-progress');
+  const raisedEl   = $('w-raised-val');
+  const pctEl      = $('w-pct');
+  const netWarn    = $('w-network-warn');
+  const step1El    = $('ws-1');
+  const step2El    = $('ws-2');
+  const step3El    = $('ws-3');
+
+  // Helpers
+  function getCurrentStage() {
+    const now = new Date();
+    for (const s of STAGES) { if (now < s.end) return s; }
+    return null;
+  }
+
+  function calcGGRD(usdcFloat) {
+    if (!usdcFloat || isNaN(usdcFloat) || usdcFloat <= 0) return "0.00";
+    const s = getCurrentStage();
+    if (!s) return "0.00";
+    const payIn = BigInt(Math.floor(usdcFloat * 1e6)) * (UNIT / 1000000n);
+    // tokenOut = payIn * PRICE_SCALE / stagePriceScaled
+    const tokenOut = payIn * PRICE_SCALE / s.price;
+    return (Number(tokenOut) / 1e18).toLocaleString('en-US', {maximumFractionDigits: 2});
+  }
+
+  function setStatus(msg, cls='') {
+    statusEl.textContent = msg;
+    statusEl.className = 'w-status ' + cls;
+  }
+
+  function setStep(n) {
+    currentStep = n;
+    [step1El, step2El, step3El].forEach((el, i) => {
+      el.className = 'w-step' + (i+1 === n ? ' active' : (i+1 < n ? ' done' : ''));
+    });
+  }
+
+  function updateStageUI() {
+    const s = getCurrentStage();
+    if (!s) {
+      $('w-stage-val').textContent = "ENDED";
+      $('w-price-val').textContent = "—";
+      btn.disabled = true;
+      return;
+    }
+    $('w-stage-val').textContent = s.label;
+    $('w-price-val').textContent = `$${(Number(s.price) / PRICE_SCALE * 1e8 / 1e8).toFixed(4)} USDC`;
+    $('w-next-price').textContent = s.nextPrice !== '—' ? `Next: $${s.nextPrice}` : 'Last stage';
+  }
+
+  async function rpcCall(data) {
+    const res = await fetch(BSC_RPC, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({jsonrpc:'2.0',id:1,method:'eth_call',
+        params:[{to:PRESALE_ADDR,data},`latest`]})
+    });
+    const j = await res.json();
+    return j.result || '0x';
+  }
+
+  async function fetchRaised() {
+    try {
+      const raw = await rpcCall('0xc5c4744c'); // totalRaised()
+      raised = raw && raw !== '0x' ? BigInt(raw) : 0n;
+      const raisedFloat = Number(raised) / 1e18;
+      const hardFloat = Number(HARDCAP) / 1e18;
+      const pct = Math.min((raisedFloat / hardFloat) * 100, 100);
+      if (raisedEl) raisedEl.textContent = `$${raisedFloat.toLocaleString('en-US',{maximumFractionDigits:0})} USDC`;
+      if (progressEl) progressEl.style.width = Math.max(pct, 0.5) + '%';
+      if (pctEl) pctEl.textContent = pct.toFixed(1) + '%';
+    } catch(e) { /* silent */ }
+  }
+
+  // Input handler
+  if (usdcIn) {
+    usdcIn.addEventListener('input', () => {
+      const v = parseFloat(usdcIn.value);
+      if (ggrdOut) ggrdOut.textContent = calcGGRD(v);
+    });
+  }
+
+  // Connect wallet
+  async function connectWallet() {
+    if (!window.ethereum) {
+      setStatus("⚠ No wallet found. Install MetaMask!", 'err');
+      window.open('https://metamask.io', '_blank');
+      return;
+    }
+    try {
+      setStatus("Connecting wallet...", 'warn');
+      btn.disabled = true;
+      const accounts = await window.ethereum.request({method:'eth_requestAccounts'});
+      userAddr = accounts[0];
+      // Check network
+      const chainId = await window.ethereum.request({method:'eth_chainId'});
+      if (parseInt(chainId,16) !== BSC_CHAIN_ID) {
+        setStatus("Switch to BNB Smart Chain!", 'err');
+        netWarn.style.display = 'block';
+        try {
+          await window.ethereum.request({
+            method:'wallet_switchEthereumChain',
+            params:[{chainId:'0x38'}]
+          });
+          netWarn.style.display = 'none';
+        } catch(switchErr) {
+          // Add network if not present
+          try {
+            await window.ethereum.request({
+              method:'wallet_addEthereumChain',
+              params:[{
+                chainId:'0x38',
+                chainName:'BNB Smart Chain',
+                nativeCurrency:{name:'BNB',symbol:'BNB',decimals:18},
+                rpcUrls:['https://bsc-dataseed1.binance.org/'],
+                blockExplorerUrls:['https://bscscan.com/']
+              }]
+            });
+          } catch(e) { setStatus("Please switch to BSC manually", 'err'); btn.disabled=false; return; }
+        }
+      }
+      provider = new ethers.BrowserProvider(window.ethereum);
+      signer   = await provider.getSigner();
+      const short = userAddr.slice(0,6) + '...' + userAddr.slice(-4);
+      setStatus(`✓ Connected: ${short}`, 'ok');
+      btn.disabled = false;
+      setStep(2);
+      btn.textContent = "APPROVE USDC";
+      btn.className = 'w-connect-btn approve-mode';
+    } catch(e) {
+      setStatus(e.message?.slice(0,60) || 'Connection failed', 'err');
+      btn.disabled = false;
+    }
+  }
+
+  // Approve USDC
+  async function approveUSDC() {
+    const usdcVal = parseFloat(usdcIn?.value || 0);
+    if (!usdcVal || usdcVal < 50) {
+      setStatus("Minimum buy: 50 USDC", 'err'); return;
+    }
+    if (usdcVal > 3000) {
+      setStatus("Max per wallet: 3,000 USDC", 'err'); return;
+    }
+    try {
+      btn.disabled = true;
+      setStatus("Checking allowance...", 'warn');
+      const usdcContract = new ethers.Contract(USDC_ADDR, ERC20_ABI, signer);
+      const payAmount = ethers.parseUnits(usdcVal.toFixed(18), 18);
+      const allowance = await usdcContract.allowance(userAddr, PRESALE_ADDR);
+      if (allowance >= payAmount) {
+        setStatus("✓ Already approved. Ready to buy!", 'ok');
+        setStep(3);
+        btn.textContent = "🚀 BUY GGRD";
+        btn.className = 'w-connect-btn buying-mode';
+        btn.disabled = false;
+        return;
+      }
+      setStatus("Approving USDC... Confirm in wallet", 'warn');
+      const tx = await usdcContract.approve(PRESALE_ADDR, payAmount);
+      setStatus("Waiting for approval tx...", 'warn');
+      await tx.wait();
+      setStatus("✓ USDC approved!", 'ok');
+      setStep(3);
+      btn.textContent = "🚀 BUY GGRD";
+      btn.className = 'w-connect-btn buying-mode';
+      btn.disabled = false;
+    } catch(e) {
+      setStatus(e.reason?.slice(0,60) || e.message?.slice(0,60) || 'Approval failed', 'err');
+      btn.disabled = false;
+    }
+  }
+
+  // Buy
+  async function buyGGRD() {
+    const usdcVal = parseFloat(usdcIn?.value || 0);
+    if (!usdcVal || usdcVal < 50) {
+      setStatus("Minimum buy: 50 USDC", 'err'); return;
+    }
+    try {
+      btn.disabled = true;
+      setStatus("Confirm purchase in wallet...", 'warn');
+      const presaleContract = new ethers.Contract(
+        PRESALE_ADDR,
+        ["function buy(uint256 payAmount) external"],
+        signer
+      );
+      const payAmount = ethers.parseUnits(usdcVal.toFixed(18), 18);
+      const tx = await presaleContract.buy(payAmount);
+      setStatus("Transaction sent! Waiting...", 'warn');
+      await tx.wait();
+      const ggrdAmt = calcGGRD(usdcVal);
+      setStatus(`✅ Done! You bought ~${ggrdAmt} GGRD 🎉`, 'ok');
+      btn.textContent = "✅ PURCHASE COMPLETE";
+      btn.className = 'w-connect-btn';
+      setStep(3);
+      fetchRaised();
+      // Confetti emoji burst
+      for(let i=0;i<5;i++){
+        setTimeout(()=>{
+          const el=document.createElement('div');
+          el.textContent=['🎉','🚀','😂','💸','🟡'][i];
+          el.style.cssText=`position:fixed;left:${20+i*15}vw;top:80vh;font-size:2rem;pointer-events:none;z-index:9999;animation:floatUp 2s ease forwards`;
+          document.body.appendChild(el);
+          setTimeout(()=>el.remove(),2100);
+        },i*100);
+      }
+    } catch(e) {
+      const msg = e.reason || e.data?.message || e.message || 'Transaction failed';
+      setStatus(msg.slice(0,80), 'err');
+      btn.disabled = false;
+      btn.textContent = "🚀 BUY GGRD";
+    }
+  }
+
+  // Main button handler
+  if (btn) {
+    btn.addEventListener('click', () => {
+      if (currentStep === 0) connectWallet();
+      else if (currentStep === 2) approveUSDC();
+      else if (currentStep === 3) buyGGRD();
+    });
+  }
+
+  // Handle account/chain changes
+  if (window.ethereum) {
+    window.ethereum.on('accountsChanged', () => location.reload());
+    window.ethereum.on('chainChanged', () => location.reload());
+  }
+
+  // Init
+  updateStageUI();
+  fetchRaised();
+  setInterval(fetchRaised, 30000);
+  setStep(1);
+
+  // Float up animation for confetti
+  const style = document.createElement('style');
+  style.textContent = `@keyframes floatUp{from{transform:translateY(0);opacity:1}to{transform:translateY(-60vh);opacity:0}}`;
+  document.head.appendChild(style);
+
+})();
+
+</script>
 </body>
 </html>
