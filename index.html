@@ -1362,6 +1362,143 @@ footer {
   margin-bottom: 0.8rem;
 }
 
+
+/* ===== REFUND BANNER ===== */
+.refund-banner {
+  background: linear-gradient(90deg, #0a0a0a 0%, #110000 50%, #0a0a0a 100%);
+  border-top: 2px solid var(--red);
+  border-bottom: 2px solid var(--red);
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.refund-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 60px,
+    rgba(255,34,51,0.03) 60px,
+    rgba(255,34,51,0.03) 61px
+  );
+  pointer-events: none;
+}
+
+.refund-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 2rem;
+  align-items: center;
+}
+
+.refund-icon {
+  font-size: 4rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 20px rgba(255,34,51,0.6));
+  animation: icon-pulse 2s ease-in-out infinite;
+}
+@keyframes icon-pulse {
+  0%,100% { transform: scale(1); filter: drop-shadow(0 0 20px rgba(255,34,51,0.6)); }
+  50%      { transform: scale(1.08); filter: drop-shadow(0 0 35px rgba(255,34,51,0.9)); }
+}
+
+.refund-content {}
+
+.refund-headline {
+  font-family: 'Bangers', cursive;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  letter-spacing: 4px;
+  color: var(--red);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+  text-shadow: 0 0 30px rgba(255,34,51,0.4);
+}
+
+.refund-headline span {
+  color: var(--yellow);
+}
+
+.refund-body {
+  font-size: 0.88rem;
+  color: #aaa;
+  line-height: 1.7;
+  max-width: 580px;
+}
+
+.refund-body strong { color: var(--white); }
+
+.refund-proof {
+  background: rgba(255,34,51,0.07);
+  border: 1px solid rgba(255,34,51,0.3);
+  padding: 1.2rem 1.5rem;
+  min-width: 200px;
+  text-align: center;
+}
+
+.rp-label {
+  font-size: 0.58rem;
+  letter-spacing: 2px;
+  color: var(--red);
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.rp-val {
+  font-family: 'Bangers', cursive;
+  font-size: 2.8rem;
+  color: var(--white);
+  line-height: 1;
+  letter-spacing: 2px;
+}
+
+.rp-sub {
+  font-size: 0.68rem;
+  color: #666;
+  margin-top: 0.2rem;
+}
+
+.rp-sub strong { color: var(--green); }
+
+.refund-pills {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-top: 0.8rem;
+}
+
+.rpill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.65rem;
+  letter-spacing: 1px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border: 1px solid;
+}
+
+.rpill-red   { border-color: var(--red);   color: var(--red); }
+.rpill-green { border-color: var(--green); color: var(--green); }
+.rpill-white { border-color: #444;         color: #888; }
+
+@media (max-width: 768px) {
+  .refund-inner {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    text-align: center;
+  }
+  .refund-icon { font-size: 3rem; }
+  .refund-pills { justify-content: center; }
+  .refund-proof { min-width: 0; }
+}
+
 </style>
 </head>
 <body>
@@ -1404,6 +1541,44 @@ footer {
     <span>🐂 BSC MAINNET</span>
   </div>
 </div>
+
+<!-- REFUND GUARANTEE BANNER -->
+<section class="refund-banner" id="guarantee">
+  <div class="refund-inner">
+
+    <div class="refund-icon">🛡️</div>
+
+    <div class="refund-content">
+      <div class="refund-headline">SOFTCAP MISS = <span>100% REFUND</span></div>
+      <p class="refund-body">
+        Not vibes. Not promises. <strong>Hard-coded in the presale contract.</strong>
+        If we don't hit <strong>$20,000 USDC softcap</strong> by March 31 — the escrow contract unlocks
+        and every buyer calls <code style="color:var(--yellow);font-size:0.82rem">refund()</code> to get
+        <strong>every single USDC back</strong>. No team wallet, no discretion, no "trust us bro."
+        The contract enforces it automatically — go verify on BscScan yourself.
+      </p>
+      <div class="refund-pills">
+        <span class="rpill rpill-red">🔒 On-chain escrow</span>
+        <span class="rpill rpill-green">✓ Auto refund() function</span>
+        <span class="rpill rpill-white">No team discretion</span>
+        <span class="rpill rpill-white">OpenZeppelin audited</span>
+      </div>
+    </div>
+
+    <div class="refund-proof">
+      <div class="rp-label">Softcap to hit</div>
+      <div class="rp-val">$20K</div>
+      <div class="rp-sub">Miss it → <strong>full refund</strong></div>
+      <div style="margin-top:1rem;font-size:0.6rem;color:#333">
+        <a href="https://bscscan.com/address/0xd8983534dd3c369d85127f6C9B85d98768139387#readContract"
+           target="_blank" rel="noopener"
+           style="color:#444;text-decoration:underline">verify contract ↗</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 
 <!-- HERO -->
 <section class="hero">
@@ -1588,6 +1763,12 @@ footer {
           </div>
         </div>
 
+        <div style="background:rgba(255,34,51,0.08);border:1px solid rgba(255,34,51,0.35);padding:0.6rem 1rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:0.7rem">
+          <span style="font-size:1.4rem">🛡️</span>
+          <span style="font-size:0.68rem;color:#ccc;line-height:1.5">
+            <strong style="color:var(--red)">SOFTCAP GUARANTEE:</strong> If presale doesn't reach $20,000 USDC — the contract lets you call <code style="color:var(--yellow)">refund()</code> for <strong style="color:var(--white)">100% of your USDC back.</strong>
+          </span>
+        </div>
         <div class="w-min-note">Min <span>50 USDC</span> · Max <span>3,000 USDC</span> per wallet · Claim: 50% immediate + 50% over 60 days</div>
 
         <!-- Status -->
