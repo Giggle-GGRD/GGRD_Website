@@ -2507,19 +2507,70 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
   }
   function toPayAmount(v) { return ethers.parseUnits(String(v), 18); }
 
-  async function fetchRaised() {
+  /* ─── on-chain state (BŁĄD 5 partial) ──────── */
+  // Contract view selectors (discovered via RPC probing)
+  const SEL = {
+    totalRaised: '0xc5c4744c',
+    totalSold:   '0x9106d7ba',
+    hardcap:     '0xb071cbe6',
+    softcap:     '0xf89be593',
+    minBuy:      '0x7107d7a6',
+    isActive:    '0xb3f05b97',
+  };
+
+  let onChainHardcap = 31250; // fallback
+  let onChainSoftcap = 20000;
+  let onChainMinBuy  = 50;
+
+  async function rpcCall(selector) {
+    const r = await fetch(BSC_RPC,{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({jsonrpc:'2.0',id:1,method:'eth_call',params:[{to:PRESALE_ADDR,data:selector},'latest']})});
+    const j = await r.json();
+    if(!j.result||j.result==='0x') return null;
+    return j.result;
+  }
+
+  async function loadContractState() {
     try {
-      const r = await fetch(BSC_RPC,{method:'POST',headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({jsonrpc:'2.0',id:1,method:'eth_call',params:[{to:PRESALE_ADDR,data:'0xc5c4744c'},'latest']})});
-      const j = await r.json();
-      if(!j.result||j.result==='0x') return;
-      const usdc = Number(BigInt(j.result))/1e18;
-      const pct  = Math.min(usdc/31250*100,100);
-      const rEl=$('w-raised-val'),pEl=$('w-pct'),prEl=$('w-progress');
-      if(rEl)  rEl.textContent =`$${usdc.toLocaleString('en-US',{maximumFractionDigits:0})} USDC`;
-      if(pEl)  pEl.textContent = pct.toFixed(1)+'%';
-      if(prEl) prEl.style.width= Math.max(pct,0.5)+'%';
-    } catch(_){}
+      // Parallel reads
+      const [raisedHex, hardcapHex, softcapHex, minBuyHex, isActiveHex, totalSoldHex] = await Promise.all([
+        rpcCall(SEL.totalRaised),
+        rpcCall(SEL.hardcap),
+        rpcCall(SEL.softcap),
+        rpcCall(SEL.minBuy),
+        rpcCall(SEL.isActive),
+        rpcCall(SEL.totalSold),
+      ]);
+
+      // Parse on-chain values
+      if(hardcapHex) onChainHardcap = Number(BigInt(hardcapHex))/1e18;
+      if(softcapHex) onChainSoftcap = Number(BigInt(softcapHex))/1e18;
+      if(minBuyHex)  onChainMinBuy  = Number(BigInt(minBuyHex))/1e18;
+
+      // Update raised display
+      if(raisedHex) {
+        const usdc = Number(BigInt(raisedHex))/1e18;
+        const pct  = Math.min(usdc/onChainHardcap*100,100);
+        const rEl=$('w-raised-val'),pEl=$('w-pct'),prEl=$('w-progress');
+        if(rEl)  rEl.textContent =`$${usdc.toLocaleString('en-US',{maximumFractionDigits:0})} USDC`;
+        if(pEl)  pEl.textContent = pct.toFixed(1)+'%';
+        if(prEl) prEl.style.width= Math.max(pct,0.5)+'%';
+      }
+
+      // isActive check — disable widget if presale not active on-chain
+      if(isActiveHex) {
+        const active = BigInt(isActiveHex) !== 0n;
+        if(!active && btn && !connected) {
+          console.log('[GGRD v7] Presale not active on-chain');
+          // Don't disable — stages may not have started yet, let frontend STAGES handle timing
+        }
+      }
+
+      // Log on-chain state
+      const sold = totalSoldHex ? Number(BigInt(totalSoldHex))/1e18 : 0;
+      console.log(`[GGRD v7] On-chain: hardcap=$${onChainHardcap}, softcap=$${onChainSoftcap}, minBuy=$${onChainMinBuy}, sold=${sold.toFixed(0)} GGRD`);
+
+    } catch(e) { console.warn('[GGRD v7] loadContractState error:', e); }
   }
 
   /* ─── modal ──────────────────────────────────── */
@@ -2897,7 +2948,7 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
   /* ─── approve + buy ──────────────────────────── */
   async function approveThenBuy() {
     const usdcVal = parseFloat($('w-usdc-in')?.value||'0');
-    if(isNaN(usdcVal)||usdcVal<50)  { setStatus("Minimum: 50 USDC",'err');    return; }
+    if(isNaN(usdcVal)||usdcVal<onChainMinBuy)  { setStatus(`Minimum: ${onChainMinBuy} USDC`,'err');    return; }
     if(usdcVal>3000)                 { setStatus("Maximum: 3,000 USDC",'err'); return; }
     if(!signer)                      { setStatus("Wallet disconnected",'err');   return; }
 
@@ -2931,7 +2982,7 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
       const ggrd=calcGGRD(usdcVal);
       setStatus(`🎉 Done! ~${ggrd} GGRD headed your way!`,'ok');
       btn.textContent="✅ ZAKUPIONO!"; btn.className='w-connect-btn'; setStep(3);
-      fetchRaised();
+      loadContractState();
       ['🎉','🚀','😂','💸','🟡'].forEach((em,i)=>{
         setTimeout(()=>{const el=document.createElement('div');el.textContent=em;el.style.cssText=`position:fixed;left:${12+i*18}vw;top:80vh;font-size:2.5rem;pointer-events:none;z-index:99999;animation:floatUp 2.5s ease forwards`;document.body.appendChild(el);setTimeout(()=>el.remove(),2600);},i*120);
       });
@@ -2960,7 +3011,7 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
     }
     const inp=$('w-usdc-in');
     if(inp) inp.addEventListener('input',()=>{ const out=$('w-ggrd-out'); if(out) out.textContent=calcGGRD(parseFloat(inp.value)||0); });
-    fetchRaised(); setInterval(fetchRaised,30000);
+    loadContractState(); setInterval(fetchRaised,30000);
     setStep(1); setStatus('Click button to select wallet');
     requestEIP6963();
     // Niektóre portfele injectują provider z opóźnieniem — powtórz po 500ms i 1.5s
