@@ -1500,6 +1500,7 @@ footer {
 }
 
 </style>
+<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
 </head>
 <body>
 
@@ -2162,293 +2163,305 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 </script>
 
 <script>
-// ===== PRESALE WIDGET WEB3 =====
-(function(){
+// ===== PRESALE WIDGET WEB3 — fixed =====
+(function () {
+
+  /* ---- constants ---- */
   const PRESALE_ADDR = "0xd8983534dd3c369d85127f6C9B85d98768139387";
   const USDC_ADDR    = "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d";
   const BSC_CHAIN_ID = 56;
   const BSC_RPC      = "https://bsc-dataseed1.binance.org/";
-  const DECIMALS     = 18n;
-  const UNIT         = 10n ** 18n;
 
-  // Stage config (on-chain confirmed)
+  // Stage prices as plain Numbers (PRICE_SCALE = 1e8 in contract)
+  // price per GGRD in USDC = priceScaled / 1e8
   const STAGES = [
-    { end: new Date('2026-03-15T01:15:19Z'), price: 850000n,  label: "Stage 1", nextPrice: "0.0100" },
-    { end: new Date('2026-03-20T01:15:19Z'), price: 1000000n, label: "Stage 2", nextPrice: "0.0115" },
-    { end: new Date('2026-03-26T01:15:19Z'), price: 1150000n, label: "Stage 3", nextPrice: "0.0134" },
-    { end: new Date('2026-03-31T01:15:19Z'), price: 1340000n, label: "Stage 4", nextPrice: "—" },
+    { end: new Date('2026-03-15T01:15:19Z'), priceScaled: 850000,  label: "Stage 1", nextPrice: "0.0100" },
+    { end: new Date('2026-03-20T01:15:19Z'), priceScaled: 1000000, label: "Stage 2", nextPrice: "0.0115" },
+    { end: new Date('2026-03-26T01:15:19Z'), priceScaled: 1150000, label: "Stage 3", nextPrice: "0.0134" },
+    { end: new Date('2026-03-31T01:15:19Z'), priceScaled: 1340000, label: "Stage 4", nextPrice: "—" },
   ];
-  const PRICE_SCALE = 100_000_000n;
-  const HARDCAP = 31250n * UNIT;
-  const SOFTCAP = 20000n * UNIT;
 
-  // ABI fragments (minimal)
-  const PRESALE_ABI = [
-    "function totalRaised() view returns (uint256)",
-    "function finalized() view returns (bool)",
-    "function buy(uint256 payAmount)",
-  ];
+  const HARDCAP_USDC = 31250;   // plain numbers for progress bar
+  const SOFTCAP_USDC = 20000;
+
   const ERC20_ABI = [
-    "function balanceOf(address) view returns (uint256)",
-    "function allowance(address,address) view returns (uint256)",
-    "function approve(address,uint256) returns (bool)",
-    "function decimals() view returns (uint8)",
+    "function allowance(address owner, address spender) view returns (uint256)",
+    "function approve(address spender, uint256 amount) returns (bool)",
   ];
 
-  // State
+  /* ---- step enum: 1=connect  2=approve  3=buy  4=done ---- */
+  let STEP = 1;
   let provider, signer, userAddr;
-  let currentStep = 0; // 0=connect, 1=approve, 2=buy, 3=done
-  let raised = 0n;
 
-  // DOM refs
-  const $ = id => document.getElementById(id);
-  const btn      = $('w-btn');
-  const statusEl = $('w-status');
-  const usdcIn   = $('w-usdc-in');
-  const ggrdOut  = $('w-ggrd-out');
-  const progressEl = $('w-progress');
-  const raisedEl   = $('w-raised-val');
-  const pctEl      = $('w-pct');
-  const netWarn    = $('w-network-warn');
-  const step1El    = $('ws-1');
-  const step2El    = $('ws-2');
-  const step3El    = $('ws-3');
+  /* ---- DOM ---- */
+  const $    = id => document.getElementById(id);
+  const btn  = $('w-btn');
+  const stEl = $('w-status');
 
-  // Helpers
-  function getCurrentStage() {
-    const now = new Date();
-    for (const s of STAGES) { if (now < s.end) return s; }
-    return null;
-  }
-
-  function calcGGRD(usdcFloat) {
-    if (!usdcFloat || isNaN(usdcFloat) || usdcFloat <= 0) return "0.00";
-    const s = getCurrentStage();
-    if (!s) return "0.00";
-    const payIn = BigInt(Math.floor(usdcFloat * 1e6)) * (UNIT / 1000000n);
-    // tokenOut = payIn * PRICE_SCALE / stagePriceScaled
-    const tokenOut = payIn * PRICE_SCALE / s.price;
-    return (Number(tokenOut) / 1e18).toLocaleString('en-US', {maximumFractionDigits: 2});
-  }
-
-  function setStatus(msg, cls='') {
-    statusEl.textContent = msg;
-    statusEl.className = 'w-status ' + cls;
+  function setStatus(msg, cls) {
+    stEl.textContent = msg;
+    stEl.className = 'w-status ' + (cls || '');
   }
 
   function setStep(n) {
-    currentStep = n;
-    [step1El, step2El, step3El].forEach((el, i) => {
-      el.className = 'w-step' + (i+1 === n ? ' active' : (i+1 < n ? ' done' : ''));
+    STEP = n;
+    ['ws-1','ws-2','ws-3'].forEach((id, i) => {
+      const el = $(id);
+      if (!el) return;
+      el.classList.remove('active','done');
+      if (i + 1 === n)      el.classList.add('active');
+      else if (i + 1 < n)   el.classList.add('done');
     });
   }
 
-  function updateStageUI() {
-    const s = getCurrentStage();
-    if (!s) {
-      $('w-stage-val').textContent = "ENDED";
-      $('w-price-val').textContent = "—";
-      btn.disabled = true;
-      return;
-    }
-    $('w-stage-val').textContent = s.label;
-    $('w-price-val').textContent = `$${(Number(s.price) / 100_000_000).toFixed(4)} USDC`;
-    $('w-next-price').textContent = s.nextPrice !== '—' ? `Next: $${s.nextPrice}` : 'Last stage';
+  /* ---- stage helpers ---- */
+  function getStage() {
+    const now = new Date();
+    return STAGES.find(s => now < s.end) || null;
   }
 
-  async function rpcCall(data) {
-    const res = await fetch(BSC_RPC, {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({jsonrpc:'2.0',id:1,method:'eth_call',
-        params:[{to:PRESALE_ADDR,data},`latest`]})
-    });
-    const j = await res.json();
-    return j.result || '0x';
+  function calcGGRD(usdcFloat) {
+    if (!usdcFloat || usdcFloat <= 0) return "0.00";
+    const s = getStage();
+    if (!s) return "0.00";
+    // contract formula: tokenOut = payIn * PRICE_SCALE * SALE_UNIT / (stagePriceScaled * PAY_UNIT)
+    // since SALE_UNIT == PAY_UNIT == 1e18, they cancel:
+    // tokenOut (in GGRD) = payIn_usdc / pricePerGGRD = usdcFloat / (priceScaled / 1e8)
+    const pricePerGGRD = s.priceScaled / 1e8;
+    const ggrd = usdcFloat / pricePerGGRD;
+    return ggrd.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
 
+  /* ---- RPC fetch for totalRaised ---- */
   async function fetchRaised() {
     try {
-      const raw = await rpcCall('0xc5c4744c'); // totalRaised()
-      raised = raw && raw !== '0x' ? BigInt(raw) : 0n;
-      const raisedFloat = Number(raised) / 1e18;
-      const hardFloat = Number(HARDCAP) / 1e18;
-      const pct = Math.min((raisedFloat / hardFloat) * 100, 100);
-      if (raisedEl) raisedEl.textContent = `$${raisedFloat.toLocaleString('en-US',{maximumFractionDigits:0})} USDC`;
-      if (progressEl) progressEl.style.width = Math.max(pct, 0.5) + '%';
-      if (pctEl) pctEl.textContent = pct.toFixed(1) + '%';
-    } catch(e) { /* silent */ }
+      const resp = await fetch(BSC_RPC, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          jsonrpc: '2.0', id: 1, method: 'eth_call',
+          params: [{ to: PRESALE_ADDR, data: '0xc5c4744c' }, 'latest']
+        })
+      });
+      const j = await resp.json();
+      const raw = j.result;
+      if (!raw || raw === '0x') return;
+      const raisedWei = BigInt(raw);
+      const raisedUsdc = Number(raisedWei) / 1e18;
+      const pct = Math.min((raisedUsdc / HARDCAP_USDC) * 100, 100);
+      const rEl = $('w-raised-val');
+      const pEl = $('w-pct');
+      const prEl = $('w-progress');
+      if (rEl) rEl.textContent = `$${raisedUsdc.toLocaleString('en-US', { maximumFractionDigits: 0 })} USDC`;
+      if (pEl) pEl.textContent = pct.toFixed(1) + '%';
+      if (prEl) prEl.style.width = Math.max(pct, 0.5) + '%';
+    } catch (_) { /* silent */ }
   }
 
-  // Input handler
-  if (usdcIn) {
-    usdcIn.addEventListener('input', () => {
-      const v = parseFloat(usdcIn.value);
-      if (ggrdOut) ggrdOut.textContent = calcGGRD(v);
-    });
+  /* ---- UI init ---- */
+  function initUI() {
+    const s = getStage();
+    if (s) {
+      const sv = $('w-stage-val');
+      const pv = $('w-price-val');
+      const np = $('w-next-price');
+      if (sv) sv.textContent = s.label;
+      if (pv) pv.textContent = `$${(s.priceScaled / 1e8).toFixed(4)} USDC`;
+      if (np) np.textContent = s.nextPrice !== '—' ? `Next: $${s.nextPrice}` : 'Last stage';
+    } else {
+      const sv = $('w-stage-val'); if (sv) sv.textContent = "ENDED";
+      const pv = $('w-price-val'); if (pv) pv.textContent = "—";
+      if (btn) { btn.disabled = true; btn.textContent = "PRESALE ENDED"; }
+    }
+    const inp = $('w-usdc-in');
+    if (inp) {
+      inp.addEventListener('input', () => {
+        const out = $('w-ggrd-out');
+        if (out) out.textContent = calcGGRD(parseFloat(inp.value) || 0);
+      });
+    }
+    fetchRaised();
+    setInterval(fetchRaised, 30000);
+    setStep(1);
+    setStatus('Connect wallet to start');
+
+    // add confetti keyframe once
+    const styleEl = document.createElement('style');
+    styleEl.textContent = `@keyframes floatUp{from{transform:translateY(0);opacity:1}to{transform:translateY(-60vh);opacity:0}}`;
+    document.head.appendChild(styleEl);
   }
 
-  // Connect wallet
+  /* ---- parseUnits safe wrapper (avoids toFixed float artifact) ---- */
+  function safeParseUnits(usdcFloat) {
+    // multiply by 1e6 to get micro-USDC integer, then scale to 18 decimals
+    const microUsdc = Math.round(usdcFloat * 1e6);
+    return BigInt(microUsdc) * BigInt(1e12); // 1e6 * 1e12 = 1e18
+  }
+
+  /* ---- STEP 1: connect wallet ---- */
   async function connectWallet() {
     if (!window.ethereum) {
-      setStatus("⚠ No wallet found. Install MetaMask!", 'err');
-      window.open('https://metamask.io', '_blank');
+      setStatus("⚠ Install MetaMask or another Web3 wallet!", 'err');
+      setTimeout(() => window.open('https://metamask.io', '_blank'), 1000);
       return;
     }
     try {
-      setStatus("Connecting wallet...", 'warn');
       btn.disabled = true;
-      const accounts = await window.ethereum.request({method:'eth_requestAccounts'});
+      setStatus("Requesting accounts…", 'warn');
+
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       userAddr = accounts[0];
-      // Check network
-      const chainId = await window.ethereum.request({method:'eth_chainId'});
-      if (parseInt(chainId,16) !== BSC_CHAIN_ID) {
-        setStatus("Switch to BNB Smart Chain!", 'err');
-        netWarn.style.display = 'block';
+
+      // ensure BSC network
+      const chainHex = await window.ethereum.request({ method: 'eth_chainId' });
+      if (parseInt(chainHex, 16) !== BSC_CHAIN_ID) {
+        setStatus("Switching to BNB Smart Chain…", 'warn');
+        const nw = $('w-network-warn');
+        if (nw) nw.style.display = 'block';
         try {
           await window.ethereum.request({
-            method:'wallet_switchEthereumChain',
-            params:[{chainId:'0x38'}]
+            method: 'wallet_switchEthereumChain',
+            params: [{ chainId: '0x38' }]
           });
-          netWarn.style.display = 'none';
-        } catch(switchErr) {
-          // Add network if not present
-          try {
+        } catch (switchErr) {
+          if (switchErr.code === 4902) {
             await window.ethereum.request({
-              method:'wallet_addEthereumChain',
-              params:[{
-                chainId:'0x38',
-                chainName:'BNB Smart Chain',
-                nativeCurrency:{name:'BNB',symbol:'BNB',decimals:18},
-                rpcUrls:['https://bsc-dataseed1.binance.org/'],
-                blockExplorerUrls:['https://bscscan.com/']
+              method: 'wallet_addEthereumChain',
+              params: [{
+                chainId: '0x38',
+                chainName: 'BNB Smart Chain',
+                nativeCurrency: { name: 'BNB', symbol: 'BNB', decimals: 18 },
+                rpcUrls: ['https://bsc-dataseed1.binance.org/'],
+                blockExplorerUrls: ['https://bscscan.com/']
               }]
             });
-          } catch(e) { setStatus("Please switch to BSC manually", 'err'); btn.disabled=false; return; }
+          } else {
+            throw switchErr;
+          }
         }
+        if (nw) nw.style.display = 'none';
       }
+
       provider = new ethers.BrowserProvider(window.ethereum);
       signer   = await provider.getSigner();
-      const short = userAddr.slice(0,6) + '...' + userAddr.slice(-4);
+
+      const short = userAddr.slice(0, 6) + '…' + userAddr.slice(-4);
       setStatus(`✓ Connected: ${short}`, 'ok');
       btn.disabled = false;
-      setStep(2);
       btn.textContent = "APPROVE USDC";
       btn.className = 'w-connect-btn approve-mode';
-    } catch(e) {
-      setStatus(e.message?.slice(0,60) || 'Connection failed', 'err');
+      setStep(2);
+
+    } catch (e) {
+      setStatus((e.message || 'Connection cancelled').slice(0, 70), 'err');
       btn.disabled = false;
     }
   }
 
-  // Approve USDC
+  /* ---- STEP 2: approve USDC ---- */
   async function approveUSDC() {
-    const usdcVal = parseFloat(usdcIn?.value || 0);
-    if (!usdcVal || usdcVal < 50) {
-      setStatus("Minimum buy: 50 USDC", 'err'); return;
-    }
-    if (usdcVal > 3000) {
-      setStatus("Max per wallet: 3,000 USDC", 'err'); return;
-    }
+    const usdcVal = parseFloat($('w-usdc-in')?.value || '0');
+    if (isNaN(usdcVal) || usdcVal < 50)  { setStatus("Minimum: 50 USDC", 'err'); return; }
+    if (usdcVal > 3000)                   { setStatus("Maximum: 3,000 USDC per wallet", 'err'); return; }
+
     try {
       btn.disabled = true;
-      setStatus("Checking allowance...", 'warn');
-      const usdcContract = new ethers.Contract(USDC_ADDR, ERC20_ABI, signer);
-      const payAmount = ethers.parseUnits(usdcVal.toFixed(18), 18);
-      const allowance = await usdcContract.allowance(userAddr, PRESALE_ADDR);
-      if (allowance >= payAmount) {
-        setStatus("✓ Already approved. Ready to buy!", 'ok');
-        setStep(3);
-        btn.textContent = "🚀 BUY GGRD";
-        btn.className = 'w-connect-btn buying-mode';
+      setStatus("Checking USDC allowance…", 'warn');
+
+      const usdc = new ethers.Contract(USDC_ADDR, ERC20_ABI, signer);
+      const payAmount = safeParseUnits(usdcVal);
+      const allowance = await usdc.allowance(userAddr, PRESALE_ADDR);
+
+      if (BigInt(allowance) >= payAmount) {
+        setStatus("✓ Allowance OK — ready to buy!", 'ok');
         btn.disabled = false;
+        btn.textContent = "🚀 BUY GGRD NOW";
+        btn.className = 'w-connect-btn buying-mode';
+        setStep(3);
         return;
       }
-      setStatus("Approving USDC... Confirm in wallet", 'warn');
-      const tx = await usdcContract.approve(PRESALE_ADDR, payAmount);
-      setStatus("Waiting for approval tx...", 'warn');
+
+      setStatus("Confirm USDC approval in your wallet…", 'warn');
+      const tx = await usdc.approve(PRESALE_ADDR, payAmount);
+      setStatus("Waiting for approval confirmation…", 'warn');
       await tx.wait();
+
       setStatus("✓ USDC approved!", 'ok');
-      setStep(3);
-      btn.textContent = "🚀 BUY GGRD";
-      btn.className = 'w-connect-btn buying-mode';
       btn.disabled = false;
-    } catch(e) {
-      setStatus(e.reason?.slice(0,60) || e.message?.slice(0,60) || 'Approval failed', 'err');
+      btn.textContent = "🚀 BUY GGRD NOW";
+      btn.className = 'w-connect-btn buying-mode';
+      setStep(3);
+
+    } catch (e) {
+      setStatus((e.reason || e.message || 'Approval failed').slice(0, 70), 'err');
       btn.disabled = false;
     }
   }
 
-  // Buy
+  /* ---- STEP 3: buy ---- */
   async function buyGGRD() {
-    const usdcVal = parseFloat(usdcIn?.value || 0);
-    if (!usdcVal || usdcVal < 50) {
-      setStatus("Minimum buy: 50 USDC", 'err'); return;
-    }
+    const usdcVal = parseFloat($('w-usdc-in')?.value || '0');
+    if (isNaN(usdcVal) || usdcVal < 50) { setStatus("Minimum: 50 USDC", 'err'); return; }
+
     try {
       btn.disabled = true;
-      setStatus("Confirm purchase in wallet...", 'warn');
-      const presaleContract = new ethers.Contract(
+      setStatus("Confirm purchase in your wallet…", 'warn');
+
+      const presale = new ethers.Contract(
         PRESALE_ADDR,
         ["function buy(uint256 payAmount) external"],
         signer
       );
-      const payAmount = ethers.parseUnits(usdcVal.toFixed(18), 18);
-      const tx = await presaleContract.buy(payAmount);
-      setStatus("Transaction sent! Waiting...", 'warn');
+      const payAmount = safeParseUnits(usdcVal);
+      const tx = await presale.buy(payAmount);
+      setStatus("Transaction sent — waiting for confirmation…", 'warn');
       await tx.wait();
+
       const ggrdAmt = calcGGRD(usdcVal);
-      setStatus(`✅ Done! You bought ~${ggrdAmt} GGRD 🎉`, 'ok');
-      btn.textContent = "✅ PURCHASE COMPLETE";
+      setStatus(`🎉 Done! ~${ggrdAmt} GGRD incoming!`, 'ok');
+      btn.textContent = "✅ PURCHASED!";
       btn.className = 'w-connect-btn';
-      setStep(3);
+      setStep(4);
       fetchRaised();
-      // Confetti emoji burst
-      for(let i=0;i<5;i++){
-        setTimeout(()=>{
-          const el=document.createElement('div');
-          el.textContent=['🎉','🚀','😂','💸','🟡'][i];
-          el.style.cssText=`position:fixed;left:${20+i*15}vw;top:80vh;font-size:2rem;pointer-events:none;z-index:9999;animation:floatUp 2s ease forwards`;
+
+      const emojis = ['🎉','🚀','😂','💸','🟡'];
+      emojis.forEach((em, i) => {
+        setTimeout(() => {
+          const el = document.createElement('div');
+          el.textContent = em;
+          el.style.cssText = `position:fixed;left:${15+i*17}vw;top:80vh;font-size:2.5rem;pointer-events:none;z-index:99999;animation:floatUp 2.5s ease forwards`;
           document.body.appendChild(el);
-          setTimeout(()=>el.remove(),2100);
-        },i*100);
-      }
-    } catch(e) {
+          setTimeout(() => el.remove(), 2600);
+        }, i * 120);
+      });
+
+    } catch (e) {
       const msg = e.reason || e.data?.message || e.message || 'Transaction failed';
-      setStatus(msg.slice(0,80), 'err');
+      setStatus(msg.slice(0, 80), 'err');
       btn.disabled = false;
-      btn.textContent = "🚀 BUY GGRD";
+      btn.textContent = "🚀 BUY GGRD NOW";
     }
   }
 
-  // Main button handler
+  /* ---- button dispatcher ---- */
   if (btn) {
     btn.addEventListener('click', () => {
-      if (currentStep === 0) connectWallet();
-      else if (currentStep === 2) approveUSDC();
-      else if (currentStep === 3) buyGGRD();
+      if (STEP === 1) connectWallet();
+      else if (STEP === 2) approveUSDC();
+      else if (STEP === 3) buyGGRD();
     });
   }
 
-  // Handle account/chain changes
+  /* ---- wallet events ---- */
   if (window.ethereum) {
     window.ethereum.on('accountsChanged', () => location.reload());
-    window.ethereum.on('chainChanged', () => location.reload());
+    window.ethereum.on('chainChanged',    () => location.reload());
   }
 
-  // Init
-  updateStageUI();
-  fetchRaised();
-  setInterval(fetchRaised, 30000);
-  setStep(1);
-
-  // Float up animation for confetti
-  const style = document.createElement('style');
-  style.textContent = `@keyframes floatUp{from{transform:translateY(0);opacity:1}to{transform:translateY(-60vh);opacity:0}}`;
-  document.head.appendChild(style);
+  /* ---- boot ---- */
+  initUI();
 
 })();
-
 </script>
 </body>
 </html>
