@@ -1668,7 +1668,8 @@ footer {
 
 </style>
 <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@walletconnect/ethereum-provider@2.17.3/dist/umd/index.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@walletconnect/modal@2.7.0/dist/cdn/bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@walletconnect/ethereum-provider@2.17.3/dist/index.umd.js"></script>
 </head>
 <body>
 
@@ -2572,64 +2573,60 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
   /* ─── connect via WalletConnect ──────────────── */
   async function connectWC() {
-    if (WC_PROJECT_ID === "YOUR_WALLETCONNECT_PROJECT_ID") {
-      setStatus("⚠ WalletConnect needs a Project ID — see TODO in code",'err');
-      closeModal(); return;
-    }
+    // Zamknij nasz modal — WalletConnect pokaże własny z QR
+    closeModal();
     try {
-      setStatus("Starting WalletConnect…",'warn');
-      const WCProvider = window.EthereumProvider;
-      if (!WCProvider) { setStatus("WalletConnect failed to load",'err'); closeModal(); return; }
+      setStatus("Uruchamiam WalletConnect…", 'warn');
+
+      // Poprawna nazwa globalnego eksportu UMD
+      const WCPkg = window["@walletconnect/ethereum-provider"];
+      const WCProvider = WCPkg && (WCPkg.EthereumProvider || WCPkg.default || WCPkg);
+      if (!WCProvider || typeof WCProvider.init !== 'function') {
+        setStatus("⚠ WalletConnect nie załadowany — odśwież stronę", 'err');
+        return;
+      }
 
       const wc = await WCProvider.init({
         projectId: WC_PROJECT_ID,
         chains: [BSC_CHAIN_ID],
         optionalChains: [BSC_CHAIN_ID],
         rpcMap: { [BSC_CHAIN_ID]: BSC_RPC },
-        showQrModal: false,
+        showQrModal: true,          // WalletConnect pokazuje własny modal z QR
+        qrModalOptions: {
+          themeMode: 'dark',
+          themeVariables: {
+            '--wcm-accent-color':      '#FFE000',
+            '--wcm-background-color':  '#080808',
+            '--wcm-font-family':       'Courier Prime, monospace',
+          }
+        },
         metadata: {
-          name: 'Giggle Reloaded Presale',
-          description: 'GGRD Presale on BSC',
-          url: 'https://ggrd.me',
-          icons: ['https://ggrd.me/img/ggrd-logo-512.png']
+          name:        'Giggle Reloaded Presale',
+          description: 'GGRD Presale — BSC',
+          url:         'https://ggrd.me',
+          icons:       ['https://ggrd.me/img/ggrd-logo-512.png']
         }
       });
 
-      // show QR inside the still-open modal
-      wc.on('display_uri', uri => {
-        $('wm-wallet-list').style.display = 'none';
-        const qrArea = $('wm-qr-area');
-        qrArea.classList.add('show');
-        $('wm-qr-uri').textContent = uri;
-        drawQR(uri, $('wm-qr-canvas'));
-        // update modal title
-        const titleEl = document.querySelector('.wm-title');
-        if (titleEl) titleEl.textContent = 'SCAN WITH WALLET';
-      });
-
       await wc.connect();
+
       const accounts = wc.accounts;
-      if (!accounts?.length) throw new Error("No accounts");
+      if (!accounts?.length) throw new Error("Brak kont po połączeniu");
       userAddr = accounts[0];
       provider = new ethers.BrowserProvider(wc);
       signer   = await provider.getSigner();
       onConnected();
 
-      wc.on('accountsChanged', ()=>location.reload());
-      wc.on('chainChanged',    ()=>location.reload());
-      wc.on('disconnect',      ()=>location.reload());
+      wc.on('accountsChanged', () => location.reload());
+      wc.on('chainChanged',    () => location.reload());
+      wc.on('disconnect',      () => location.reload());
 
     } catch(e) {
-      const msg = e.message || 'WalletConnect failed';
-      // don't close if user cancelled intentionally (modal already has back btn)
-      if (!msg.includes('User rejected') && !msg.includes('user rejected')) {
-        setStatus(msg.slice(0,70), 'err');
+      const msg = e.message || 'WalletConnect nie powiódł się';
+      if (!msg.toLowerCase().includes('user rejected') &&
+          !msg.toLowerCase().includes('user closed')) {
+        setStatus(msg.slice(0, 80), 'err');
       }
-      // reset modal state
-      $('wm-qr-area').classList.remove('show');
-      $('wm-wallet-list').style.display = 'flex';
-      const titleEl = document.querySelector('.wm-title');
-      if (titleEl) titleEl.textContent = 'CONNECT WALLET';
     }
   }
 
