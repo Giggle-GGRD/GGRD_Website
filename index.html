@@ -4,1530 +4,1535 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="index,follow">
-<meta name="theme-color" content="#081017">
-<title>Giggle Reloaded (GGRD) - BSC Mainnet, USDC Presale, Safe Governance</title>
-<meta name="description" content="Giggle Reloaded (GGRD) on BNB Smart Chain: fixed-supply token, USDC presale escrow, Safe plus timelock governance, staking and charity vesting. Verify official addresses on BscScan.">
+<meta name="theme-color" content="#080808">
+<title>Giggle Reloaded (GGRD) — The Meme Token That Gives Back 😂💸</title>
+<meta name="description" content="GGRD is the BSC meme coin that actually does something. Fixed supply, USDC presale live NOW, charity vesting on-chain. No rugs. Just giggling to the moon.">
 <link rel="canonical" href="https://ggrd.me/">
 <link rel="icon" type="image/png" href="img/ggrd-logo-512.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Courier+Prime:wght@400;700&family=Black+Han+Sans&display=swap" rel="stylesheet">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Giggle Reloaded">
 <meta property="og:url" content="https://ggrd.me/">
-<meta property="og:title" content="Giggle Reloaded (GGRD) - BSC Mainnet Technical Overview">
-<meta property="og:description" content="USDC presale escrow, Safe governance, timelocks, staking and charity vesting on BNB Smart Chain.">
+<meta property="og:title" content="Giggle Reloaded (GGRD) — The Meme Token That Gives Back 😂">
+<meta property="og:description" content="USDC presale live on BSC. Fixed supply. Charity vesting on-chain. Staking. Safe governance. This ain't your average meme coin.">
 <meta property="og:image" content="https://ggrd.me/img/ggrd-og-banner.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@ContactGiggle">
-<meta name="twitter:title" content="Giggle Reloaded (GGRD) - BSC Mainnet Technical Overview">
-<meta name="twitter:description" content="Fixed-supply token with USDC presale escrow, Safe governance and transparent on-chain operations.">
+<meta name="twitter:title" content="Giggle Reloaded (GGRD) — Meme Token That Gives Back 😂">
+<meta name="twitter:description" content="Fixed supply. USDC presale. Charity on-chain. BSC. ngmi if you miss Stage 1.">
 <meta name="twitter:image" content="https://ggrd.me/img/ggrd-og-banner.png">
-<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Giggle Reloaded",
-  "alternateName": "GGRD",
-  "url": "https://ggrd.me",
-  "logo": "https://ggrd.me/img/ggrd-logo-512.png",
-  "sameAs": [
-    "https://x.com/ContactGiggle",
-    "https://t.me/GGRDofficial"
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "What is the official GGRD token contract address?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "The official GGRD token contract is 0xA0d5663d57b7D7EF975D2F02BcAEaf5c94c671f9 on BNB Smart Chain mainnet."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Which asset can be used in the presale?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "The current presale accepts only USDC on BNB Smart Chain."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How are raised funds split after successful finalize?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "PresaleEscrow8020 splits raised USDC as 80 percent to liquidity wallet and 20 percent to marketing wallet."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Does GGRD have transfer taxes?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "GGRD token design is 0 percent transfer tax with no blacklist and no freeze logic."
-      }
-    }
-  ]
-}
-</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Giggle Reloaded","alternateName":"GGRD","url":"https://ggrd.me","logo":"https://ggrd.me/img/ggrd-logo-512.png","sameAs":["https://x.com/ContactGiggle","https://t.me/GGRDofficial"]}</script>
 <style>
 :root {
-  --bg: #081017;
-  --bg-soft: #0d1b26;
-  --card: #122635;
-  --line: #27465e;
-  --text: #ebf5ff;
-  --muted: #9bb6ca;
-  --accent: #79f0b4;
-  --accent-2: #f6d365;
-  --warn: #ff8a5b;
+  --yellow: #FFE000;
+  --green: #00FF41;
+  --red: #FF2233;
+  --bg: #080808;
+  --bg2: #0f0f0f;
+  --bg3: #141414;
+  --white: #F5F5F5;
+  --gray: #888;
+  --border: #222;
 }
-* { box-sizing: border-box; }
-html, body { margin: 0; padding: 0; }
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
 body {
-  font-family: "Space Grotesk", sans-serif;
-  color: var(--text);
-  background:
-    radial-gradient(circle at 10% 10%, rgba(121,240,180,0.18), transparent 42%),
-    radial-gradient(circle at 90% 0%, rgba(246,211,101,0.13), transparent 38%),
-    linear-gradient(180deg, #081017, #091824 28%, #0a131b 100%);
-  line-height: 1.6;
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'Courier Prime', monospace;
+  overflow-x: hidden;
+  cursor: crosshair;
 }
-a { color: inherit; text-decoration: none; }
-.container { width: min(1160px, 92vw); margin: 0 auto; }
-.header {
-  position: sticky;
+
+/* SCANLINES OVERLAY */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.08) 2px, rgba(0,0,0,0.08) 4px);
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* NOISE */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.4;
+}
+
+/* ===== NAV ===== */
+nav {
+  position: fixed;
   top: 0;
-  z-index: 20;
-  background: rgba(8,16,23,0.88);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(121,240,180,0.22);
-}
-.header-inner {
+  width: 100%;
+  z-index: 1000;
+  background: rgba(8,8,8,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
   display: flex;
-  gap: 24px;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 0;
+  padding: 0 2rem;
+  height: 60px;
 }
-.brand {
+
+.nav-logo {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-family: "Bebas Neue", sans-serif;
-  letter-spacing: 1px;
-  font-size: 28px;
+  font-family: 'Bangers', cursive;
+  font-size: 1.6rem;
+  letter-spacing: 2px;
+  color: var(--yellow);
+  text-decoration: none;
 }
-.brand img { width: 40px; height: 40px; }
-.nav {
+
+.nav-logo img { width: 32px; height: 32px; border-radius: 50%; }
+
+.nav-links {
   display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
-  font-size: 14px;
-  color: var(--muted);
+  gap: 1.5rem;
+  list-style: none;
 }
-.nav a:hover { color: var(--accent); }
-.hero {
-  padding: 72px 0 36px;
-}
-.kicker {
-  display: inline-block;
-  font-size: 12px;
+
+.nav-links a {
+  color: var(--gray);
+  text-decoration: none;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
   text-transform: uppercase;
-  letter-spacing: 1.5px;
-  color: var(--accent-2);
-  border: 1px solid rgba(246,211,101,0.4);
-  border-radius: 999px;
-  padding: 6px 12px;
-  margin-bottom: 18px;
+  transition: color 0.2s;
 }
-.hero h1 {
-  font-family: "Bebas Neue", sans-serif;
-  font-size: clamp(44px, 9vw, 86px);
-  line-height: 0.95;
-  margin: 0 0 14px;
-  letter-spacing: 1.2px;
-}
-.hero p {
-  margin: 0;
-  max-width: 840px;
-  color: #d5e8f7;
-  font-size: 18px;
-}
-.hero-grid {
-  margin-top: 28px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 14px;
-}
-.stat {
-  background: linear-gradient(145deg, rgba(18,38,53,0.9), rgba(10,24,35,0.95));
-  border: 1px solid rgba(121,240,180,0.25);
-  border-radius: 14px;
-  padding: 16px;
-}
-.stat .v {
-  display: block;
+.nav-links a:hover { color: var(--yellow); }
+
+.nav-cta {
+  background: var(--yellow);
+  color: #000 !important;
   font-weight: 700;
-  font-size: 26px;
-  color: var(--accent);
+  padding: 6px 16px;
+  border-radius: 2px;
+  transition: transform 0.1s, background 0.1s !important;
 }
-.stat .l {
-  color: var(--muted);
-  font-size: 13px;
-}
-.actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 24px;
-}
-.btn {
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  padding: 12px 18px;
-  font-weight: 700;
-  font-size: 14px;
-  transition: 0.2s ease;
-}
-.btn:hover { transform: translateY(-1px); }
-.btn-primary {
-  background: var(--accent);
-  color: #032113;
-  border-color: rgba(121,240,180,0.6);
-}
-.btn-secondary {
-  background: rgba(121,240,180,0.1);
-  color: var(--accent);
-}
-.section { padding: 56px 0; }
-.section h2 {
-  margin: 0 0 10px;
-  font-family: "Bebas Neue", sans-serif;
-  letter-spacing: 1px;
-  font-size: 46px;
-}
-.section .lead {
-  margin: 0 0 22px;
-  color: var(--muted);
-  font-size: 17px;
-}
-.grid {
-  display: grid;
-  gap: 16px;
-}
-.grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
-.grid-3 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
-.card {
-  background: linear-gradient(145deg, rgba(18,38,53,0.94), rgba(10,24,35,0.96));
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  padding: 18px;
-}
-.card h3 {
-  margin: 0 0 8px;
-  font-size: 19px;
-}
-.card p {
-  margin: 0;
-  color: var(--muted);
-}
-.table-wrap {
-  overflow-x: auto;
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  background: rgba(12,24,34,0.95);
-}
-table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 680px;
-}
-th, td {
-  text-align: left;
-  padding: 12px 14px;
-  border-bottom: 1px solid rgba(39,70,94,0.5);
-  font-size: 14px;
-}
-th {
-  color: #a8e7c6;
-  background: rgba(121,240,180,0.08);
-  font-weight: 700;
-}
-.code {
-  display: block;
-  font-family: Consolas, Monaco, monospace;
-  font-size: 13px;
-  word-break: break-all;
-  color: #d8f6e6;
-  background: rgba(121,240,180,0.08);
-  border: 1px solid rgba(121,240,180,0.24);
-  border-radius: 10px;
-  padding: 10px;
-  margin: 8px 0 12px;
-}
-.addr-actions {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-.btn-mini {
-  font-size: 12px;
-  padding: 8px 10px;
-  border-radius: 10px;
-  border: 1px solid var(--line);
-  background: rgba(255,255,255,0.02);
-  color: #d9edf9;
-}
-.warning {
-  border: 1px solid rgba(255,138,91,0.45);
-  background: rgba(255,138,91,0.08);
-  color: #ffd9cc;
-  border-radius: 14px;
-  padding: 14px;
-}
-.presale-kpis {
-  margin-bottom: 16px;
-}
-.kpi {
-  background: linear-gradient(145deg, rgba(18,38,53,0.94), rgba(10,24,35,0.96));
-  border: 1px solid rgba(121,240,180,0.24);
-  border-radius: 14px;
-  padding: 16px;
-}
-.kpi-label {
-  display: block;
-  font-size: 13px;
-  color: var(--muted);
-  margin-bottom: 8px;
-}
-.kpi-value {
-  display: block;
-  font-size: 24px;
-  font-weight: 700;
-  color: #dbffeb;
-}
-.status-pill {
-  display: inline-flex;
-  align-items: center;
-  padding: 6px 10px;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 700;
-}
-.status-pill-neutral {
-  color: #d7ebfa;
-  border: 1px solid rgba(155,182,202,0.45);
-  background: rgba(155,182,202,0.1);
-}
-.status-pill-live {
-  color: #08341f;
-  border: 1px solid rgba(121,240,180,0.8);
-  background: rgba(121,240,180,0.9);
-}
-.status-pill-success {
-  color: #062a1a;
-  border: 1px solid rgba(121,240,180,0.86);
-  background: rgba(121,240,180,0.96);
-}
-.status-pill-fail {
-  color: #ffe7dc;
-  border: 1px solid rgba(255,138,91,0.66);
-  background: rgba(255,138,91,0.22);
-}
-.progress-wrap {
-  width: 100%;
-  height: 14px;
-  border-radius: 999px;
-  border: 1px solid var(--line);
-  background: rgba(9,24,36,0.94);
+.nav-cta:hover { background: var(--green) !important; color: #000 !important; transform: scale(1.05); }
+
+/* ===== TICKER ===== */
+.ticker-wrap {
+  background: var(--yellow);
   overflow: hidden;
-  margin-top: 2px;
+  padding: 8px 0;
+  margin-top: 60px;
+  position: relative;
+  z-index: 100;
 }
-.progress-bar {
-  height: 100%;
-  width: 0;
-  background: linear-gradient(90deg, var(--accent), #8df7d8);
-  transition: width 0.2s ease;
-}
-.progress-caption {
-  font-size: 13px;
-  color: var(--muted);
-  margin: 10px 0 0;
-}
-.wallet-row {
+
+.ticker {
   display: flex;
-  gap: 8px;
-  align-items: center;
-  flex-wrap: wrap;
+  gap: 0;
+  width: max-content;
+  animation: ticker 40s linear infinite;
 }
-.wallet-badge {
-  display: inline-flex;
-  border: 1px solid rgba(121,240,180,0.4);
-  background: rgba(121,240,180,0.1);
-  border-radius: 999px;
-  font-size: 12px;
-  padding: 6px 10px;
-  color: #c1f9de;
+
+.ticker span {
+  color: #000;
+  font-family: 'Bangers', cursive;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  padding: 0 2rem;
+  white-space: nowrap;
 }
-.wallet-address {
-  font-family: Consolas, Monaco, monospace;
-  font-size: 12px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(155,182,202,0.28);
-  padding: 6px 9px;
-  border-radius: 10px;
+
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
-.form-label {
-  font-size: 13px;
-  color: var(--muted);
-}
-.form-input {
-  width: 100%;
-  border-radius: 10px;
-  border: 1px solid var(--line);
-  background: rgba(9,24,36,0.9);
-  color: var(--text);
-  font-size: 15px;
-  padding: 10px 12px;
-  outline: none;
-}
-.form-input:focus {
-  border-color: rgba(121,240,180,0.45);
-  box-shadow: 0 0 0 2px rgba(121,240,180,0.1);
-}
-.hint {
-  font-size: 12px;
-  color: var(--muted);
-}
-.hint.warn {
-  color: #ffd9cc;
-}
-.hint.ok {
-  color: #c1f9de;
-}
-.wallet-metrics {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-.metric {
-  border: 1px solid rgba(39,70,94,0.58);
-  border-radius: 12px;
-  padding: 10px;
-  background: rgba(12,24,34,0.8);
-}
-.metric span {
-  display: block;
-  color: var(--muted);
-  font-size: 12px;
-}
-.metric strong {
-  display: block;
-  margin-top: 4px;
-  font-size: 16px;
-}
-.kpi-sub {
-  display: block;
-  margin-top: 6px;
-  font-size: 12px;
-  color: var(--muted);
-}
-.presale-meta {
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 12px;
-}
-.stage-pill {
-  display: inline-flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-width: 84px;
-  border-radius: 999px;
-  font-size: 12px;
+  padding: 6rem 2rem 4rem;
+  position: relative;
+  text-align: center;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255,224,0,0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 30% at 80% 80%, rgba(0,255,65,0.04) 0%, transparent 60%),
+    var(--bg);
+}
+
+.hero-badge {
+  display: inline-block;
+  background: var(--red);
+  color: #fff;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.7rem;
   font-weight: 700;
-  padding: 5px 10px;
-  border: 1px solid rgba(155,182,202,0.45);
-  background: rgba(155,182,202,0.1);
-  color: #d7ebfa;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  margin-bottom: 1.5rem;
+  animation: pulse-badge 2s ease-in-out infinite;
 }
-.stage-pill-active {
-  border-color: rgba(121,240,180,0.9);
-  background: rgba(121,240,180,0.92);
-  color: #042417;
+
+@keyframes pulse-badge {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
 }
-.stage-pill-upcoming {
-  border-color: rgba(246,211,101,0.65);
-  background: rgba(246,211,101,0.18);
-  color: #f7e9b3;
+
+.hero h1 {
+  font-family: 'Bangers', cursive;
+  font-size: clamp(4rem, 12vw, 9rem);
+  line-height: 0.9;
+  letter-spacing: 4px;
+  color: var(--yellow);
+  text-shadow:
+    4px 4px 0 rgba(0,0,0,0.8),
+    0 0 40px rgba(255,224,0,0.3);
+  margin-bottom: 0.5rem;
+  position: relative;
 }
-.stage-pill-closed {
-  border-color: rgba(155,182,202,0.45);
-  background: rgba(155,182,202,0.1);
-  color: #d7ebfa;
+
+.hero h1 .glitch {
+  position: relative;
+  display: inline-block;
 }
-.stage-pill-soldout {
-  border-color: rgba(255,138,91,0.72);
-  background: rgba(255,138,91,0.22);
-  color: #ffe7dc;
+
+.hero h1 .glitch::before,
+.hero h1 .glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
 }
-.wallet-actions-grid {
-  margin-top: 10px;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
+
+.hero h1 .glitch::before {
+  color: var(--red);
+  animation: glitch-1 3s infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
 }
-.wallet-actions-grid .btn {
-  width: 100%;
+
+.hero h1 .glitch::after {
+  color: var(--green);
+  animation: glitch-2 3s infinite;
+  clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+}
+
+@keyframes glitch-1 {
+  0%, 90%, 100% { transform: none; opacity: 0; }
+  92% { transform: translateX(-3px); opacity: 0.8; }
+  94% { transform: translateX(3px); opacity: 0.8; }
+  96% { transform: translateX(0); opacity: 0; }
+}
+
+@keyframes glitch-2 {
+  0%, 85%, 100% { transform: none; opacity: 0; }
+  87% { transform: translateX(3px); opacity: 0.8; }
+  89% { transform: translateX(-3px); opacity: 0.8; }
+  91% { transform: translateX(0); opacity: 0; }
+}
+
+.hero-sub {
+  font-family: 'Bangers', cursive;
+  font-size: clamp(1.2rem, 3vw, 2rem);
+  letter-spacing: 3px;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+  opacity: 0.9;
+}
+
+.hero-tagline {
+  font-size: 0.9rem;
+  color: var(--gray);
+  letter-spacing: 1px;
+  margin-bottom: 2.5rem;
+  max-width: 500px;
+}
+
+.hero-tagline span { color: var(--green); }
+
+/* COUNTDOWN */
+.countdown-box {
+  background: var(--bg3);
+  border: 1px solid var(--yellow);
+  padding: 1.5rem 2.5rem;
+  margin-bottom: 2.5rem;
+  position: relative;
+}
+
+.countdown-box::before {
+  content: '⚡ PRESALE ENDS IN ⚡';
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--yellow);
+  color: #000;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  padding: 2px 10px;
+  white-space: nowrap;
+}
+
+.countdown {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.cd-unit {
   text-align: center;
 }
-.btn:disabled,
-.btn-mini:disabled {
-  opacity: 0.56;
-  cursor: not-allowed;
-  transform: none;
+
+.cd-num {
+  font-family: 'Bangers', cursive;
+  font-size: 3rem;
+  color: var(--yellow);
+  line-height: 1;
+  min-width: 70px;
+  display: block;
 }
-.btn-success-soft {
-  background: rgba(121,240,180,0.18);
-  color: #d2ffe9;
-  border-color: rgba(121,240,180,0.5);
+
+.cd-label {
+  font-size: 0.6rem;
+  letter-spacing: 2px;
+  color: var(--gray);
+  text-transform: uppercase;
 }
-.presale-cta-mobile {
-  display: none;
-  position: sticky;
-  bottom: 10px;
-  z-index: 6;
-  margin-top: 16px;
-  padding: 10px;
-  border: 1px solid rgba(121,240,180,0.3);
-  border-radius: 14px;
-  background: rgba(7,18,27,0.94);
-  backdrop-filter: blur(6px);
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
+
+.cd-sep {
+  font-family: 'Bangers', cursive;
+  font-size: 2.5rem;
+  color: var(--yellow);
+  opacity: 0.4;
+  margin-bottom: 12px;
 }
-.faq details {
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  margin-bottom: 10px;
-  background: rgba(12,24,34,0.9);
+
+.hero-btns {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 3rem;
 }
-.faq summary {
+
+.btn-primary {
+  background: var(--yellow);
+  color: #000;
+  font-family: 'Bangers', cursive;
+  font-size: 1.4rem;
+  letter-spacing: 3px;
+  padding: 14px 36px;
+  border: none;
   cursor: pointer;
-  padding: 14px;
+  text-decoration: none;
+  display: inline-block;
+  transition: transform 0.1s, box-shadow 0.1s;
+  position: relative;
+  clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+}
+
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border: 1px solid rgba(0,0,0,0.3);
+  clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+  pointer-events: none;
+}
+
+.btn-primary:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 rgba(0,255,65,0.5);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--green);
+  font-family: 'Bangers', cursive;
+  font-size: 1.4rem;
+  letter-spacing: 3px;
+  padding: 13px 36px;
+  border: 2px solid var(--green);
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: transform 0.1s, background 0.1s, color 0.1s;
+  clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+}
+
+.btn-secondary:hover {
+  background: var(--green);
+  color: #000;
+  transform: translate(-2px, -2px);
+}
+
+.hero-stats {
+  display: flex;
+  gap: 3rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-val {
+  font-family: 'Bangers', cursive;
+  font-size: 1.8rem;
+  color: var(--yellow);
+  letter-spacing: 2px;
+}
+
+.stat-label {
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  color: var(--gray);
+  text-transform: uppercase;
+}
+
+/* STAGE INDICATOR */
+.stage-indicator {
+  position: absolute;
+  top: 80px;
+  right: 2rem;
+  background: var(--bg3);
+  border: 1px solid var(--green);
+  padding: 0.8rem 1.2rem;
+  text-align: center;
+}
+
+.stage-indicator .s-label {
+  font-size: 0.6rem;
+  letter-spacing: 2px;
+  color: var(--gray);
+  text-transform: uppercase;
+}
+
+.stage-indicator .s-num {
+  font-family: 'Bangers', cursive;
+  font-size: 2.5rem;
+  color: var(--green);
+  line-height: 1;
+}
+
+.stage-indicator .s-price {
+  font-size: 0.75rem;
+  color: var(--white);
   font-weight: 700;
 }
-.faq p {
-  margin: 0;
-  padding: 0 14px 14px;
-  color: var(--muted);
+
+/* ===== SECTIONS ===== */
+section {
+  padding: 5rem 2rem;
+  position: relative;
 }
-.footer {
-  border-top: 1px solid rgba(121,240,180,0.2);
-  padding: 28px 0 36px;
-  color: var(--muted);
-  font-size: 14px;
+
+.section-inner {
+  max-width: 1100px;
+  margin: 0 auto;
 }
-.footer a { color: #d0f4e2; }
-@media (max-width: 760px) {
-  .nav { display: none; }
-  .section h2 { font-size: 38px; }
-  .hero p { font-size: 16px; }
-  .wallet-metrics { grid-template-columns: 1fr; }
-  .wallet-actions-grid { grid-template-columns: 1fr; }
-  .presale-meta { align-items: flex-start; }
-  .presale-cta-mobile { display: grid; }
-  .presale-cta-mobile .btn { width: 100%; padding: 13px 12px; }
+
+.section-title {
+  font-family: 'Bangers', cursive;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  letter-spacing: 4px;
+  color: var(--yellow);
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.section-sub {
+  text-align: center;
+  color: var(--gray);
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  margin-bottom: 3.5rem;
+}
+
+/* ===== WHY GGRD ===== */
+.why-section { background: var(--bg2); }
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5px;
+  border: 1.5px solid var(--border);
+}
+
+.why-card {
+  background: var(--bg);
+  padding: 2rem 1.5rem;
+  border: none;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.2s;
+}
+
+.why-card:hover { background: #111; }
+
+.why-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--yellow);
+  transform: scaleX(0);
+  transition: transform 0.3s;
+}
+
+.why-card:hover::before { transform: scaleX(1); }
+
+.why-emoji {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.why-title {
+  font-family: 'Bangers', cursive;
+  font-size: 1.4rem;
+  letter-spacing: 2px;
+  color: var(--yellow);
+  margin-bottom: 0.5rem;
+}
+
+.why-text {
+  font-size: 0.82rem;
+  color: var(--gray);
+  line-height: 1.7;
+}
+
+.why-text strong { color: var(--white); }
+
+/* ===== TOKENOMICS ===== */
+.tokenomics-section { background: var(--bg); }
+
+.token-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .token-grid { grid-template-columns: 1fr; }
+  .stage-indicator { display: none; }
+}
+
+.pie-wrapper {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  margin: 0 auto;
+}
+
+.pie-svg { width: 280px; height: 280px; }
+
+.pie-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.pie-center .pc-num {
+  font-family: 'Bangers', cursive;
+  font-size: 1.8rem;
+  color: var(--yellow);
+}
+
+.pie-center .pc-label {
+  font-size: 0.6rem;
+  color: var(--gray);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.token-slices { list-style: none; }
+
+.token-slice {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.slice-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.slice-info {}
+.slice-name {
+  font-family: 'Bangers', cursive;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  color: var(--white);
+}
+
+.slice-detail {
+  font-size: 0.75rem;
+  color: var(--gray);
+}
+
+.slice-pct {
+  margin-left: auto;
+  font-family: 'Bangers', cursive;
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+}
+
+/* ===== PRESALE STAGES ===== */
+.presale-section {
+  background: var(--bg2);
+}
+
+.stages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin-bottom: 3rem;
+}
+
+.stage-card {
+  background: var(--bg);
+  padding: 1.8rem 1.5rem;
+  position: relative;
+  transition: background 0.2s;
+}
+
+.stage-card.active {
+  background: #111500;
+  border-top: 3px solid var(--green);
+}
+
+.stage-card.active::after {
+  content: '← YOU ARE HERE';
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: var(--green);
+  color: #000;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 2px 6px;
+  animation: pulse-badge 1.5s ease-in-out infinite;
+}
+
+.stage-num {
+  font-family: 'Bangers', cursive;
+  font-size: 3rem;
+  color: var(--border);
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  line-height: 1;
+}
+
+.stage-card.active .stage-num { color: rgba(0,255,65,0.15); }
+
+.stage-label {
+  font-size: 0.6rem;
+  letter-spacing: 2px;
+  color: var(--gray);
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+
+.stage-dates {
+  font-size: 0.75rem;
+  color: var(--gray);
+  margin-bottom: 0.8rem;
+}
+
+.stage-price {
+  font-family: 'Bangers', cursive;
+  font-size: 2.2rem;
+  letter-spacing: 1px;
+  color: var(--yellow);
+  margin-bottom: 0.2rem;
+}
+
+.stage-card.active .stage-price { color: var(--green); }
+
+.stage-tokens {
+  font-size: 0.75rem;
+  color: var(--gray);
+  margin-bottom: 0.3rem;
+}
+
+.stage-wallet {
+  font-size: 0.75rem;
+  color: var(--gray);
+}
+
+.stage-wallet strong { color: var(--white); }
+
+/* SOFTCAP BARS */
+.caps-row {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.cap-box {
+  flex: 1;
+  min-width: 200px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 1.2rem 1.5rem;
+}
+
+.cap-label {
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  color: var(--gray);
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+
+.cap-val {
+  font-family: 'Bangers', cursive;
+  font-size: 1.8rem;
+  color: var(--yellow);
+  letter-spacing: 1px;
+}
+
+.cap-desc {
+  font-size: 0.7rem;
+  color: var(--gray);
+  margin-top: 0.2rem;
+}
+
+/* ===== CHARITY ===== */
+.charity-section {
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+}
+
+.charity-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 40% at 50% 50%, rgba(0,255,65,0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.charity-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.charity-big {
+  font-family: 'Bangers', cursive;
+  font-size: clamp(3rem, 8vw, 6rem);
+  letter-spacing: 4px;
+  color: var(--green);
+  line-height: 0.9;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 0 40px rgba(0,255,65,0.2);
+}
+
+.charity-text {
+  font-size: 0.9rem;
+  color: var(--gray);
+  line-height: 1.8;
+  max-width: 600px;
+  margin: 0 auto 2.5rem;
+}
+
+.charity-text strong { color: var(--white); }
+
+.charity-vesting {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cv-cell {
+  background: var(--bg2);
+  padding: 1.2rem 1rem;
+  text-align: center;
+}
+
+.cv-pct {
+  font-family: 'Bangers', cursive;
+  font-size: 2.2rem;
+  color: var(--green);
+}
+
+.cv-name {
+  font-size: 0.65rem;
+  letter-spacing: 1px;
+  color: var(--gray);
+  text-transform: uppercase;
+  margin-top: 0.2rem;
+}
+
+.charity-note {
+  font-size: 0.72rem;
+  color: var(--gray);
+  border: 1px solid var(--border);
+  padding: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.charity-note strong { color: var(--green); }
+
+/* ===== ADDRESSES ===== */
+.addresses-section { background: var(--bg2); }
+
+.addr-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.78rem;
+}
+
+.addr-table th {
+  text-align: left;
+  font-size: 0.6rem;
+  letter-spacing: 2px;
+  color: var(--gray);
+  text-transform: uppercase;
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.addr-table td {
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.addr-table tr:hover td { background: #111; }
+
+.addr-component {
+  font-family: 'Bangers', cursive;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  color: var(--white);
+}
+
+.addr-hash {
+  font-family: 'Courier Prime', monospace;
+  color: var(--green);
+  font-size: 0.75rem;
+  word-break: break-all;
+}
+
+.addr-link {
+  color: var(--yellow);
+  text-decoration: none;
+  font-size: 0.65rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: 1px solid rgba(255,224,0,0.3);
+  padding: 3px 8px;
+  white-space: nowrap;
+  transition: background 0.2s, color 0.2s;
+}
+
+.addr-link:hover { background: var(--yellow); color: #000; }
+
+/* ===== STAKING ===== */
+.staking-section { background: var(--bg); }
+
+.staking-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+.sk-card {
+  background: var(--bg2);
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+
+.sk-icon { font-size: 2rem; margin-bottom: 0.8rem; display: block; }
+
+.sk-val {
+  font-family: 'Bangers', cursive;
+  font-size: 2.5rem;
+  color: var(--yellow);
+  letter-spacing: 2px;
+  line-height: 1;
+}
+
+.sk-label {
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  color: var(--gray);
+  text-transform: uppercase;
+  margin-top: 0.3rem;
+}
+
+/* ===== DISCLAIMER ===== */
+.disclaimer-section {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+}
+
+.disclaimer-text {
+  font-size: 0.7rem;
+  color: var(--gray);
+  line-height: 1.7;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  padding: 3rem 2rem 2rem;
+}
+
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2rem;
+  align-items: start;
+}
+
+.footer-brand {}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Bangers', cursive;
+  font-size: 1.8rem;
+  letter-spacing: 2px;
+  color: var(--yellow);
+  text-decoration: none;
+  margin-bottom: 0.5rem;
+}
+
+.footer-logo img { width: 28px; height: 28px; border-radius: 50%; }
+
+.footer-desc {
+  font-size: 0.75rem;
+  color: var(--gray);
+  max-width: 320px;
+  line-height: 1.6;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  align-items: flex-end;
+}
+
+.footer-social {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--gray);
+  text-decoration: none;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: 1px solid var(--border);
+  padding: 7px 14px;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.social-btn:hover { border-color: var(--yellow); color: var(--yellow); }
+
+.footer-copy {
+  font-size: 0.65rem;
+  color: #444;
+  text-align: right;
+}
+
+/* SCROLL ANIMATION */
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (max-width: 600px) {
+  .footer-inner { grid-template-columns: 1fr; }
+  .footer-links { align-items: flex-start; }
+  .footer-copy { text-align: left; }
+  .countdown { gap: 0.8rem; }
+  .cd-num { font-size: 2.2rem; min-width: 50px; }
+  .hero-stats { gap: 1.5rem; }
 }
 </style>
 </head>
 <body>
-<header class="header">
-  <div class="container header-inner">
-    <a class="brand" href="#top">
-      <img src="img/ggrd-logo-512.png" alt="GGRD logo">
-      <span>GGRD</span>
-    </a>
-    <nav class="nav">
-      <a href="#overview">Overview</a>
-      <a href="#tokenomics">Tokenomics</a>
-      <a href="#contracts">Contracts</a>
-      <a href="#presale">Presale</a>
-      <a href="#charity">Charity</a>
-      <a href="#whitepaper">Whitepaper</a>
-      <a href="#roadmap">Roadmap</a>
-      <a href="#faq">FAQ</a>
-    </nav>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <img src="img/ggrd-logo-512.png" alt="GGRD logo">
+    GGRD
+  </a>
+  <ul class="nav-links">
+    <li><a href="#presale">Presale</a></li>
+    <li><a href="#tokenomics">Tokenomics</a></li>
+    <li><a href="#staking">Staking</a></li>
+    <li><a href="#charity">Charity</a></li>
+    <li><a href="#addresses">Contracts</a></li>
+    <li><a href="GGRD_Whitepaper_EN.html">Whitepaper</a></li>
+    <li><a class="nav-cta" href="https://bscscan.com/address/0xd8983534dd3c369d85127f6C9B85d98768139387" target="_blank" rel="noopener">BUY GGRD ↗</a></li>
+  </ul>
+</nav>
+
+<!-- TICKER -->
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker">
+    <span>😂 GIGGLE RELOADED</span>
+    <span>🚀 PRESALE LIVE NOW</span>
+    <span>💸 10,000,000 FIXED SUPPLY</span>
+    <span>🔒 NO MINT · NO RUG</span>
+    <span>❤️ CHARITY ON-CHAIN</span>
+    <span>🏦 SAFE MULTISIG GOVERNANCE</span>
+    <span>⚡ STAGE 1 — 0.0085 USDC</span>
+    <span>🐂 BSC MAINNET</span>
+    <span>😂 GIGGLE RELOADED</span>
+    <span>🚀 PRESALE LIVE NOW</span>
+    <span>💸 10,000,000 FIXED SUPPLY</span>
+    <span>🔒 NO MINT · NO RUG</span>
+    <span>❤️ CHARITY ON-CHAIN</span>
+    <span>🏦 SAFE MULTISIG GOVERNANCE</span>
+    <span>⚡ STAGE 1 — 0.0085 USDC</span>
+    <span>🐂 BSC MAINNET</span>
   </div>
-</header>
+</div>
 
-<main id="top">
-  <section class="hero" id="overview">
-    <div class="container">
-      <span class="kicker">BSC Mainnet Live</span>
-      <h1>Giggle Reloaded (GGRD)</h1>
-      <p>
-        Fixed-supply token on BNB Smart Chain with USDC presale escrow, Safe plus timelock governance,
-        staking controls and transparent charity vesting.
+<!-- HERO -->
+<section class="hero">
+
+  <div class="stage-indicator">
+    <div class="s-label">CURRENT STAGE</div>
+    <div class="s-num" id="liveStageNum">1</div>
+    <div class="s-price" id="liveStagePrice">0.0085 USDC</div>
+  </div>
+
+  <div class="hero-badge" role="status">🔴 PRESALE ACTIVE — BSC MAINNET</div>
+
+  <h1>
+    <span class="glitch" data-text="GIGGLE">GIGGLE</span><br>
+    <span class="glitch" data-text="RELOADED">RELOADED</span>
+  </h1>
+
+  <p class="hero-sub">$GGRD · BNB Smart Chain</p>
+  <p class="hero-tagline">The meme coin that actually <span>does something</span>. Fixed supply. USDC presale. Charity vesting locked on-chain. No funny business — just funny.</p>
+
+  <div class="countdown-box">
+    <div class="countdown">
+      <div class="cd-unit">
+        <span class="cd-num" id="cd-days">--</span>
+        <span class="cd-label">days</span>
+      </div>
+      <span class="cd-sep">:</span>
+      <div class="cd-unit">
+        <span class="cd-num" id="cd-hours">--</span>
+        <span class="cd-label">hours</span>
+      </div>
+      <span class="cd-sep">:</span>
+      <div class="cd-unit">
+        <span class="cd-num" id="cd-mins">--</span>
+        <span class="cd-label">mins</span>
+      </div>
+      <span class="cd-sep">:</span>
+      <div class="cd-unit">
+        <span class="cd-num" id="cd-secs">--</span>
+        <span class="cd-label">secs</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-btns">
+    <a class="btn-primary" href="https://bscscan.com/address/0xd8983534dd3c369d85127f6C9B85d98768139387" target="_blank" rel="noopener">
+      🚀 BUY IN PRESALE
+    </a>
+    <a class="btn-secondary" href="https://t.me/GGRDofficial" target="_blank" rel="noopener">
+      💬 JOIN TELEGRAM
+    </a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-val">10M</div>
+      <div class="stat-label">Fixed Supply</div>
+    </div>
+    <div class="stat">
+      <div class="stat-val">0%</div>
+      <div class="stat-label">Transfer Tax</div>
+    </div>
+    <div class="stat">
+      <div class="stat-val">2/3</div>
+      <div class="stat-label">Safe Multisig</div>
+    </div>
+    <div class="stat">
+      <div class="stat-val">20%</div>
+      <div class="stat-label">Charity Allocation</div>
+    </div>
+    <div class="stat">
+      <div class="stat-val">10% APR</div>
+      <div class="stat-label">Staking Rewards</div>
+    </div>
+  </div>
+
+</section>
+
+<!-- WHY GGRD -->
+<section class="why-section" id="why">
+  <div class="section-inner">
+    <h2 class="section-title fade-up">WHY $GGRD THO? 🤔</h2>
+    <p class="section-sub fade-up">Look, we know you've seen it all. Here's why this one's different.</p>
+    <div class="why-grid">
+      <div class="why-card fade-up">
+        <span class="why-emoji">🔒</span>
+        <div class="why-title">NO RUGS. EVER.</div>
+        <p class="why-text">Fixed supply minted <strong>once</strong> in the constructor. No post-deploy mint. No blacklist. No freeze. No hidden owner tricks. Contract is the boss now.</p>
+      </div>
+      <div class="why-card fade-up">
+        <span class="why-emoji">🏦</span>
+        <div class="why-title">SAFE + TIMELOCK GOVERNANCE</div>
+        <p class="why-text">2-of-3 Safe multisig. 48h/72h timelocks on critical actions. <strong>No single wallet controls your money.</strong> Even the team needs consensus.</p>
+      </div>
+      <div class="why-card fade-up">
+        <span class="why-emoji">💰</span>
+        <div class="why-title">USDC PRESALE, NOT VIBES</div>
+        <p class="why-text">You buy with USDC. Escrow contract holds it. <strong>If softcap isn't hit — 100% refund.</strong> On-chain. No "trust us bro".</p>
+      </div>
+      <div class="why-card fade-up">
+        <span class="why-emoji">❤️</span>
+        <div class="why-title">CHARITY IS IN THE CODE</div>
+        <p class="why-text">20% of supply is <strong>charity-vested on-chain.</strong> 40/30/30 split. 1-year cliff. 3-year linear vesting. Not a promise — a contract.</p>
+      </div>
+      <div class="why-card fade-up">
+        <span class="why-emoji">📈</span>
+        <div class="why-title">STAKING WITH REAL CAPS</div>
+        <p class="why-text">10% APR. 30-day minimum lock. 3M GGRD reward cap hardcoded on-chain. <strong>No infinite printer.</strong> Early exit = 10% penalty.</p>
+      </div>
+      <div class="why-card fade-up">
+        <span class="why-emoji">😂</span>
+        <div class="why-title">WE'RE STILL A MEME COIN</div>
+        <p class="why-text">Let's be honest — we're having fun. But fun with <strong>audited OpenZeppelin primitives</strong>, not fun with your life savings. DYOR. NFA.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOKENOMICS -->
+<section class="tokenomics-section" id="tokenomics">
+  <div class="section-inner">
+    <h2 class="section-title fade-up">TOKENOMICS 🥧</h2>
+    <p class="section-sub fade-up">10,000,000 GGRD. Fixed forever. No mint button exists.</p>
+    <div class="token-grid">
+      <div class="pie-wrapper fade-up">
+        <svg class="pie-svg" viewBox="0 0 200 200">
+          <!-- Presale 30% -->
+          <circle r="80" cx="100" cy="100" fill="none" stroke="#FFE000" stroke-width="36"
+            stroke-dasharray="150.8 352.5" stroke-dashoffset="0" transform="rotate(-90 100 100)"/>
+          <!-- Staking 30% -->
+          <circle r="80" cx="100" cy="100" fill="none" stroke="#00FF41" stroke-width="36"
+            stroke-dasharray="150.8 352.5" stroke-dashoffset="-150.8" transform="rotate(-90 100 100)"/>
+          <!-- Charity 20% -->
+          <circle r="80" cx="100" cy="100" fill="none" stroke="#FF6B35" stroke-width="36"
+            stroke-dasharray="100.5 402.8" stroke-dashoffset="-301.6" transform="rotate(-90 100 100)"/>
+          <!-- Ops+LP 20% -->
+          <circle r="80" cx="100" cy="100" fill="none" stroke="#8855FF" stroke-width="36"
+            stroke-dasharray="100.5 402.8" stroke-dashoffset="-402.1" transform="rotate(-90 100 100)"/>
+          <circle r="60" cx="100" cy="100" fill="#080808"/>
+        </svg>
+        <div class="pie-center">
+          <span class="pc-num">10M</span>
+          <span class="pc-label">GGRD</span>
+        </div>
+      </div>
+      <ul class="token-slices fade-up">
+        <li class="token-slice">
+          <div class="slice-dot" style="background:#FFE000"></div>
+          <div class="slice-info">
+            <div class="slice-name">PRESALE</div>
+            <div class="slice-detail">3,000,000 GGRD · USDC escrow · 4-stage · on-chain cap</div>
+          </div>
+          <span class="slice-pct" style="color:#FFE000">30%</span>
+        </li>
+        <li class="token-slice">
+          <div class="slice-dot" style="background:#00FF41"></div>
+          <div class="slice-info">
+            <div class="slice-name">STAKING REWARDS</div>
+            <div class="slice-detail">3,000,000 GGRD · 10% APR · 730-day program · capped</div>
+          </div>
+          <span class="slice-pct" style="color:#00FF41">30%</span>
+        </li>
+        <li class="token-slice">
+          <div class="slice-dot" style="background:#FF6B35"></div>
+          <div class="slice-info">
+            <div class="slice-name">CHARITY</div>
+            <div class="slice-detail">2,000,000 GGRD · 1yr cliff · 3yr linear vest · 40/30/30 split</div>
+          </div>
+          <span class="slice-pct" style="color:#FF6B35">20%</span>
+        </li>
+        <li class="token-slice">
+          <div class="slice-dot" style="background:#8855FF"></div>
+          <div class="slice-info">
+            <div class="slice-name">OPS + LIQUIDITY</div>
+            <div class="slice-detail">2,000,000 GGRD · LP lock 12mo · GGRD/USDC pair</div>
+          </div>
+          <span class="slice-pct" style="color:#8855FF">20%</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PRESALE STAGES -->
+<section class="presale-section" id="presale">
+  <div class="section-inner">
+    <h2 class="section-title fade-up">PRESALE STAGES ⚡</h2>
+    <p class="section-sub fade-up">4 stages. Each one more expensive than the last. Degen math: buy earlier, pay less. Minimum 50 USDC.</p>
+    <div class="stages-grid fade-up">
+      <div class="stage-card active">
+        <span class="stage-num">01</span>
+        <div class="stage-label">Stage 1</div>
+        <div class="stage-dates">Mar 10 → Mar 15, 2026</div>
+        <div class="stage-price">$0.0085</div>
+        <div class="stage-tokens">1,000,000 GGRD available</div>
+        <div class="stage-wallet">Max per wallet: <strong>500 USDC</strong></div>
+      </div>
+      <div class="stage-card">
+        <span class="stage-num">02</span>
+        <div class="stage-label">Stage 2</div>
+        <div class="stage-dates">Mar 15 → Mar 20, 2026</div>
+        <div class="stage-price">$0.0100</div>
+        <div class="stage-tokens">800,000 GGRD available</div>
+        <div class="stage-wallet">Max per wallet: <strong>750 USDC</strong></div>
+      </div>
+      <div class="stage-card">
+        <span class="stage-num">03</span>
+        <div class="stage-label">Stage 3</div>
+        <div class="stage-dates">Mar 20 → Mar 26, 2026</div>
+        <div class="stage-price">$0.0115</div>
+        <div class="stage-tokens">700,000 GGRD available</div>
+        <div class="stage-wallet">Max per wallet: <strong>1,000 USDC</strong></div>
+      </div>
+      <div class="stage-card">
+        <span class="stage-num">04</span>
+        <div class="stage-label">Stage 4</div>
+        <div class="stage-dates">Mar 26 → Mar 31, 2026</div>
+        <div class="stage-price">$0.0134</div>
+        <div class="stage-tokens">500,000 GGRD available</div>
+        <div class="stage-wallet">Max per wallet: <strong>1,500 USDC</strong></div>
+      </div>
+    </div>
+    <div class="caps-row fade-up">
+      <div class="cap-box">
+        <div class="cap-label">Softcap</div>
+        <div class="cap-val">20,000 USDC</div>
+        <div class="cap-desc">Miss this → 100% refund to all buyers</div>
+      </div>
+      <div class="cap-box">
+        <div class="cap-label">Hardcap</div>
+        <div class="cap-val">31,250 USDC</div>
+        <div class="cap-desc">Hit this → presale closes immediately</div>
+      </div>
+      <div class="cap-box">
+        <div class="cap-label">On success: USDC split</div>
+        <div class="cap-val">80% / 20%</div>
+        <div class="cap-desc">80% to liquidity LP · 20% to marketing</div>
+      </div>
+      <div class="cap-box">
+        <div class="cap-label">Claim vesting</div>
+        <div class="cap-val">50% + 50%</div>
+        <div class="cap-desc">50% immediate · 50% linear over 60 days</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STAKING -->
+<section class="staking-section" id="staking">
+  <div class="section-inner">
+    <h2 class="section-title fade-up">STAKING 🥩</h2>
+    <p class="section-sub fade-up">Lock it. Stack it. Don't touch it for 30 days or pay 10% penalty. Your choice.</p>
+    <div class="staking-cards fade-up">
+      <div class="sk-card">
+        <span class="sk-icon">📊</span>
+        <div class="sk-val">10%</div>
+        <div class="sk-label">APR</div>
+      </div>
+      <div class="sk-card">
+        <span class="sk-icon">⏳</span>
+        <div class="sk-val">30 days</div>
+        <div class="sk-label">Min lock</div>
+      </div>
+      <div class="sk-card">
+        <span class="sk-icon">🎁</span>
+        <div class="sk-val">3M GGRD</div>
+        <div class="sk-label">Reward pool cap</div>
+      </div>
+      <div class="sk-card">
+        <span class="sk-icon">📅</span>
+        <div class="sk-val">730 days</div>
+        <div class="sk-label">Program duration</div>
+      </div>
+      <div class="sk-card">
+        <span class="sk-icon">⚠️</span>
+        <div class="sk-val">10%</div>
+        <div class="sk-label">Early exit penalty</div>
+      </div>
+      <div class="sk-card">
+        <span class="sk-icon">🔒</span>
+        <div class="sk-val">5M GGRD</div>
+        <div class="sk-label">Max total staked</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHARITY -->
+<section class="charity-section" id="charity">
+  <div class="section-inner">
+    <div class="charity-inner">
+      <h2 class="section-title fade-up">THE CHARITY THING ❤️</h2>
+      <p class="section-sub fade-up">Because degeneracy without purpose is just degeneracy.</p>
+      <div class="charity-big fade-up">2,000,000<br>GGRD<br>FOR GOOD</div>
+      <p class="charity-text fade-up">
+        20% of total supply is <strong>hardcoded into a vesting contract</strong> — not a wallet, not a promise, not a marketing slide. The <strong>CharityVesting403030</strong> contract splits funds across three beneficiaries at <strong>40% / 30% / 30%</strong>, with a full 1-year cliff before a single token can be claimed. Full release takes 3 years. Transparent. On-chain. Verifiable by anyone.
       </p>
-      <div class="hero-grid">
-        <div class="stat"><span class="v">10,000,000</span><span class="l">Fixed supply</span></div>
-        <div class="stat"><span class="v">0%</span><span class="l">Transfer tax</span></div>
-        <div class="stat"><span class="v">USDC</span><span class="l">Presale payment asset</span></div>
-        <div class="stat"><span class="v">2 / 3</span><span class="l">Safe multisig threshold</span></div>
-      </div>
-      <div class="actions">
-        <a class="btn btn-primary" href="GGRD_Whitepaper_EN.html">Open Whitepaper</a>
-        <a class="btn btn-secondary" href="https://bscscan.com/token/0xA0d5663d57b7D7EF975D2F02BcAEaf5c94c671f9" target="_blank" rel="noopener">Verify token on BscScan</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="tokenomics">
-    <div class="container">
-      <h2>Tokenomics</h2>
-      <p class="lead">Model aligned to mainnet contracts and v3.1 assumptions.</p>
-      <div class="grid grid-3">
-        <div class="card"><h3>Immutable rules</h3><p>No post-deploy mint. No blacklist. No freeze. 0% transfer tax.</p></div>
-        <div class="card"><h3>Governance</h3><p>Safe multisig plus 48h and 72h timelocks for critical operations.</p></div>
-        <div class="card"><h3>Presale logic</h3><p>USDC escrow with deterministic success split, refund path and claim vesting.</p></div>
-      </div>
-
-      <h3 style="margin:28px 0 10px;font-size:24px">Core allocation model</h3>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Component</th><th>Amount</th><th>Share</th><th>Notes</th></tr></thead>
-          <tbody>
-            <tr><td>Presale allocation cap</td><td>3,000,000 GGRD</td><td>30%</td><td>Hard token cap inside PresaleEscrow8020.</td></tr>
-            <tr><td>Charity allocation</td><td>2,000,000 GGRD</td><td>20%</td><td>Released through CharityVesting403030 (40/30/30).</td></tr>
-            <tr><td>Staking reward cap</td><td>3,000,000 GGRD</td><td>30%</td><td>Lifetime reward funding cap in staking contract.</td></tr>
-            <tr><td>Operations and liquidity</td><td>2,000,000 GGRD</td><td>20%</td><td>Governance-controlled operational distribution.</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h3 style="margin:28px 0 10px;font-size:24px">Presale stages (USDC)</h3>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Stage</th><th>Window</th><th>Allocation</th><th>Price (USDC)</th><th>Wallet cap</th></tr></thead>
-          <tbody>
-            <tr><td>Stage 1</td><td>Days 1-5</td><td>1,000,000 GGRD</td><td>0.0085</td><td>500 USDC</td></tr>
-            <tr><td>Stage 2</td><td>Days 6-10</td><td>800,000 GGRD</td><td>0.0100</td><td>750 USDC</td></tr>
-            <tr><td>Stage 3</td><td>Days 11-16</td><td>700,000 GGRD</td><td>0.0115</td><td>1,000 USDC</td></tr>
-            <tr><td>Stage 4</td><td>Days 17-21</td><td>500,000 GGRD</td><td>0.0134</td><td>1,500 USDC</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="warning" style="margin-top:18px">
-        Finalize success split: 80% raised USDC to liquidity wallet and 20% to marketing wallet. If softcap is not reached, buyers can refund 100% of contributed USDC.
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="contracts">
-    <div class="container">
-      <h2>Official addresses</h2>
-      <p class="lead">Verify every address on BscScan before interaction.</p>
-      <div class="grid grid-2">
-        <article class="card">
-          <h3>GGRD token</h3>
-          <span class="code" id="addr-token">0xA0d5663d57b7D7EF975D2F02BcAEaf5c94c671f9</span>
-          <div class="addr-actions">
-            <button class="btn-mini" onclick="copyAddress('addr-token', this)">Copy</button>
-            <a class="btn-mini" href="https://bscscan.com/token/0xA0d5663d57b7D7EF975D2F02BcAEaf5c94c671f9" target="_blank" rel="noopener">BscScan</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <h3>PresaleEscrow8020</h3>
-          <span class="code" id="addr-presale">0xd8983534dd3c369d85127f6C9B85d98768139387</span>
-          <div class="addr-actions">
-            <button class="btn-mini" onclick="copyAddress('addr-presale', this)">Copy</button>
-            <a class="btn-mini" href="https://bscscan.com/address/0xd8983534dd3c369d85127f6C9B85d98768139387" target="_blank" rel="noopener">BscScan</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <h3>GGRDStakingMultiV1</h3>
-          <span class="code" id="addr-staking">0x05d803135bc09e9E5006CA75C533377D7Ea0A34b</span>
-          <div class="addr-actions">
-            <button class="btn-mini" onclick="copyAddress('addr-staking', this)">Copy</button>
-            <a class="btn-mini" href="https://bscscan.com/address/0x05d803135bc09e9E5006CA75C533377D7Ea0A34b" target="_blank" rel="noopener">BscScan</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <h3>CharityVesting403030</h3>
-          <span class="code" id="addr-charity-vesting">0xE2993F0C8D2020dD9866E2d6dC5AA1D62b7C8fDC</span>
-          <div class="addr-actions">
-            <button class="btn-mini" onclick="copyAddress('addr-charity-vesting', this)">Copy</button>
-            <a class="btn-mini" href="https://bscscan.com/address/0xE2993F0C8D2020dD9866E2d6dC5AA1D62b7C8fDC" target="_blank" rel="noopener">BscScan</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <h3>MerkleAirdrop</h3>
-          <span class="code" id="addr-airdrop">0x9F64E78185ee697783E0c9ebA0F66131FFCedBD6</span>
-          <div class="addr-actions">
-            <button class="btn-mini" onclick="copyAddress('addr-airdrop', this)">Copy</button>
-            <a class="btn-mini" href="https://bscscan.com/address/0x9F64E78185ee697783E0c9ebA0F66131FFCedBD6" target="_blank" rel="noopener">BscScan</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <h3>Timelock short (48h)</h3>
-          <span class="code" id="addr-short">0xBC4655E8D5A4A4B16bD30db2fFBC94Ed05AbcE87</span>
-          <div class="addr-actions">
-            <button class="btn-mini" onclick="copyAddress('addr-short', this)">Copy</button>
-            <a class="btn-mini" href="https://bscscan.com/address/0xBC4655E8D5A4A4B16bD30db2fFBC94Ed05AbcE87" target="_blank" rel="noopener">BscScan</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <h3>Timelock long (72h)</h3>
-          <span class="code" id="addr-long">0xd4b5f94f7cF8Eb79bEd2f3Aa5693d9F97D573E31</span>
-          <div class="addr-actions">
-            <button class="btn-mini" onclick="copyAddress('addr-long', this)">Copy</button>
-            <a class="btn-mini" href="https://bscscan.com/address/0xd4b5f94f7cF8Eb79bEd2f3Aa5693d9F97D573E31" target="_blank" rel="noopener">BscScan</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <h3>USDC pay token</h3>
-          <span class="code" id="addr-usdc">0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d</span>
-          <div class="addr-actions">
-            <button class="btn-mini" onclick="copyAddress('addr-usdc', this)">Copy</button>
-            <a class="btn-mini" href="https://bscscan.com/token/0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d" target="_blank" rel="noopener">BscScan</a>
-          </div>
-        </article>
-      </div>
-
-      <h3 style="margin:26px 0 10px;font-size:24px">Governance and operations safes (2/3)</h3>
-      <div class="grid grid-2">
-        <article class="card"><h3>Governance Safe</h3><span class="code" id="addr-safe-gov">0x28218d08f6D2084eBd7CeF3f582139E7417b6300</span><div class="addr-actions"><button class="btn-mini" onclick="copyAddress('addr-safe-gov', this)">Copy</button><a class="btn-mini" href="https://bscscan.com/address/0x28218d08f6D2084eBd7CeF3f582139E7417b6300" target="_blank" rel="noopener">BscScan</a></div></article>
-        <article class="card"><h3>Liquidity Safe</h3><span class="code" id="addr-safe-liq">0x7677AC2712d161e7F75fC4316E8B3dC3FaC01009</span><div class="addr-actions"><button class="btn-mini" onclick="copyAddress('addr-safe-liq', this)">Copy</button><a class="btn-mini" href="https://bscscan.com/address/0x7677AC2712d161e7F75fC4316E8B3dC3FaC01009" target="_blank" rel="noopener">BscScan</a></div></article>
-        <article class="card"><h3>Marketing Safe</h3><span class="code" id="addr-safe-mkt">0xF2922343AdF6F2631A2f1e9b9b11c9d269f3874D</span><div class="addr-actions"><button class="btn-mini" onclick="copyAddress('addr-safe-mkt', this)">Copy</button><a class="btn-mini" href="https://bscscan.com/address/0xF2922343AdF6F2631A2f1e9b9b11c9d269f3874D" target="_blank" rel="noopener">BscScan</a></div></article>
-        <article class="card"><h3>Charity Safe A</h3><span class="code" id="addr-safe-charity">0xd58B8D79deC67F8731267B929D24A4923Bac59a3</span><div class="addr-actions"><button class="btn-mini" onclick="copyAddress('addr-safe-charity', this)">Copy</button><a class="btn-mini" href="https://bscscan.com/address/0xd58B8D79deC67F8731267B929D24A4923Bac59a3" target="_blank" rel="noopener">BscScan</a></div></article>
-      </div>
-    </div>
-  </section>
-
-    <section class="section" id="presale">
-    <div class="container">
-      <h2>Presale dashboard</h2>
-      <p class="lead">Live on-chain status for PresaleEscrow8020 on BSC mainnet, including stage progress and wallet actions.</p>
-
-      <div class="grid grid-3 presale-kpis">
-        <article class="kpi">
-          <span class="kpi-label">Presale status</span>
-          <span class="kpi-value"><span class="status-pill status-pill-neutral" id="ps-status">Loading...</span></span>
-          <span class="kpi-sub" id="ps-stage-context">Fetching stage context from chain...</span>
-        </article>
-        <article class="kpi">
-          <span class="kpi-label">Current stage</span>
-          <span class="kpi-value" id="ps-stage">--</span>
-        </article>
-        <article class="kpi">
-          <span class="kpi-label">Window (UTC)</span>
-          <span class="kpi-value" id="ps-window" style="font-size:14px;font-weight:600;line-height:1.4">--</span>
-        </article>
-        <article class="kpi">
-          <span class="kpi-label">Raised USDC</span>
-          <span class="kpi-value" id="ps-raised">--</span>
-        </article>
-        <article class="kpi">
-          <span class="kpi-label">Softcap / Hardcap</span>
-          <span class="kpi-value" id="ps-caps" style="font-size:16px">--</span>
-        </article>
-        <article class="kpi">
-          <span class="kpi-label">Sold GGRD</span>
-          <span class="kpi-value" id="ps-sold">--</span>
-        </article>
-      </div>
-
-      <div class="progress-wrap">
-        <div class="progress-bar" id="ps-progress"></div>
-      </div>
-      <p class="progress-caption" id="ps-progress-caption">Loading presale hardcap progress...</p>
-      <div class="presale-meta">
-        <p class="hint" id="ps-last-update">Last sync: --</p>
-        <a class="btn-mini" href="https://bscscan.com/address/0xd8983534dd3c369d85127f6C9B85d98768139387" target="_blank" rel="noopener">Open Presale on BscScan</a>
-      </div>
-
-      <div class="table-wrap" style="margin-top:18px">
-        <table>
-          <thead>
-            <tr>
-              <th>Stage</th>
-              <th>Window (UTC)</th>
-              <th>Price (USDC)</th>
-              <th>Wallet cap (USDC)</th>
-              <th>Sold (GGRD)</th>
-              <th>Raised (USDC)</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Stage 1</td>
-              <td id="stage1-window">--</td>
-              <td id="stage1-price">--</td>
-              <td id="stage1-wallet-cap">--</td>
-              <td id="stage1-sold">--</td>
-              <td id="stage1-raised">--</td>
-              <td id="stage1-status"><span class="stage-pill">--</span></td>
-            </tr>
-            <tr>
-              <td>Stage 2</td>
-              <td id="stage2-window">--</td>
-              <td id="stage2-price">--</td>
-              <td id="stage2-wallet-cap">--</td>
-              <td id="stage2-sold">--</td>
-              <td id="stage2-raised">--</td>
-              <td id="stage2-status"><span class="stage-pill">--</span></td>
-            </tr>
-            <tr>
-              <td>Stage 3</td>
-              <td id="stage3-window">--</td>
-              <td id="stage3-price">--</td>
-              <td id="stage3-wallet-cap">--</td>
-              <td id="stage3-sold">--</td>
-              <td id="stage3-raised">--</td>
-              <td id="stage3-status"><span class="stage-pill">--</span></td>
-            </tr>
-            <tr>
-              <td>Stage 4</td>
-              <td id="stage4-window">--</td>
-              <td id="stage4-price">--</td>
-              <td id="stage4-wallet-cap">--</td>
-              <td id="stage4-sold">--</td>
-              <td id="stage4-raised">--</td>
-              <td id="stage4-status"><span class="stage-pill">--</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="grid grid-2" style="margin-top:16px">
-        <article class="card">
-          <h3>Wallet interaction</h3>
-          <p>Connect wallet to buy with USDC, then claim or refund according to finalized result.</p>
-          <div class="wallet-row" style="margin-top:12px">
-            <span class="wallet-badge">Connected wallet</span>
-            <span class="wallet-address" id="wallet-address">Not connected</span>
-          </div>
-          <div class="wallet-actions-grid">
-            <button class="btn btn-secondary" id="btn-connect">Connect wallet</button>
-            <button class="btn btn-secondary" id="btn-refresh">Refresh data</button>
-          </div>
-          <div style="margin-top:12px">
-            <label class="form-label" for="buy-amount">USDC amount</label>
-            <input class="form-input" id="buy-amount" type="number" min="50" step="0.01" placeholder="e.g. 100">
-            <p class="hint" id="quote-hint">Estimated output: --</p>
-          </div>
-          <div class="wallet-actions-grid">
-            <button class="btn btn-secondary" id="btn-approve">Approve USDC</button>
-            <button class="btn btn-primary" id="btn-buy">Buy GGRD</button>
-          </div>
-          <div class="wallet-actions-grid">
-            <button class="btn btn-secondary" id="btn-claim">Claim tokens</button>
-            <button class="btn btn-secondary" id="btn-refund">Refund USDC</button>
-          </div>
-          <p class="hint" id="ps-action-status" style="margin-top:12px">Connect wallet to enable transactions.</p>
-        </article>
-
-        <article class="card">
-          <h3>Your presale state</h3>
-          <p>Real-time values from USDC and PresaleEscrow8020 contracts.</p>
-          <div class="wallet-metrics" style="margin-top:12px">
-            <div class="metric"><span>USDC balance</span><strong id="wm-usdc">--</strong></div>
-            <div class="metric"><span>USDC allowance</span><strong id="wm-allowance">--</strong></div>
-            <div class="metric"><span>Contributed (USDC)</span><strong id="wm-contributed">--</strong></div>
-            <div class="metric"><span>Purchased (GGRD)</span><strong id="wm-purchased">--</strong></div>
-            <div class="metric"><span>Claimable now (GGRD)</span><strong id="wm-claimable">--</strong></div>
-          </div>
-          <div class="warning" style="margin-top:14px">
-            Security note: always verify this presale address before approving funds: <span class="code" style="margin-top:8px">0xd8983534dd3c369d85127f6C9B85d98768139387</span>
-          </div>
-        </article>
-      </div>
-
-
-      <div class="presale-cta-mobile">
-        <button class="btn btn-secondary" id="btn-connect-mobile">Connect</button>
-        <button class="btn btn-primary" id="btn-buy-mobile">Buy GGRD</button>
-      </div>
-
-      <div class="grid grid-2" style="margin-top:16px">
-        <div class="card"><h3>1) Prepare wallet</h3><p>Use BSC mainnet wallet and keep a small BNB balance for gas.</p></div>
-        <div class="card"><h3>2) Acquire USDC</h3><p>Presale accepts only USDC on BSC (0x8AC7...580d).</p></div>
-        <div class="card"><h3>3) Approve and buy</h3><p>Approve USDC to presale contract, then call buy(payIn). Minimum buy is 50 USDC.</p></div>
-        <div class="card"><h3>4) Finalize and claim</h3><p>On success: 50% immediate claim plus 50% linear vesting over 60 days. On failure: full refund.</p></div>
-      </div>
-    </div>
-  </section>
-
-
-  <section class="section" id="charity">
-    <div class="container">
-      <h2>Charity allocation</h2>
-      <p class="lead">20% allocation with vesting safeguards and public tracking.</p>
-      <div class="grid grid-2">
-        <div class="card">
-          <h3>Contracted vesting model</h3>
-          <p>CharityVesting403030 uses 40/30/30 split with 12-month cliff and 24-month linear release.</p>
+      <div class="charity-vesting fade-up">
+        <div class="cv-cell">
+          <div class="cv-pct">40%</div>
+          <div class="cv-name">Charity A</div>
         </div>
-        <div class="card">
-          <h3>Operational wallet</h3>
-          <p>Current Charity A/B/C recipient setup is mapped to address 0xd58B...59a3 by project decision.</p>
+        <div class="cv-cell">
+          <div class="cv-pct">30%</div>
+          <div class="cv-name">Charity B</div>
+        </div>
+        <div class="cv-cell">
+          <div class="cv-pct">30%</div>
+          <div class="cv-name">Charity C</div>
         </div>
       </div>
-      <div class="actions" style="margin-top:20px">
-        <a class="btn btn-secondary" href="donation-policy.html">Read donation policy</a>
+      <div class="charity-note fade-up">
+        <strong>Vesting timeline:</strong> Start 2026-03-10 · Cliff 2027-03-10 · Full release 2029-03-09<br>
+        Contract: <code style="color:var(--green);font-size:0.68rem">0xE2993F0C8D2020dD9866E2d6dC5AA1D62b7C8fDC</code>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="section" id="whitepaper">
-    <div class="container">
-      <h2>Whitepaper</h2>
-      <p class="lead">Updated technical document aligned to BSC mainnet deployment and v3.1 constraints.</p>
-      <div class="grid grid-3">
-        <div class="card"><h3>Token and governance</h3><p>Fixed supply, 0% tax, Safe plus timelock ownership model.</p></div>
-        <div class="card"><h3>Presale mechanics</h3><p>USDC-only escrow, stage caps, finalize split, refund and claim formulas.</p></div>
-        <div class="card"><h3>Post-launch modules</h3><p>Staking guardrails, charity vesting and airdrop round governance.</p></div>
-      </div>
-      <div class="actions" style="margin-top:20px">
-        <a class="btn btn-primary" href="GGRD_Whitepaper_EN.html">Open full whitepaper</a>
-      </div>
+<!-- ADDRESSES -->
+<section class="addresses-section" id="addresses">
+  <div class="section-inner">
+    <h2 class="section-title fade-up">CONTRACT ADDRESSES 🧾</h2>
+    <p class="section-sub fade-up">BSC Mainnet · chainId 56 · Always verify before signing. NFA.</p>
+    <div style="overflow-x:auto" class="fade-up">
+      <table class="addr-table">
+        <thead>
+          <tr>
+            <th>Component</th>
+            <th>Address</th>
+            <th>Verify</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="addr-component">GGRD Token</span></td>
+            <td><span class="addr-hash">0xA0d5663d57b7D7EF975D2F02BcAEaf5c94c671f9</span></td>
+            <td><a class="addr-link" href="https://bscscan.com/token/0xA0d5663d57b7D7EF975D2F02BcAEaf5c94c671f9" target="_blank" rel="noopener">BscScan ↗</a></td>
+          </tr>
+          <tr>
+            <td><span class="addr-component">Presale Escrow</span></td>
+            <td><span class="addr-hash">0xd8983534dd3c369d85127f6C9B85d98768139387</span></td>
+            <td><a class="addr-link" href="https://bscscan.com/address/0xd8983534dd3c369d85127f6C9B85d98768139387" target="_blank" rel="noopener">BscScan ↗</a></td>
+          </tr>
+          <tr>
+            <td><span class="addr-component">Staking V1</span></td>
+            <td><span class="addr-hash">0x05d803135bc09e9E5006CA75C533377D7Ea0A34b</span></td>
+            <td><a class="addr-link" href="https://bscscan.com/address/0x05d803135bc09e9E5006CA75C533377D7Ea0A34b" target="_blank" rel="noopener">BscScan ↗</a></td>
+          </tr>
+          <tr>
+            <td><span class="addr-component">Charity Vesting</span></td>
+            <td><span class="addr-hash">0xE2993F0C8D2020dD9866E2d6dC5AA1D62b7C8fDC</span></td>
+            <td><a class="addr-link" href="https://bscscan.com/address/0xE2993F0C8D2020dD9866E2d6dC5AA1D62b7C8fDC" target="_blank" rel="noopener">BscScan ↗</a></td>
+          </tr>
+          <tr>
+            <td><span class="addr-component">Merkle Airdrop</span></td>
+            <td><span class="addr-hash">0x9F64E78185ee697783E0c9ebA0F66131FFCedBD6</span></td>
+            <td><a class="addr-link" href="https://bscscan.com/address/0x9F64E78185ee697783E0c9ebA0F66131FFCedBD6" target="_blank" rel="noopener">BscScan ↗</a></td>
+          </tr>
+          <tr>
+            <td><span class="addr-component">Timelock 48h</span></td>
+            <td><span class="addr-hash">0xBC4655E8D5A4A4B16bD30db2fFBC94Ed05AbcE87</span></td>
+            <td><a class="addr-link" href="https://bscscan.com/address/0xBC4655E8D5A4A4B16bD30db2fFBC94Ed05AbcE87" target="_blank" rel="noopener">BscScan ↗</a></td>
+          </tr>
+          <tr>
+            <td><span class="addr-component">Timelock 72h</span></td>
+            <td><span class="addr-hash">0xd4b5f94f7cF8Eb79bEd2f3Aa5693d9F97D573E31</span></td>
+            <td><a class="addr-link" href="https://bscscan.com/address/0xd4b5f94f7cF8Eb79bEd2f3Aa5693d9F97D573E31" target="_blank" rel="noopener">BscScan ↗</a></td>
+          </tr>
+          <tr>
+            <td><span class="addr-component">Governance Safe 2/3</span></td>
+            <td><span class="addr-hash">0x28218d08f6D2084eBd7CeF3f582139E7417b6300</span></td>
+            <td><a class="addr-link" href="https://bscscan.com/address/0x28218d08f6D2084eBd7CeF3f582139E7417b6300" target="_blank" rel="noopener">BscScan ↗</a></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-  </section>
+    <p style="font-size:0.7rem;color:var(--gray);margin-top:1.5rem;text-align:center" class="fade-up">
+      USDC on BSC: <code style="color:var(--green)">0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d</code> — always verify pay token before approving
+    </p>
+  </div>
+</section>
 
-  <section class="section" id="roadmap">
-    <div class="container">
-      <h2>Roadmap</h2>
-      <p class="lead">Execution path from deployment to operational maturity.</p>
-      <div class="grid grid-2">
-        <div class="card"><h3>Phase 1 - Completed</h3><p>Mainnet deployment, verification, Safe setup, presale funded to 3,000,000 GGRD cap.</p></div>
-        <div class="card"><h3>Phase 2 - Active</h3><p>Presale participation, monitoring and transparent reporting.</p></div>
-        <div class="card"><h3>Phase 3 - Next</h3><p>Finalize, LP pair creation, 12-month LP lock, staking initialization.</p></div>
-        <div class="card"><h3>Phase 4 - Ongoing</h3><p>Charity vesting releases, airdrop rounds, community and ecosystem expansion.</p></div>
+<!-- DISCLAIMER -->
+<section class="disclaimer-section">
+  <div class="section-inner">
+    <p class="disclaimer-text">
+      ⚠️ <strong>RISK DISCLAIMER:</strong> GGRD is a high-risk crypto asset. Total capital loss is possible. This website is technical information only — not investment, financial, or legal advice. Cryptocurrency markets are volatile and unregulated. Past performance does not predict future results. Always verify contract addresses independently before interacting. DYOR. NFA. WAGMI maybe.
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a class="footer-logo" href="#">
+        <img src="img/ggrd-logo-512.png" alt="GGRD">
+        GIGGLE RELOADED
+      </a>
+      <p class="footer-desc">The meme token that gives back. Fixed supply. On-chain charity. Safe governance. BSC mainnet. Presale live until March 31, 2026.</p>
+    </div>
+    <div class="footer-links">
+      <div class="footer-social">
+        <a class="social-btn" href="https://t.me/GGRDofficial" target="_blank" rel="noopener">
+          ✈️ Telegram
+        </a>
+        <a class="social-btn" href="https://x.com/ContactGiggle" target="_blank" rel="noopener">
+          𝕏 Twitter
+        </a>
+        <a class="social-btn" href="https://github.com/Giggle-GGRD" target="_blank" rel="noopener">
+          ⌨ GitHub
+        </a>
       </div>
+      <a class="social-btn" href="GGRD_Whitepaper_EN.html" style="justify-content:center">
+        📄 Whitepaper v4.0
+      </a>
+      <p class="footer-copy">© 2026 Giggle Reloaded · ggrd.me · BSC chainId 56<br>Contracts deployed 2026-03-10</p>
     </div>
-  </section>
-
-  <section class="section faq" id="faq">
-    <div class="container">
-      <h2>FAQ</h2>
-      <p class="lead">Most common operational questions.</p>
-      <details><summary>What is the official token address?</summary><p>0xA0d5663d57b7D7EF975D2F02BcAEaf5c94c671f9 on BSC mainnet.</p></details>
-      <details><summary>Which crypto is accepted in presale?</summary><p>Only USDC on BNB Smart Chain in the current contract setup.</p></details>
-      <details><summary>What are presale caps?</summary><p>Softcap 20,000 USDC, hardcap 31,250 USDC, min buy 50 USDC, global max per wallet 3,000 USDC.</p></details>
-      <details><summary>How do claims work after successful finalize?</summary><p>50% immediate plus 50% linear vesting over 60 days.</p></details>
-      <details><summary>Does token have tax or blacklist?</summary><p>No transfer tax, no blacklist and no freeze logic.</p></details>
-    </div>
-  </section>
-</main>
-
-<footer class="footer">
-  <div class="container">
-    <p><strong>Official links:</strong> <a href="https://ggrd.me">ggrd.me</a> | <a href="GGRD_Whitepaper_EN.html">Whitepaper</a> | <a href="donation-policy.html">Donation Policy</a></p>
-    <p><strong>BscScan:</strong> <a href="https://bscscan.com/token/0xA0d5663d57b7D7EF975D2F02BcAEaf5c94c671f9" target="_blank" rel="noopener">Token</a> | <a href="https://bscscan.com/address/0xd8983534dd3c369d85127f6C9B85d98768139387" target="_blank" rel="noopener">Presale</a> | <a href="https://bscscan.com/address/0x05d803135bc09e9E5006CA75C533377D7Ea0A34b" target="_blank" rel="noopener">Staking</a></p>
-    <p><strong>Community:</strong> <a href="https://t.me/GGRDofficial" target="_blank" rel="noopener">Telegram</a> | <a href="https://x.com/ContactGiggle" target="_blank" rel="noopener">X</a></p>
-    <p style="font-size:12px">Risk warning: GGRD is a high-risk crypto asset. Nothing on this website is financial, legal or tax advice.</p>
   </div>
 </footer>
 
 <script>
-const PRESALE_CONFIG = {
-  chainId: 56,
-  chainHex: "0x38",
-  rpc: "https://bsc-dataseed.bnbchain.org",
-  presaleAddress: "0xd8983534dd3c369d85127f6C9B85d98768139387",
-  usdcAddress: "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d",
-  priceScale: 100000000n,
-  stageSeconds: [5 * 24 * 60 * 60, 10 * 24 * 60 * 60, 16 * 24 * 60 * 60, 21 * 24 * 60 * 60]
-};
+// ===== COUNTDOWN =====
+const PRESALE_END = new Date('2026-03-31T01:15:19Z').getTime();
 
-const PRESALE_ABI = [
-  "function payDecimals() view returns (uint8)",
-  "function saleDecimals() view returns (uint8)",
-  "function startTs() view returns (uint256)",
-  "function endTs() view returns (uint256)",
-  "function softcap() view returns (uint256)",
-  "function hardcap() view returns (uint256)",
-  "function minBuy() view returns (uint256)",
-  "function globalMaxPerWallet() view returns (uint256)",
-  "function tokenCap() view returns (uint256)",
-  "function currentStageId() view returns (uint8)",
-  "function totalRaised() view returns (uint256)",
-  "function totalSold() view returns (uint256)",
-  "function finalized() view returns (bool)",
-  "function succeeded() view returns (bool)",
-  "function finalizedAt() view returns (uint256)",
-  "function stageConfig(uint8) view returns (uint256 allocation, uint256 priceScaled, uint256 walletCap, uint256 sold, uint256 raised)",
-  "function contributed(address) view returns (uint256)",
-  "function purchased(address) view returns (uint256)",
-  "function claimable(address) view returns (uint256)",
-  "function quoteCurrentStage(uint256) view returns (uint8 stageId, uint256 tokenOut)",
-  "function buy(uint256 payIn)",
-  "function claim()",
-  "function refund()"
+function updateCountdown() {
+  const now = Date.now();
+  const diff = PRESALE_END - now;
+  if (diff <= 0) {
+    document.querySelector('.countdown-box').innerHTML = '<div style="font-family:Bangers,cursive;font-size:2rem;color:var(--red);letter-spacing:3px">PRESALE ENDED</div>';
+    return;
+  }
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+  document.getElementById('cd-days').textContent  = String(d).padStart(2,'0');
+  document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+  document.getElementById('cd-mins').textContent  = String(m).padStart(2,'0');
+  document.getElementById('cd-secs').textContent  = String(s).padStart(2,'0');
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// ===== LIVE STAGE =====
+const STAGES = [
+  { end: new Date('2026-03-15T01:15:19Z'), num: 1, price: '0.0085 USDC' },
+  { end: new Date('2026-03-20T01:15:19Z'), num: 2, price: '0.0100 USDC' },
+  { end: new Date('2026-03-26T01:15:19Z'), num: 3, price: '0.0115 USDC' },
+  { end: new Date('2026-03-31T01:15:19Z'), num: 4, price: '0.0134 USDC' },
 ];
 
-const ERC20_ABI = [
-  "function balanceOf(address) view returns (uint256)",
-  "function allowance(address owner, address spender) view returns (uint256)",
-  "function approve(address spender, uint256 amount) returns (bool)"
-];
-
-const state = {
-  readProvider: null,
-  browserProvider: null,
-  signer: null,
-  wallet: null,
-  presaleRead: null,
-  usdcRead: null,
-  presaleWrite: null,
-  usdcWrite: null,
-  payDecimals: 6,
-  saleDecimals: 18,
-  isBusy: false,
-  presaleFinalized: false,
-  presaleSucceeded: false,
-  currentStageId: 0
-};
-
-function copyAddress(id, btn) {
-  const v = document.getElementById(id).textContent.trim();
-  navigator.clipboard.writeText(v).then(() => {
-    const old = btn.textContent;
-    btn.textContent = "Copied";
-    setTimeout(() => { btn.textContent = old; }, 1200);
-  });
-}
-
-function setText(id, text) {
-  const el = document.getElementById(id);
-  if (el) el.textContent = text;
-}
-
-function setHtml(id, html) {
-  const el = document.getElementById(id);
-  if (el) el.innerHTML = html;
-}
-
-function fmtAmount(raw, decimals, fractionDigits = 2) {
-  const n = Number(ethers.formatUnits(raw, decimals));
-  if (!Number.isFinite(n)) return "0";
-  return n.toLocaleString("en-US", { maximumFractionDigits: fractionDigits });
-}
-
-function fmtTs(ts) {
-  const t = Number(ts);
-  if (!t) return "--";
-  return new Date(t * 1000).toISOString().replace("T", " ").replace(".000Z", " UTC");
-}
-
-function shortAddr(addr) {
-  if (!addr) return "Not connected";
-  return addr.slice(0, 8) + "..." + addr.slice(-6);
-}
-
-function asHint(message, cls = "") {
-  const el = document.getElementById("ps-action-status");
-  if (!el) return;
-  el.className = ("hint " + cls).trim();
-  el.textContent = message;
-}
-
-function parseUserAmount() {
-  const input = document.getElementById("buy-amount");
-  if (!input || !input.value) return null;
-  try {
-    return ethers.parseUnits(input.value, state.payDecimals);
-  } catch {
-    return null;
-  }
-}
-
-function stageWindowBounds(startTs, endTs, stageId) {
-  if (stageId < 1 || stageId > 4) return { start: 0, end: 0 };
-  const start = Number(startTs);
-  const cap = stageId === 1 ? 0 : PRESALE_CONFIG.stageSeconds[stageId - 2];
-  const startBound = start + cap;
-  const endBound = stageId === 4 ? Number(endTs) : start + PRESALE_CONFIG.stageSeconds[stageId - 1];
-  return { start: startBound, end: endBound };
-}
-
-function stageStatus(nowTs, startTs, endTs, stageId, soldRaw, allocRaw) {
-  const bounds = stageWindowBounds(startTs, endTs, stageId);
-  if (soldRaw >= allocRaw && allocRaw > 0n) return "Sold out";
-  if (nowTs < bounds.start) return "Upcoming";
-  if (nowTs >= bounds.start && nowTs < bounds.end) return "Active";
-  return "Closed";
-}
-
-function formatError(err) {
-  const e = err || {};
-  return e.shortMessage || e.reason || e.message || "Transaction failed";
-}
-
-function stageStatusClass(status) {
-  if (status === "Active") return "stage-pill stage-pill-active";
-  if (status === "Upcoming") return "stage-pill stage-pill-upcoming";
-  if (status === "Sold out") return "stage-pill stage-pill-soldout";
-  return "stage-pill stage-pill-closed";
-}
-
-function setStageBadge(stage, status) {
-  setHtml("stage" + stage + "-status", '<span class="' + stageStatusClass(status) + '">' + status + '</span>');
-}
-
-function updateLastSync() {
-  const now = new Date().toISOString().replace("T", " ").replace(".000Z", " UTC");
-  setText("ps-last-update", "Last sync: " + now);
-}
-
-function isPresaleOpen() {
-  return !state.presaleFinalized && state.currentStageId > 0;
-}
-
-function updateCtaState() {
-  const connectBtn = document.getElementById("btn-connect");
-  const connectMobileBtn = document.getElementById("btn-connect-mobile");
-  const refreshBtn = document.getElementById("btn-refresh");
-  const approveBtn = document.getElementById("btn-approve");
-  const buyBtn = document.getElementById("btn-buy");
-  const buyMobileBtn = document.getElementById("btn-buy-mobile");
-  const claimBtn = document.getElementById("btn-claim");
-  const refundBtn = document.getElementById("btn-refund");
-
-  if (connectBtn) {
-    connectBtn.textContent = state.wallet ? "Wallet connected" : "Connect wallet";
-    connectBtn.classList.toggle("btn-success-soft", Boolean(state.wallet));
-    connectBtn.disabled = state.isBusy;
-  }
-
-  if (connectMobileBtn) {
-    connectMobileBtn.textContent = state.wallet ? "Wallet ready" : "Connect";
-    connectMobileBtn.classList.toggle("btn-success-soft", Boolean(state.wallet));
-    connectMobileBtn.disabled = state.isBusy;
-  }
-
-  if (refreshBtn) refreshBtn.disabled = state.isBusy;
-
-  const canBuy = Boolean(state.wallet) && isPresaleOpen() && !state.isBusy;
-  const buyText = !state.wallet ? "Connect to buy" : (isPresaleOpen() ? "Buy GGRD" : "Presale unavailable");
-
-  if (buyBtn) {
-    buyBtn.textContent = buyText;
-    buyBtn.disabled = !canBuy;
-  }
-
-  if (buyMobileBtn) {
-    buyMobileBtn.textContent = buyText;
-    buyMobileBtn.disabled = !canBuy;
-  }
-
-  if (approveBtn) approveBtn.disabled = !state.wallet || !isPresaleOpen() || state.isBusy;
-  if (claimBtn) claimBtn.disabled = !state.wallet || !state.presaleFinalized || !state.presaleSucceeded || state.isBusy;
-  if (refundBtn) refundBtn.disabled = !state.wallet || !state.presaleFinalized || state.presaleSucceeded || state.isBusy;
-}
-
-async function runBusy(label, fn) {
-  if (state.isBusy) return;
-  state.isBusy = true;
-  updateCtaState();
-  asHint(label);
-  try {
-    await fn();
-  } catch (err) {
-    asHint("Transaction failed: " + formatError(err), "warn");
-  } finally {
-    state.isBusy = false;
-    updateCtaState();
-  }
-}
-
-async function refreshQuote() {
-  if (!state.presaleRead) return;
-  const payIn = parseUserAmount();
-  const quoteHint = document.getElementById("quote-hint");
-
-  if (!payIn || payIn <= 0n) {
-    if (quoteHint) quoteHint.className = "hint";
-    setText("quote-hint", "Estimated output: --");
-    return;
-  }
-
-  try {
-    const quote = await state.presaleRead.quoteCurrentStage(payIn);
-    const stageId = Number(quote[0]);
-    const out = quote[1];
-    if (stageId === 0) {
-      if (quoteHint) quoteHint.className = "hint warn";
-      setText("quote-hint", "Estimated output: presale not active");
+function updateStage() {
+  const now = new Date();
+  for (const s of STAGES) {
+    if (now < s.end) {
+      document.getElementById('liveStageNum').textContent = s.num;
+      document.getElementById('liveStagePrice').textContent = s.price;
+      // update ticker
+      document.querySelectorAll('.ticker span').forEach((el, i) => {
+        if (i === 6 || i === 14) el.textContent = `⚡ STAGE ${s.num} — ${s.price}`;
+      });
       return;
     }
-
-    const outFmt = fmtAmount(out, state.saleDecimals, 4);
-    if (quoteHint) quoteHint.className = "hint ok";
-    setText("quote-hint", "Estimated output: " + outFmt + " GGRD (Stage " + stageId + ")");
-  } catch {
-    if (quoteHint) quoteHint.className = "hint";
-    setText("quote-hint", "Estimated output: --");
   }
+  document.getElementById('liveStageNum').textContent = '—';
+  document.getElementById('liveStagePrice').textContent = 'ENDED';
 }
+updateStage();
 
-async function refreshWalletData() {
-  if (!state.wallet || !state.presaleRead || !state.usdcRead) {
-    setText("wm-usdc", "--");
-    setText("wm-allowance", "--");
-    setText("wm-contributed", "--");
-    setText("wm-purchased", "--");
-    setText("wm-claimable", "--");
-    return;
-  }
+// ===== SCROLL FADE =====
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
 
-  const [bal, allowance, contributed, purchased, claimable] = await Promise.all([
-    state.usdcRead.balanceOf(state.wallet),
-    state.usdcRead.allowance(state.wallet, PRESALE_CONFIG.presaleAddress),
-    state.presaleRead.contributed(state.wallet),
-    state.presaleRead.purchased(state.wallet),
-    state.presaleRead.claimable(state.wallet)
-  ]);
-
-  setText("wm-usdc", fmtAmount(bal, state.payDecimals, 2) + " USDC");
-  setText("wm-allowance", fmtAmount(allowance, state.payDecimals, 2) + " USDC");
-  setText("wm-contributed", fmtAmount(contributed, state.payDecimals, 2) + " USDC");
-  setText("wm-purchased", fmtAmount(purchased, state.saleDecimals, 2) + " GGRD");
-  setText("wm-claimable", fmtAmount(claimable, state.saleDecimals, 4) + " GGRD");
-}
-
-async function refreshPresaleData() {
-  if (!state.presaleRead) return;
-
-  const [startTs, endTs, totalRaised, totalSold, softcap, hardcap, minBuy, maxWallet, currentStageId, finalized, succeeded] = await Promise.all([
-    state.presaleRead.startTs(),
-    state.presaleRead.endTs(),
-    state.presaleRead.totalRaised(),
-    state.presaleRead.totalSold(),
-    state.presaleRead.softcap(),
-    state.presaleRead.hardcap(),
-    state.presaleRead.minBuy(),
-    state.presaleRead.globalMaxPerWallet(),
-    state.presaleRead.currentStageId(),
-    state.presaleRead.finalized(),
-    state.presaleRead.succeeded()
-  ]);
-
-  state.presaleFinalized = Boolean(finalized);
-  state.presaleSucceeded = Boolean(succeeded);
-  state.currentStageId = Number(currentStageId);
-
-  const nowTs = Math.floor(Date.now() / 1000);
-  let statusClass = "status-pill-neutral";
-  let statusText = "Awaiting status";
-  let stageContext = "Waiting for next on-chain state update.";
-
-  if (state.presaleFinalized && state.presaleSucceeded) {
-    statusClass = "status-pill-success";
-    statusText = "Finalized - Success";
-    stageContext = "Claim and vesting are active for buyers.";
-  } else if (state.presaleFinalized && !state.presaleSucceeded) {
-    statusClass = "status-pill-fail";
-    statusText = "Finalized - Failed";
-    stageContext = "Refund path is active for buyers.";
-  } else if (nowTs < Number(startTs)) {
-    statusClass = "status-pill-neutral";
-    statusText = "Not started";
-    stageContext = "Presale has not started yet.";
-  } else if (nowTs >= Number(endTs)) {
-    statusClass = "status-pill-neutral";
-    statusText = "Ended - awaiting finalize";
-    stageContext = "Presale ended; owner finalize is pending.";
-  } else {
-    statusClass = "status-pill-live";
-    statusText = "Live";
-    stageContext = state.currentStageId > 0 ? "Stage " + state.currentStageId + " is currently active." : "Presale is active.";
-  }
-
-  setHtml("ps-status", '<span class="status-pill ' + statusClass + '">' + statusText + '</span>');
-  setText("ps-stage-context", stageContext);
-
-  let stageText = "--";
-  if (state.currentStageId > 0) {
-    stageText = "Stage " + state.currentStageId;
-  } else if (nowTs < Number(startTs)) {
-    stageText = "Pre-start";
-  } else if (nowTs >= Number(endTs)) {
-    stageText = "Closed";
-  }
-
-  setText("ps-stage", stageText);
-  setText("ps-window", fmtTs(startTs) + " -> " + fmtTs(endTs));
-  setText("ps-raised", fmtAmount(totalRaised, state.payDecimals, 2) + " USDC");
-  setText("ps-caps", fmtAmount(softcap, state.payDecimals, 0) + " / " + fmtAmount(hardcap, state.payDecimals, 0) + " USDC");
-  setText("ps-sold", fmtAmount(totalSold, state.saleDecimals, 2) + " GGRD");
-
-  const progressPct = hardcap > 0n ? Number((totalRaised * 10000n) / hardcap) / 100 : 0;
-  const safePct = Math.max(0, Math.min(100, progressPct));
-  const bar = document.getElementById("ps-progress");
-  if (bar) bar.style.width = safePct.toFixed(2) + "%";
-  setText("ps-progress-caption", "Hardcap progress: " + safePct.toFixed(2) + "% (" + fmtAmount(totalRaised, state.payDecimals, 2) + " / " + fmtAmount(hardcap, state.payDecimals, 2) + " USDC)");
-
-  for (let stage = 1; stage <= 4; stage += 1) {
-    const cfg = await state.presaleRead.stageConfig(stage);
-    const allocation = cfg[0];
-    const priceScaled = cfg[1];
-    const walletCap = cfg[2];
-    const sold = cfg[3];
-    const raised = cfg[4];
-
-    const bounds = stageWindowBounds(startTs, endTs, stage);
-    const status = stageStatus(nowTs, startTs, endTs, stage, sold, allocation);
-    const price = Number(priceScaled) / Number(PRESALE_CONFIG.priceScale);
-
-    setText("stage" + stage + "-window", fmtTs(bounds.start) + " -> " + fmtTs(bounds.end));
-    setText("stage" + stage + "-price", price.toFixed(4));
-    setText("stage" + stage + "-wallet-cap", fmtAmount(walletCap, state.payDecimals, 0));
-    setText("stage" + stage + "-sold", fmtAmount(sold, state.saleDecimals, 2));
-    setText("stage" + stage + "-raised", fmtAmount(raised, state.payDecimals, 2));
-    setStageBadge(stage, status);
-  }
-
-  const quoteEl = document.getElementById("quote-hint");
-  if (quoteEl && quoteEl.textContent === "Estimated output: --") {
-    quoteEl.textContent = "Minimum buy: " + fmtAmount(minBuy, state.payDecimals, 2) + " USDC, global max per wallet: " + fmtAmount(maxWallet, state.payDecimals, 0) + " USDC";
-  }
-
-  updateLastSync();
-  updateCtaState();
-}
-
-async function refreshAll() {
-  try {
-    await refreshPresaleData();
-    await refreshWalletData();
-    await refreshQuote();
-  } catch (err) {
-    asHint("Read error: " + formatError(err), "warn");
-  }
-}
-
-async function connectWallet() {
-  if (!window.ethereum) {
-    asHint("No injected wallet detected. Install MetaMask.", "warn");
-    return;
-  }
-
-  try {
-    state.browserProvider = new ethers.BrowserProvider(window.ethereum);
-    await window.ethereum.request({ method: "eth_requestAccounts" });
-
-    const network = await state.browserProvider.getNetwork();
-    if (Number(network.chainId) !== PRESALE_CONFIG.chainId) {
-      try {
-        await window.ethereum.request({ method: "wallet_switchEthereumChain", params: [{ chainId: PRESALE_CONFIG.chainHex }] });
-      } catch (switchErr) {
-        if (switchErr && switchErr.code === 4902) {
-          await window.ethereum.request({
-            method: "wallet_addEthereumChain",
-            params: [{
-              chainId: "0x38",
-              chainName: "BNB Smart Chain",
-              nativeCurrency: { name: "BNB", symbol: "BNB", decimals: 18 },
-              rpcUrls: ["https://bsc-dataseed.bnbchain.org"],
-              blockExplorerUrls: ["https://bscscan.com"]
-            }]
-          });
-        } else {
-          throw switchErr;
-        }
-      }
-    }
-
-    state.signer = await state.browserProvider.getSigner();
-    state.wallet = await state.signer.getAddress();
-    state.presaleWrite = state.presaleRead.connect(state.signer);
-    state.usdcWrite = state.usdcRead.connect(state.signer);
-
-    setText("wallet-address", shortAddr(state.wallet));
-    asHint("Wallet connected.", "ok");
-    updateCtaState();
-    await refreshWalletData();
-    await refreshQuote();
-  } catch (err) {
-    asHint("Connect error: " + formatError(err), "warn");
-  }
-}
-
-async function approveUsdc() {
-  if (!state.usdcWrite || !state.wallet) {
-    asHint("Connect wallet first.", "warn");
-    return;
-  }
-
-  const payIn = parseUserAmount();
-  if (!payIn || payIn <= 0n) {
-    asHint("Enter valid USDC amount.", "warn");
-    return;
-  }
-
-  await runBusy("Approval transaction submitted...", async () => {
-    const tx = await state.usdcWrite.approve(PRESALE_CONFIG.presaleAddress, payIn);
-    await tx.wait();
-    asHint("USDC allowance updated.", "ok");
-    await refreshWalletData();
-  });
-}
-
-async function buyTokens() {
-  if (!state.presaleWrite || !state.wallet) {
-    asHint("Connect wallet first.", "warn");
-    return;
-  }
-
-  if (!isPresaleOpen()) {
-    asHint("Presale is currently not open for new buys.", "warn");
-    return;
-  }
-
-  const payIn = parseUserAmount();
-  if (!payIn || payIn <= 0n) {
-    asHint("Enter valid USDC amount.", "warn");
-    return;
-  }
-
-  await runBusy("Buy transaction submitted...", async () => {
-    const allowance = await state.usdcRead.allowance(state.wallet, PRESALE_CONFIG.presaleAddress);
-    if (allowance < payIn) {
-      asHint("Allowance too low. Click 'Approve USDC' first.", "warn");
-      return;
-    }
-
-    const tx = await state.presaleWrite.buy(payIn);
-    await tx.wait();
-    asHint("Buy confirmed on-chain.", "ok");
-    await refreshAll();
-  });
-}
-
-async function claimTokens() {
-  if (!state.presaleWrite || !state.wallet) {
-    asHint("Connect wallet first.", "warn");
-    return;
-  }
-
-  await runBusy("Claim transaction submitted...", async () => {
-    const tx = await state.presaleWrite.claim();
-    await tx.wait();
-    asHint("Claim confirmed.", "ok");
-    await refreshAll();
-  });
-}
-
-async function refundUsdc() {
-  if (!state.presaleWrite || !state.wallet) {
-    asHint("Connect wallet first.", "warn");
-    return;
-  }
-
-  await runBusy("Refund transaction submitted...", async () => {
-    const tx = await state.presaleWrite.refund();
-    await tx.wait();
-    asHint("Refund confirmed.", "ok");
-    await refreshAll();
-  });
-}
-
-async function handleBuyCta() {
-  if (!state.wallet) {
-    await connectWallet();
-    return;
-  }
-  await buyTokens();
-}
-
-async function setupPresaleDashboard() {
-
-  if (!window.ethers) {
-    asHint("ethers library failed to load.", "warn");
-    return;
-  }
-
-  state.readProvider = new ethers.JsonRpcProvider(PRESALE_CONFIG.rpc);
-  state.presaleRead = new ethers.Contract(PRESALE_CONFIG.presaleAddress, PRESALE_ABI, state.readProvider);
-  state.usdcRead = new ethers.Contract(PRESALE_CONFIG.usdcAddress, ERC20_ABI, state.readProvider);
-
-  try {
-    const [payDecimals, saleDecimals] = await Promise.all([state.presaleRead.payDecimals(), state.presaleRead.saleDecimals()]);
-    state.payDecimals = Number(payDecimals);
-    state.saleDecimals = Number(saleDecimals);
-  } catch (err) {
-    asHint("Failed to load token decimals: " + formatError(err), "warn");
-  }
-
-  const buyInput = document.getElementById("buy-amount");
-  const connectBtn = document.getElementById("btn-connect");
-  const connectMobileBtn = document.getElementById("btn-connect-mobile");
-  const refreshBtn = document.getElementById("btn-refresh");
-  const approveBtn = document.getElementById("btn-approve");
-  const buyBtn = document.getElementById("btn-buy");
-  const buyMobileBtn = document.getElementById("btn-buy-mobile");
-  const claimBtn = document.getElementById("btn-claim");
-  const refundBtn = document.getElementById("btn-refund");
-
-  if (buyInput) buyInput.addEventListener("input", refreshQuote);
-  if (connectBtn) connectBtn.addEventListener("click", connectWallet);
-  if (connectMobileBtn) connectMobileBtn.addEventListener("click", connectWallet);
-  if (refreshBtn) refreshBtn.addEventListener("click", refreshAll);
-  if (approveBtn) approveBtn.addEventListener("click", approveUsdc);
-  if (buyBtn) buyBtn.addEventListener("click", handleBuyCta);
-  if (buyMobileBtn) buyMobileBtn.addEventListener("click", handleBuyCta);
-  if (claimBtn) claimBtn.addEventListener("click", claimTokens);
-  if (refundBtn) refundBtn.addEventListener("click", refundUsdc);
-
-  if (window.ethereum && window.ethereum.on) {
-    window.ethereum.on("accountsChanged", async (accounts) => {
-      if (!accounts || accounts.length === 0) {
-        state.wallet = null;
-        state.signer = null;
-        state.presaleWrite = null;
-        state.usdcWrite = null;
-        setText("wallet-address", "Not connected");
-        asHint("Wallet disconnected.", "warn");
-        updateCtaState();
-        await refreshWalletData();
-        return;
-      }
-      await connectWallet();
-    });
-
-    window.ethereum.on("chainChanged", () => {
-      window.location.reload();
-    });
-  }
-
-  updateCtaState();
-  await refreshAll();
-  setInterval(refreshAll, 30000);
-}
-
-setupPresaleDashboard();
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 </script>
+
 </body>
 </html>
