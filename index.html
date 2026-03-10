@@ -1709,37 +1709,38 @@ footer {
       <!-- wallet list -->
       <div class="wm-wallets" id="wm-wallet-list">
 
-        <button class="wm-wallet-btn" data-wallet="metamask">
+        <button class="wm-wallet-btn" data-wallet="metamask" data-rdns="io.metamask">
           <div class="wm-wallet-icon" style="background:#F6851B20">🦊</div>
           <div class="wm-wallet-info">
             <div class="wm-wallet-name">MetaMask</div>
             <div class="wm-wallet-desc">Browser extension / MetaMask Mobile</div>
           </div>
-          <span class="wm-badge wm-badge-green">Popular</span>
+          <span class="wm-wallet-badge-status" style="font-size:0.55rem;letter-spacing:1px"></span>
         </button>
 
-        <button class="wm-wallet-btn" data-wallet="trust">
+        <button class="wm-wallet-btn" data-wallet="trust" data-rdns="com.trustwallet.app">
           <div class="wm-wallet-icon" style="background:#3375BB20">🛡️</div>
           <div class="wm-wallet-info">
             <div class="wm-wallet-name">Trust Wallet</div>
             <div class="wm-wallet-desc">Browser extension / Trust Mobile app</div>
           </div>
-          <span class="wm-badge wm-badge-yellow">BSC native</span>
+          <span class="wm-wallet-badge-status" style="font-size:0.55rem;letter-spacing:1px"></span>
         </button>
 
-        <button class="wm-wallet-btn" data-wallet="binance">
+        <button class="wm-wallet-btn" data-wallet="binance" data-rdns="com.binance.wallet">
           <div class="wm-wallet-icon" style="background:#F0B90B20">🟡</div>
           <div class="wm-wallet-info">
             <div class="wm-wallet-name">Binance Web3 Wallet</div>
             <div class="wm-wallet-desc">Built into Binance app</div>
           </div>
+          <span class="wm-wallet-badge-status" style="font-size:0.55rem;letter-spacing:1px"></span>
         </button>
 
         <button class="wm-wallet-btn" data-wallet="injected">
           <div class="wm-wallet-icon" style="background:#ffffff10">🔗</div>
           <div class="wm-wallet-info">
             <div class="wm-wallet-name">Other Injected Wallet</div>
-            <div class="wm-wallet-desc">Coinbase, Brave, OKX, Rabby...</div>
+            <div class="wm-wallet-desc">Coinbase, Brave, OKX, Rabby…</div>
           </div>
         </button>
 
@@ -1747,18 +1748,21 @@ footer {
           <div class="wm-wallet-icon" style="background:#3B99FC20">📱</div>
           <div class="wm-wallet-info">
             <div class="wm-wallet-name">WalletConnect</div>
-            <div class="wm-wallet-desc">Scan QR — 300+ mobile wallets</div>
+            <div class="wm-wallet-desc">QR code — 300+ portfeli mobilnych</div>
           </div>
           <span class="wm-badge wm-badge-yellow">Mobile</span>
         </button>
 
       </div><!-- /wallet-list -->
 
-      <!-- WC QR fallback -->
+      <!-- WC QR -->
       <div class="wm-qr-area" id="wm-qr-area">
-        <canvas id="wm-qr-canvas"></canvas>
-        <div class="wm-qr-uri" id="wm-qr-uri"></div>
-        <button class="wm-back-btn" id="wm-qr-back">← Back</button>
+        <p style="font-size:0.65rem;color:var(--gray);margin-bottom:0.8rem;letter-spacing:1px;text-align:center">Zeskanuj telefonem z portfelem</p>
+        <div id="wm-qr-img-wrap" style="min-height:226px;display:flex;align-items:center;justify-content:center">
+          <div style="color:#444;font-size:0.75rem">⏳ Generuję QR…</div>
+        </div>
+        <button class="wm-back-btn" id="wm-copy-uri" style="display:none;margin-top:0.5rem;width:100%">📋 Kopiuj URI</button>
+        <button class="wm-back-btn" id="wm-qr-back" style="margin-top:0.5rem;width:100%">← Wróć do listy</button>
       </div>
 
     </div><!-- /body -->
@@ -2445,7 +2449,7 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 </script>
 
 <script>
-// ===== PRESALE WIDGET WEB3 v4 =====
+// ===== PRESALE WIDGET WEB3 v5 =====
 (function () {
 
   /* ─── stałe ─────────────────────────────────── */
@@ -2461,7 +2465,6 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
     { end: new Date('2026-03-26T01:15:19Z'), priceScaled: 1150000, label: "Stage 3", next: "0.0134" },
     { end: new Date('2026-03-31T01:15:19Z'), priceScaled: 1340000, label: "Stage 4", next: "—" },
   ];
-
   const ERC20_ABI = [
     "function allowance(address,address) view returns (uint256)",
     "function approve(address,uint256) returns (bool)",
@@ -2472,354 +2475,347 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
   let provider, signer, userAddr, wcInstance;
   let connected = false;
 
-  /* ─── DOM ────────────────────────────────────── */
+  /* ─── DOM helpers ────────────────────────────── */
   const $  = id => document.getElementById(id);
-  const btn         = $('w-btn');
-  const discBtn     = $('w-disconnect-btn');
-  const stEl        = $('w-status');
-  const addrEl      = $('w-addr');
-  const netWarn     = $('w-network-warn');
+  const btn      = $('w-btn');
+  const discBtn  = $('w-disconnect-btn');
+  const stEl     = $('w-status');
+  const addrEl   = $('w-addr');
 
   function setStatus(msg, cls) {
     if (stEl) { stEl.textContent = msg; stEl.className = 'w-status ' + (cls||''); }
   }
-
   function setStep(n) {
     ['ws-1','ws-2','ws-3'].forEach((id,i) => {
-      const el = $(id); if (!el) return;
+      const el=$(id); if(!el) return;
       el.classList.remove('active','done');
-      if (i+1 === n) el.classList.add('active');
-      else if (i+1 < n) el.classList.add('done');
+      if(i+1===n) el.classList.add('active');
+      else if(i+1<n) el.classList.add('done');
     });
   }
 
   /* ─── helpers ────────────────────────────────── */
   function getStage() { return STAGES.find(s => new Date() < s.end) || null; }
-
-  function calcGGRD(usdcFloat) {
-    if (!usdcFloat || usdcFloat <= 0) return "0.00";
-    const s = getStage(); if (!s) return "0.00";
-    return (usdcFloat / (s.priceScaled / 1e8))
-      .toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  function calcGGRD(v) {
+    if(!v||v<=0) return "0.00";
+    const s=getStage(); if(!s) return "0.00";
+    return (v/(s.priceScaled/1e8)).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
   }
-
-  function toBigInt18(usdcFloat) {
-    const micro = Math.round(usdcFloat * 1e6);
-    return BigInt(micro) * BigInt(1_000_000_000_000);
-  }
+  function toBigInt18(v) { return BigInt(Math.round(v*1e6))*BigInt(1_000_000_000_000); }
 
   async function fetchRaised() {
     try {
-      const r = await fetch(BSC_RPC, {
-        method:'POST', headers:{'Content-Type':'application/json'},
-        body: JSON.stringify({jsonrpc:'2.0',id:1,method:'eth_call',
-          params:[{to:PRESALE_ADDR,data:'0xc5c4744c'},'latest']})
-      });
+      const r = await fetch(BSC_RPC,{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({jsonrpc:'2.0',id:1,method:'eth_call',params:[{to:PRESALE_ADDR,data:'0xc5c4744c'},'latest']})});
       const j = await r.json();
-      if (!j.result || j.result==='0x') return;
-      const usdc = Number(BigInt(j.result)) / 1e18;
-      const pct  = Math.min(usdc / 31250 * 100, 100);
-      const rEl  = $('w-raised-val'), pEl = $('w-pct'), prEl = $('w-progress');
-      if (rEl)  rEl.textContent  = `$${usdc.toLocaleString('en-US',{maximumFractionDigits:0})} USDC`;
-      if (pEl)  pEl.textContent  = pct.toFixed(1) + '%';
-      if (prEl) prEl.style.width = Math.max(pct, 0.5) + '%';
+      if(!j.result||j.result==='0x') return;
+      const usdc = Number(BigInt(j.result))/1e18;
+      const pct  = Math.min(usdc/31250*100,100);
+      const rEl=$('w-raised-val'),pEl=$('w-pct'),prEl=$('w-progress');
+      if(rEl)  rEl.textContent =`$${usdc.toLocaleString('en-US',{maximumFractionDigits:0})} USDC`;
+      if(pEl)  pEl.textContent = pct.toFixed(1)+'%';
+      if(prEl) prEl.style.width= Math.max(pct,0.5)+'%';
     } catch(_){}
   }
 
-  /* ─── modal portfeli ─────────────────────────── */
+  /* ─── modal ──────────────────────────────────── */
   const overlay = $('wm-overlay');
   function openModal()  { overlay.classList.add('open');    document.body.style.overflow='hidden'; }
-  function closeModal() { overlay.classList.remove('open'); document.body.style.overflow=''; }
+  function closeModal() { overlay.classList.remove('open'); document.body.style.overflow=''; showWalletList(); }
+
+  function showWalletList() {
+    const wl=$('wm-wallet-list'), qa=$('wm-qr-area');
+    if(wl) wl.style.display='flex';
+    if(qa) qa.classList.remove('show');
+    const t=document.querySelector('.wm-title');
+    if(t) t.textContent='CONNECT WALLET';
+  }
+  function showQRView(uri) {
+    const wl=$('wm-wallet-list'), qa=$('wm-qr-area');
+    if(wl) wl.style.display='none';
+    if(qa) qa.classList.add('show');
+    const t=document.querySelector('.wm-title');
+    if(t) t.textContent='SCAN QR CODE';
+    renderQR(uri);
+  }
 
   $('wm-close')?.addEventListener('click', closeModal);
-  overlay?.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
-
-  document.querySelectorAll('.wm-wallet-btn').forEach(b => {
-    b.addEventListener('click', () => handleWalletChoice(b.dataset.wallet));
+  overlay?.addEventListener('click', e => { if(e.target===overlay) closeModal(); });
+  $('wm-qr-back')?.addEventListener('click', () => {
+    showWalletList();
+    // anuluj WC jeśli w toku
+    if(wcInstance) { try{wcInstance.disconnect();}catch(_){} wcInstance=null; }
+    setStatus('Wybierz portfel');
   });
 
+  /* ─── QR renderer (pure canvas — zero deps) ─── */
+  function renderQR(uri) {
+    // Użyj API qrserver jako img — niezawodne, nie wymaga JS lib
+    const wrap = $('wm-qr-img-wrap');
+    if(!wrap) return;
+    wrap.innerHTML = '';
+    const img = document.createElement('img');
+    img.style.cssText = 'width:220px;height:220px;border:3px solid #FFE000;display:block;';
+    img.alt = 'WalletConnect QR';
+    // qrserver.com — darmowe publiczne API, działa zawsze
+    img.src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(uri)}&bgcolor=0f0f0f&color=FFE000&margin=2`;
+    img.onerror = () => {
+      // fallback: pokaż URI do skopiowania
+      wrap.innerHTML = `<div style="color:#888;font-size:0.65rem;word-break:break-all;padding:1rem;border:1px solid #333;max-width:220px">${uri}</div>`;
+    };
+    wrap.appendChild(img);
+    // kopiuj URI
+    const copyBtn = $('wm-copy-uri');
+    if(copyBtn) { copyBtn.style.display='block'; copyBtn.onclick=()=>{navigator.clipboard.writeText(uri).then(()=>{copyBtn.textContent='✓ Skopiowano!';setTimeout(()=>{copyBtn.textContent='📋 Kopiuj URI';},2000);}); }; }
+  }
+
   /* ─── BSC switch ─────────────────────────────── */
-  async function ensureBSC(ethProvider) {
-    const chainHex = await ethProvider.request({method:'eth_chainId'});
-    if (parseInt(chainHex,16) === BSC_CHAIN_ID) return true;
+  async function ensureBSC(eth) {
+    const ch = await eth.request({method:'eth_chainId'});
+    if(parseInt(ch,16)===BSC_CHAIN_ID) return;
     setStatus("Przełączam na BSC…",'warn');
     try {
-      await ethProvider.request({method:'wallet_switchEthereumChain',params:[{chainId:'0x38'}]});
-      return true;
+      await eth.request({method:'wallet_switchEthereumChain',params:[{chainId:'0x38'}]});
     } catch(e) {
-      if (e.code === 4902) {
-        await ethProvider.request({method:'wallet_addEthereumChain',params:[{
-          chainId:'0x38', chainName:'BNB Smart Chain',
-          nativeCurrency:{name:'BNB',symbol:'BNB',decimals:18},
-          rpcUrls:['https://bsc-dataseed1.binance.org/'],
-          blockExplorerUrls:['https://bscscan.com/']
-        }]});
-        return true;
-      }
-      throw e;
+      if(e.code===4902) await eth.request({method:'wallet_addEthereumChain',params:[{
+        chainId:'0x38',chainName:'BNB Smart Chain',
+        nativeCurrency:{name:'BNB',symbol:'BNB',decimals:18},
+        rpcUrls:['https://bsc-dataseed1.binance.org/'],
+        blockExplorerUrls:['https://bscscan.com/']
+      }]});
+      else throw e;
     }
   }
 
-  /* ─── połącz przez injected (MM, Trust, itp.) ── */
+  /* ─── EIP-6963: wykryj dostępne portfele ──────── */
+  const eip6963Providers = {};
+  window.addEventListener('eip6963:announceProvider', e => {
+    const {info, provider: p} = e.detail;
+    eip6963Providers[info.rdns] = {info, provider: p};
+    // zaktualizuj przycisk jeśli jest już widoczny
+    updateWalletButtons();
+  });
+  function requestEIP6963() {
+    window.dispatchEvent(new Event('eip6963:requestProvider'));
+  }
+
+  function updateWalletButtons() {
+    // oznacz dostępne portfele zieloną ikoną
+    document.querySelectorAll('.wm-wallet-btn[data-rdns]').forEach(btn => {
+      const rdns = btn.dataset.rdns;
+      const available = rdns in eip6963Providers || (rdns==='io.metamask' && !!window.ethereum?.isMetaMask);
+      const badge = btn.querySelector('.wm-wallet-badge-status');
+      if(badge) badge.textContent = available ? '● DETECTED' : '';
+      if(badge) badge.style.color = available ? 'var(--green)' : '';
+    });
+  }
+
+  /* ─── połącz injected (EIP-6963 first) ──────── */
   async function connectInjected(walletType) {
-    const eth = window.ethereum;
-    if (!eth) {
-      const urls = {
-        metamask: 'https://metamask.io/download/',
-        trust:    'https://trustwallet.com/download',
-        binance:  'https://www.bnbchain.org/en/binance-wallet',
-      };
-      setStatus(`⚠ ${walletType} nie znaleziony — otwieram stronę instalacji…`,'err');
-      setTimeout(()=>window.open(urls[walletType]||'https://metamask.io','_blank'),800);
+    // Mapowanie typ → rdns EIP-6963
+    const rdnsMap = {
+      metamask: 'io.metamask',
+      trust:    'com.trustwallet.app',
+      binance:  'com.binance.wallet',
+      injected: null
+    };
+    const rdns = rdnsMap[walletType];
+    let eth = null;
+
+    // Spróbuj EIP-6963 (dokładnie ten portfel)
+    if(rdns && eip6963Providers[rdns]) {
+      eth = eip6963Providers[rdns].provider;
+    }
+    // Fallback: window.ethereum
+    if(!eth) eth = window.ethereum;
+
+    if(!eth) {
+      const urls={metamask:'https://metamask.io/download/',trust:'https://trustwallet.com/download',binance:'https://www.bnbchain.org/en/binance-wallet'};
+      setStatus(`⚠ ${walletType} nie znaleziony — instaluję…`,'err');
+      if(urls[walletType]) window.open(urls[walletType],'_blank');
       return;
     }
     try {
       setStatus("Czekam na potwierdzenie w portfelu…",'warn');
       const accounts = await eth.request({method:'eth_requestAccounts'});
+      if(!accounts?.length) throw new Error("Brak kont");
       userAddr = accounts[0];
       await ensureBSC(eth);
       provider = new ethers.BrowserProvider(eth);
       signer   = await provider.getSigner();
-      onConnected('injected');
+      onConnected();
+      eth.on?.('accountsChanged', accs => { if(!accs.length) disconnectWallet(); else if(accs[0]!==userAddr) location.reload(); });
+      eth.on?.('chainChanged', ()=>location.reload());
     } catch(e) {
       setStatus((e.message||'Anulowano').slice(0,70),'err');
     }
   }
 
-  /* ─── połącz przez WalletConnect ────────────── */
-  async function connectWC() {
-    closeModal();
+  /* ─── WalletConnect ──────────────────────────── */
+  function clearWCSessions() {
     try {
-      setStatus("Inicjalizuję WalletConnect…",'warn');
+      Object.keys(localStorage).forEach(k => {
+        if(k.startsWith('wc@')||k.startsWith('W3M')||k.startsWith('walletconnect')||k.startsWith('wc2@')) localStorage.removeItem(k);
+      });
+    } catch(_){}
+  }
 
-      // index.umd.js eksportuje EthereumProvider bezpośrednio pod window
+  async function connectWC() {
+    // Nie zamykaj modalu — pokażemy QR wewnątrz
+    setStatus("Inicjalizuję WalletConnect…",'warn');
+    try {
       const WCPkg  = window["@walletconnect/ethereum-provider"];
       const WCCtor = WCPkg?.EthereumProvider || WCPkg?.default || WCPkg;
-      if (!WCCtor || typeof WCCtor.init !== 'function') {
-        setStatus("⚠ WalletConnect nie załadowany — odśwież stronę (Ctrl+F5)",'err');
+      if(!WCCtor || typeof WCCtor.init !== 'function') {
+        setStatus("⚠ WalletConnect nie załadowany — odśwież (Ctrl+F5)",'err');
         return;
       }
+      // Rozłącz starą sesję i wyczyść localStorage
+      if(wcInstance) { try{await wcInstance.disconnect();}catch(_){} wcInstance=null; }
+      clearWCSessions();
 
-      // Wyczyść stare sesje — bez tego WC przywraca starą sesję bez QR
-      if (wcInstance) {
-        try { await wcInstance.disconnect(); } catch(_) {}
-        wcInstance = null;
-      }
-      Object.keys(localStorage).forEach(k => {
-        if (k.startsWith('wc@') || k.startsWith('W3M') ||
-            k.startsWith('walletconnect') || k.startsWith('wc2@')) {
-          localStorage.removeItem(k);
-        }
-      });
-
-      // showQrModal:true — wbudowany QR modal z ethereum-provider UMD
       const wc = await WCCtor.init({
         projectId:      WC_PROJECT_ID,
         chains:         [BSC_CHAIN_ID],
         optionalChains: [BSC_CHAIN_ID],
-        rpcMap:         { [BSC_CHAIN_ID]: BSC_RPC },
-        showQrModal:    true,
+        rpcMap:         {[BSC_CHAIN_ID]: BSC_RPC},
+        showQrModal:    false,   // własny QR w naszym modalu
         metadata: {
-          name:        'Giggle Reloaded Presale',
-          description: 'GGRD Presale — BSC',
-          url:         'https://ggrd.me',
-          icons:       ['https://ggrd.me/img/ggrd-logo-512.png']
+          name:'Giggle Reloaded Presale', description:'GGRD Presale — BSC',
+          url:'https://ggrd.me', icons:['https://ggrd.me/img/ggrd-logo-512.png']
         }
       });
-
       wcInstance = wc;
+
+      // display_uri odpala gdy WC ma URI do wyświetlenia
+      wc.on('display_uri', uri => {
+        console.log('[WC] display_uri:', uri);
+        showQRView(uri);
+      });
+      wc.on('disconnect', () => disconnectWallet());
+
+      setStatus("Skanuj QR telefonem…",'warn');
       await wc.connect();
 
       const accounts = wc.accounts;
-      if (!accounts?.length) throw new Error("Brak kont po połączeniu");
+      if(!accounts?.length) throw new Error("Brak kont po połączeniu");
       userAddr = accounts[0];
       provider = new ethers.BrowserProvider(wc);
       signer   = await provider.getSigner();
-      onConnected('walletconnect');
+      onConnected();
 
-      wc.on('accountsChanged', () => location.reload());
-      wc.on('chainChanged',    () => location.reload());
-      wc.on('disconnect',      () => disconnectWallet());
+      wc.on('accountsChanged', ()=>location.reload());
+      wc.on('chainChanged',    ()=>location.reload());
 
     } catch(e) {
-      const msg = e.message || '';
-      if (!msg.toLowerCase().includes('user rejected') &&
-          !msg.toLowerCase().includes('user closed') &&
-          !msg.toLowerCase().includes('modal closed')) {
-        setStatus(msg.slice(0,80) || 'WalletConnect nie powiódł się','err');
+      const msg = e.message||'';
+      if(!msg.toLowerCase().includes('user rejected')&&!msg.toLowerCase().includes('modal closed')&&!msg.toLowerCase().includes('user closed')) {
+        setStatus(msg.slice(0,80)||'WalletConnect error','err');
+        console.error('[WC] error:', e);
       } else {
-        setStatus('Połączenie anulowane.','warn');
+        setStatus('Anulowano','warn');
       }
+      showWalletList();
     }
   }
 
   /* ─── po połączeniu ──────────────────────────── */
-  function onConnected(type) {
+  function onConnected() {
     connected = true;
     closeModal();
     const short = userAddr.slice(0,6)+'…'+userAddr.slice(-4);
-    if (addrEl)  { addrEl.textContent = `✓ ${short}`; addrEl.classList.add('show'); }
-    if (netWarn) netWarn.style.display = 'none';
-    if (btn) {
-      btn.textContent = "🚀 BUY $GGRD NOW";
-      btn.className   = 'w-connect-btn buying-mode';
-      btn.disabled    = false;
-    }
-    if (discBtn) discBtn.classList.add('show');
+    if(addrEl)  { addrEl.textContent=`✓ ${short}`; addrEl.classList.add('show'); }
+    if(btn)     { btn.textContent='🚀 BUY $GGRD NOW'; btn.className='w-connect-btn buying-mode'; btn.disabled=false; }
+    if(discBtn) discBtn.classList.add('show');
     setStatus("Gotowe! Wpisz kwotę USDC i kliknij BUY",'ok');
     setStep(2);
   }
 
-  /* ─── rozłącz portfel ────────────────────────── */
+  /* ─── rozłącz ────────────────────────────────── */
   async function disconnectWallet() {
-    connected = false;
-    userAddr  = null;
-    provider  = null;
-    signer    = null;
-
-    // Rozłącz WC jeśli aktywne
-    if (wcInstance) {
-      try { await wcInstance.disconnect(); } catch(_) {}
-      wcInstance = null;
-    }
-
-    // Wyczyść resztki sesji WC z localStorage
-    Object.keys(localStorage).forEach(k => {
-      if (k.startsWith('wc@') || k.startsWith('W3M') || k.startsWith('walletconnect')) {
-        localStorage.removeItem(k);
-      }
-    });
-
-    // Reset UI
-    if (addrEl)  { addrEl.textContent = ''; addrEl.classList.remove('show'); }
-    if (discBtn) discBtn.classList.remove('show');
-    if (btn) {
-      btn.textContent = 'CONNECT WALLET';
-      btn.className   = 'w-connect-btn';
-      btn.disabled    = false;
-    }
+    connected=false; userAddr=null; provider=null; signer=null;
+    if(wcInstance) { try{await wcInstance.disconnect();}catch(_){} wcInstance=null; }
+    clearWCSessions();
+    if(addrEl)  { addrEl.textContent=''; addrEl.classList.remove('show'); }
+    if(discBtn) discBtn.classList.remove('show');
+    if(btn)     { btn.textContent='CONNECT WALLET'; btn.className='w-connect-btn'; btn.disabled=false; }
     setStep(1);
     setStatus('Portfel rozłączony. Kliknij aby połączyć ponownie.');
   }
 
-  /* ─── dispatcher wyboru portfela ─────────────── */
-  function handleWalletChoice(type) {
-    if (type === 'walletconnect') {
-      connectWC();
-    } else {
-      closeModal();
-      connectInjected(type);
-    }
-  }
+  /* ─── dispatcher ─────────────────────────────── */
+  document.querySelectorAll('.wm-wallet-btn').forEach(b => {
+    b.addEventListener('click', () => {
+      const type = b.dataset.wallet;
+      if(type==='walletconnect') connectWC();
+      else { closeModal(); connectInjected(type); }
+    });
+  });
 
   /* ─── approve + buy ──────────────────────────── */
   async function approveThenBuy() {
-    const usdcVal = parseFloat($('w-usdc-in')?.value || '0');
-    if (isNaN(usdcVal) || usdcVal < 50)  { setStatus("Minimum: 50 USDC",'err');    return; }
-    if (usdcVal > 3000)                   { setStatus("Maximum: 3,000 USDC",'err'); return; }
-    if (!signer) { setStatus("Portfel rozłączony — połącz ponownie",'err'); return; }
-
-    btn.disabled = true;
+    const usdcVal = parseFloat($('w-usdc-in')?.value||'0');
+    if(isNaN(usdcVal)||usdcVal<50)  { setStatus("Minimum: 50 USDC",'err');    return; }
+    if(usdcVal>3000)                 { setStatus("Maximum: 3,000 USDC",'err'); return; }
+    if(!signer)                      { setStatus("Portfel rozłączony",'err');   return; }
+    btn.disabled=true;
     try {
-      setStatus("Sprawdzam allowance USDC…",'warn');
-      const usdc      = new ethers.Contract(USDC_ADDR, ERC20_ABI, signer);
+      setStatus("Sprawdzam allowance…",'warn');
+      const usdc      = new ethers.Contract(USDC_ADDR,ERC20_ABI,signer);
       const payAmount = toBigInt18(usdcVal);
-      const allowance = BigInt(await usdc.allowance(userAddr, PRESALE_ADDR));
-
-      if (allowance < payAmount) {
+      const allowance = BigInt(await usdc.allowance(userAddr,PRESALE_ADDR));
+      if(allowance<payAmount) {
         setStatus("Krok 1/2 — Zatwierdź USDC w portfelu…",'warn');
-        btn.textContent = "⏳ ZATWIERDZANIE…";
-        setStep(2);
-        const txA = await usdc.approve(PRESALE_ADDR, payAmount);
-        setStatus("Czekam na zatwierdzenie…",'warn');
-        await txA.wait();
-        setStatus("✓ Zatwierdzone! Wysyłam transakcję kupna…",'ok');
+        btn.textContent="⏳ ZATWIERDZANIE…"; setStep(2);
+        await (await usdc.approve(PRESALE_ADDR,payAmount)).wait();
+        setStatus("✓ Zatwierdzone!",'ok');
       }
-
       setStatus("Krok 2/2 — Potwierdź zakup w portfelu…",'warn');
-      btn.textContent = "⏳ KUPOWANIE…";
-      setStep(3);
-      const presale = new ethers.Contract(PRESALE_ADDR, BUY_ABI, signer);
-      const txB = await presale.buy(payAmount);
-      setStatus("Czekam na potwierdzenie transakcji…",'warn');
-      await txB.wait();
-
-      const ggrd = calcGGRD(usdcVal);
-      setStatus(`🎉 Gotowe! ~${ggrd} GGRD leci na Twój portfel!`,'ok');
-      btn.textContent = "✅ ZAKUPIONO!";
-      btn.className   = 'w-connect-btn';
-      setStep(3);
+      btn.textContent="⏳ KUPOWANIE…"; setStep(3);
+      const presale = new ethers.Contract(PRESALE_ADDR,BUY_ABI,signer);
+      await (await presale.buy(payAmount)).wait();
+      const ggrd=calcGGRD(usdcVal);
+      setStatus(`🎉 Gotowe! ~${ggrd} GGRD leci do Ciebie!`,'ok');
+      btn.textContent="✅ ZAKUPIONO!"; btn.className='w-connect-btn'; setStep(3);
       fetchRaised();
-
-      ['🎉','🚀','😂','💸','🟡'].forEach((em,i) => {
-        setTimeout(()=>{
-          const el = document.createElement('div');
-          el.textContent = em;
-          el.style.cssText = `position:fixed;left:${12+i*18}vw;top:80vh;font-size:2.5rem;pointer-events:none;z-index:99999;animation:floatUp 2.5s ease forwards`;
-          document.body.appendChild(el);
-          setTimeout(()=>el.remove(),2600);
-        }, i*120);
+      ['🎉','🚀','😂','💸','🟡'].forEach((em,i)=>{
+        setTimeout(()=>{const el=document.createElement('div');el.textContent=em;el.style.cssText=`position:fixed;left:${12+i*18}vw;top:80vh;font-size:2.5rem;pointer-events:none;z-index:99999;animation:floatUp 2.5s ease forwards`;document.body.appendChild(el);setTimeout(()=>el.remove(),2600);},i*120);
       });
-
     } catch(e) {
-      const msg = e.reason || e.data?.message || e.message || 'Transakcja nieudana';
+      const msg=e.reason||e.data?.message||e.message||'Błąd';
       setStatus(msg.slice(0,80),'err');
-      btn.textContent = "🚀 BUY $GGRD NOW";
-      btn.className   = 'w-connect-btn buying-mode';
-      btn.disabled    = false;
+      btn.textContent="🚀 BUY $GGRD NOW"; btn.className='w-connect-btn buying-mode'; btn.disabled=false;
     }
   }
 
-  /* ─── główny przycisk ────────────────────────── */
-  btn?.addEventListener('click', () => {
-    if (!connected) openModal();
-    else approveThenBuy();
-  });
-
-  /* ─── przycisk disconnect ────────────────────── */
+  btn?.addEventListener('click', ()=>{ if(!connected) openModal(); else approveThenBuy(); });
   discBtn?.addEventListener('click', disconnectWallet);
 
-  /* ─── eventy injected wallet ─────────────────── */
-  if (window.ethereum) {
-    window.ethereum.on('accountsChanged', accs => {
-      if (!accs.length) disconnectWallet();
-      else if (accs[0] !== userAddr) location.reload();
-    });
-    window.ethereum.on('chainChanged', () => location.reload());
-  }
-
-  /* ─── init UI ────────────────────────────────── */
-  (function initUI() {
-    const s = getStage();
-    if (s) {
-      const sv=$('w-stage-val'), pv=$('w-price-val'), np=$('w-next-price');
-      if (sv) sv.textContent = s.label;
-      if (pv) pv.textContent = `$${(s.priceScaled/1e8).toFixed(4)} USDC`;
-      if (np) np.textContent = s.next!=='—' ? `Next stage: $${s.next}` : 'Last stage!';
+  /* ─── init ───────────────────────────────────── */
+  (function init() {
+    const s=getStage();
+    if(s) {
+      const sv=$('w-stage-val'),pv=$('w-price-val'),np=$('w-next-price');
+      if(sv) sv.textContent=s.label;
+      if(pv) pv.textContent=`$${(s.priceScaled/1e8).toFixed(4)} USDC`;
+      if(np) np.textContent=s.next!=='—'?`Next stage: $${s.next}`:'Last stage!';
     } else {
-      const sv=$('w-stage-val'), pv=$('w-price-val');
-      if (sv) sv.textContent = "ENDED";
-      if (pv) pv.textContent = "—";
-      if (btn) { btn.disabled=true; btn.textContent="PRESALE ENDED"; }
+      if($('w-stage-val')) $('w-stage-val').textContent="ENDED";
+      if($('w-price-val')) $('w-price-val').textContent="—";
+      if(btn) { btn.disabled=true; btn.textContent="PRESALE ENDED"; }
     }
-
-    const inp = $('w-usdc-in');
-    if (inp) inp.addEventListener('input', ()=>{
-      const out=$('w-ggrd-out');
-      if (out) out.textContent = calcGGRD(parseFloat(inp.value)||0);
-    });
-
-    fetchRaised();
-    setInterval(fetchRaised, 30000);
-    setStep(1);
-    setStatus('Kliknij przycisk aby wybrać portfel');
-
-    const styleEl = document.createElement('style');
-    styleEl.textContent = `@keyframes floatUp{from{transform:translateY(0);opacity:1}to{transform:translateY(-60vh);opacity:0}}`;
-    document.head.appendChild(styleEl);
+    const inp=$('w-usdc-in');
+    if(inp) inp.addEventListener('input',()=>{ const out=$('w-ggrd-out'); if(out) out.textContent=calcGGRD(parseFloat(inp.value)||0); });
+    fetchRaised(); setInterval(fetchRaised,30000);
+    setStep(1); setStatus('Kliknij przycisk aby wybrać portfel');
+    requestEIP6963(); // wykryj dostępne portfele
+    const se=document.createElement('style');
+    se.textContent='@keyframes floatUp{from{transform:translateY(0);opacity:1}to{transform:translateY(-60vh);opacity:0}}';
+    document.head.appendChild(se);
   })();
 
 })();
+
 </script>
 </body>
 </html>
