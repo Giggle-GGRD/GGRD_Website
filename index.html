@@ -1499,10 +1499,251 @@ footer {
   .refund-proof { min-width: 0; }
 }
 
+
+/* ===== WALLET MODAL ===== */
+.wm-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(6px);
+  z-index: 10000;
+  align-items: center;
+  justify-content: center;
+}
+.wm-overlay.open { display: flex; }
+
+.wm-box {
+  background: #0f0f0f;
+  border: 1px solid rgba(255,224,0,0.35);
+  width: 100%;
+  max-width: 380px;
+  margin: 1rem;
+  position: relative;
+  animation: wm-in 0.2s ease;
+}
+@keyframes wm-in { from{transform:scale(0.94);opacity:0} to{transform:scale(1);opacity:1} }
+
+.wm-header {
+  padding: 1.2rem 1.5rem 1rem;
+  border-bottom: 1px solid #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.wm-title {
+  font-family: 'Bangers', cursive;
+  font-size: 1.4rem;
+  letter-spacing: 3px;
+  color: var(--yellow);
+}
+.wm-close {
+  background: none;
+  border: 1px solid #333;
+  color: #666;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s, color 0.2s;
+}
+.wm-close:hover { border-color: var(--red); color: var(--red); }
+
+.wm-body { padding: 1rem 1.2rem 1.5rem; }
+
+.wm-subtitle {
+  font-size: 0.68rem;
+  color: var(--gray);
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.wm-wallets {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 1rem;
+}
+
+.wm-wallet-btn {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 1rem;
+  background: #141414;
+  border: 1px solid #222;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  width: 100%;
+  text-align: left;
+}
+.wm-wallet-btn:hover { border-color: var(--yellow); background: #1a1800; }
+.wm-wallet-btn:active { transform: scale(0.99); }
+
+.wm-wallet-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.wm-wallet-info {}
+.wm-wallet-name {
+  font-family: 'Bangers', cursive;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  color: var(--white);
+}
+.wm-wallet-desc {
+  font-size: 0.62rem;
+  color: var(--gray);
+  letter-spacing: 0.5px;
+}
+
+.wm-badge {
+  margin-left: auto;
+  font-size: 0.55rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: 1px solid;
+  padding: 2px 7px;
+  white-space: nowrap;
+}
+.wm-badge-green { border-color: var(--green); color: var(--green); }
+.wm-badge-yellow { border-color: var(--yellow); color: var(--yellow); }
+
+.wm-footer {
+  font-size: 0.6rem;
+  color: #333;
+  text-align: center;
+  border-top: 1px solid #1a1a1a;
+  padding-top: 0.8rem;
+}
+.wm-footer a { color: #444; }
+
+/* WC QR area */
+.wm-qr-area {
+  display: none;
+  text-align: center;
+  padding: 0.5rem 0;
+}
+.wm-qr-area.show { display: block; }
+.wm-qr-area canvas { border: 3px solid var(--yellow); }
+.wm-qr-uri {
+  font-size: 0.58rem;
+  color: #444;
+  word-break: break-all;
+  margin-top: 0.5rem;
+}
+.wm-back-btn {
+  background: none;
+  border: 1px solid #333;
+  color: var(--gray);
+  padding: 5px 14px;
+  cursor: pointer;
+  font-size: 0.7rem;
+  margin-top: 0.7rem;
+  letter-spacing: 1px;
+}
+.wm-back-btn:hover { border-color: var(--yellow); color: var(--yellow); }
+
+/* Widget button states */
+.w-connected-addr {
+  font-size: 0.68rem;
+  color: var(--green);
+  text-align: center;
+  margin-bottom: 0.5rem;
+  font-family: 'Courier Prime', monospace;
+  display: none;
+}
+.w-connected-addr.show { display: block; }
+
 </style>
 <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@walletconnect/ethereum-provider@2.17.3/dist/umd/index.min.js"></script>
 </head>
 <body>
+
+<!-- WALLET SELECTION MODAL -->
+<div class="wm-overlay" id="wm-overlay" role="dialog" aria-modal="true">
+  <div class="wm-box">
+    <div class="wm-header">
+      <div class="wm-title">CONNECT WALLET</div>
+      <button class="wm-close" id="wm-close" aria-label="Close">✕</button>
+    </div>
+    <div class="wm-body">
+      <div class="wm-subtitle">Choose your wallet to buy $GGRD</div>
+
+      <!-- wallet list -->
+      <div class="wm-wallets" id="wm-wallet-list">
+
+        <button class="wm-wallet-btn" data-wallet="metamask">
+          <div class="wm-wallet-icon" style="background:#F6851B20">🦊</div>
+          <div class="wm-wallet-info">
+            <div class="wm-wallet-name">MetaMask</div>
+            <div class="wm-wallet-desc">Browser extension / MetaMask Mobile</div>
+          </div>
+          <span class="wm-badge wm-badge-green">Popular</span>
+        </button>
+
+        <button class="wm-wallet-btn" data-wallet="trust">
+          <div class="wm-wallet-icon" style="background:#3375BB20">🛡️</div>
+          <div class="wm-wallet-info">
+            <div class="wm-wallet-name">Trust Wallet</div>
+            <div class="wm-wallet-desc">Browser extension / Trust Mobile app</div>
+          </div>
+          <span class="wm-badge wm-badge-yellow">BSC native</span>
+        </button>
+
+        <button class="wm-wallet-btn" data-wallet="binance">
+          <div class="wm-wallet-icon" style="background:#F0B90B20">🟡</div>
+          <div class="wm-wallet-info">
+            <div class="wm-wallet-name">Binance Web3 Wallet</div>
+            <div class="wm-wallet-desc">Built into Binance app</div>
+          </div>
+        </button>
+
+        <button class="wm-wallet-btn" data-wallet="injected">
+          <div class="wm-wallet-icon" style="background:#ffffff10">🔗</div>
+          <div class="wm-wallet-info">
+            <div class="wm-wallet-name">Other Injected Wallet</div>
+            <div class="wm-wallet-desc">Coinbase, Brave, OKX, Rabby...</div>
+          </div>
+        </button>
+
+        <button class="wm-wallet-btn" data-wallet="walletconnect">
+          <div class="wm-wallet-icon" style="background:#3B99FC20">📱</div>
+          <div class="wm-wallet-info">
+            <div class="wm-wallet-name">WalletConnect</div>
+            <div class="wm-wallet-desc">Scan QR — 300+ mobile wallets</div>
+          </div>
+          <span class="wm-badge wm-badge-yellow">Mobile</span>
+        </button>
+
+      </div><!-- /wallet-list -->
+
+      <!-- WC QR fallback -->
+      <div class="wm-qr-area" id="wm-qr-area">
+        <canvas id="wm-qr-canvas"></canvas>
+        <div class="wm-qr-uri" id="wm-qr-uri"></div>
+        <button class="wm-back-btn" id="wm-qr-back">← Back</button>
+      </div>
+
+    </div><!-- /body -->
+    <div class="wm-footer">
+      By connecting you agree to interact with a smart contract on BNB Smart Chain.
+      <br>NFA · DYOR · <a href="#addresses">Verify contracts ↗</a>
+    </div>
+  </div>
+</div>
 
 <!-- NAV -->
 <nav>
@@ -1772,6 +2013,7 @@ footer {
         </div>
         <div class="w-min-note">Min <span>50 USDC</span> · Max <span>3,000 USDC</span> per wallet · Claim: 50% immediate + 50% over 60 days</div>
 
+        <div class="w-connected-addr" id="w-addr"></div>
         <!-- Status -->
         <div class="w-status" id="w-status">Connect wallet to start</div>
 
@@ -2163,303 +2405,344 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 </script>
 
 <script>
-// ===== PRESALE WIDGET WEB3 — fixed =====
+// ===== PRESALE WIDGET WEB3 v3 =====
 (function () {
 
-  /* ---- constants ---- */
-  const PRESALE_ADDR = "0xd8983534dd3c369d85127f6C9B85d98768139387";
-  const USDC_ADDR    = "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d";
-  const BSC_CHAIN_ID = 56;
-  const BSC_RPC      = "https://bsc-dataseed1.binance.org/";
+  /* ─── constants ──────────────────────────────── */
+  const PRESALE_ADDR  = "0xd8983534dd3c369d85127f6C9B85d98768139387";
+  const USDC_ADDR     = "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d";
+  const BSC_CHAIN_ID  = 56;
+  const BSC_RPC       = "https://bsc-dataseed1.binance.org/";
+  // ⚠ TODO: Replace with your project ID from https://cloud.walletconnect.com (free)
+  const WC_PROJECT_ID = "YOUR_WALLETCONNECT_PROJECT_ID";
 
-  // Stage prices as plain Numbers (PRICE_SCALE = 1e8 in contract)
-  // price per GGRD in USDC = priceScaled / 1e8
   const STAGES = [
-    { end: new Date('2026-03-15T01:15:19Z'), priceScaled: 850000,  label: "Stage 1", nextPrice: "0.0100" },
-    { end: new Date('2026-03-20T01:15:19Z'), priceScaled: 1000000, label: "Stage 2", nextPrice: "0.0115" },
-    { end: new Date('2026-03-26T01:15:19Z'), priceScaled: 1150000, label: "Stage 3", nextPrice: "0.0134" },
-    { end: new Date('2026-03-31T01:15:19Z'), priceScaled: 1340000, label: "Stage 4", nextPrice: "—" },
+    { end: new Date('2026-03-15T01:15:19Z'), priceScaled: 850000,  label: "Stage 1", next: "0.0100" },
+    { end: new Date('2026-03-20T01:15:19Z'), priceScaled: 1000000, label: "Stage 2", next: "0.0115" },
+    { end: new Date('2026-03-26T01:15:19Z'), priceScaled: 1150000, label: "Stage 3", next: "0.0134" },
+    { end: new Date('2026-03-31T01:15:19Z'), priceScaled: 1340000, label: "Stage 4", next: "—" },
   ];
-
-  const HARDCAP_USDC = 31250;   // plain numbers for progress bar
-  const SOFTCAP_USDC = 20000;
 
   const ERC20_ABI = [
-    "function allowance(address owner, address spender) view returns (uint256)",
-    "function approve(address spender, uint256 amount) returns (bool)",
+    "function allowance(address,address) view returns (uint256)",
+    "function approve(address,uint256) returns (bool)",
   ];
+  const BUY_ABI = ["function buy(uint256) external"];
 
-  /* ---- step enum: 1=connect  2=approve  3=buy  4=done ---- */
-  let STEP = 1;
+  /* ─── state ─────────────────────────────────── */
   let provider, signer, userAddr;
+  let connected = false;
 
-  /* ---- DOM ---- */
-  const $    = id => document.getElementById(id);
-  const btn  = $('w-btn');
-  const stEl = $('w-status');
+  /* ─── DOM ────────────────────────────────────── */
+  const $  = id => document.getElementById(id);
+  const btn      = $('w-btn');
+  const stEl     = $('w-status');
+  const addrEl   = $('w-addr');
+  const netWarn  = $('w-network-warn');
 
   function setStatus(msg, cls) {
-    stEl.textContent = msg;
-    stEl.className = 'w-status ' + (cls || '');
+    if (stEl) { stEl.textContent = msg; stEl.className = 'w-status ' + (cls||''); }
   }
 
   function setStep(n) {
-    STEP = n;
-    ['ws-1','ws-2','ws-3'].forEach((id, i) => {
-      const el = $(id);
-      if (!el) return;
+    ['ws-1','ws-2','ws-3'].forEach((id,i) => {
+      const el = $(id); if (!el) return;
       el.classList.remove('active','done');
-      if (i + 1 === n)      el.classList.add('active');
-      else if (i + 1 < n)   el.classList.add('done');
+      if (i+1 === n) el.classList.add('active');
+      else if (i+1 < n) el.classList.add('done');
     });
   }
 
-  /* ---- stage helpers ---- */
-  function getStage() {
-    const now = new Date();
-    return STAGES.find(s => now < s.end) || null;
-  }
+  /* ─── helpers ────────────────────────────────── */
+  function getStage() { return STAGES.find(s => new Date() < s.end) || null; }
 
   function calcGGRD(usdcFloat) {
     if (!usdcFloat || usdcFloat <= 0) return "0.00";
-    const s = getStage();
-    if (!s) return "0.00";
-    // contract formula: tokenOut = payIn * PRICE_SCALE * SALE_UNIT / (stagePriceScaled * PAY_UNIT)
-    // since SALE_UNIT == PAY_UNIT == 1e18, they cancel:
-    // tokenOut (in GGRD) = payIn_usdc / pricePerGGRD = usdcFloat / (priceScaled / 1e8)
-    const pricePerGGRD = s.priceScaled / 1e8;
-    const ggrd = usdcFloat / pricePerGGRD;
-    return ggrd.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const s = getStage(); if (!s) return "0.00";
+    return (usdcFloat / (s.priceScaled / 1e8))
+      .toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
 
-  /* ---- RPC fetch for totalRaised ---- */
+  // safe BigInt conversion without toFixed float artifacts
+  function toBigInt18(usdcFloat) {
+    const micro = Math.round(usdcFloat * 1e6); // integer micro-USDC
+    return BigInt(micro) * BigInt(1_000_000_000_000); // ×1e12 → 18 decimals
+  }
+
   async function fetchRaised() {
     try {
-      const resp = await fetch(BSC_RPC, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          jsonrpc: '2.0', id: 1, method: 'eth_call',
-          params: [{ to: PRESALE_ADDR, data: '0xc5c4744c' }, 'latest']
-        })
+      const r = await fetch(BSC_RPC, {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({jsonrpc:'2.0',id:1,method:'eth_call',
+          params:[{to:PRESALE_ADDR,data:'0xc5c4744c'},'latest']})
       });
-      const j = await resp.json();
-      const raw = j.result;
-      if (!raw || raw === '0x') return;
-      const raisedWei = BigInt(raw);
-      const raisedUsdc = Number(raisedWei) / 1e18;
-      const pct = Math.min((raisedUsdc / HARDCAP_USDC) * 100, 100);
-      const rEl = $('w-raised-val');
-      const pEl = $('w-pct');
-      const prEl = $('w-progress');
-      if (rEl) rEl.textContent = `$${raisedUsdc.toLocaleString('en-US', { maximumFractionDigits: 0 })} USDC`;
-      if (pEl) pEl.textContent = pct.toFixed(1) + '%';
+      const j = await r.json();
+      if (!j.result || j.result==='0x') return;
+      const usdc = Number(BigInt(j.result)) / 1e18;
+      const pct  = Math.min(usdc / 31250 * 100, 100);
+      const rEl  = $('w-raised-val'), pEl = $('w-pct'), prEl = $('w-progress');
+      if (rEl)  rEl.textContent  = `$${usdc.toLocaleString('en-US',{maximumFractionDigits:0})} USDC`;
+      if (pEl)  pEl.textContent  = pct.toFixed(1) + '%';
       if (prEl) prEl.style.width = Math.max(pct, 0.5) + '%';
-    } catch (_) { /* silent */ }
+    } catch(_){}
   }
 
-  /* ---- UI init ---- */
-  function initUI() {
-    const s = getStage();
-    if (s) {
-      const sv = $('w-stage-val');
-      const pv = $('w-price-val');
-      const np = $('w-next-price');
-      if (sv) sv.textContent = s.label;
-      if (pv) pv.textContent = `$${(s.priceScaled / 1e8).toFixed(4)} USDC`;
-      if (np) np.textContent = s.nextPrice !== '—' ? `Next: $${s.nextPrice}` : 'Last stage';
-    } else {
-      const sv = $('w-stage-val'); if (sv) sv.textContent = "ENDED";
-      const pv = $('w-price-val'); if (pv) pv.textContent = "—";
-      if (btn) { btn.disabled = true; btn.textContent = "PRESALE ENDED"; }
+  /* ─── wallet modal ───────────────────────────── */
+  const overlay = $('wm-overlay');
+
+  function openModal()  { overlay.classList.add('open');    document.body.style.overflow='hidden'; }
+  function closeModal() { overlay.classList.remove('open'); document.body.style.overflow=''; }
+
+  $('wm-close')?.addEventListener('click', closeModal);
+  overlay?.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+
+  // wallet buttons
+  document.querySelectorAll('.wm-wallet-btn').forEach(b => {
+    b.addEventListener('click', () => handleWalletChoice(b.dataset.wallet));
+  });
+  $('wm-qr-back')?.addEventListener('click', () => {
+    $('wm-qr-area').classList.remove('show');
+    $('wm-wallet-list').style.display = 'flex';
+  });
+
+  /* ─── network check & switch ─────────────────── */
+  async function ensureBSC(ethProvider) {
+    const chainHex = await ethProvider.request({method:'eth_chainId'});
+    if (parseInt(chainHex,16) === BSC_CHAIN_ID) return true;
+    setStatus("Switching to BSC…",'warn');
+    try {
+      await ethProvider.request({method:'wallet_switchEthereumChain',params:[{chainId:'0x38'}]});
+      return true;
+    } catch(e) {
+      if (e.code === 4902) {
+        await ethProvider.request({method:'wallet_addEthereumChain',params:[{
+          chainId:'0x38', chainName:'BNB Smart Chain',
+          nativeCurrency:{name:'BNB',symbol:'BNB',decimals:18},
+          rpcUrls:['https://bsc-dataseed1.binance.org/'],
+          blockExplorerUrls:['https://bscscan.com/']
+        }]});
+        return true;
+      }
+      throw e;
     }
-    const inp = $('w-usdc-in');
-    if (inp) {
-      inp.addEventListener('input', () => {
-        const out = $('w-ggrd-out');
-        if (out) out.textContent = calcGGRD(parseFloat(inp.value) || 0);
-      });
-    }
-    fetchRaised();
-    setInterval(fetchRaised, 30000);
-    setStep(1);
-    setStatus('Connect wallet to start');
-
-    // add confetti keyframe once
-    const styleEl = document.createElement('style');
-    styleEl.textContent = `@keyframes floatUp{from{transform:translateY(0);opacity:1}to{transform:translateY(-60vh);opacity:0}}`;
-    document.head.appendChild(styleEl);
   }
 
-  /* ---- parseUnits safe wrapper (avoids toFixed float artifact) ---- */
-  function safeParseUnits(usdcFloat) {
-    // multiply by 1e6 to get micro-USDC integer, then scale to 18 decimals
-    const microUsdc = Math.round(usdcFloat * 1e6);
-    return BigInt(microUsdc) * BigInt(1e12); // 1e6 * 1e12 = 1e18
-  }
-
-  /* ---- STEP 1: connect wallet ---- */
-  async function connectWallet() {
-    if (!window.ethereum) {
-      setStatus("⚠ Install MetaMask or another Web3 wallet!", 'err');
-      setTimeout(() => window.open('https://metamask.io', '_blank'), 1000);
+  /* ─── connect via injected ethereum ─────────────*/
+  async function connectInjected(walletType) {
+    const eth = window.ethereum;
+    if (!eth) {
+      const urls = {
+        metamask: 'https://metamask.io/download/',
+        trust:    'https://trustwallet.com/download',
+        binance:  'https://www.bnbchain.org/en/binance-wallet',
+        injected: 'https://metamask.io/download/',
+      };
+      setStatus(`⚠ ${walletType} not found. Opening install page…`,'err');
+      setTimeout(()=>window.open(urls[walletType]||'https://metamask.io','_blank'),800);
+      closeModal();
       return;
     }
     try {
-      btn.disabled = true;
-      setStatus("Requesting accounts…", 'warn');
-
-      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+      setStatus("Requesting accounts…",'warn');
+      const accounts = await eth.request({method:'eth_requestAccounts'});
       userAddr = accounts[0];
-
-      // ensure BSC network
-      const chainHex = await window.ethereum.request({ method: 'eth_chainId' });
-      if (parseInt(chainHex, 16) !== BSC_CHAIN_ID) {
-        setStatus("Switching to BNB Smart Chain…", 'warn');
-        const nw = $('w-network-warn');
-        if (nw) nw.style.display = 'block';
-        try {
-          await window.ethereum.request({
-            method: 'wallet_switchEthereumChain',
-            params: [{ chainId: '0x38' }]
-          });
-        } catch (switchErr) {
-          if (switchErr.code === 4902) {
-            await window.ethereum.request({
-              method: 'wallet_addEthereumChain',
-              params: [{
-                chainId: '0x38',
-                chainName: 'BNB Smart Chain',
-                nativeCurrency: { name: 'BNB', symbol: 'BNB', decimals: 18 },
-                rpcUrls: ['https://bsc-dataseed1.binance.org/'],
-                blockExplorerUrls: ['https://bscscan.com/']
-              }]
-            });
-          } else {
-            throw switchErr;
-          }
-        }
-        if (nw) nw.style.display = 'none';
-      }
-
-      provider = new ethers.BrowserProvider(window.ethereum);
+      await ensureBSC(eth);
+      provider = new ethers.BrowserProvider(eth);
       signer   = await provider.getSigner();
-
-      const short = userAddr.slice(0, 6) + '…' + userAddr.slice(-4);
-      setStatus(`✓ Connected: ${short}`, 'ok');
-      btn.disabled = false;
-      btn.textContent = "APPROVE USDC";
-      btn.className = 'w-connect-btn approve-mode';
-      setStep(2);
-
-    } catch (e) {
-      setStatus((e.message || 'Connection cancelled').slice(0, 70), 'err');
-      btn.disabled = false;
+      onConnected();
+    } catch(e) {
+      setStatus((e.message||'Cancelled').slice(0,70),'err');
     }
   }
 
-  /* ---- STEP 2: approve USDC ---- */
-  async function approveUSDC() {
-    const usdcVal = parseFloat($('w-usdc-in')?.value || '0');
-    if (isNaN(usdcVal) || usdcVal < 50)  { setStatus("Minimum: 50 USDC", 'err'); return; }
-    if (usdcVal > 3000)                   { setStatus("Maximum: 3,000 USDC per wallet", 'err'); return; }
-
-    try {
-      btn.disabled = true;
-      setStatus("Checking USDC allowance…", 'warn');
-
-      const usdc = new ethers.Contract(USDC_ADDR, ERC20_ABI, signer);
-      const payAmount = safeParseUnits(usdcVal);
-      const allowance = await usdc.allowance(userAddr, PRESALE_ADDR);
-
-      if (BigInt(allowance) >= payAmount) {
-        setStatus("✓ Allowance OK — ready to buy!", 'ok');
-        btn.disabled = false;
-        btn.textContent = "🚀 BUY GGRD NOW";
-        btn.className = 'w-connect-btn buying-mode';
-        setStep(3);
-        return;
-      }
-
-      setStatus("Confirm USDC approval in your wallet…", 'warn');
-      const tx = await usdc.approve(PRESALE_ADDR, payAmount);
-      setStatus("Waiting for approval confirmation…", 'warn');
-      await tx.wait();
-
-      setStatus("✓ USDC approved!", 'ok');
-      btn.disabled = false;
-      btn.textContent = "🚀 BUY GGRD NOW";
-      btn.className = 'w-connect-btn buying-mode';
-      setStep(3);
-
-    } catch (e) {
-      setStatus((e.reason || e.message || 'Approval failed').slice(0, 70), 'err');
-      btn.disabled = false;
+  /* ─── connect via WalletConnect ──────────────── */
+  async function connectWC() {
+    if (WC_PROJECT_ID === "YOUR_WALLETCONNECT_PROJECT_ID") {
+      setStatus("⚠ WalletConnect needs a Project ID — see TODO in code",'err');
+      closeModal(); return;
     }
-  }
-
-  /* ---- STEP 3: buy ---- */
-  async function buyGGRD() {
-    const usdcVal = parseFloat($('w-usdc-in')?.value || '0');
-    if (isNaN(usdcVal) || usdcVal < 50) { setStatus("Minimum: 50 USDC", 'err'); return; }
-
     try {
-      btn.disabled = true;
-      setStatus("Confirm purchase in your wallet…", 'warn');
+      setStatus("Starting WalletConnect…",'warn');
+      const WCProvider = window.EthereumProvider;
+      if (!WCProvider) { setStatus("WalletConnect failed to load",'err'); closeModal(); return; }
 
-      const presale = new ethers.Contract(
-        PRESALE_ADDR,
-        ["function buy(uint256 payAmount) external"],
-        signer
-      );
-      const payAmount = safeParseUnits(usdcVal);
-      const tx = await presale.buy(payAmount);
-      setStatus("Transaction sent — waiting for confirmation…", 'warn');
-      await tx.wait();
-
-      const ggrdAmt = calcGGRD(usdcVal);
-      setStatus(`🎉 Done! ~${ggrdAmt} GGRD incoming!`, 'ok');
-      btn.textContent = "✅ PURCHASED!";
-      btn.className = 'w-connect-btn';
-      setStep(4);
-      fetchRaised();
-
-      const emojis = ['🎉','🚀','😂','💸','🟡'];
-      emojis.forEach((em, i) => {
-        setTimeout(() => {
-          const el = document.createElement('div');
-          el.textContent = em;
-          el.style.cssText = `position:fixed;left:${15+i*17}vw;top:80vh;font-size:2.5rem;pointer-events:none;z-index:99999;animation:floatUp 2.5s ease forwards`;
-          document.body.appendChild(el);
-          setTimeout(() => el.remove(), 2600);
-        }, i * 120);
+      const wc = await WCProvider.init({
+        projectId: WC_PROJECT_ID,
+        chains: [BSC_CHAIN_ID],
+        optionalChains: [BSC_CHAIN_ID],
+        rpcMap: { [BSC_CHAIN_ID]: BSC_RPC },
+        showQrModal: false, // we handle QR ourselves
+        metadata: {
+          name: 'Giggle Reloaded Presale',
+          description: 'GGRD Presale on BSC',
+          url: 'https://ggrd.me',
+          icons: ['https://ggrd.me/img/ggrd-logo-512.png']
+        }
       });
 
-    } catch (e) {
-      const msg = e.reason || e.data?.message || e.message || 'Transaction failed';
-      setStatus(msg.slice(0, 80), 'err');
-      btn.disabled = false;
-      btn.textContent = "🚀 BUY GGRD NOW";
+      // show QR
+      wc.on('display_uri', uri => {
+        $('wm-wallet-list').style.display = 'none';
+        $('wm-qr-area').classList.add('show');
+        $('wm-qr-uri').textContent = uri;
+        drawQR(uri, $('wm-qr-canvas'));
+      });
+
+      await wc.connect();
+      const accounts = wc.accounts;
+      if (!accounts?.length) throw new Error("No accounts");
+      userAddr = accounts[0];
+      provider = new ethers.BrowserProvider(wc);
+      signer   = await provider.getSigner();
+      onConnected();
+
+      wc.on('accountsChanged', ()=>location.reload());
+      wc.on('chainChanged',    ()=>location.reload());
+      wc.on('disconnect',      ()=>location.reload());
+
+    } catch(e) {
+      setStatus((e.message||'WalletConnect failed').slice(0,70),'err');
+      closeModal();
     }
   }
 
-  /* ---- button dispatcher ---- */
+  /* tiny QR code renderer — pure JS, no library needed */
+  function drawQR(text, canvas) {
+    // Use a free QR API since we have no local library
+    const size = 200;
+    canvas.width = canvas.height = size;
+    const ctx = canvas.getContext('2d');
+    const img = new Image();
+    img.onload = () => ctx.drawImage(img, 0, 0, size, size);
+    img.src = `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(text)}&bgcolor=0f0f0f&color=FFE000`;
+  }
+
+  /* ─── wallet choice dispatcher ───────────────── */
+  function handleWalletChoice(type) {
+    closeModal();
+    if (type === 'walletconnect') connectWC();
+    else connectInjected(type);
+  }
+
+  /* ─── post-connect ───────────────────────────── */
+  function onConnected() {
+    connected = true;
+    closeModal();
+    const short = userAddr.slice(0,6)+'…'+userAddr.slice(-4);
+    if (addrEl) { addrEl.textContent = '✓ ' + short; addrEl.classList.add('show'); }
+    if (netWarn) netWarn.style.display='none';
+    setStatus("Ready! Enter USDC amount and click BUY",'ok');
+    if (btn) {
+      btn.textContent = "🚀 BUY $GGRD NOW";
+      btn.className   = 'w-connect-btn buying-mode';
+      btn.disabled    = false;
+    }
+    setStep(2);
+  }
+
+  /* ─── approve + buy (single click after connect) */
+  async function approveThenBuy() {
+    const usdcVal = parseFloat($('w-usdc-in')?.value || '0');
+    if (isNaN(usdcVal) || usdcVal < 50)  { setStatus("Minimum: 50 USDC",'err');  return; }
+    if (usdcVal > 3000)                   { setStatus("Maximum: 3,000 USDC",'err'); return; }
+    if (!signer) { setStatus("Wallet disconnected — reconnect",'err'); return; }
+
+    btn.disabled = true;
+
+    try {
+      // step 1: check / approve
+      setStatus("Checking USDC allowance…",'warn');
+      const usdc      = new ethers.Contract(USDC_ADDR, ERC20_ABI, signer);
+      const payAmount = toBigInt18(usdcVal);
+      const allowance = BigInt(await usdc.allowance(userAddr, PRESALE_ADDR));
+
+      if (allowance < payAmount) {
+        setStatus("Step 1/2 — Approve USDC in your wallet…",'warn');
+        btn.textContent = "⏳ APPROVING…";
+        setStep(2);
+        const txA = await usdc.approve(PRESALE_ADDR, payAmount);
+        setStatus("Waiting for approval…",'warn');
+        await txA.wait();
+        setStatus("✓ Approved! Sending buy tx…",'ok');
+      }
+
+      // step 2: buy
+      setStatus("Step 2/2 — Confirm purchase in your wallet…",'warn');
+      btn.textContent = "⏳ BUYING…";
+      setStep(3);
+      const presale = new ethers.Contract(PRESALE_ADDR, BUY_ABI, signer);
+      const txB = await presale.buy(payAmount);
+      setStatus("Waiting for confirmation…",'warn');
+      await txB.wait();
+
+      const ggrd = calcGGRD(usdcVal);
+      setStatus(`🎉 Done! ~${ggrd} GGRD coming your way!`,'ok');
+      btn.textContent = "✅ PURCHASED!";
+      btn.className   = 'w-connect-btn';
+      setStep(3);
+      fetchRaised();
+
+      // confetti
+      ['🎉','🚀','😂','💸','🟡'].forEach((em,i) => {
+        setTimeout(()=>{
+          const el = document.createElement('div');
+          el.textContent = em;
+          el.style.cssText = `position:fixed;left:${12+i*18}vw;top:80vh;font-size:2.5rem;pointer-events:none;z-index:99999;animation:floatUp 2.5s ease forwards`;
+          document.body.appendChild(el);
+          setTimeout(()=>el.remove(),2600);
+        }, i*120);
+      });
+
+    } catch(e) {
+      const msg = e.reason || e.data?.message || e.message || 'Transaction failed';
+      setStatus(msg.slice(0,80),'err');
+      btn.textContent = "🚀 BUY $GGRD NOW";
+      btn.className   = 'w-connect-btn buying-mode';
+      btn.disabled    = false;
+    }
+  }
+
+  /* ─── button dispatcher ──────────────────────── */
   if (btn) {
     btn.addEventListener('click', () => {
-      if (STEP === 1) connectWallet();
-      else if (STEP === 2) approveUSDC();
-      else if (STEP === 3) buyGGRD();
+      if (!connected) openModal();
+      else approveThenBuy();
     });
   }
 
-  /* ---- wallet events ---- */
+  /* ─── wallet events ──────────────────────────── */
   if (window.ethereum) {
-    window.ethereum.on('accountsChanged', () => location.reload());
-    window.ethereum.on('chainChanged',    () => location.reload());
+    window.ethereum.on('accountsChanged', ()=>location.reload());
+    window.ethereum.on('chainChanged',    ()=>location.reload());
   }
 
-  /* ---- boot ---- */
-  initUI();
+  /* ─── init UI ────────────────────────────────── */
+  (function initUI() {
+    const s = getStage();
+    if (s) {
+      const sv=$('w-stage-val'), pv=$('w-price-val'), np=$('w-next-price');
+      if (sv) sv.textContent = s.label;
+      if (pv) pv.textContent = `$${(s.priceScaled/1e8).toFixed(4)} USDC`;
+      if (np) np.textContent = s.next!=='—' ? `Next stage: $${s.next}` : 'Last stage!';
+    } else {
+      const sv=$('w-stage-val'), pv=$('w-price-val');
+      if (sv) sv.textContent = "ENDED";
+      if (pv) pv.textContent = "—";
+      if (btn) { btn.disabled=true; btn.textContent="PRESALE ENDED"; }
+    }
+    const inp = $('w-usdc-in');
+    if (inp) inp.addEventListener('input', ()=>{
+      const out=$('w-ggrd-out');
+      if (out) out.textContent = calcGGRD(parseFloat(inp.value)||0);
+    });
+    fetchRaised();
+    setInterval(fetchRaised, 30000);
+    setStep(1);
+    setStatus('Click below to connect your wallet');
+    const styleEl=document.createElement('style');
+    styleEl.textContent=`@keyframes floatUp{from{transform:translateY(0);opacity:1}to{transform:translateY(-60vh);opacity:0}}`;
+    document.head.appendChild(styleEl);
+  })();
 
 })();
 </script>
