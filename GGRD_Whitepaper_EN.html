@@ -1,1525 +1,1022 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="index,follow">
-    <title>Giggle Reloaded ($GGRD) Whitepaper v1.0 — Fair Launch, Tokenomics &amp; Charity Treasury</title>
-    <meta name="description" content="Official GGRD Whitepaper: Solana fair launch via Meteora DBC, tokenomics, LP policy, charity treasury governance, and multisig security.">
-    <link rel="canonical" href="https://ggrd.me/GGRD_Whitepaper_EN.html">
-    <link rel="icon" type="image/png" href="img/ggrd-logo-512.png">
-    
-    <!-- Open Graph -->
-    <meta property="og:type" content="article">
-    <meta property="og:site_name" content="Giggle Reloaded">
-    <meta property="og:url" content="https://ggrd.me/GGRD_Whitepaper_EN.html">
-    <meta property="og:title" content="Giggle Reloaded ($GGRD) Whitepaper v1.0">
-    <meta property="og:description" content="Official GGRD Whitepaper: Solana fair launch via Meteora DBC, tokenomics, LP policy, charity treasury governance, and multisig security.">
-    <meta property="og:image" content="https://ggrd.me/img/ggrd-og-banner.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Giggle Reloaded (GGRD) banner">
-    <meta name="twitter:image:alt" content="Giggle Reloaded (GGRD) banner">
-    
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@ContactGiggle">
-    <meta name="twitter:title" content="Giggle Reloaded ($GGRD) Whitepaper v1.0">
-    <meta name="twitter:description" content="Official GGRD Whitepaper: fair launch via Meteora DBC, tokenomics, charity treasury, and multisig security.">
-    <meta name="twitter:image" content="https://ggrd.me/img/ggrd-og-banner.png">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GGRD Whitepaper v4.0 — Giggle Reloaded BSC Mainnet Specification</title>
+<meta name="description" content="Giggle Reloaded (GGRD) Whitepaper v4.0 — contract-aligned mainnet specification for tokenomics, governance, presale, staking, vesting and operational controls on BNB Smart Chain.">
+<link rel="canonical" href="https://ggrd.me/GGRD_Whitepaper_EN.html">
+<link rel="icon" type="image/png" href="img/ggrd-logo-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Courier+Prime:wght@400;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --yellow: #FFE000;
+  --green:  #00FF41;
+  --red:    #FF2233;
+  --blue:   #4488FF;
+  --bg:     #080808;
+  --bg2:    #0f0f0f;
+  --bg3:    #141414;
+  --white:  #F0F0F0;
+  --gray:   #888;
+  --border: #1e1e1e;
+  --sidebar-w: 260px;
+}
 
-    <!-- Structured Data: Article -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "headline": "Giggle Reloaded ($GGRD) Whitepaper v1.0",
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "https://ggrd.me/GGRD_Whitepaper_EN.html"
-      },
-      "dateModified": "2025-12-07",
-      "publisher": {
-        "@type": "Organization",
-        "name": "Giggle Reloaded",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://ggrd.me/img/ggrd-logo-512.png"
-        }
-      },
-      "image": [
-        "https://ggrd.me/img/ggrd-og-banner.png"
-      ]
-    }
-    </script>
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior: smooth; }
 
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
-        
-        @page {
-            size: A4;
-            margin: 2cm;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            line-height: 1.6;
-            color: #1a1a1a;
-            background: #ffffff;
-            font-size: 11pt;
-        }
-        
-        .container {
-            max-width: 21cm;
-            margin: 0 auto;
-            padding: 1cm;
-        }
-        
-        /* Cover Page */
-        .cover {
-            page-break-after: always;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 90vh;
-            height: auto;
-            text-align: center;
-            background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
-            border: 3px solid #9DFF00;
-            padding: 2cm 3cm;
-            margin: 0;
-        }
-        
-        .cover h1 {
-            font-size: 48pt;
-            font-weight: 800;
-            color: #000000;
-            margin-bottom: 0.5cm;
-            letter-spacing: -0.02em;
-        }
-        
-        .cover .ticker {
-            font-size: 36pt;
-            font-weight: 700;
-            color: #9DFF00;
-            margin-bottom: 1cm;
-        }
-        
-        .cover .tagline {
-            font-size: 18pt;
-            color: #666666;
-            margin-bottom: 2cm;
-            font-weight: 600;
-        }
-        
-        .cover .meta {
-            font-size: 12pt;
-            color: #666666;
-            margin-top: 2cm;
-        }
-        
-        .cover .meta p {
-            margin: 0.3cm 0;
-        }
-        
-        /* Headers */
-        h1 {
-            font-size: 24pt;
-            font-weight: 800;
-            color: #000000;
-            margin: 1.5cm 0 0.5cm 0;
-            page-break-after: avoid;
-        }
-        
-        h2 {
-            font-size: 18pt;
-            font-weight: 700;
-            color: #1a1a1a;
-            margin: 1cm 0 0.4cm 0;
-            page-break-after: avoid;
-            border-bottom: 2px solid #9DFF00;
-            padding-bottom: 0.2cm;
-        }
-        
-        h3 {
-            font-size: 14pt;
-            font-weight: 700;
-            color: #1a1a1a;
-            margin: 0.8cm 0 0.3cm 0;
-            page-break-after: avoid;
-        }
-        
-        h4 {
-            font-size: 12pt;
-            font-weight: 600;
-            color: #333333;
-            margin: 0.5cm 0 0.2cm 0;
-            page-break-after: avoid;
-        }
-        
-        /* Paragraphs */
-        p {
-            margin: 0.3cm 0;
-            text-align: justify;
-        }
-        
-        /* Lists */
-        ul, ol {
-            margin: 0.3cm 0 0.3cm 1cm;
-        }
-        
-        li {
-            margin: 0.2cm 0;
-        }
-        
-        /* Tables */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 0.5cm 0;
-            page-break-inside: avoid;
-        }
-        
-        th {
-            background-color: #9DFF00;
-            color: #000000;
-            font-weight: 700;
-            padding: 0.3cm;
-            text-align: left;
-            border: 1px solid #7ACC00;
-        }
-        
-        td {
-            padding: 0.25cm 0.3cm;
-            border: 1px solid #e0e0e0;
-        }
-        
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        
-        /* Code/Monospace */
-        code, .mono {
-            font-family: 'Courier New', monospace;
-            background-color: #f5f5f5;
-            padding: 0.1cm 0.2cm;
-            border-radius: 3px;
-            font-size: 10pt;
-        }
-        
-        pre {
-            background-color: #f5f5f5;
-            padding: 0.5cm;
-            border-radius: 5px;
-            overflow-x: auto;
-            font-family: 'Courier New', monospace;
-            font-size: 9pt;
-            margin: 0.5cm 0;
-        }
-        
-        /* Blockquotes */
-        blockquote {
-            background-color: #f0fdf4;
-            border-left: 4px solid #9DFF00;
-            padding: 0.4cm 0.6cm;
-            margin: 0.5cm 0;
-            font-style: italic;
-            page-break-inside: avoid;
-        }
-        
-        /* Warning/Alert Boxes */
-        .warning {
-            background-color: #fff7ed;
-            border: 2px solid #FFC83D;
-            padding: 0.4cm 0.6cm;
-            margin: 0.5cm 0;
-            page-break-inside: avoid;
-        }
-        
-        .warning strong {
-            color: #f59e0b;
-        }
-        
-        /* Info Boxes */
-        .info {
-            background-color: #f0f9ff;
-            border: 2px solid #22D3EE;
-            padding: 0.4cm 0.6cm;
-            margin: 0.5cm 0;
-            page-break-inside: avoid;
-        }
-        
-        /* Table of Contents */
-        .toc {
-            page-break-after: always;
-            margin: 1cm 0;
-        }
-        
-        .toc h2 {
-            text-align: center;
-            margin-bottom: 1cm;
-        }
-        
-        .toc ul {
-            list-style: none;
-            margin: 0;
-        }
-        
-        .toc li {
-            margin: 0.3cm 0;
-        }
-        
-        .toc a {
-            text-decoration: none;
-            color: #1a1a1a;
-            display: flex;
-            justify-content: space-between;
-        }
-        
-        .toc a:hover {
-            color: #9DFF00;
-        }
-        
-        /* Links */
-        a {
-            color: #22D3EE;
-            text-decoration: none;
-        }
-        
-        a:hover {
-            text-decoration: underline;
-        }
-        
-        /* Strong/Bold */
-        strong {
-            font-weight: 700;
-        }
-        
-        /* Page Breaks */
-        .page-break {
-            page-break-after: always;
-        }
-        
-        /* Footer */
-        .footer {
-            margin-top: 2cm;
-            padding-top: 0.5cm;
-            border-top: 1px solid #e0e0e0;
-            font-size: 9pt;
-            color: #666666;
-            text-align: center;
-        }
-        
-        /* Print Styles */
-        @media print {
-            body {
-                background: white;
-            }
-            
-            .no-print {
-                display: none;
-            }
-            
-            a {
-                color: #000000;
-                text-decoration: underline;
-            }
-            
-            .cover {
-                background: white;
-            }
-        }
-    </style>
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'Courier Prime', monospace;
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+/* scanlines */
+body::before {
+  content:''; position:fixed; inset:0; pointer-events:none; z-index:9999;
+  background: repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.06) 3px,rgba(0,0,0,0.06) 4px);
+}
+
+/* ── TOP BAR ── */
+.topbar {
+  position: fixed; top:0; left:0; right:0; height:52px; z-index:500;
+  background: rgba(8,8,8,0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 1.5rem;
+}
+
+.topbar-left {
+  display: flex; align-items: center; gap:12px;
+}
+.topbar-logo {
+  font-family:'Bangers',cursive; font-size:1.4rem; letter-spacing:2px;
+  color:var(--yellow); text-decoration:none; display:flex; align-items:center; gap:8px;
+}
+.topbar-logo img { width:26px; height:26px; border-radius:50%; }
+.topbar-sep { color:#333; }
+.topbar-doc {
+  font-size:0.65rem; letter-spacing:2px; color:var(--gray); text-transform:uppercase;
+}
+
+.topbar-right { display:flex; align-items:center; gap:0.8rem; }
+
+.tb-btn {
+  font-family:'Courier Prime',monospace; font-size:0.68rem; font-weight:700;
+  letter-spacing:1.5px; text-transform:uppercase; text-decoration:none;
+  padding:6px 14px; border:1px solid; cursor:pointer; transition:background 0.15s,color 0.15s;
+  display:inline-flex; align-items:center; gap:5px;
+}
+.tb-btn-outline { border-color:#333; color:var(--gray); background:none; }
+.tb-btn-outline:hover { border-color:var(--yellow); color:var(--yellow); }
+.tb-btn-primary { border-color:var(--yellow); color:#000; background:var(--yellow); }
+.tb-btn-primary:hover { background:var(--green); border-color:var(--green); }
+
+/* ── LAYOUT ── */
+.layout { display:flex; padding-top:52px; min-height:100vh; }
+
+/* ── SIDEBAR ── */
+.sidebar {
+  position: fixed; top:52px; left:0; bottom:0;
+  width: var(--sidebar-w);
+  background: var(--bg2);
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  padding: 1.5rem 0;
+  z-index: 400;
+}
+
+.sidebar::-webkit-scrollbar { width:4px; }
+.sidebar::-webkit-scrollbar-track { background:transparent; }
+.sidebar::-webkit-scrollbar-thumb { background:#2a2a2a; border-radius:2px; }
+
+.sb-section-label {
+  font-size:0.55rem; letter-spacing:2.5px; text-transform:uppercase;
+  color:#444; padding:0.6rem 1.2rem 0.3rem; display:block;
+}
+
+.sb-link {
+  display:block; padding:0.45rem 1.2rem;
+  font-size:0.72rem; color:var(--gray); text-decoration:none;
+  letter-spacing:0.5px; transition:color 0.15s, background 0.15s;
+  border-left:2px solid transparent;
+}
+.sb-link:hover { color:var(--white); background:rgba(255,224,0,0.04); }
+.sb-link.active { color:var(--yellow); border-left-color:var(--yellow); background:rgba(255,224,0,0.06); }
+.sb-link .sb-num { color:#333; margin-right:6px; font-size:0.65rem; }
+
+.sb-divider { height:1px; background:var(--border); margin:0.8rem 1.2rem; }
+
+.sb-version-badge {
+  margin:1rem 1.2rem 0;
+  background:rgba(0,255,65,0.06); border:1px solid rgba(0,255,65,0.2);
+  padding:0.5rem 0.8rem; font-size:0.62rem; color:var(--green); letter-spacing:1px;
+}
+.sb-version-badge strong { display:block; font-size:0.8rem; color:var(--green); }
+
+/* ── CONTENT ── */
+.content {
+  margin-left: var(--sidebar-w);
+  flex:1; max-width: 900px; padding: 3rem 3rem 6rem;
+}
+
+/* ── SECTIONS ── */
+.wp-section {
+  margin-bottom: 4rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  scroll-margin-top: 72px;
+}
+
+.wp-section:first-child { border-top:none; }
+
+.section-num {
+  font-size:0.6rem; letter-spacing:3px; color:var(--yellow);
+  text-transform:uppercase; display:block; margin-bottom:0.3rem;
+}
+
+.section-title {
+  font-family:'Bangers',cursive; font-size:2.2rem; letter-spacing:3px;
+  color:var(--white); line-height:1; margin-bottom:0.8rem;
+}
+
+.section-lead {
+  font-size:0.85rem; color:var(--gray); border-left:3px solid var(--yellow);
+  padding-left:1rem; margin-bottom:2rem; line-height:1.8;
+}
+
+/* COVER */
+.cover {
+  padding: 3rem 0 4rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.cover-eyebrow {
+  font-size:0.6rem; letter-spacing:3px; color:var(--green); text-transform:uppercase;
+  margin-bottom:0.8rem; display:block;
+}
+
+.cover-title {
+  font-family:'Bangers',cursive;
+  font-size: clamp(2.5rem,5vw,4.5rem);
+  letter-spacing:4px; color:var(--yellow); line-height:0.95;
+  margin-bottom:0.5rem;
+  text-shadow:0 0 40px rgba(255,224,0,0.15);
+}
+
+.cover-subtitle {
+  font-family:'Bangers',cursive; font-size:1.4rem; letter-spacing:3px;
+  color:var(--gray); margin-bottom:2rem;
+}
+
+.cover-meta {
+  display:grid; grid-template-columns: repeat(3,1fr); gap:1px;
+  background:var(--border); border:1px solid var(--border);
+  margin-bottom:2rem;
+}
+.cm-cell {
+  background:var(--bg3); padding:0.9rem 1rem;
+}
+.cm-label { font-size:0.58rem; letter-spacing:2px; color:var(--gray); text-transform:uppercase; margin-bottom:0.2rem; }
+.cm-val { font-size:0.88rem; color:var(--white); font-weight:700; }
+
+.cover-chain-badge {
+  display:inline-flex; align-items:center; gap:8px;
+  background:#1a1200; border:1px solid rgba(255,224,0,0.25);
+  padding:0.6rem 1.2rem; font-size:0.7rem; color:var(--yellow); letter-spacing:1.5px;
+}
+
+/* TABLES */
+.wp-table {
+  width:100%; border-collapse:collapse; font-size:0.8rem; margin:1.5rem 0;
+  overflow:hidden;
+}
+.wp-table th {
+  font-size:0.58rem; letter-spacing:2px; text-transform:uppercase; color:var(--gray);
+  padding:0.6rem 1rem; text-align:left; border-bottom:1px solid var(--border);
+  background:var(--bg2);
+}
+.wp-table td {
+  padding:0.75rem 1rem; border-bottom:1px solid var(--border); vertical-align:top;
+}
+.wp-table tr:last-child td { border-bottom:none; }
+.wp-table tr:hover td { background:rgba(255,255,255,0.02); }
+
+.td-key { color:var(--white); font-weight:700; white-space:nowrap; }
+.td-val { color:var(--green); font-family:'DM Mono',monospace; }
+.td-anchor { color:#555; font-size:0.72rem; font-family:'DM Mono',monospace; }
+.td-badge {
+  display:inline-block; font-size:0.55rem; letter-spacing:1.5px; text-transform:uppercase;
+  padding:2px 7px; border:1px solid;
+}
+.badge-green { border-color:var(--green); color:var(--green); }
+.badge-yellow { border-color:var(--yellow); color:var(--yellow); }
+.badge-gray { border-color:#444; color:#666; }
+
+/* ADDR */
+.addr-block {
+  font-family:'DM Mono',monospace; font-size:0.75rem; color:var(--green);
+  background:var(--bg3); border:1px solid var(--border);
+  padding:0.6rem 1rem; margin:0.3rem 0; word-break:break-all;
+  display:flex; align-items:center; justify-content:space-between; gap:1rem;
+}
+.addr-block a {
+  color:var(--yellow); text-decoration:none; font-size:0.6rem;
+  letter-spacing:1px; text-transform:uppercase; white-space:nowrap;
+  border:1px solid rgba(255,224,0,0.3); padding:2px 8px;
+  transition:background 0.15s;
+}
+.addr-block a:hover { background:var(--yellow); color:#000; }
+
+/* INFO BOXES */
+.info-box {
+  border:1px solid; padding:1rem 1.2rem; margin:1.5rem 0; font-size:0.82rem;
+  position:relative;
+}
+.info-box-label {
+  position:absolute; top:-10px; left:1rem; background:var(--bg);
+  font-size:0.58rem; letter-spacing:2px; text-transform:uppercase; padding:0 6px;
+}
+.info-box-green { border-color:rgba(0,255,65,0.3); color:#bbb; }
+.info-box-green .info-box-label { color:var(--green); }
+.info-box-yellow { border-color:rgba(255,224,0,0.3); color:#bbb; }
+.info-box-yellow .info-box-label { color:var(--yellow); }
+.info-box-red { border-color:rgba(255,34,51,0.3); color:#bbb; }
+.info-box-red .info-box-label { color:var(--red); }
+
+/* STAGE CARDS */
+.stage-grid {
+  display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
+  background:var(--border); border:1px solid var(--border); margin:1.5rem 0;
+}
+.stage-card {
+  background:var(--bg2); padding:1.2rem 1rem;
+}
+.stage-card.s1 { border-top:2px solid var(--green); }
+.stage-card.s2 { border-top:2px solid var(--yellow); }
+.stage-card.s3 { border-top:2px solid #FF8C00; }
+.stage-card.s4 { border-top:2px solid var(--red); }
+.sc-num { font-family:'Bangers',cursive; font-size:2rem; color:#222; line-height:1; }
+.sc-label { font-size:0.58rem; letter-spacing:2px; color:var(--gray); text-transform:uppercase; margin:0.2rem 0; }
+.sc-price { font-family:'Bangers',cursive; font-size:1.6rem; color:var(--yellow); }
+.sc-detail { font-size:0.68rem; color:var(--gray); margin-top:0.3rem; }
+.sc-detail strong { color:var(--white); }
+
+/* ALLOC BAR */
+.alloc-rows { margin:1.5rem 0; }
+.alloc-row { display:flex; align-items:center; gap:1rem; margin-bottom:0.8rem; }
+.alloc-label { font-size:0.72rem; color:var(--white); min-width:160px; }
+.alloc-bar-wrap { flex:1; background:#1a1a1a; height:8px; position:relative; }
+.alloc-bar { height:100%; transition:width 1s ease; }
+.alloc-pct {
+  font-family:'Bangers',cursive; font-size:1.1rem; letter-spacing:1px;
+  min-width:40px; text-align:right;
+}
+
+/* TIMELINE */
+.timeline { margin:1.5rem 0; }
+.tl-row {
+  display:flex; gap:1rem; align-items:flex-start;
+  padding:0.8rem 0; border-bottom:1px solid var(--border);
+}
+.tl-row:last-child { border-bottom:none; }
+.tl-dot { width:10px; height:10px; border-radius:50%; margin-top:5px; flex-shrink:0; }
+.tl-date { font-family:'DM Mono',monospace; font-size:0.75rem; color:var(--yellow); min-width:180px; }
+.tl-label { font-size:0.82rem; color:var(--gray); }
+.tl-label strong { color:var(--white); }
+
+/* FORMULA BOX */
+.formula {
+  background:var(--bg3); border:1px solid var(--border);
+  border-left:3px solid var(--green);
+  padding:0.8rem 1.2rem; font-family:'DM Mono',monospace;
+  font-size:0.82rem; color:var(--green); margin:1rem 0;
+  overflow-x:auto;
+}
+
+/* GOVERNANCE LAYERS */
+.gov-grid {
+  display:grid; grid-template-columns:1fr 1fr; gap:1px;
+  background:var(--border); margin:1.5rem 0;
+}
+.gov-cell { background:var(--bg2); padding:1.2rem; }
+.gov-cell-title {
+  font-family:'Bangers',cursive; font-size:1.1rem; letter-spacing:2px;
+  color:var(--yellow); margin-bottom:0.5rem;
+}
+.gov-cell-val { font-size:0.82rem; color:var(--gray); }
+.gov-cell-val strong { color:var(--white); }
+
+/* RISK SECTION */
+.risk-grid {
+  display:grid; grid-template-columns:1fr 1fr; gap:1px;
+  background:var(--border); margin:1.5rem 0;
+}
+.risk-card { background:var(--bg2); padding:1.2rem; }
+.risk-title {
+  font-size:0.65rem; letter-spacing:2px; text-transform:uppercase;
+  margin-bottom:0.8rem;
+}
+.risk-item {
+  font-size:0.78rem; color:var(--gray); padding:0.4rem 0;
+  border-bottom:1px solid var(--border); display:flex; gap:0.5rem;
+}
+.risk-item:last-child { border-bottom:none; }
+.risk-item::before { content:'→'; color:#444; flex-shrink:0; }
+
+/* DISCLAIMER */
+.disclaimer {
+  background:rgba(255,34,51,0.05); border:1px solid rgba(255,34,51,0.2);
+  padding:1.5rem; margin-top:3rem; font-size:0.78rem; color:#888; line-height:1.8;
+}
+.disclaimer strong { color:var(--red); }
+
+/* PROSE */
+p { margin-bottom:1rem; color:#aaa; font-size:0.88rem; }
+p strong { color:var(--white); }
+p code { font-family:'DM Mono',monospace; font-size:0.82rem; color:var(--green); background:var(--bg3); padding:1px 5px; }
+ul { margin:0.8rem 0 1rem 1.2rem; }
+li { font-size:0.85rem; color:#aaa; margin-bottom:0.4rem; }
+li strong { color:var(--white); }
+
+/* h3 subheads */
+h3 {
+  font-family:'Bangers',cursive; font-size:1.3rem; letter-spacing:2px;
+  color:var(--green); margin:2rem 0 0.8rem;
+}
+
+/* DOWNLOAD CTA */
+.download-cta {
+  background:rgba(0,255,65,0.05); border:1px solid rgba(0,255,65,0.25);
+  padding:1.2rem 1.5rem; display:flex; align-items:center; justify-content:space-between;
+  margin:2rem 0; gap:1rem; flex-wrap:wrap;
+}
+.dl-text { font-size:0.8rem; color:var(--gray); }
+.dl-text strong { color:var(--white); font-size:0.9rem; display:block; }
+
+/* MOBILE */
+@media (max-width: 900px) {
+  .sidebar { display:none; }
+  .content { margin-left:0; padding:2rem 1.2rem 4rem; }
+  .stage-grid { grid-template-columns:1fr 1fr; }
+  .gov-grid, .risk-grid { grid-template-columns:1fr; }
+  .cover-meta { grid-template-columns:1fr; }
+  .topbar-doc { display:none; }
+}
+</style>
 </head>
 <body>
 
-<!-- COVER PAGE -->
-<div class="cover">
-    <h1>Giggle Reloaded ($GGRD) Whitepaper</h1>
-    <div class="ticker">$GGRD</div>
-    <div class="tagline">The Robin Hood of Solana<br>A Fair-Launch Memecoin with Charitable Impact</div>
-    
-    <div style="margin: 2cm 0; padding: 1cm; background: rgba(157, 255, 0, 0.1); border-radius: 10px;">
-        <p style="font-size: 14pt; font-weight: 600; margin-bottom: 0.5cm;">Whitepaper</p>
-        <p style="font-size: 12pt;">Fair Launch • Zero Tax • 10% for Pediatric Cancer Support</p>
-        <p style="font-size: 12pt;">1,000,000 Fixed Supply • Meteora DBC • Squads Multisig</p>
+<!-- TOP BAR -->
+<nav class="topbar">
+  <div class="topbar-left">
+    <a class="topbar-logo" href="index.html">
+      <img src="img/ggrd-logo-512.png" alt="GGRD">
+      GGRD
+    </a>
+    <span class="topbar-sep">|</span>
+    <span class="topbar-doc">Whitepaper v4.0</span>
+  </div>
+  <div class="topbar-right">
+    <a class="tb-btn tb-btn-outline" href="GGRD_Whitepaper_EN.pdf" download>⬇ Download PDF</a>
+    <a class="tb-btn tb-btn-primary" href="index.html#buy">🚀 Buy $GGRD</a>
+  </div>
+</nav>
+
+<!-- LAYOUT -->
+<div class="layout">
+
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar">
+  <div class="sb-version-badge">
+    <strong>v4.0</strong>
+    Contract-Aligned · 2026-03-10
+  </div>
+  <div class="sb-divider"></div>
+
+  <span class="sb-section-label">Document</span>
+  <a class="sb-link active" href="#cover"><span class="sb-num">—</span>Overview</a>
+
+  <span class="sb-section-label">Sections</span>
+  <a class="sb-link" href="#s1"><span class="sb-num">01</span>Scope & Methodology</a>
+  <a class="sb-link" href="#s2"><span class="sb-num">02</span>Vision & Constraints</a>
+  <a class="sb-link" href="#s3"><span class="sb-num">03</span>Token & Monetary Policy</a>
+  <a class="sb-link" href="#s4"><span class="sb-num">04</span>Allocation Model</a>
+  <a class="sb-link" href="#s5"><span class="sb-num">05</span>Presale Mechanics</a>
+  <a class="sb-link" href="#s6"><span class="sb-num">06</span>Governance</a>
+  <a class="sb-link" href="#s7"><span class="sb-num">07</span>Staking Engine</a>
+  <a class="sb-link" href="#s8"><span class="sb-num">08</span>Charity Vesting</a>
+  <a class="sb-link" href="#s9"><span class="sb-num">09</span>Airdrop Framework</a>
+  <a class="sb-link" href="#s10"><span class="sb-num">10</span>Liquidity & LP Lock</a>
+  <a class="sb-link" href="#s11"><span class="sb-num">11</span>Security & Risks</a>
+  <a class="sb-link" href="#s12"><span class="sb-num">12</span>Mainnet Addresses</a>
+  <a class="sb-link" href="#s13"><span class="sb-num">13</span>Operational Runbook</a>
+  <a class="sb-link" href="#s14"><span class="sb-num">14</span>Risk & Legal Notice</a>
+
+  <div class="sb-divider"></div>
+  <span class="sb-section-label">Links</span>
+  <a class="sb-link" href="index.html">← Main Site</a>
+  <a class="sb-link" href="index.html#buy">Buy $GGRD</a>
+  <a class="sb-link" href="https://bscscan.com/token/0xA0d5663d57b7D7EF975D2F02BcAEaf5c94c671f9" target="_blank" rel="noopener">BscScan Token ↗</a>
+  <a class="sb-link" href="https://t.me/GGRDofficial" target="_blank" rel="noopener">Telegram ↗</a>
+</nav>
+
+<!-- CONTENT -->
+<main class="content">
+
+<!-- COVER -->
+<div class="cover" id="cover">
+  <span class="cover-eyebrow">🟡 BSC Mainnet · chainId 56 · Contract-Aligned</span>
+  <div class="cover-title">GIGGLE RELOADED<br>($GGRD)</div>
+  <div class="cover-subtitle">Whitepaper v4.0 — Mainnet Specification</div>
+
+  <div class="cover-meta">
+    <div class="cm-cell">
+      <div class="cm-label">Version</div>
+      <div class="cm-val">v4.0 (contract-aligned rewrite)</div>
     </div>
-    
-    <div class="meta">
-        <p><strong>Version:</strong> 1.0</p>
-        <p><strong>Date:</strong> November 25, 2025</p>
-        <p><strong>Network:</strong> Solana Mainnet-Beta</p>
-        <p><strong>Website:</strong> https://ggrd.me</p>
+    <div class="cm-cell">
+      <div class="cm-label">Date</div>
+      <div class="cm-val">2026-03-10</div>
     </div>
+    <div class="cm-cell">
+      <div class="cm-label">Primary Source</div>
+      <div class="cm-val">ggrd-bsc-contracts</div>
+    </div>
+    <div class="cm-cell">
+      <div class="cm-label">Chain</div>
+      <div class="cm-val">BNB Smart Chain Mainnet</div>
+    </div>
+    <div class="cm-cell">
+      <div class="cm-label">Token</div>
+      <div class="cm-val">Giggle Reloaded (GGRD)</div>
+    </div>
+    <div class="cm-cell">
+      <div class="cm-label">Supply Model</div>
+      <div class="cm-val">Fixed supply — 10,000,000 GGRD</div>
+    </div>
+  </div>
+
+  <div class="cover-chain-badge">⛓ Deployed on BNB Smart Chain · chainId 56 · Snapshot: deployments/bscMainnet.latest.json</div>
+
+  <div class="download-cta">
+    <div class="dl-text">
+      <strong>📄 Download Full Whitepaper PDF</strong>
+      GGRD_Whitepaper_Contract_Aligned_v4_0.pdf · Full technical specification
+    </div>
+    <a class="tb-btn tb-btn-primary" href="GGRD_Whitepaper_EN.pdf" download>⬇ Download PDF</a>
+  </div>
 </div>
 
-<!-- TABLE OF CONTENTS -->
-<div class="container toc">
-    <h2>Table of Contents</h2>
-    <ul>
-        <li><a href="#executive-summary"><span>1. Executive Summary</span></a></li>
-        <li><a href="#introduction"><span>2. Introduction</span></a></li>
-        <li><a href="#token-specifications"><span>3. Token Specifications</span></a></li>
-        <li><a href="#tokenomics"><span>4. Tokenomics &amp; Distribution</span></a></li>
-        <li><a href="#launch-mechanism"><span>5. Launch Mechanism — Meteora Dynamic Bonding Curve</span></a></li>
-        <li><a href="#liquidity"><span>6. Liquidity &amp; Trading Post-Migration</span></a></li>
-        <li><a href="#charity"><span>7. Charity Treasury &amp; Donation Policy</span></a></li>
-        <li><a href="#rewards"><span>8. Community Rewards Program (Telegram Bot)</span></a></li>
-        <li><a href="#governance"><span>9. Governance, Multisigs &amp; Future DAO</span></a></li>
-        <li><a href="#roadmap"><span>10. Development Roadmap &amp; Milestones</span></a></li>
-        <li><a href="#marketing"><span>11. Marketing, Community &amp; Communication</span></a></li>
-        <li><a href="#security"><span>12. Security &amp; Risk Management</span></a></li>
-        <li><a href="#legal"><span>13. Legal Disclaimers</span></a></li>
-        <li><a href="#contact"><span>14. Contact &amp; Support</span></a></li>
-        <li><a href="#summary"><span>15. Summary</span></a></li>
-        <li><a href="#appendices"><span>Appendices (A, B, C)</span></a></li>
-    </ul>
-</div>
-
-<!-- MAIN CONTENT -->
-<div class="container">
-
-<h2 id="executive-summary">1. Executive Summary</h2>
-
-<p><strong>Giggle Reloaded ($GGRD)</strong> is a fair-launch memecoin on Solana, utilising Meteora's Dynamic Bonding Curve (DBC) mechanism with subsequent migration to DAMM v2 liquidity pools. The project is structurally designed to combine meme-coin dynamics with a transparent, on-chain charity component dedicated to supporting children battling cancer through pediatric oncology programs.</p>
-
-<h3>Key Parameters</h3>
-
-<ul>
-    <li><strong>Fixed Supply:</strong> 1,000,000 GGRD (1M tokens)</li>
-    <li><strong>Launch Model:</strong> Public sale exclusively through Meteora DBC with USDC as the quote token</li>
-    <li><strong>Market Cap Parameters (DBC design):</strong>
-        <ul>
-            <li>Initial design market cap: <strong>10,000 USDC</strong></li>
-            <li>Migration market cap (design target): <strong>300,000 USDC</strong></li>
-            <li>Technical migration quote threshold: <strong>80,000 USDC</strong></li>
-        </ul>
-    </li>
-    <li><strong>Curve Allocation:</strong> 40% of total supply (400,000 GGRD) allocated to the DBC</li>
-    <li><strong>Treasury Allocation:</strong> 60% of total supply (600,000 GGRD) allocated to multisig-controlled treasuries</li>
-    <li><strong>Charitable Component:</strong> 10% of total supply (100,000 GGRD) reserved in a dedicated Charity Treasury for transparent donations to pediatric cancer support via community-selected verified charities</li>
-    <li><strong>Security Architecture:</strong> 0% tax, no hidden fee-switches, no freeze authority, no presale or VC allocation, and a comprehensive suite of Squads v4 multisigs (3/4 threshold) for Treasury, Charity, LP Policy, Marketing, Distribution and Team funds</li>
-</ul>
-
-<h3>Deployment Status &amp; Addresses</h3>
-
-<div class="info">
-    <p><strong>✅ Deployment Status (Updated December 7, 2025):</strong></p>
-    <p>The GGRD token has been deployed to Solana Mainnet-Beta:</p>
-    <ul>
-        <li><strong>Token Mint:</strong> <code>TR97dHmm8nXVndTcxew21138AchNgrk2BhEJGXMybdE</code></li>
-        <li>The Meteora DBC is <strong>live</strong> and trading is available.</li>
-        <li>All treasury multisig wallets are operational as listed in Section 4.</li>
-    </ul>
-</div>
-
-<p>All official addresses are announced exclusively through:</p>
-<ul>
-    <li>Official website: <strong>https://ggrd.me</strong></li>
-    <li>Official Telegram announcement channel: <strong>https://t.me/GGRDofficial</strong></li>
-    <li>Official Telegram community chat: <strong>https://t.me/GGRDchat</strong></li>
-</ul>
-
-<p>Any token, pool, or "official" address not confirmed through these channels should be assumed to be unauthorised or potentially malicious.</p>
-
-<div class="page-break"></div>
-
-<h2 id="introduction">2. Introduction</h2>
-
-<h3>2.1. Market Context</h3>
-
-<p>The Solana memecoin market is expanding rapidly, but many projects suffer from:</p>
-
-<ul>
-    <li>Lack of transparent, verifiable tokenomics</li>
-    <li>Poorly documented or unsafe liquidity management</li>
-    <li>No real, measurable impact beyond pure speculation</li>
-    <li>Opaque or inconsistent handling of funds earmarked for "charity" or "community"</li>
-</ul>
-
-<p><strong>Giggle Reloaded ($GGRD)</strong> aims to address these issues by:</p>
-
-<ul>
-    <li>Using a fixed-supply token with clearly documented on-chain configuration</li>
-    <li>Launching exclusively via a Dynamic Bonding Curve (DBC) with transparent parameters</li>
-    <li>Allocating a clearly defined 10% of total supply to a dedicated Charity Treasury</li>
-    <li>Managing core fund pools exclusively through verified, public Squads multisigs</li>
-    <li>Providing a roadmap towards community-involved on-chain governance (DAO)</li>
-</ul>
-
-<h3>2.2. Mission &amp; Vision</h3>
-
-<div class="info">
-    <p><strong>Mission:</strong></p>
-    <p>To build a Solana memecoin that combines the entertainment and speculation typical of memes with real, repeatable humanitarian aid and transparent on-chain management of funds.</p>
-</div>
-
-<div class="info">
-    <p><strong>Vision:</strong></p>
-    <p>To become the recognisable "Robin Hood of Solana" — a token associated with:</p>
-    <ul>
-        <li>Fair-launch without presale or VC allocation</li>
-        <li>Healthy, public distribution to the community via a bonding curve</li>
-        <li>Cyclical, transparent donations to children battling cancer</li>
-        <li>Building trust through complete transparency, multisig control and verifiable reporting</li>
-    </ul>
-</div>
-
-<h3>2.3. Purpose and Core Functions of GGRD</h3>
-
-<p>GGRD is designed to fulfil four core functions:</p>
-
-<ol>
-    <li><strong>Market / Trading Function</strong> — a freely tradable Solana memecoin with no presale, no VC allocation and 0% tax, launched via a Meteora DBC and later traded on a DAMM v2 LP and aggregators such as Jupiter.</li>
-    
-    <li><strong>Charity Value Driver</strong> — 10% of the total supply is allocated to a dedicated Charity Treasury whose sole purpose is to fund verifiable, on-chain crypto donations to children battling cancer through pediatric oncology programs.</li>
-    
-    <li><strong>Governance Signal (Future DAO)</strong> — in later phases, GGRD (or staked/wrapped GGRD) is expected to act as a governance signal in DAO votes on key parameters such as charity allocations, community incentive programmes and long-term policy changes.</li>
-    
-    <li><strong>Community Incentives &amp; Rewards</strong> — part of the Treasury allocation (community, marketing, partnerships) is intended for quests, airdrops, contests and other mechanisms designed to reward long-term, constructive community participation rather than short-term extraction.</li>
-</ol>
-
-<div class="page-break"></div>
-
-<h2 id="token-specifications">3. Token Specifications</h2>
-
-<h3>Technical Parameters</h3>
-
-<table>
-    <tr>
-        <th>Parameter</th>
-        <th>Value</th>
-    </tr>
-    <tr>
-        <td>Name</td>
-        <td>Giggle Reloaded</td>
-    </tr>
-    <tr>
-        <td>Symbol</td>
-        <td>GGRD</td>
-    </tr>
-    <tr>
-        <td>Total Supply</td>
-        <td>1,000,000 GGRD (fixed, no inflation)</td>
-    </tr>
-    <tr>
-        <td>Decimals</td>
-        <td>6</td>
-    </tr>
-    <tr>
-        <td>Network</td>
-        <td>Solana Mainnet-Beta</td>
-    </tr>
-    <tr>
-        <td>Mint Address</td>
-        <td><code>TR97dHmm8nXVndTcxew21138AchNgrk2BhEJGXMybdE</code></td>
-    </tr>
-</table>
-
-<h3>Metadata (Metaplex Token Metadata)</h3>
-
-<ul>
-    <li><strong>Standard:</strong> SPL Token + Metaplex Token Metadata</li>
-    <li><strong>Logo:</strong> 512×512 PNG, hosted on a permanent storage layer (Irys / Arweave)</li>
-    <li><strong>On-Chain Metadata:</strong> Metadata URI and associated media links are verifiable using reputable explorers (Solscan, Solana Explorer, SolanaFM).</li>
-</ul>
-
-<h3>Token Authorities</h3>
-
-<p>The token's authority configuration is as follows:</p>
-
-<ul>
-    <li><strong>Mint Authority:</strong> Revoked after minting the full 1,000,000 GGRD supply (no further minting possible)</li>
-    <li><strong>Freeze Authority:</strong> None (no authority capable of arbitrarily freezing user accounts)</li>
-    <li><strong>Metadata Update Authority:</strong> Renounced once final metadata was confirmed</li>
-</ul>
-
-<div class="info">
-    <p><strong>Verification:</strong> The mint authority has been revoked and can be verified on-chain via Solscan or Solana Explorer.</p>
-</div>
-
-<div class="page-break"></div>
-
-<h2 id="tokenomics">4. Tokenomics &amp; Distribution</h2>
-
-<h3>4.1. Supply Breakdown</h3>
-
-<p>The total supply of <strong>1,000,000 GGRD</strong> is allocated as follows:</p>
-
-<h4>40% — 400,000 GGRD — Meteora DBC (Public Sale)</h4>
-
-<ul>
-    <li>Sole source of primary token sale</li>
-    <li>No presale, no private sale, no VC allocation</li>
-    <li>Fair-launch via public access to the DBC</li>
-</ul>
-
-<h4>60% — 600,000 GGRD — Treasury Multisig (Secondary Distribution)</h4>
-
-<p>Allocated to specialised, named multisigs:</p>
-
-<table>
-    <tr>
-        <th>Purpose</th>
-        <th>Amount</th>
-        <th>Percentage</th>
-        <th>Multisig Address</th>
-    </tr>
-    <tr>
-        <td><strong>Charity (Pediatric Cancer Support)</strong></td>
-        <td>100,000 GGRD</td>
-        <td>10%</td>
-        <td><code>C96zqEjGh22yuZknVrasLyr2j5b2xsMnbTUiu2WKLK9w</code></td>
-    </tr>
-    <tr>
-        <td><strong>LP Policy (Additional Liquidity)</strong></td>
-        <td>100,000 GGRD</td>
-        <td>10%</td>
-        <td><code>8vFQrPpdE3uyd4JRdE7jUhyzTF8ZBVnuvqFTpsAA4SLY</code></td>
-    </tr>
-    <tr>
-        <td><strong>Community Distribution / Airdrops</strong></td>
-        <td>70,000 GGRD</td>
-        <td>7%</td>
-        <td><code>D3JWCu9egWYHEf1xvxBqSJJ6PBsHU3HkMjJZDW3ZQ37D</code></td>
-    </tr>
-    <tr>
-        <td><strong>Team Vesting</strong></td>
-        <td>70,000 GGRD</td>
-        <td>7%</td>
-        <td><code>7xXhueJp5LTr4jNwcWPn4oFurqJM9W5hxQRRWBCWLnDY</code></td>
-    </tr>
-    <tr>
-        <td><strong>Marketing &amp; Partnerships</strong></td>
-        <td>80,000 GGRD</td>
-        <td>8%</td>
-        <td><code>2RgWCdtsvU4VYcR1nZJS2XN5utBzA88vHbEyHuutHkvG</code></td>
-    </tr>
-    <tr>
-        <td><strong>Treasury Operations / Reserve</strong></td>
-        <td>180,000 GGRD</td>
-        <td>18%</td>
-        <td><code>5UAgVqKBNFoT6WrANGFdjqbTXJRGXPzHcNhG5LK4n9mj</code></td>
-    </tr>
-</table>
-
-<h3>4.2. Multisig Configuration</h3>
-
-<p>All key pools are controlled by <strong>Squads v4 multisigs</strong> with a <strong>3/4 threshold</strong>, meaning at least three independent signers must approve any outbound transaction.</p>
-
-<div class="info">
-    <p><strong>Multisig Summary:</strong></p>
-    <ul>
-        <li><strong>TREASURY:</strong> <code>5UAgVqKBNFoT6WrANGFdjqbTXJRGXPzHcNhG5LK4n9mj</code></li>
-        <li><strong>CHARITY:</strong> <code>C96zqEjGh22yuZknVrasLyr2j5b2xsMnbTUiu2WKLK9w</code></li>
-        <li><strong>LP_POLICY:</strong> <code>8vFQrPpdE3uyd4JRdE7jUhyzTF8ZBVnuvqFTpsAA4SLY</code></li>
-        <li><strong>MARKETING:</strong> <code>2RgWCdtsvU4VYcR1nZJS2XN5utBzA88vHbEyHuutHkvG</code></li>
-        <li><strong>DISTRIBUTION / COMMUNITY:</strong> <code>D3JWCu9egWYHEf1xvxBqSJJ6PBsHU3HkMjJZDW3ZQ37D</code></li>
-        <li><strong>TEAM:</strong> <code>7xXhueJp5LTr4jNwcWPn4oFurqJM9W5hxQRRWBCWLnDY</code></li>
-    </ul>
-</div>
-
-<p>Transfers from the main Treasury multisig to specialised multisigs are executed through on-chain Squads proposals, visible and verifiable by any observer.</p>
-
-<div class="page-break"></div>
-
-<h2 id="launch-mechanism">5. Launch Mechanism — Meteora Dynamic Bonding Curve</h2>
-
-<h3>5.1. DBC Parameters</h3>
-
-<p>GGRD launched on <strong>Meteora Dynamic Bonding Curve (DBC)</strong> with the following key parameters:</p>
-
-<table>
-    <tr>
-        <th>Parameter</th>
-        <th>Value</th>
-    </tr>
-    <tr>
-        <td>Quote Token</td>
-        <td>USDC (<code>EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v</code>)</td>
-    </tr>
-    <tr>
-        <td>Quote Decimals</td>
-        <td>6</td>
-    </tr>
-    <tr>
-        <td>Curve Allocation</td>
-        <td>400,000 GGRD (40% of total supply)</td>
-    </tr>
-    <tr>
-        <td>Initial Market Cap (design)</td>
-        <td>10,000 USDC</td>
-    </tr>
-    <tr>
-        <td>Migration Market Cap (design target)</td>
-        <td>300,000 USDC</td>
-    </tr>
-    <tr>
-        <td>Migration Quote Threshold (technical)</td>
-        <td>80,000 USDC</td>
-    </tr>
-    <tr>
-        <td>Percentage Supply on Migration</td>
-        <td>40%</td>
-    </tr>
-    <tr>
-        <td>Curve Mode</td>
-        <td>3 (multi-segment community-oriented curve)</td>
-    </tr>
-</table>
-
-<h4>Interpretation</h4>
-
-<ul>
-    <li><strong>10,000 USDC</strong> defines the low-end of the curve (starting design market cap)</li>
-    <li><strong>300,000 USDC</strong> is a design target: it shapes the upper part of the curve and projected market cap for full utilisation, but it is <strong>not</strong> a hard on-chain requirement for migration</li>
-    <li><strong>80,000 USDC</strong> is the <strong>actual technical migration threshold</strong> — once the quote balance on the DBC reaches or exceeds this value, the pool becomes eligible for migration to a Meteora DAMM v2 liquidity pool</li>
-</ul>
-
-<p>The <code>liquidityWeights</code> array splits the 400,000 GGRD allocated to the curve into 16 segments with progressively higher weights in later segments. Full values are provided in <strong>Appendix A</strong>, making early segments more accessible to smaller participants while discouraging domination by a single large buyer.</p>
-
-<h3>5.2. Fee Structure</h3>
-
-<p>The DBC uses a <strong>time-decaying fee schedule</strong>:</p>
-
-<table>
-    <tr>
-        <th>Parameter</th>
-        <th>Value</th>
-    </tr>
-    <tr>
-        <td>Starting Fee</td>
-        <td>0.90% (90 bps)</td>
-    </tr>
-    <tr>
-        <td>Ending Fee</td>
-        <td>0.35% (35 bps)</td>
-    </tr>
-    <tr>
-        <td>Number of Periods</td>
-        <td>12</td>
-    </tr>
-    <tr>
-        <td>Total Decay Duration</td>
-        <td>36 hours (129,600 seconds)</td>
-    </tr>
-    <tr>
-        <td>Dynamic Fees</td>
-        <td>Disabled (<code>dynamicFeeEnabled = false</code>)</td>
-    </tr>
-    <tr>
-        <td>Migration Fee</td>
-        <td>0% creator fee</td>
-    </tr>
-    <tr>
-        <td>Fee Receiver / Claimer</td>
-        <td>Main Treasury multisig <code>5UAgVqKBNFoT6WrANGFdjqbTXJRGXPzHcNhG5LK4n9mj</code></td>
-    </tr>
-</table>
-
-<h4>Illustrative Fee Schedule (Approximate)</h4>
-
-<table>
-    <tr>
-        <th>Elapsed Time (hours)</th>
-        <th>Approx. Fee</th>
-    </tr>
-    <tr><td>0–3</td><td>0.90%</td></tr>
-    <tr><td>3–6</td><td>0.85%</td></tr>
-    <tr><td>6–9</td><td>0.80%</td></tr>
-    <tr><td>9–12</td><td>0.75%</td></tr>
-    <tr><td>12–15</td><td>0.70%</td></tr>
-    <tr><td>15–18</td><td>0.65%</td></tr>
-    <tr><td>18–21</td><td>0.60%</td></tr>
-    <tr><td>21–24</td><td>0.55%</td></tr>
-    <tr><td>24–27</td><td>0.50%</td></tr>
-    <tr><td>27–30</td><td>0.45%</td></tr>
-    <tr><td>30–33</td><td>0.40%</td></tr>
-    <tr><td>33–36 and later</td><td>0.35%</td></tr>
-</table>
-
-<p>This model provides additional revenue to the Treasury from early, more speculative trading, offers softer conditions for later participants, and is fully predictable (no surprise changes in fees).</p>
-
-<h3>5.3. Migration to Permanent Liquidity (DAMM v2)</h3>
-
-<p>Key migration-related parameters:</p>
-
-<ul>
-    <li><strong>Migration Option:</strong> <code>migrationOption = 1</code> (migrate to LP / TO_LP-style behaviour)</li>
-    <li><strong>Migration Fee:</strong> 0% (no extra fee charged to the project at migration)</li>
-    <li><strong>Leftover Receiver &amp; Fee Claimer:</strong> Main Treasury multisig <code>5UAgVqKBNFoT6WrANGFdjqbTXJRGXPzHcNhG5LK4n9mj</code></li>
-    <li><strong>Pool Creator Transfer:</strong> After migration, the pool creator is transferred to the LP Policy multisig: <code>newCreator = 8vFQrPpdE3uyd4JRdE7jUhyzTF8ZBVnuvqFTpsAA4SLY</code></li>
-</ul>
-
-<div class="info">
-    <p><strong>Migration Process:</strong></p>
-    <ol>
-        <li>Once the DBC accumulates at least <strong>80,000 USDC</strong> in quote, migration to DAMM v2 can be triggered</li>
-        <li>Unsold tokens and remaining quote are handled according to Meteora's migration logic (with no extra creator fee and with leftovers/fee claims directed to the main Treasury multisig)</li>
-        <li>Immediately after DAMM v2 pool creation, pool creator/authority is transferred to the <strong>LP Policy multisig</strong>, typically within minutes from deployment, minimising any window in which a single wallet controls LP parameters</li>
-    </ol>
-</div>
-
-<p>The aim is to ensure that post-migration liquidity is controlled by a multisig rather than a single developer wallet, significantly reducing rug-pull risk.</p>
-
-<div class="page-break"></div>
-
-<h2 id="liquidity">6. Liquidity &amp; Trading Post-Migration</h2>
-
-<p>After migration to <strong>Meteora DAMM v2</strong>:</p>
-
-<ul>
-    <li>GGRD trading occurs on a liquidity pool whose parameters are governed by Meteora and the LP Policy multisig</li>
-    <li>An additional <strong>10% of total supply (100,000 GGRD)</strong> exists in the LP Policy multisig and can be deployed over time to strengthen liquidity, open new pairs, or support listings, subject to transparent policies and market conditions</li>
-    <li>There is <strong>no transaction tax</strong> on GGRD (0% buy/sell tax, no hidden fee-switches, no backdoor for introducing a tax later)</li>
-</ul>
-
-<h3>Security &amp; Transparency Principles</h3>
-
-<ul>
-    <li><strong>No stealth liquidity pulls:</strong> LP tokens and positions are controlled by the LP Policy multisig and, where possible, guarded by time-locks and clear policies</li>
-    <li><strong>No single-key control:</strong> Major actions require approvals from at least 3 of 4 multisig signers</li>
-    <li><strong>Public policies:</strong> LP management rules (e.g. when to add/remove liquidity, under what conditions) are published and discussed with the community and, in later stages, submitted to DAO-style governance votes</li>
-</ul>
-
-<div class="page-break"></div>
-
-<h2 id="charity">7. Charity Treasury &amp; Donation Policy</h2>
-
-<h3>7.1. General Assumptions</h3>
-
-<p>The <strong>GGRD Charity Treasury</strong> is a dedicated on-chain wallet holding <strong>10% of total GGRD supply (100,000 GGRD)</strong>, controlled by a 3/4 Squads multisig:</p>
-
-<div class="info">
-    <p><strong>Charity Multisig:</strong> <code>C96zqEjGh22yuZknVrasLyr2j5b2xsMnbTUiu2WKLK9w</code></p>
-</div>
-
-<h4>Primary Beneficiary</h4>
-
-<p><strong>Community-selected charitable organizations focused on pediatric oncology</strong> — verified non-profit organizations providing comprehensive support to children with cancer and their families.</p>
-
-<h4>Exclusive Purpose</h4>
-
-<p>Charity Treasury funds are dedicated to:</p>
-
-<ul>
-    <li>Financing humanitarian aid for children battling cancer through pediatric oncology programs</li>
-    <li>Providing direct support through transparent crypto donations to verified pediatric oncology organizations</li>
-    <li>Potentially supporting other clearly defined organisations with similar humanitarian profiles (children and families in need), subject to clear public disclosure and governance</li>
-</ul>
-
-<h4>Prohibited Uses</h4>
-
-<div class="warning">
-    <p><strong>Charity Treasury funds must NOT be used for:</strong></p>
-    <ul>
-        <li>Team funding or salaries</li>
-        <li>Marketing campaigns</li>
-        <li>Liquidity provision or market-making</li>
-        <li>CEX listing fees</li>
-        <li>Profit-oriented investments</li>
-        <li>Any purpose other than verified charitable donations</li>
-    </ul>
-</div>
-
-<h3>7.2. Permitted Fund Usage</h3>
-
-<p>Charity Treasury funds may <strong>only</strong> be used for:</p>
-
-<ol>
-    <li><strong>On-chain transfers</strong> to official community-selected charities crypto-donation endpoints or other verified payment gateways</li>
-    <li><strong>Technical swaps</strong> of GGRD into assets accepted by community-selected charities (e.g. USDC or other supported cryptocurrencies), executed carefully to limit market impact</li>
-    <li><strong>On-chain transfers</strong> to official wallets of other charitable organisations with similar focus, clearly approved and disclosed to the community</li>
-</ol>
-
-<h3>7.3. Donation Mechanics</h3>
-
-<p>High-level principles:</p>
-
-<ul>
-    <li>Donations are executed periodically (e.g. monthly or quarterly tranches), typically in USDC or other stable assets accepted by the beneficiary organisation</li>
-    <li>Conversions from GGRD to donation assets are spread over time (TWAP/DCA-style), with safeguards such as:
-        <ul>
-            <li>A maximum share of average daily trading volume allocated to charity conversions</li>
-            <li>Slippage limits per transaction</li>
-        </ul>
-    </li>
-    <li>A pause mechanism may be used to temporarily suspend conversions if market conditions become extremely unfavourable or if price impact exceeds predefined thresholds</li>
-</ul>
-
-<div class="info">
-    <p><strong>Clarification:</strong> This is an <strong>operational policy</strong> executed via multisig approvals (i.e., pausing or delaying transactions) and should not be interpreted as an on-chain enforced pause function unless explicitly implemented and disclosed in future smart contract releases.</p>
-</div>
-
-<h4>Goals</h4>
-
-<ul>
-    <li>Minimise excessive selling pressure on the GGRD market</li>
-    <li>Avoid sudden, disruptive token "dumps" under the banner of charity</li>
-    <li>Execute donations in a transparent, economically rational manner</li>
-</ul>
-
-<h3>7.4. Transparency &amp; Communication</h3>
-
-<p>Transparency tools include:</p>
-
-<ul>
-    <li>A public dashboard (e.g. Dune/Flipside) tracking:
-        <ul>
-            <li>Charity Treasury balances</li>
-            <li>Donation schedules</li>
-            <li>Historical transactions and transaction hashes</li>
-        </ul>
-    </li>
-    <li>Periodic reports summarising executed donations, published on the website and official social channels</li>
-    <li>Open discussion of proposed donations and recipients in the Telegram community, with major decisions submitted to future DAO-style votes</li>
-</ul>
-
-<p>For <strong>questions regarding charity operations</strong>, holders should use the official Telegram community chat: <strong>https://t.me/GGRDchat</strong></p>
-
-<p>The project does <strong>not</strong> use email for individual charity or support inquiries.</p>
-
-<div class="warning">
-    <p><strong>Verification Required:</strong> Official charity-related addresses and links should always be verified directly via:</p>
-    <ul>
-        <li>The official GGRD website (<strong>https://ggrd.me</strong>)</li>
-        <li>The official website / donation pages of the beneficiary organisation</li>
-    </ul>
-</div>
-
-<div class="page-break"></div>
-
-<h2 id="rewards">8. Community Rewards Program (Telegram Bot)</h2>
-
-<h3>8.1. Program Overview</h3>
-
-<p>Automated Telegram bot distributing <strong>40,000+ GGRD</strong> across 6 reward tiers.</p>
-
-<div class="info">
-    <p><strong>Bot:</strong> @GGRD_Rewards_Bot</p>
-</div>
-
-<div class="warning">
-    <p><strong>Important:</strong> Joining Telegram does not require any purchase. Some reward tiers may require on-chain holding verification and/or purchase proof. All rewards are <strong>limited</strong>, <strong>discretionary</strong>, may be adjusted, and are not guaranteed.</p>
-</div>
-
-<h3>8.2. Reward Structure</h3>
-
-<table>
-    <tr>
-        <th>Task</th>
-        <th>Reward</th>
-        <th>Requirements</th>
-    </tr>
-    <tr>
-        <td><strong>Task 1</strong></td>
-        <td>10 GGRD + lottery entry (2k GGRD prize)</td>
-        <td>Basic participation</td>
-    </tr>
-    <tr>
-        <td><strong>Task 2</strong></td>
-        <td>20 GGRD (max 300 participants)</td>
-        <td>Purchase proof required</td>
-    </tr>
-    <tr>
-        <td><strong>Task 3 TOP 100</strong></td>
-        <td>50 GGRD each (first 100 holders ≥2,500 GGRD)</td>
-        <td>Hold ≥2,500 GGRD on Day 0</td>
-    </tr>
-    <tr>
-        <td><strong>Task 3 Lottery</strong></td>
-        <td>10,000 GGRD grand prize</td>
-        <td>Hold ≥2,500 GGRD on Day 0 AND Day 7</td>
-    </tr>
-    <tr>
-        <td><strong>Biggest Holder</strong></td>
-        <td>20,000 GGRD</td>
-        <td>Highest 30-day average balance</td>
-    </tr>
-    <tr>
-        <td><strong>Referrals</strong></td>
-        <td>5 GGRD each (10k pool)</td>
-        <td>Day 10 payout, verified referrals</td>
-    </tr>
-</table>
-
-<h3>8.3. Timeline</h3>
-
-<ul>
-    <li><strong>Day 0:</strong> LP launch → TOP 100 snapshot</li>
-    <li><strong>Day 7:</strong> Lottery qualification check</li>
-    <li><strong>Day 10:</strong> Referral payouts</li>
-    <li><strong>Days 1-30:</strong> Daily snapshots for average balance</li>
-    <li><strong>Day 30:</strong> Biggest holder award</li>
-</ul>
-
-<h3>8.4. Key Features</h3>
-
-<ul>
-    <li><strong>Dual-snapshot anti-gaming:</strong> Day 0 + Day 7 requirement prevents quick dumps</li>
-    <li><strong>30-day consistency tracking:</strong> Rewards long-term holding over speculation</li>
-    <li><strong>On-chain verification:</strong> Balance checks via Helius RPC</li>
-    <li><strong>Public leaderboards:</strong> Transparent ranking system</li>
-    <li><strong>Day 10 referral delay:</strong> Prevents immediate dump after referral signup</li>
-</ul>
-
-<div class="page-break"></div>
-
-<h2 id="governance">9. Governance, Multisigs &amp; Future DAO</h2>
-
-<h3>9.1. Current Decision Structure</h3>
-
-<p>At launch, governance is based on a <strong>multisig-first</strong> security model:</p>
-
-<ul>
-    <li>All core fund pools (Treasury, Charity, LP Policy, Marketing, Distribution, Team) are controlled by <strong>Squads v4 multisigs</strong> with a <strong>3/4 threshold</strong></li>
-    <li>Every significant transaction (donation, liquidity change, large transfer) is executed only after:
-        <ul>
-            <li>Creating a proposal in Squads describing the purpose, recipients and amounts</li>
-            <li>Approval by at least 3 of 4 designated signers</li>
-        </ul>
-    </li>
-</ul>
-
-<p>This structure is designed to prevent any single private key from unilaterally draining liquidity or charity funds.</p>
-
-<h3>9.2. Role of Telegram in Governance</h3>
-
-<p>Telegram is used as the primary <strong>consultation and communication</strong> layer:</p>
-
-<ul>
-    <li>The <strong>official announcement channel</strong> (<code>https://t.me/GGRDofficial</code>) is used to publish proposals, results, and key decisions</li>
-    <li>The <strong>official community chat</strong> (<code>https://t.me/GGRDchat</code>) is used to discuss proposals, collect feedback and, where useful, run <strong>non-binding polls</strong> to gauge sentiment</li>
-</ul>
-
-<div class="warning">
-    <p><strong>Note:</strong> Telegram polls and discussions are <strong>not</strong> formal or binding governance mechanisms but serve as an important input into on-chain decision-making.</p>
-</div>
-
-<h3>9.3. On-Chain Governance (Future DAO)</h3>
-
-<p>In later phases, the project aims to introduce a <strong>DAO-style on-chain governance layer</strong>, potentially using Realms or another Solana-native governance framework. The intended model is:</p>
-
-<ul>
-    <li><strong>Telegram:</strong> Place for open discussion, education, and informal polling</li>
-    <li><strong>DAO (on-chain):</strong> Place for formal proposals and binding votes related to protocol-level decisions (e.g. charity allocation rules, community incentive parameters, activation of new programmes). Voting power based on GGRD holdings or staked/wrapped GGRD (final model to be determined)</li>
-    <li><strong>Multisigs (Squads):</strong> Remain the execution layer, responsible for signing and executing transactions that implement decisions approved via DAO, especially in charity and treasury operations</li>
-</ul>
-
-<h4>Hybrid Governance Model</h4>
-
-<ol>
-    <li>Community discusses and signals preferences on Telegram</li>
-    <li>Formal proposals are submitted to the DAO for token-weighted voting</li>
-    <li>If approved, multisigs execute the corresponding on-chain transactions in line with the DAO decision</li>
-</ol>
-
-<div class="info">
-    <p><strong>Important:</strong> Participation in governance does <strong>not</strong> grant any legal ownership or equity in any entity. It is a <strong>protocol-level mechanism</strong> for influencing project direction and treasury usage, not a shareholder structure.</p>
-</div>
-
-<h3>9.4. Planned On-Chain Programmes (Future)</h3>
-
-<p>As the project matures, the following on-chain programmes may be implemented using Anchor or similar tooling:</p>
-
-<ul>
-    <li><strong>ggrd_vesting:</strong> On-chain vesting for team and certain allocations (cliff + linear release)</li>
-    <li><strong>ggrd_merkle_distributor:</strong> Efficient distribution of rewards/airdrops based on off-chain leaderboards and on-chain Merkle proofs</li>
-    <li><strong>ggrd_reward_locker:</strong> Locking mechanism with cliff and linear unlock for partner or community allocations</li>
-    <li><strong>ggrd_lp_escrow_timelock:</strong> Timelock for LP positions to further reduce rug-pull risk</li>
-</ul>
-
-<p>Any such programme will be documented separately and, where appropriate, submitted to external audits before handling significant value.</p>
-
-<div class="page-break"></div>
-
-<h2 id="roadmap">10. Development Roadmap &amp; Milestones</h2>
-
-<div class="warning">
-    <p><strong>Disclaimer:</strong> The roadmap below presents <strong>non-binding, indicative targets</strong> rather than promises or guarantees.</p>
-</div>
-
-<h3>10.1. Launch Phase (Day 1–7)</h3>
-
-<h4>Indicative Targets:</h4>
-<ul>
-    <li>500–1,000 holders</li>
-    <li>DBC segments 4–6 completed</li>
-    <li>30,000–50,000 USD cumulative volume</li>
-    <li>1,000+ Telegram community members</li>
-    <li>500+ X (Twitter) followers</li>
-</ul>
-
-<h4>Key Activities:</h4>
-<ul>
-    <li>Deploy GGRD mint, DBC and supporting infrastructure</li>
-    <li>Transfer DBC/DAMM pool creator to LP Policy multisig immediately after creation</li>
-    <li>Publish clear "How to buy GGRD" guides and security reminders</li>
-    <li>Start regular communication on X and Telegram</li>
-</ul>
-
-<h3>10.2. Growth Phase (Week 2–4)</h3>
-
-<h4>Indicative Targets:</h4>
-<ul>
-    <li>2,000+ holders</li>
-    <li>DBC segments 10–12 completed</li>
-    <li>Migration to DAMM v2 completed (post-80k USDC threshold)</li>
-    <li>3,000+ Telegram members</li>
-    <li>2,000+ X followers</li>
-    <li>Indexed and tradable via Jupiter (aggregator)</li>
-</ul>
-
-<h4>Key Activities:</h4>
-<ul>
-    <li>Distribute Treasury tokens to specialised multisigs (Charity, LP, Marketing, Community, Team)</li>
-    <li>Finalise charity technical setup with community-selected charities and other partners as needed</li>
-    <li>Begin collaboration with KOLs and communities</li>
-    <li>Launch first meme/engagement campaigns and educational content</li>
-</ul>
-
-<h3>10.3. Expansion Phase (Month 2–3)</h3>
-
-<h4>Indicative Targets:</h4>
-<ul>
-    <li>5,000+ holders</li>
-    <li>Stable post-migration trading conditions</li>
-    <li>First charity donation(s) executed from Charity Treasury</li>
-    <li>Presence in trending sections on analytics platforms (e.g. DEXScreener)</li>
-    <li>10,000+ community members across channels</li>
-</ul>
-
-<h4>Key Activities:</h4>
-<ul>
-    <li>Execute first transparent donation to community-selected charities using on-chain verifiable paths</li>
-    <li>Publish a detailed donation transparency report</li>
-    <li>Launch quests, contests and structured community incentive programmes</li>
-    <li>Deploy early versions of merkle distributor / reward contracts where appropriate</li>
-</ul>
-
-<h3>10.4. Maturity Phase (Month 4–6)</h3>
-
-<h4>Indicative Targets:</h4>
-<ul>
-    <li>10,000+ holders</li>
-    <li>Potential CEX listings</li>
-    <li>DAO governance live for key decisions</li>
-    <li>Fully deployed vesting and LP-security infrastructure</li>
-</ul>
-
-<h4>Key Activities:</h4>
-<ul>
-    <li>Launch DAO governance with clear documentation</li>
-    <li>Run regular charity donation cycles (e.g. monthly or quarterly)</li>
-    <li>Explore cross-chain expansion or additional liquidity venues in a controlled manner</li>
-    <li>Continue refining risk management and transparency tools</li>
-</ul>
-
-<div class="page-break"></div>
-
-<h2 id="marketing">11. Marketing, Community &amp; Communication</h2>
-
-<h3>11.1. Official Channels</h3>
-
-<table>
-    <tr>
-        <th>Channel</th>
-        <th>URL</th>
-    </tr>
-    <tr>
-        <td>Official Website</td>
-        <td><a href="https://ggrd.me">https://ggrd.me</a></td>
-    </tr>
-    <tr>
-        <td>Official X (Twitter)</td>
-        <td><a href="https://x.com/ContactGiggle">https://x.com/ContactGiggle</a></td>
-    </tr>
-    <tr>
-        <td>Telegram Announcement Channel</td>
-        <td><a href="https://t.me/GGRDofficial">https://t.me/GGRDofficial</a></td>
-    </tr>
-    <tr>
-        <td>Telegram Community Chat</td>
-        <td><a href="https://t.me/GGRDchat">https://t.me/GGRDchat</a></td>
-    </tr>
-    <tr>
-        <td>Email (listings &amp; verification only)</td>
-        <td><a href="mailto:contact@ggrd.me">contact@ggrd.me</a></td>
-    </tr>
-</table>
-
-<div class="warning">
-    <p><strong>Security Notice:</strong> Only channels <strong>explicitly linked</strong> from the official website should be considered official. Any other channel or account claiming to represent GGRD should be treated with caution.</p>
-</div>
-
-<h3>11.2. Communication Rules</h3>
-
-<ul>
-    <li>All critical announcements (launch dates, contract addresses, charity reports, governance proposals) are published on <strong>https://ggrd.me</strong> and in <strong>@GGRDofficial</strong></li>
-    <li>Community questions, feedback and informal polls are handled in <strong>@GGRDchat</strong></li>
-    <li>The official email address (<strong>contact@ggrd.me</strong>) is reserved <strong>exclusively</strong> for exchange listings, verification requests, and partnership inquiries. The team does <strong>not</strong> provide user support via email or private DMs. Any unsolicited messages asking for funds, seed phrases, or private keys are scams</li>
-</ul>
-
-<h3>11.3. Branding &amp; Content Strategy</h3>
-
-<p>The project's branding combines a <strong>"Robin Hood" meme aesthetic</strong> with a modern crypto-native visual style:</p>
-
-<ul>
-    <li>Meme-friendly yet professional graphics for social channels</li>
-    <li>Infographics explaining tokenomics, multisig structures and the charity mechanism</li>
-    <li>Regular posts about:
-        <ul>
-            <li>DBC/LP status and milestones</li>
-            <li>Holders / volume stats</li>
-            <li>Executed and planned donations</li>
-            <li>Governance and roadmap updates</li>
-        </ul>
-    </li>
-</ul>
-
-<p>Marketing efforts focus on transparency, education and long-term community building rather than aggressive short-term hype.</p>
-
-<h3>11.4. Community Incentives</h3>
-
-<p>Community incentives include:</p>
-
-<ul>
-    <li>Meme contests, quests and referral programmes</li>
-    <li>Reward allocations based on long-term, verifiable engagement and contribution</li>
-    <li>On-chain claim mechanisms (e.g. merkle distributions) to prevent double-claiming and encourage fair distribution</li>
-</ul>
-
-<p>Details are communicated via official channels and may be subject to DAO feedback and votes in later phases.</p>
-
-<div class="page-break"></div>
-
-<h2 id="security">12. Security &amp; Risk Management</h2>
-
-<h3>12.1. Security Measures</h3>
-
-<p>Implemented security measures include:</p>
-
-<ul>
-    <li><strong>Immutable Supply Design:</strong> Full 1,000,000 GGRD minted at launch, with mint authority revoked</li>
-    <li><strong>No Freeze Authority:</strong> Token configuration has no freeze authority over user accounts</li>
-    <li><strong>Zero Tax:</strong> No buy/sell tax, no hidden fee-switch and no backdoor allowing a tax to be introduced later</li>
-    <li><strong>Multisig-Controlled Treasuries:</strong> All critical pools controlled by 3/4 Squads multisigs, not by single EOAs</li>
-    <li><strong>Battle-tested Protocols:</strong> Reliance on established components such as Meteora DBC + DAMM v2, Metaplex Token Metadata and Squads multisigs</li>
-    <li><strong>LP Security:</strong> Post-migration LP controlled by a multisig, with time-locks and transparent LP policies</li>
-</ul>
-
-<h3>12.2. Risk Categories</h3>
-
-<h4>Market Risk</h4>
-<ul>
-    <li>High volatility typical of memecoins</li>
-    <li>Possibility of rapid and severe price swings</li>
-    <li>Real risk of losing the entire invested amount</li>
-</ul>
-
-<h4>Regulatory Risk</h4>
-<ul>
-    <li>Evolving regulatory landscape across jurisdictions</li>
-    <li>Differences between countries in treatment of tokens and DAOs</li>
-    <li>Responsibility for legal compliance lies with individual participants</li>
-</ul>
-
-<h4>Technical Risk</h4>
-<ul>
-    <li>Smart contract bugs or protocol-level issues in Meteora, Metaplex, wallets, DEXs or bridging infrastructure</li>
-    <li>Risks inherent in self-custody, including wallet misconfiguration or phishing</li>
-</ul>
-
-<h4>Reputational / Governance Risk</h4>
-<ul>
-    <li>Misinterpretation of treasury actions (e.g. charity conversions) as "team dumps"</li>
-    <li>Community disagreements on priorities (e.g. size and timing of donations)</li>
-    <li>Dependence on the responsible behaviour of multisig signers and governance participants</li>
-</ul>
-
-<h3>12.3. Mitigation Strategies</h3>
-
-<ul>
-    <li>Careful curve design to avoid extreme early concentration of supply</li>
-    <li>No presale and no VC allocation to reduce centralisation</li>
-    <li>Transparent publication of all multisig addresses and key policies</li>
-    <li>Periodic reporting and dashboards for treasury and charity movements</li>
-    <li>Seeking external review and audits for custom on-chain programmes as they are introduced</li>
-    <li>Continuous education for the community on risks, self-custody and security best practices</li>
-</ul>
-
-<div class="page-break"></div>
-
-<h2 id="legal">13. Legal Disclaimers</h2>
-
-<h3>13.1. Not Financial Advice</h3>
-
-<p>This document does not constitute financial, investment, legal or tax advice. Each person should independently, and with professional advisers where appropriate, assess risks associated with acquiring or holding GGRD. Nothing in this whitepaper should be interpreted as a recommendation to buy, sell or hold GGRD.</p>
-
-<h3>13.2. High-Risk Investment</h3>
-
-<div class="warning">
-    <p><strong>⚠️ WARNING:</strong> Cryptocurrency investments, especially memecoins, involve a high risk of losing the entire invested amount. Past performance, including performance of other tokens or markets, does not guarantee future results. Only invest what you can afford to lose entirely.</p>
-</div>
-
-<h3>13.3. No Guarantees</h3>
-
-<p>There are no guarantees regarding price, liquidity, exchange listings, future utility, revenues, profits or overall project success. Participation in GGRD is entirely voluntary and at the participant's own risk.</p>
-
-<h3>13.4. Token Nature</h3>
-
-<p>GGRD is <strong>not</strong> a share, bond or other equity instrument in any legal entity. Holding GGRD does <strong>not</strong> grant:</p>
-
-<ul>
-    <li>Ownership rights in any company</li>
-    <li>Rights to dividends or profit-sharing</li>
-    <li>Enforceable governance rights outside of the protocol-level mechanisms described herein</li>
-</ul>
-
-<h3>13.5. Regulatory Risk</h3>
-
-<p>The legal status of tokens and DAOs varies by jurisdiction and may change over time. Participants are solely responsible for determining whether acquiring, holding or using GGRD is legal in their jurisdiction and for complying with any applicable laws, including tax obligations.</p>
-
-<h3>13.6. Smart Contract Risk</h3>
-
-<p>Even widely used and audited smart contracts may contain undiscovered vulnerabilities. All on-chain interactions carry inherent technical risk. Users should always verify contract addresses, use trusted wallets and keep software up to date.</p>
-
-<h3>13.7. No Refunds</h3>
-
-<p>On-chain transactions are typically irreversible. The project does not offer refunds, chargebacks or guaranteed buybacks. All transactions in GGRD and related assets are final.</p>
-
-<h3>13.8. Restricted Jurisdictions</h3>
-
-<p>Participation may be restricted or prohibited for residents of certain countries (including but not limited to the USA and jurisdictions subject to international sanctions). The project does not specifically target or solicit participants from such jurisdictions. Participants are responsible for ensuring that they are not violating local laws by engaging with the project.</p>
-
-<h3>13.9. Charity Component Disclaimer</h3>
-
-<p>While 10% of total supply is allocated to the Charity Treasury and there is a clear intention to support children battling cancer, <strong>no specific donation volume, frequency or outcome is guaranteed</strong>. Actual donations will depend on market conditions, governance decisions and operational feasibility. The project commits to transparency and reporting but cannot guarantee any particular charitable impact beyond the donations that are effectively executed on-chain.</p>
-
-<h3>13.10. Governance and DAO Disclaimer</h3>
-
-<p>Any future DAO or on-chain governance mechanisms are protocol-level tools only. Participation in governance:</p>
-
-<ul>
-    <li>Does not create legal shareholder rights</li>
-    <li>Does not guarantee that all governance outcomes will be implemented</li>
-    <li>Does not grant enforceable claims to project assets or treasuries outside of protocol logic</li>
-</ul>
-
-<div class="page-break"></div>
-
-<h2 id="contact">14. Contact &amp; Support</h2>
-
-<h3>14.1. Official Communication Channels</h3>
-
-<table>
-    <tr>
-        <th>Channel</th>
-        <th>URL</th>
-    </tr>
-    <tr>
-        <td>Website</td>
-        <td><a href="https://ggrd.me">https://ggrd.me</a></td>
-    </tr>
-    <tr>
-        <td>X (Twitter)</td>
-        <td><a href="https://x.com/ContactGiggle">https://x.com/ContactGiggle</a></td>
-    </tr>
-    <tr>
-        <td>Telegram Announcement Channel</td>
-        <td><a href="https://t.me/GGRDofficial">https://t.me/GGRDofficial</a></td>
-    </tr>
-    <tr>
-        <td>Telegram Community Chat</td>
-        <td><a href="https://t.me/GGRDchat">https://t.me/GGRDchat</a></td>
-    </tr>
-</table>
-
-<p>All critical information (including contract addresses, DBC and LP links, and charity reports) is published on <strong>https://ggrd.me</strong> and in <strong>@GGRDofficial</strong>.</p>
-
-<h3>14.2. Support Policy</h3>
-
-<ul>
-    <li>The official email <strong>contact@ggrd.me</strong> is used <strong>only</strong> for exchange listings, verification requests, and partnership inquiries&mdash;not for user support</li>
-    <li>Direct contact with the team and moderators takes place <strong>only</strong> via the official Telegram community chat <strong>@GGRDchat</strong></li>
-    <li>Team members will never ask for private keys, seed phrases or direct transfers in DMs. Any such requests are scams</li>
-</ul>
-
-<h3>14.3. Explorers &amp; Tools</h3>
-
-<p>For independent verification, users are encouraged to use:</p>
-
-<table>
-    <tr>
-        <th>Tool</th>
-        <th>URL</th>
-    </tr>
-    <tr>
-        <td>Solscan</td>
-        <td><a href="https://solscan.io">https://solscan.io</a></td>
-    </tr>
-    <tr>
-        <td>Solana Explorer</td>
-        <td><a href="https://explorer.solana.com">https://explorer.solana.com</a></td>
-    </tr>
-    <tr>
-        <td>SolanaFM</td>
-        <td><a href="https://solana.fm">https://solana.fm</a></td>
-    </tr>
-    <tr>
-        <td>Meteora</td>
-        <td><a href="https://app.meteora.ag">https://app.meteora.ag</a></td>
-    </tr>
-    <tr>
-        <td>Jupiter</td>
-        <td><a href="https://jup.ag">https://jup.ag</a></td>
-    </tr>
-    <tr>
-        <td>DEXScreener</td>
-        <td><a href="https://dexscreener.com">https://dexscreener.com</a></td>
-    </tr>
-    <tr>
-        <td>Birdeye</td>
-        <td><a href="https://birdeye.so">https://birdeye.so</a></td>
-    </tr>
-    <tr>
-        <td>Squads Dashboard</td>
-        <td><a href="https://app.squads.so">https://app.squads.so</a></td>
-    </tr>
-</table>
-
-<p>Token, pool and treasury addresses should always be cross-checked between these tools and the official communication channels.</p>
-
-<div class="page-break"></div>
-
-<h2 id="summary">15. Summary</h2>
-
-<p><strong>Giggle Reloaded ($GGRD)</strong> is designed as:</p>
-
-<ul>
-    <li>A fair-launch Solana memecoin with a fixed supply of 1,000,000 tokens</li>
-    <li>A transparently structured token with a 40/60 split between public DBC allocation and multisig-controlled treasuries</li>
-    <li>A project with a clear humanitarian focus, allocating 10% of total supply to a Charity Treasury dedicated to children battling cancer through pediatric oncology programs</li>
-    <li>A security-conscious deployment using Meteora DBC + DAMM v2, Metaplex Token Metadata and Squads multisigs</li>
-    <li>A future-ready ecosystem that plans to involve the community through DAO-style governance and structured incentive programmes</li>
-</ul>
-
-<p>The project explicitly acknowledges the high-risk nature of memecoins and does not promise profits, listings or outcomes. Instead, it focuses on:</p>
-
-<ul>
-    <li>Transparent mechanics</li>
-    <li>Clearly defined charity commitments at the tokenomics level</li>
-    <li>Strong multisig-based treasury controls</li>
-    <li>A roadmap towards community-driven decision-making</li>
-</ul>
-
-<div style="text-align: center; margin: 2cm 0; padding: 1cm; background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%); border: 3px solid #9DFF00; border-radius: 10px;">
-    <p style="font-size: 18pt; font-weight: 700; color: #000000; margin-bottom: 0.5cm;">🏹 From the people, for the people 💚</p>
-    <p style="font-size: 14pt; font-weight: 600; color: #666666;">Let's make GGRD legendary — with transparency, memes and verifiable impact.</p>
-</div>
-
-<div class="page-break"></div>
-
-<h2 id="appendices">Appendices (Informational)</h2>
-
-<h3>Appendix A — DBC Configuration (Key Fields)</h3>
-
-<p>The following fields are provided for transparency and reproducibility and reflect the configuration described in Section 5.<br>
-<strong>Note:</strong> All deployment artefacts (mint, DBC, LP) are published and verified on-chain.</p>
-
-<pre>
-{
-  "baseToken": {
-    "symbol": "GGRD",
-    "mint": "TR97dHmm8nXVndTcxew21138AchNgrk2BhEJGXMybdE",
-    "decimals": 6,
-    "totalSupply": 1000000
-  },
-  "quoteToken": {
-    "symbol": "USDC",
-    "mint": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
-    "decimals": 6
-  },
-  "curveAllocation": 400000,
-  "initialMarketCapDesignUSDC": 10000,
-  "migrationMarketCapDesignUSDC": 300000,
-  "migrationQuoteThresholdUSDC": 80000,
-  "percentageSupplyOnMigration": 0.40,
-  "buildCurveMode": 3,
-  "liquidityWeights": [15, 18, 22, 25, 28, 30, 32, 32, 32, 33, 35, 37, 40, 43, 48, 50]
-}
-</pre>
-
-<h3>Appendix B — Glossary (Selected)</h3>
-
-<table>
-    <tr>
-        <th>Term</th>
-        <th>Definition</th>
-    </tr>
-    <tr>
-        <td><strong>DBC (Dynamic Bonding Curve)</strong></td>
-        <td>A primary sale mechanism where price changes algorithmically based on demand and curve parameters.</td>
-    </tr>
-    <tr>
-        <td><strong>DAMM v2</strong></td>
-        <td>A concentrated-liquidity AMM pool model used by Meteora for post-migration trading liquidity.</td>
-    </tr>
-    <tr>
-        <td><strong>Migration Quote Threshold</strong></td>
-        <td>A technical threshold (in quote asset units, here USDC) after which the pool becomes eligible for migration to the permanent AMM.</td>
-    </tr>
-    <tr>
-        <td><strong>Migration Market Cap (Design Target)</strong></td>
-        <td>A design parameter used to shape the curve; it is not a promise or guaranteed valuation.</td>
-    </tr>
-    <tr>
-        <td><strong>Multisig (Squads)</strong></td>
-        <td>A wallet requiring approvals from multiple independent signers to execute transactions.</td>
-    </tr>
-    <tr>
-        <td><strong>FDV (Fully Diluted Valuation)</strong></td>
-        <td>Implied market cap using total token supply; <strong>FDV is not guaranteed</strong> and is often not equal to realised liquidity.</td>
-    </tr>
-</table>
-
-<h3>Appendix C — Illustrative Price Scenarios (Non-Predictive)</h3>
-
-<div class="warning">
-    <p><strong>Disclaimer:</strong> This appendix is provided to improve readability and support user education.<br>
-    <strong>It is not a price forecast, not financial advice, and does not imply probability of any outcome.</strong></p>
-</div>
-
-<p>Implied price is a simple ratio:</p>
-<p><strong>Implied Price = Market Cap / Total Supply</strong></p>
-<p>For a total supply of <strong>1,000,000 GGRD</strong>, the following values are purely illustrative:</p>
-
-<table>
-    <tr>
-        <th>Market Cap (USD)</th>
-        <th>Implied Price (USD)</th>
-    </tr>
-    <tr><td>10,000</td><td>0.0100</td></tr>
-    <tr><td>80,000</td><td>0.0800</td></tr>
-    <tr><td>300,000</td><td>0.3000</td></tr>
-    <tr><td>1,000,000</td><td>1.0000</td></tr>
-    <tr><td>10,000,000</td><td>10.0000</td></tr>
-    <tr><td>50,000,000</td><td>50.0000</td></tr>
-    <tr><td>100,000,000</td><td>100.0000</td></tr>
-</table>
-
-<div class="info">
-    <p><strong>Important:</strong> Market cap, liquidity depth, exchange availability and sell-through conditions can differ materially. These examples are not forecasts and should not be used as investment expectations.</p>
-</div>
-
-</div>
-
+<!-- S1: SCOPE -->
+<section class="wp-section" id="s1">
+  <span class="section-num">Section 01</span>
+  <div class="section-title">SCOPE AND METHODOLOGY</div>
+  <div class="section-lead">This whitepaper is a full rewrite based on deployed contract logic and repository specifications. Every numeric parameter is either contract-enforced or explicitly marked as an operational assumption from repository docs.</div>
+
+  <h3>Source Hierarchy</h3>
+  <table class="wp-table">
+    <thead><tr><th>Level</th><th>Source</th><th>Authority</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="td-badge badge-green">Level 1</span></td>
+        <td class="td-key">contracts/*.sol</td>
+        <td>Immutable and runtime-enforced rules</td>
+      </tr>
+      <tr>
+        <td><span class="td-badge badge-yellow">Level 2</span></td>
+        <td class="td-key">deployments/bscMainnet.latest.json</td>
+        <td>Live mainnet addresses and constructor timestamps</td>
+      </tr>
+      <tr>
+        <td><span class="td-badge badge-gray">Level 3</span></td>
+        <td class="td-key">docs/SPEC_TOKENOMICS_v1.md</td>
+        <td>Declared launch assumptions and architecture docs</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="info-box info-box-yellow">
+    <span class="info-box-label">Canonical Rule</span>
+    When contract code and descriptive text differ, <strong>contract code is treated as canonical.</strong>
+  </div>
+</section>
+
+<!-- S2: VISION -->
+<section class="wp-section" id="s2">
+  <span class="section-num">Section 02</span>
+  <div class="section-title">PROJECT VISION AND DESIGN CONSTRAINTS</div>
+  <div class="section-lead">GGRD is designed as a fixed-supply BSC token with deterministic on-chain sale mechanics, governance delay controls, staking emissions caps, and charity vesting logic. The design target is auditable execution with reduced discretionary control surface.</div>
+
+  <h3>Explicit Constraints</h3>
+  <table class="wp-table">
+    <thead><tr><th>Constraint</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td class="td-key">Fixed supply token model</td><td><span class="td-badge badge-green">Enforced</span></td></tr>
+      <tr><td class="td-key">0% transfer tax</td><td><span class="td-badge badge-green">Enforced</span></td></tr>
+      <tr><td class="td-key">No post-deployment mint API</td><td><span class="td-badge badge-green">Enforced</span></td></tr>
+      <tr><td class="td-key">No blacklist, no freeze, no confiscation logic</td><td><span class="td-badge badge-green">Enforced</span></td></tr>
+      <tr><td class="td-key">Governance via Safe multisig + timelock layers</td><td><span class="td-badge badge-green">Enforced</span></td></tr>
+      <tr><td class="td-key">Presale escrow with success/fail settlement paths</td><td><span class="td-badge badge-green">Enforced</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- S3: TOKEN -->
+<section class="wp-section" id="s3">
+  <span class="section-num">Section 03</span>
+  <div class="section-title">TOKEN CONTRACT AND MONETARY POLICY</div>
+  <div class="section-lead">GGRDToken.sol implements a standard ERC20 with a single mint in the constructor. No owner functions expose post-deployment supply changes.</div>
+
+  <table class="wp-table">
+    <thead><tr><th>Field</th><th>Value</th><th>Contract Anchor</th></tr></thead>
+    <tbody>
+      <tr><td class="td-key">Name</td><td class="td-val">Giggle Reloaded</td><td class="td-anchor">GGRDToken.sol constructor</td></tr>
+      <tr><td class="td-key">Symbol</td><td class="td-val">GGRD</td><td class="td-anchor">GGRDToken.sol constructor</td></tr>
+      <tr><td class="td-key">Decimals</td><td class="td-val">18</td><td class="td-anchor">OpenZeppelin ERC20 default</td></tr>
+      <tr><td class="td-key">Total Supply</td><td class="td-val">10,000,000 GGRD — minted once</td><td class="td-anchor">_mint(recipient, 10_000_000 ether)</td></tr>
+      <tr><td class="td-key">Transfer Tax</td><td class="td-val">None (0%)</td><td class="td-anchor">GGRDToken.sol — no tax mechanism</td></tr>
+      <tr><td class="td-key">Post-deploy Mint</td><td class="td-val">Not available</td><td class="td-anchor">GGRDToken.sol — no mint function</td></tr>
+      <tr><td class="td-key">Blacklist / Freeze</td><td class="td-val">Not available</td><td class="td-anchor">GGRDToken.sol — no restriction functions</td></tr>
+    </tbody>
+  </table>
+  <p>Mint destination in the mainnet deployment artifact is the deployer address at deployment time. Downstream allocations are performed by transfers to module contracts.</p>
+</section>
+
+<!-- S4: ALLOCATION -->
+<section class="wp-section" id="s4">
+  <span class="section-num">Section 04</span>
+  <div class="section-title">ALLOCATION AND ECONOMIC MODEL</div>
+  <div class="section-lead">The total supply model combines hard caps from contracts and launch allocations from the repository specification.</div>
+
+  <div class="alloc-rows">
+    <div class="alloc-row">
+      <div class="alloc-label">Presale</div>
+      <div class="alloc-bar-wrap"><div class="alloc-bar" style="width:30%;background:var(--yellow)"></div></div>
+      <div class="alloc-pct" style="color:var(--yellow)">30%</div>
+    </div>
+    <div class="alloc-row">
+      <div class="alloc-label">Staking Rewards</div>
+      <div class="alloc-bar-wrap"><div class="alloc-bar" style="width:30%;background:var(--green)"></div></div>
+      <div class="alloc-pct" style="color:var(--green)">30%</div>
+    </div>
+    <div class="alloc-row">
+      <div class="alloc-label">Charity</div>
+      <div class="alloc-bar-wrap"><div class="alloc-bar" style="width:20%;background:#FF6B35"></div></div>
+      <div class="alloc-pct" style="color:#FF6B35">20%</div>
+    </div>
+    <div class="alloc-row">
+      <div class="alloc-label">Operations + Liquidity</div>
+      <div class="alloc-bar-wrap"><div class="alloc-bar" style="width:20%;background:#8855FF"></div></div>
+      <div class="alloc-pct" style="color:#8855FF">20%</div>
+    </div>
+  </div>
+
+  <table class="wp-table">
+    <thead><tr><th>Component</th><th>Amount</th><th>Share</th><th>Enforcement</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="td-key">Presale token cap</td>
+        <td class="td-val">3,000,000 GGRD</td>
+        <td>30%</td>
+        <td class="td-anchor">On-chain — PresaleEscrow8020.tokenCap</td>
+      </tr>
+      <tr>
+        <td class="td-key">Staking reward cap</td>
+        <td class="td-val">3,000,000 GGRD</td>
+        <td>30%</td>
+        <td class="td-anchor">On-chain — GGRDStakingMultiV1.REWARD_POOL_CAP</td>
+      </tr>
+      <tr>
+        <td class="td-key">Charity allocation</td>
+        <td class="td-val">2,000,000 GGRD</td>
+        <td>20%</td>
+        <td class="td-anchor">Operational — docs/SPEC_TOKENOMICS_v1.md</td>
+      </tr>
+      <tr>
+        <td class="td-key">Operations + Liquidity</td>
+        <td class="td-val">2,000,000 GGRD</td>
+        <td>20%</td>
+        <td class="td-anchor">Operational — docs/SPEC_TOKENOMICS_v1.md</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="info-box info-box-green">
+    <span class="info-box-label">Note</span>
+    CharityVesting403030 enforces distribution shape (40/30/30) and vesting schedule, but not a fixed token amount. The amount is determined by funding transfers.
+  </div>
+</section>
+
+<!-- S5: PRESALE -->
+<section class="wp-section" id="s5">
+  <span class="section-num">Section 05</span>
+  <div class="section-title">PRESALE ESCROW MECHANICS</div>
+  <div class="section-lead">Presale is implemented in PresaleEscrow8020.sol as USDC escrow with deterministic stage logic, wallet caps, success split, refund fallback, and post-success claim vesting.</div>
+
+  <h3>Core Parameters (Contract-Enforced)</h3>
+  <table class="wp-table">
+    <thead><tr><th>Parameter</th><th>Value</th><th>Anchor</th></tr></thead>
+    <tbody>
+      <tr><td class="td-key">Payment asset</td><td class="td-val">USDC on BSC</td><td class="td-anchor">payToken immutable</td></tr>
+      <tr><td class="td-key">Duration</td><td class="td-val">21 days</td><td class="td-anchor">PRESALE_DURATION</td></tr>
+      <tr><td class="td-key">Softcap</td><td class="td-val">20,000 USDC</td><td class="td-anchor">softcap = 20_000 * PAY_UNIT</td></tr>
+      <tr><td class="td-key">Hardcap</td><td class="td-val">31,250 USDC</td><td class="td-anchor">hardcap = 31_250 * PAY_UNIT</td></tr>
+      <tr><td class="td-key">Min buy</td><td class="td-val">50 USDC</td><td class="td-anchor">minBuy = 50 * PAY_UNIT</td></tr>
+      <tr><td class="td-key">Global wallet cap</td><td class="td-val">3,000 USDC</td><td class="td-anchor">globalMaxPerWallet</td></tr>
+      <tr><td class="td-key">Token cap</td><td class="td-val">3,000,000 GGRD</td><td class="td-anchor">tokenCap = 3_000_000 * SALE_UNIT</td></tr>
+      <tr><td class="td-key">Claim vesting</td><td class="td-val">60 days linear</td><td class="td-anchor">CLAIM_LINEAR_DURATION</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Stage Matrix</h3>
+  <div class="stage-grid">
+    <div class="stage-card s1">
+      <div class="sc-num">01</div>
+      <div class="sc-label">Elapsed &lt; 5 days</div>
+      <div class="sc-price">$0.0085</div>
+      <div class="sc-detail"><strong>1,000,000</strong> GGRD available</div>
+      <div class="sc-detail">Wallet cap: <strong>500 USDC</strong></div>
+      <div class="sc-detail">Max raise: <strong>$8,500</strong></div>
+    </div>
+    <div class="stage-card s2">
+      <div class="sc-num">02</div>
+      <div class="sc-label">5–10 days</div>
+      <div class="sc-price">$0.0100</div>
+      <div class="sc-detail"><strong>800,000</strong> GGRD available</div>
+      <div class="sc-detail">Wallet cap: <strong>750 USDC</strong></div>
+      <div class="sc-detail">Max raise: <strong>$8,000</strong></div>
+    </div>
+    <div class="stage-card s3">
+      <div class="sc-num">03</div>
+      <div class="sc-label">10–16 days</div>
+      <div class="sc-price">$0.0115</div>
+      <div class="sc-detail"><strong>700,000</strong> GGRD available</div>
+      <div class="sc-detail">Wallet cap: <strong>1,000 USDC</strong></div>
+      <div class="sc-detail">Max raise: <strong>$8,050</strong></div>
+    </div>
+    <div class="stage-card s4">
+      <div class="sc-num">04</div>
+      <div class="sc-label">16–21 days</div>
+      <div class="sc-price">$0.0134</div>
+      <div class="sc-detail"><strong>500,000</strong> GGRD available</div>
+      <div class="sc-detail">Wallet cap: <strong>1,500 USDC</strong></div>
+      <div class="sc-detail">Max raise: <strong>$6,700</strong></div>
+    </div>
+  </div>
+
+  <h3>Mainnet Schedule</h3>
+  <div class="timeline">
+    <div class="tl-row">
+      <div class="tl-dot" style="background:var(--green)"></div>
+      <div class="tl-date">2026-03-10 01:15:19 UTC</div>
+      <div class="tl-label"><strong>Presale Start</strong> — startTs = 1773105319</div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-dot" style="background:var(--yellow)"></div>
+      <div class="tl-date">2026-03-15 01:15:19 UTC</div>
+      <div class="tl-label"><strong>Stage 1 End</strong> — start + 5 days</div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-dot" style="background:var(--yellow)"></div>
+      <div class="tl-date">2026-03-20 01:15:19 UTC</div>
+      <div class="tl-label"><strong>Stage 2 End</strong> — start + 10 days</div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-dot" style="background:#FF8C00)"></div>
+      <div class="tl-date">2026-03-26 01:15:19 UTC</div>
+      <div class="tl-label"><strong>Stage 3 End</strong> — start + 16 days</div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-dot" style="background:var(--red)"></div>
+      <div class="tl-date">2026-03-31 01:15:19 UTC</div>
+      <div class="tl-label"><strong>Presale End</strong> — start + 21 days</div>
+    </div>
+  </div>
+
+  <h3>Settlement and Claim Logic</h3>
+  <table class="wp-table">
+    <thead><tr><th>Condition</th><th>Outcome</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="td-key">totalRaised ≥ softcap</td>
+        <td><span class="td-badge badge-green">SUCCESS</span> — 80% USDC → Liquidity wallet · 20% → Marketing wallet</td>
+      </tr>
+      <tr>
+        <td class="td-key">totalRaised &lt; softcap</td>
+        <td><span class="td-badge" style="border-color:var(--red);color:var(--red)">FAILURE</span> — Each buyer calls <code>refund()</code> for 100% USDC back</td>
+      </tr>
+      <tr>
+        <td class="td-key">Success claim vesting</td>
+        <td>50% immediate + 50% linear over 60 days</td>
+      </tr>
+      <tr>
+        <td class="td-key">Finalize timing gate</td>
+        <td>Owner can finalize only after end time or at hardcap</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Price Formula</h3>
+  <div class="formula">tokenOut = payIn × PRICE_SCALE × SALE_UNIT / (stagePriceScaled × PAY_UNIT)</div>
+</section>
+
+<!-- S6: GOVERNANCE -->
+<section class="wp-section" id="s6">
+  <span class="section-num">Section 06</span>
+  <div class="section-title">GOVERNANCE AND CONTROL PLANE</div>
+  <div class="section-lead">Governance model combines Safe multisig operations with timelock-enforced delays for selected high-impact actions.</div>
+
+  <div class="gov-grid">
+    <div class="gov-cell">
+      <div class="gov-cell-title">🏦 Operational Safe</div>
+      <div class="gov-cell-val"><strong>2 of 3 signers</strong><br>External Safe setup referenced in deployment docs</div>
+    </div>
+    <div class="gov-cell">
+      <div class="gov-cell-title">⏱ Short Timelock</div>
+      <div class="gov-cell-val"><strong>48 hours</strong> (172,800 seconds)<br>GGRDTimelock constructor args</div>
+    </div>
+    <div class="gov-cell">
+      <div class="gov-cell-title">⏱ Long Timelock</div>
+      <div class="gov-cell-val"><strong>72 hours</strong> (259,200 seconds)<br>GGRDTimelock constructor args</div>
+    </div>
+    <div class="gov-cell">
+      <div class="gov-cell-title">🔒 Staking Owner</div>
+      <div class="gov-cell-val"><strong>Long timelock address</strong><br>GGRDStakingMultiV1 constructor owner arg</div>
+    </div>
+    <div class="gov-cell">
+      <div class="gov-cell-title">🛡 Staking Guardian</div>
+      <div class="gov-cell-val"><strong>Safe address</strong><br>GGRDStakingMultiV1 constructor guardian arg</div>
+    </div>
+    <div class="gov-cell">
+      <div class="gov-cell-title">📦 Airdrop Owner</div>
+      <div class="gov-cell-val"><strong>Short timelock address</strong><br>MerkleAirdrop constructor owner arg</div>
+    </div>
+  </div>
+</section>
+
+<!-- S7: STAKING -->
+<section class="wp-section" id="s7">
+  <span class="section-num">Section 07</span>
+  <div class="section-title">STAKING ENGINE</div>
+  <div class="section-lead">GGRDStakingMultiV1 is a multi-position staking contract with reward and principal caps, lock-based reward eligibility, and early withdraw penalties.</div>
+
+  <table class="wp-table">
+    <thead><tr><th>Parameter</th><th>Value</th><th>Effect</th></tr></thead>
+    <tbody>
+      <tr><td class="td-key">APR</td><td class="td-val">10% (APR_BPS=1000)</td><td>Linear annualized reward accrual</td></tr>
+      <tr><td class="td-key">Minimum lock</td><td class="td-val">30 days</td><td>No rewards before lock maturity</td></tr>
+      <tr><td class="td-key">Program duration</td><td class="td-val">730 days</td><td>Reward accrual stops at endTime</td></tr>
+      <tr><td class="td-key">Reward pool cap</td><td class="td-val">3,000,000 GGRD</td><td>Hard upper bound on funded rewards</td></tr>
+      <tr><td class="td-key">Max total staked</td><td class="td-val">5,000,000 GGRD</td><td>Hard principal capacity cap</td></tr>
+      <tr><td class="td-key">Early withdraw penalty</td><td class="td-val">10%</td><td>Penalty before 30-day lock, no reward payout</td></tr>
+      <tr><td class="td-key">Emergency controls</td><td class="td-val">Guardian or owner can pause</td><td>Owner unpauses — operational incident response</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- S8: CHARITY -->
+<section class="wp-section" id="s8">
+  <span class="section-num">Section 08</span>
+  <div class="section-title">CHARITY VESTING PROGRAM</div>
+  <div class="section-lead">Charity release is executed by CharityVesting403030 with deterministic share splitting and linear vesting after cliff.</div>
+
+  <table class="wp-table">
+    <thead><tr><th>Parameter</th><th>Value</th><th>Contract Behavior</th></tr></thead>
+    <tbody>
+      <tr><td class="td-key">Beneficiary split</td><td class="td-val">40% / 30% / 30%</td><td class="td-anchor">A_BPS=4000, B_BPS=3000, C_BPS=3000</td></tr>
+      <tr><td class="td-key">Cliff behavior</td><td class="td-val">No vesting before cliff</td><td class="td-anchor">if (timestamp &lt; cliff) return 0</td></tr>
+      <tr><td class="td-key">Post-cliff behavior</td><td class="td-val">Linear until duration end</td><td class="td-anchor">(total × (timestamp - start)) / duration</td></tr>
+      <tr><td class="td-key">Mainnet start</td><td class="td-val">2026-03-10 00:15:17 UTC</td><td class="td-anchor">constructor arg 1773101717</td></tr>
+      <tr><td class="td-key">Cliff end</td><td class="td-val">2027-03-10 00:15:17 UTC</td><td class="td-anchor">cliffSeconds = 31,536,000</td></tr>
+      <tr><td class="td-key">Full vesting end</td><td class="td-val">2029-03-09 00:15:17 UTC</td><td class="td-anchor">durationSeconds = 94,608,000</td></tr>
+    </tbody>
+  </table>
+
+  <div class="info-box info-box-green">
+    <span class="info-box-label">Current Deployment</span>
+    Current deployment maps charity A/B/C recipients to one operational charity safe address. Beneficiary addresses will be updated via governance as charity partners are confirmed.
+  </div>
+</section>
+
+<!-- S9: AIRDROP -->
+<section class="wp-section" id="s9">
+  <span class="section-num">Section 09</span>
+  <div class="section-title">AIRDROP DISTRIBUTION FRAMEWORK</div>
+  <div class="section-lead">MerkleAirdrop supports multiple rounds with independent Merkle roots and claim windows.</div>
+
+  <ul>
+    <li>Round creation requires <strong>Merkle root, start/end times, and funded amount.</strong></li>
+    <li>Claim authorization uses standard Merkle proof verification over <code>(index, account, amount)</code>.</li>
+    <li><strong>One-claim-per-leaf</strong> enforced through bitmap state — no double claims.</li>
+    <li>Owner can sweep unclaimed leftovers only <strong>after round expiry.</strong></li>
+    <li>Airdrop owner is the <strong>short timelock (48h)</strong> — governance-gated round creation.</li>
+  </ul>
+</section>
+
+<!-- S10: LIQUIDITY -->
+<section class="wp-section" id="s10">
+  <span class="section-num">Section 10</span>
+  <div class="section-title">LIQUIDITY AND LP LOCK POLICY</div>
+  <div class="section-lead">Economic intent from repo specification is GGRD/USDC liquidity provisioning after successful presale finalization.</div>
+
+  <table class="wp-table">
+    <thead><tr><th>Parameter</th><th>Value</th></tr></thead>
+    <tbody>
+      <tr><td class="td-key">USDC to liquidity (on success)</td><td class="td-val">80% of raised USDC → Liquidity Safe</td></tr>
+      <tr><td class="td-key">USDC to marketing (on success)</td><td class="td-val">20% of raised USDC → Marketing Safe</td></tr>
+      <tr><td class="td-key">Reference launch ratio</td><td class="td-val">~25,000 USDC paired with ~1,200,000 GGRD</td></tr>
+      <tr><td class="td-key">LP lock target</td><td class="td-val">12 months</td></tr>
+      <tr><td class="td-key">LP lock contract</td><td class="td-val">LPLocker.sol — owner can only extend lock forward</td></tr>
+    </tbody>
+  </table>
+
+  <div class="info-box info-box-yellow">
+    <span class="info-box-label">Important</span>
+    LP token address does not exist until pair creation. LP locker deployment and lock execution is an explicit <strong>post-presale operational step.</strong> LP pair and locker addresses will be published with explorer links after finalization.
+  </div>
+</section>
+
+<!-- S11: SECURITY -->
+<section class="wp-section" id="s11">
+  <span class="section-num">Section 11</span>
+  <div class="section-title">SECURITY CONTROLS AND RESIDUAL RISKS</div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <div class="risk-title" style="color:var(--green)">✓ Implemented Controls</div>
+      <div class="risk-item">OpenZeppelin primitives across token, timelock, access control, Merkle verification, and safe transfers</div>
+      <div class="risk-item">Reentrancy protections in presale, staking, and airdrop state-changing flows</div>
+      <div class="risk-item">Hard caps for presale token sale, staking rewards, and staking principal</div>
+      <div class="risk-item">Pause control in staking with guardian-owner split for incident response speed</div>
+      <div class="risk-item">Timelock delays (48h / 72h) on all governance actions</div>
+      <div class="risk-item">2-of-3 Safe multisig — no single point of control</div>
+    </div>
+    <div class="risk-card">
+      <div class="risk-title" style="color:var(--red)">⚠ Residual Risks</div>
+      <div class="risk-item">Misconfigured wallet addresses in deployment/env can route funds incorrectly</div>
+      <div class="risk-item">High-impact governance transactions still require strict signer discipline</div>
+      <div class="risk-item">Operational execution (LP provisioning, locking, funding schedules) remains process-sensitive</div>
+      <div class="risk-item">External oracle or price feed dependency is not present — stage pricing is time-based only</div>
+    </div>
+  </div>
+</section>
+
+<!-- S12: ADDRESSES -->
+<section class="wp-section" id="s12">
+  <span class="section-num">Section 12</span>
+  <div class="section-title">MAINNET ADDRESSES AND PARAMETERS</div>
+  <div class="section-lead">All addresses sourced from deployments/bscMainnet.latest.json. Always verify before signing any transaction.</div>
+
+  <h3>Core Contracts</h3>
+  <table class="wp-table">
+    <thead><tr><th>Component</th><th>Address</th><th>Role</th><th></th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="td-key">GGRD Token</td>
+        <td><span style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--green)">0xA0d5663d57b7D7EF975D2F02BcAEaf5c94c671f9</span></td>
+        <td>ERC20 fixed supply token</td>
+        <td><a href="https://bscscan.com/token/0xA0d5663d57b7D7EF975D2F02BcAEaf5c94c671f9" target="_blank" rel="noopener" style="color:var(--yellow);font-size:0.65rem;text-decoration:none;border:1px solid rgba(255,224,0,0.3);padding:2px 8px;white-space:nowrap">BscScan ↗</a></td>
+      </tr>
+      <tr>
+        <td class="td-key">PresaleEscrow8020</td>
+        <td><span style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--green)">0xd8983534dd3c369d85127f6C9B85d98768139387</span></td>
+        <td>USDC escrow presale</td>
+        <td><a href="https://bscscan.com/address/0xd8983534dd3c369d85127f6C9B85d98768139387" target="_blank" rel="noopener" style="color:var(--yellow);font-size:0.65rem;text-decoration:none;border:1px solid rgba(255,224,0,0.3);padding:2px 8px;white-space:nowrap">BscScan ↗</a></td>
+      </tr>
+      <tr>
+        <td class="td-key">USDC (pay token)</td>
+        <td><span style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--green)">0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d</span></td>
+        <td>Presale payment asset</td>
+        <td><a href="https://bscscan.com/token/0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d" target="_blank" rel="noopener" style="color:var(--yellow);font-size:0.65rem;text-decoration:none;border:1px solid rgba(255,224,0,0.3);padding:2px 8px;white-space:nowrap">BscScan ↗</a></td>
+      </tr>
+      <tr>
+        <td class="td-key">GGRDStakingMultiV1</td>
+        <td><span style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--green)">0x05d803135bc09e9E5006CA75C533377D7Ea0A34b</span></td>
+        <td>Staking module</td>
+        <td><a href="https://bscscan.com/address/0x05d803135bc09e9E5006CA75C533377D7Ea0A34b" target="_blank" rel="noopener" style="color:var(--yellow);font-size:0.65rem;text-decoration:none;border:1px solid rgba(255,224,0,0.3);padding:2px 8px;white-space:nowrap">BscScan ↗</a></td>
+      </tr>
+      <tr>
+        <td class="td-key">CharityVesting403030</td>
+        <td><span style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--green)">0xE2993F0C8D2020dD9866E2d6dC5AA1D62b7C8fDC</span></td>
+        <td>Charity vesting splitter</td>
+        <td><a href="https://bscscan.com/address/0xE2993F0C8D2020dD9866E2d6dC5AA1D62b7C8fDC" target="_blank" rel="noopener" style="color:var(--yellow);font-size:0.65rem;text-decoration:none;border:1px solid rgba(255,224,0,0.3);padding:2px 8px;white-space:nowrap">BscScan ↗</a></td>
+      </tr>
+      <tr>
+        <td class="td-key">MerkleAirdrop</td>
+        <td><span style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--green)">0x9F64E78185ee697783E0c9ebA0F66131FFCedBD6</span></td>
+        <td>Airdrop module</td>
+        <td><a href="https://bscscan.com/address/0x9F64E78185ee697783E0c9ebA0F66131FFCedBD6" target="_blank" rel="noopener" style="color:var(--yellow);font-size:0.65rem;text-decoration:none;border:1px solid rgba(255,224,0,0.3);padding:2px 8px;white-space:nowrap">BscScan ↗</a></td>
+      </tr>
+      <tr>
+        <td class="td-key">Timelock (48h)</td>
+        <td><span style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--green)">0xBC4655E8D5A4A4B16bD30db2fFBC94Ed05AbcE87</span></td>
+        <td>Short governance delay</td>
+        <td><a href="https://bscscan.com/address/0xBC4655E8D5A4A4B16bD30db2fFBC94Ed05AbcE87" target="_blank" rel="noopener" style="color:var(--yellow);font-size:0.65rem;text-decoration:none;border:1px solid rgba(255,224,0,0.3);padding:2px 8px;white-space:nowrap">BscScan ↗</a></td>
+      </tr>
+      <tr>
+        <td class="td-key">Timelock (72h)</td>
+        <td><span style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--green)">0xd4b5f94f7cF8Eb79bEd2f3Aa5693d9F97D573E31</span></td>
+        <td>Long governance delay</td>
+        <td><a href="https://bscscan.com/address/0xd4b5f94f7cF8Eb79bEd2f3Aa5693d9F97D573E31" target="_blank" rel="noopener" style="color:var(--yellow);font-size:0.65rem;text-decoration:none;border:1px solid rgba(255,224,0,0.3);padding:2px 8px;white-space:nowrap">BscScan ↗</a></td>
+      </tr>
+      <tr>
+        <td class="td-key">Governance Safe (2/3)</td>
+        <td><span style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--green)">0x28218d08f6D2084eBd7CeF3f582139E7417b6300</span></td>
+        <td>Operational multisig</td>
+        <td><a href="https://bscscan.com/address/0x28218d08f6D2084eBd7CeF3f582139E7417b6300" target="_blank" rel="noopener" style="color:var(--yellow);font-size:0.65rem;text-decoration:none;border:1px solid rgba(255,224,0,0.3);padding:2px 8px;white-space:nowrap">BscScan ↗</a></td>
+      </tr>
+      <tr>
+        <td class="td-key">Liquidity Safe (2/3)</td>
+        <td><span style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--green)">0x7677AC2712d161e7F75fC4316E8B3dC3FaC01009</span></td>
+        <td>USDC destination — 80% on success</td>
+        <td><a href="https://bscscan.com/address/0x7677AC2712d161e7F75fC4316E8B3dC3FaC01009" target="_blank" rel="noopener" style="color:var(--yellow);font-size:0.65rem;text-decoration:none;border:1px solid rgba(255,224,0,0.3);padding:2px 8px;white-space:nowrap">BscScan ↗</a></td>
+      </tr>
+      <tr>
+        <td class="td-key">Marketing Safe (2/3)</td>
+        <td><span style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--green)">0xF2922343AdF6F2631A2f1e9b9b11c9d269f3874D</span></td>
+        <td>USDC destination — 20% on success</td>
+        <td><a href="https://bscscan.com/address/0xF2922343AdF6F2631A2f1e9b9b11c9d269f3874D" target="_blank" rel="noopener" style="color:var(--yellow);font-size:0.65rem;text-decoration:none;border:1px solid rgba(255,224,0,0.3);padding:2px 8px;white-space:nowrap">BscScan ↗</a></td>
+      </tr>
+      <tr>
+        <td class="td-key">Charity Safe A</td>
+        <td><span style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--green)">0xd58B8D79deC67F8731267B929D24A4923Bac59a3</span></td>
+        <td>Charity vesting recipient</td>
+        <td><a href="https://bscscan.com/address/0xd58B8D79deC67F8731267B929D24A4923Bac59a3" target="_blank" rel="noopener" style="color:var(--yellow);font-size:0.65rem;text-decoration:none;border:1px solid rgba(255,224,0,0.3);padding:2px 8px;white-space:nowrap">BscScan ↗</a></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- S13: RUNBOOK -->
+<section class="wp-section" id="s13">
+  <span class="section-num">Section 13</span>
+  <div class="section-title">OPERATIONAL RUNBOOK AND GOVERNANCE ACTIONS</div>
+
+  <h3>Presale Phase</h3>
+  <ul>
+    <li>Fund presale contract with up to <strong>3,000,000 GGRD.</strong></li>
+    <li>Monitor stage progress, wallet caps, and raised total against hardcap/softcap thresholds.</li>
+    <li>Trigger <code>finalize()</code> after end time or at hardcap.</li>
+  </ul>
+
+  <h3>Post-Finalize — Success Path</h3>
+  <ul>
+    <li>Execute LP provisioning workflow using liquidity wallet USDC share and planned GGRD allocation.</li>
+    <li>Create LP pair token and deploy/initialize LP locker for <strong>12-month lock target.</strong></li>
+    <li>Publish LP pair and locker addresses with explorer links.</li>
+  </ul>
+
+  <h3>Post-Finalize — Failure Path</h3>
+  <ul>
+    <li>Keep refund interface open and monitored until participant refunds are completed.</li>
+    <li>Communicate final accounting and remaining balances transparently.</li>
+  </ul>
+
+  <h3>Staking and Charity Lifecycle</h3>
+  <ul>
+    <li>Fund staking reward pool gradually within <strong>REWARD_POOL_CAP.</strong></li>
+    <li>Initialize staking program start time under governance control.</li>
+    <li>Call charity vesting release function per schedule and publish transfer reports.</li>
+  </ul>
+</section>
+
+<!-- S14: RISK -->
+<section class="wp-section" id="s14">
+  <span class="section-num">Section 14</span>
+  <div class="section-title">RISK AND LEGAL NOTICE</div>
+
+  <div class="disclaimer">
+    <strong>⚠ RISK DISCLAIMER</strong><br><br>
+    GGRD is a high-risk crypto asset; <strong>total capital loss is possible.</strong> This document is technical information, not investment, legal, or tax advice. Users and operators should verify contract addresses and transaction payloads independently. Operational execution quality materially affects real-world outcomes despite strong contract controls.<br><br>
+    Whitepaper v4.0 is a repository-grounded technical specification as of 2026-03-10. Future governance actions, module upgrades, or operational reconfiguration can change non-immutable behavior.<br><br>
+    <strong>Generated from ggrd-bsc-contracts repository | GGRD Whitepaper v4.0 | 2026-03-10</strong>
+  </div>
+</section>
+
+</main>
+</div><!-- /layout -->
+
+<script>
+// Active sidebar link on scroll
+const sections = document.querySelectorAll('.wp-section[id], .cover[id]');
+const links = document.querySelectorAll('.sb-link');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      links.forEach(l => l.classList.remove('active'));
+      const match = document.querySelector(`.sb-link[href="#${e.target.id}"]`);
+      if (match) match.classList.add('active');
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px' });
+sections.forEach(s => obs.observe(s));
+</script>
 </body>
 </html>
