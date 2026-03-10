@@ -2586,7 +2586,7 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
         chains: [BSC_CHAIN_ID],
         optionalChains: [BSC_CHAIN_ID],
         rpcMap: { [BSC_CHAIN_ID]: BSC_RPC },
-        showQrModal: false, // we handle QR ourselves
+        showQrModal: false,
         metadata: {
           name: 'Giggle Reloaded Presale',
           description: 'GGRD Presale on BSC',
@@ -2595,12 +2595,16 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
         }
       });
 
-      // show QR
+      // show QR inside the still-open modal
       wc.on('display_uri', uri => {
         $('wm-wallet-list').style.display = 'none';
-        $('wm-qr-area').classList.add('show');
+        const qrArea = $('wm-qr-area');
+        qrArea.classList.add('show');
         $('wm-qr-uri').textContent = uri;
         drawQR(uri, $('wm-qr-canvas'));
+        // update modal title
+        const titleEl = document.querySelector('.wm-title');
+        if (titleEl) titleEl.textContent = 'SCAN WITH WALLET';
       });
 
       await wc.connect();
@@ -2616,8 +2620,16 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
       wc.on('disconnect',      ()=>location.reload());
 
     } catch(e) {
-      setStatus((e.message||'WalletConnect failed').slice(0,70),'err');
-      closeModal();
+      const msg = e.message || 'WalletConnect failed';
+      // don't close if user cancelled intentionally (modal already has back btn)
+      if (!msg.includes('User rejected') && !msg.includes('user rejected')) {
+        setStatus(msg.slice(0,70), 'err');
+      }
+      // reset modal state
+      $('wm-qr-area').classList.remove('show');
+      $('wm-wallet-list').style.display = 'flex';
+      const titleEl = document.querySelector('.wm-title');
+      if (titleEl) titleEl.textContent = 'CONNECT WALLET';
     }
   }
 
@@ -2634,9 +2646,8 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
   /* ─── wallet choice dispatcher ───────────────── */
   function handleWalletChoice(type) {
-    closeModal();
-    if (type === 'walletconnect') connectWC();
-    else connectInjected(type);
+    if (type === 'walletconnect') connectWC(); // modal stays open — QR shown inside
+    else { closeModal(); connectInjected(type); }
   }
 
   /* ─── post-connect ───────────────────────────── */
