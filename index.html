@@ -1835,19 +1835,25 @@ nav {
     radial-gradient(circle at 18% 12%, rgba(0,170,152,0.12), transparent 42%),
     radial-gradient(circle at 84% 15%, rgba(5,111,75,0.12), transparent 46%),
     var(--ggrd-bg);
+  overflow: visible;
 }
 
 .hero-layout {
-  width: min(1120px, 100%);
+  width: min(1160px, 100%);
+  position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(260px, 0.95fr);
-  gap: clamp(1rem, 4vw, 3rem);
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(1rem, 3vw, 2rem);
   align-items: center;
+  overflow: visible;
+  padding-right: clamp(250px, 42vw, 560px);
+  min-height: clamp(380px, 48vw, 560px);
 }
 
 .hero-content {
   position: relative;
   z-index: 2;
+  max-width: 640px;
 }
 
 .hero-badge {
@@ -1925,17 +1931,23 @@ nav {
 }
 
 .hero-mascot-wrap {
+  position: absolute;
+  right: clamp(-72px, -4vw, -20px);
+  bottom: -18px;
+  width: min(52vw, 560px);
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
   pointer-events: none;
+  z-index: 1;
 }
 
 .hero-mascot {
-  width: min(100%, 420px);
-  max-height: 520px;
-  filter: drop-shadow(0 20px 36px var(--ggrd-glow));
-  opacity: 0.96;
+  width: 100%;
+  height: auto;
+  max-height: none;
+  filter: drop-shadow(0 0 40px rgba(0,170,152,0.25));
+  opacity: 0.98;
   user-select: none;
 }
 
@@ -2046,11 +2058,13 @@ nav {
 
 @media (max-width: 1100px) {
   .hero-layout {
-    grid-template-columns: minmax(0, 1fr) minmax(240px, 0.75fr);
+    padding-right: clamp(220px, 45vw, 470px);
+    min-height: clamp(340px, 52vw, 480px);
   }
 
-  .hero-mascot {
-    max-width: 320px;
+  .hero-mascot-wrap {
+    right: clamp(-56px, -4vw, -16px);
+    width: min(50vw, 460px);
   }
 }
 
@@ -2062,12 +2076,15 @@ nav {
   .hero-layout {
     grid-template-columns: 1fr;
     gap: 1.25rem;
+    padding-right: 0;
+    min-height: auto;
   }
 
   .hero-content {
     display: flex;
     flex-direction: column;
     align-items: center;
+    max-width: none;
   }
 
   .hero-tagline {
@@ -2081,20 +2098,26 @@ nav {
   }
 
   .hero-mascot-wrap {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    width: min(72vw, 320px);
     justify-content: center;
-    margin-top: 0.5rem;
+    margin: 0.75rem auto 0;
+    z-index: 2;
   }
 
   .hero-mascot {
-    max-width: 260px;
+    width: 100%;
   }
 }
 
 @media (max-width: 540px) {
-  .hero-mascot {
-    max-width: 220px;
+  .hero-mascot-wrap {
+    width: min(78vw, 250px);
   }
 }
+
 </style>
 <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@walletconnect/ethereum-provider@2.23.8/dist/index.umd.js"></script>
