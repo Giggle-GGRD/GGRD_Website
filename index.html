@@ -1723,7 +1723,7 @@ footer {
 
 </style>
 <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@walletconnect/ethereum-provider@2.10.0/dist/index.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@walletconnect/ethereum-provider@2.23.8/dist/index.umd.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/lib/browser.min.js"></script>
 </head>
 <body>
@@ -2493,6 +2493,10 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
   const BSC_CHAIN_ID  = 56;
   const BSC_RPC       = "https://bsc-dataseed1.binance.org/";
   const WC_PROJECT_ID = "ad704bd8122e267d73cb15391aa2ae95";
+  const WC_REQUIRED_METHODS = ['eth_sendTransaction','personal_sign','eth_accounts','eth_requestAccounts','wallet_switchEthereumChain','wallet_addEthereumChain'];
+  const WC_OPTIONAL_METHODS = ['eth_sendRawTransaction','eth_sign','eth_signTransaction','eth_signTypedData','eth_signTypedData_v3','eth_signTypedData_v4','wallet_getPermissions','wallet_requestPermissions','wallet_registerOnboarding','wallet_watchAsset','wallet_scanQRCode','wallet_sendCalls','wallet_getCapabilities','wallet_getCallsStatus','wallet_showCallsStatus'];
+  const WC_REQUIRED_EVENTS = ['chainChanged','accountsChanged','connect','disconnect'];
+  const WC_OPTIONAL_EVENTS = ['message'];
 
   const STAGES = [
     { end: new Date('2026-03-15T01:15:19Z'), priceScaled: 850000,  label: "Stage 1", next: "0.0100" },
@@ -2693,8 +2697,8 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
     wcLibPromise ??= (async () => {
       const urls = [
-        'https://cdn.jsdelivr.net/npm/@walletconnect/ethereum-provider@2.10.0/dist/index.umd.js',
-        'https://unpkg.com/@walletconnect/ethereum-provider@2.10.0/dist/index.umd.js',
+        'https://cdn.jsdelivr.net/npm/@walletconnect/ethereum-provider@2.23.8/dist/index.umd.js',
+        'https://unpkg.com/@walletconnect/ethereum-provider@2.23.8/dist/index.umd.js',
       ];
       let lastErr = null;
       for(const url of urls) {
@@ -3035,12 +3039,16 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
       if(wcInstance) { try{await wcInstance.disconnect();}catch(_){} wcInstance=null; }
       await clearWCSessions();
 
-      // WC 2.10.0 API: chains jest required, brak optionalChains
+      // Explicit methods/events improve compatibility across mobile wallets.
       const wc = await WCCtor.init({
-        projectId:      WC_PROJECT_ID,
-        chains:         [BSC_CHAIN_ID],
-        rpcMap:         {[BSC_CHAIN_ID]: BSC_RPC},
-        showQrModal:    false,
+        projectId:       WC_PROJECT_ID,
+        chains:          [BSC_CHAIN_ID],
+        methods:         WC_REQUIRED_METHODS,
+        optionalMethods: WC_OPTIONAL_METHODS,
+        events:          WC_REQUIRED_EVENTS,
+        optionalEvents:  WC_OPTIONAL_EVENTS,
+        rpcMap:          {[BSC_CHAIN_ID]: BSC_RPC},
+        showQrModal:     false,
         metadata: {
           name:'Giggle Reloaded Presale', description:'GGRD Presale — BSC',
           url:'https://ggrd.me', icons:['https://ggrd.me/img/ggrd-logo-512.png']
@@ -3063,10 +3071,8 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
       setStatus("Scan QR code with your mobile wallet…",'warn');
       showQRView();
-      await wc.connect();
-
-      const accounts = wc.accounts;
-      if(!accounts?.length) throw new Error("No accounts after connect");
+      const accounts = await wc.enable();
+      if(!accounts?.length) throw new Error("No accounts after WalletConnect approval");
       userAddr = accounts[0];
       currentEthProvider = wc;
 
@@ -3108,8 +3114,9 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
       console.error('[WC] error:', e);
       showQRView();
       const wrap = $('wm-qr-img-wrap');
+      const detail = (msg || 'WalletConnect error').slice(0,140).replace(/[&<>]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[ch]));
       if(wrap) {
-        wrap.innerHTML = '<div style="color:#f66;font-size:0.72rem;line-height:1.45">WalletConnect error.<br>Try again or use another wallet option.</div>';
+        wrap.innerHTML = '<div style="color:#f66;font-size:0.72rem;line-height:1.45">WalletConnect error.<br>Try again or use another wallet option.<div style="color:#999;font-size:0.65rem;margin-top:0.75rem;word-break:break-word">' + detail + '</div></div>';
       }
     }
   }
