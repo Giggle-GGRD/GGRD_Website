@@ -2645,6 +2645,72 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
   /* ─── mobile detection ─────────────────────────── */
   const isMobile = /Android|iPhone|iPad|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
+  let qrLibPromise = null;
+  let wcLibPromise = null;
+
+  function loadExternalScript(url) {
+    return new Promise((resolve, reject) => {
+      const existing = Array.from(document.scripts || []).find(s => s.src === url);
+      if(existing) { resolve(); return; }
+      const s = document.createElement('script');
+      s.src = url;
+      s.async = true;
+      s.onload = () => resolve();
+      s.onerror = () => reject(new Error('Script load failed: ' + url));
+      document.head.appendChild(s);
+    });
+  }
+
+  async function ensureQRCodeLib() {
+    if(typeof QRCode !== 'undefined' && QRCode?.toCanvas) return;
+    qrLibPromise ??= (async () => {
+      const urls = [
+        'https://cdn.jsdelivr.net/npm/qrcode@1.5.4/lib/browser.min.js',
+        'https://unpkg.com/qrcode@1.5.4/lib/browser.min.js',
+      ];
+      let lastErr = null;
+      for(const url of urls) {
+        try {
+          await loadExternalScript(url);
+          if(typeof QRCode !== 'undefined' && QRCode?.toCanvas) return;
+        } catch(e) {
+          lastErr = e;
+        }
+      }
+      throw lastErr || new Error('QRCode library unavailable');
+    })();
+    await qrLibPromise;
+  }
+
+  async function ensureWalletConnectLib() {
+    const hasCtor = () => {
+      const pkg = window["@walletconnect/ethereum-provider"];
+      const ctor = pkg?.EthereumProvider || pkg?.default || pkg;
+      return !!(ctor && typeof ctor.init === 'function');
+    };
+
+    if(hasCtor()) return;
+
+    wcLibPromise ??= (async () => {
+      const urls = [
+        'https://cdn.jsdelivr.net/npm/@walletconnect/ethereum-provider@2.10.0/dist/index.umd.js',
+        'https://unpkg.com/@walletconnect/ethereum-provider@2.10.0/dist/index.umd.js',
+      ];
+      let lastErr = null;
+      for(const url of urls) {
+        try {
+          await loadExternalScript(url);
+          if(hasCtor()) return;
+        } catch(e) {
+          lastErr = e;
+        }
+      }
+      throw lastErr || new Error('WalletConnect library unavailable');
+    })();
+
+    await wcLibPromise;
+  }
+
   /* ─── QR renderer (local — no external API) ──── */
   function renderQR(uri) {
     const wrap = $('wm-qr-img-wrap');
@@ -2664,8 +2730,8 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
         qrHost.appendChild(canvas);
       });
     } else {
-      // Fallback if qrcode.js didn't load
-      fallbackQR(qrHost, uri);
+      // Try to lazy-load QR library, then render again.
+      ensureQRCodeLib().then(() => renderQR(uri)).catch(() => fallbackQR(qrHost, uri));
     }
 
     if(isMobile) {
@@ -2950,12 +3016,19 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
   async function connectWC() {
     setStatus("Initializing WalletConnect…",'warn');
+    showQRView();
     try {
+      await ensureWalletConnectLib();
+      // QR library is optional for mobile deep links, but preload for desktop QR reliability.
+      await ensureQRCodeLib().catch(() => {});
+
       const WCPkg  = window["@walletconnect/ethereum-provider"];
       const WCCtor = WCPkg?.EthereumProvider || WCPkg?.default || WCPkg;
       if(!WCCtor || typeof WCCtor.init !== 'function') {
         console.error('[WC] Package state:', typeof WCPkg, WCPkg ? Object.keys(WCPkg) : 'null');
-        setStatus("⚠ WalletConnect failed to load — try Ctrl+F5 or use injected wallet",'err');
+        setStatus("⚠ WalletConnect failed to load — refresh page and try again",'err');
+        const wrap = $('wm-qr-img-wrap');
+        if(wrap) wrap.innerHTML = '<div style="color:#f66;font-size:0.72rem;line-height:1.45">WalletConnect library failed to load.<br>Refresh page (Ctrl+F5) and try again.</div>';
         return;
       }
       // Rozłącz starą sesję i wyczyść local/session/indexedDB
@@ -3022,13 +3095,22 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
     } catch(e) {
       const msg = e.message||'';
-      if(!msg.toLowerCase().includes('user rejected')&&!msg.toLowerCase().includes('modal closed')&&!msg.toLowerCase().includes('user closed')) {
-        setStatus(msg.slice(0,80)||'WalletConnect error','err');
-        console.error('[WC] error:', e);
-      } else {
+      const low = msg.toLowerCase();
+      const isUserCancel = low.includes('user rejected') || low.includes('modal closed') || low.includes('user closed');
+
+      if(isUserCancel) {
         setStatus('Cancelled','warn');
+        showWalletList();
+        return;
       }
-      showWalletList();
+
+      setStatus(msg.slice(0,80)||'WalletConnect error','err');
+      console.error('[WC] error:', e);
+      showQRView();
+      const wrap = $('wm-qr-img-wrap');
+      if(wrap) {
+        wrap.innerHTML = '<div style="color:#f66;font-size:0.72rem;line-height:1.45">WalletConnect error.<br>Try again or use another wallet option.</div>';
+      }
     }
   }
 
@@ -3060,8 +3142,10 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
   document.querySelectorAll('.wm-wallet-btn').forEach(b => {
     b.addEventListener('click', () => {
       const type = b.dataset.wallet;
-      if(type==='walletconnect') connectWC();
-      else { closeModal(); connectInjected(type); }
+      if(type==='walletconnect') {
+        showQRView();
+        connectWC();
+      } else { closeModal(); connectInjected(type); }
     });
   });
 
