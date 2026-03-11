@@ -1937,6 +1937,7 @@ nav {
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
+  overflow: visible;
   pointer-events: none;
   z-index: 1;
   background: transparent !important;
@@ -1948,11 +1949,13 @@ nav {
 
 .hero-mascot {
   display: block;
-  width: min(100%, 620px);
+  width: min(140%, 868px);
+  max-width: none;
+  flex: 0 0 auto;
   height: auto;
   max-height: none;
-  transform: translateX(6%);
-  filter: drop-shadow(0 0 40px rgba(0,170,152,0.25));
+  transform: translateX(10%);
+  filter: none;
   opacity: 0.99;
   user-select: none;
 }
