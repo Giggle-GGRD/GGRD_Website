@@ -2622,15 +2622,23 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
     if(qa) qa.classList.add('show');
     const t=document.querySelector('.wm-title');
     if(t) t.textContent='SCAN QR CODE';
-    renderQR(uri);
+    if(uri) {
+      renderQR(uri);
+    } else {
+      const wrap = $('wm-qr-img-wrap');
+      const copyBtn = $('wm-copy-uri');
+      if(wrap) wrap.innerHTML = '<div style="color:#444;font-size:0.75rem">⏳ Waiting for WalletConnect URI…</div>';
+      if(copyBtn) copyBtn.style.display = 'none';
+    }
   }
 
   $('wm-close')?.addEventListener('click', closeModal);
   overlay?.addEventListener('click', e => { if(e.target===overlay) closeModal(); });
-  $('wm-qr-back')?.addEventListener('click', () => {
+  $('wm-qr-back')?.addEventListener('click', async () => {
     showWalletList();
     // anuluj WC jeśli w toku
-    if(wcInstance) { try{wcInstance.disconnect();}catch(_){} wcInstance=null; }
+    if(wcInstance) { try{await wcInstance.disconnect();}catch(_){} wcInstance=null; }
+    await clearWCSessions();
     setStatus('Select wallet');
   });
 
@@ -2640,10 +2648,26 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
   /* ─── QR renderer (local — no external API) ──── */
   function renderQR(uri) {
     const wrap = $('wm-qr-img-wrap');
-    if(!wrap) return;
+    if(!wrap || !uri) return;
     wrap.innerHTML = '';
 
-    // Mobile: show deep link buttons instead of QR
+    const qrHost = document.createElement('div');
+    qrHost.style.cssText = 'width:100%;display:flex;justify-content:center;align-items:center;margin-bottom:10px';
+    wrap.appendChild(qrHost);
+
+    // Render QR on both desktop and mobile; mobile also gets deep links below.
+    if(typeof QRCode !== 'undefined' && QRCode.toCanvas) {
+      const canvas = document.createElement('canvas');
+      canvas.style.cssText = 'border:3px solid #FFE000;display:block;margin:0 auto';
+      QRCode.toCanvas(canvas, uri, {width:220, margin:2, color:{dark:'#FFE000',light:'#0f0f0f'}}, err => {
+        if(err) { fallbackQR(qrHost, uri); return; }
+        qrHost.appendChild(canvas);
+      });
+    } else {
+      // Fallback if qrcode.js didn't load
+      fallbackQR(qrHost, uri);
+    }
+
     if(isMobile) {
       const wcUri = encodeURIComponent(uri);
       const links = [
@@ -2667,23 +2691,19 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
       wcLink.style.cssText = 'display:block;padding:10px;text-align:center;border:1px solid #444;border-radius:8px;font-size:0.7rem;color:#aaa;margin-top:4px;text-decoration:none';
       container.appendChild(wcLink);
       wrap.appendChild(container);
-    } else {
-      // Desktop: generate QR locally
-      if(typeof QRCode !== 'undefined' && QRCode.toCanvas) {
-        const canvas = document.createElement('canvas');
-        canvas.style.cssText = 'border:3px solid #FFE000;display:block;margin:0 auto';
-        QRCode.toCanvas(canvas, uri, {width:220, margin:2, color:{dark:'#FFE000',light:'#0f0f0f'}}, err => {
-          if(err) { fallbackQR(wrap, uri); return; }
-          wrap.appendChild(canvas);
-        });
-      } else {
-        // Fallback if qrcode.js didn't load
-        fallbackQR(wrap, uri);
-      }
     }
+
     // Copy URI button
     const copyBtn = $('wm-copy-uri');
-    if(copyBtn) { copyBtn.style.display='block'; copyBtn.onclick=()=>{navigator.clipboard.writeText(uri).then(()=>{copyBtn.textContent='✓ Copied!';setTimeout(()=>{copyBtn.textContent='📋 Copy URI';},2000);}); }; }
+    if(copyBtn) {
+      copyBtn.style.display='block';
+      copyBtn.onclick=()=>{
+        navigator.clipboard.writeText(uri).then(()=>{
+          copyBtn.textContent='✓ Copied!';
+          setTimeout(()=>{copyBtn.textContent='📋 Copy URI';},2000);
+        });
+      };
+    }
   }
 
   function fallbackQR(wrap, uri) {
@@ -2771,6 +2791,31 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
     window.dispatchEvent(new Event('eip6963:requestProvider'));
   }
 
+  const KNOWN_WALLET_RDNS = new Set(['io.metamask','com.trustwallet.app','com.binance.wallet']);
+
+  function isKnownInjectedProvider(provider) {
+    return !!(provider?.isMetaMask || provider?.isTrust || provider?.isBinance);
+  }
+
+  function getOtherInjectedProvider() {
+    for (const [rdns, entry] of Object.entries(eip6963Providers)) {
+      if(KNOWN_WALLET_RDNS.has(rdns)) continue;
+      const candidate = entry?.provider;
+      if(candidate && typeof candidate.request === 'function') return candidate;
+    }
+
+    if(Array.isArray(window.ethereum?.providers)) {
+      const other = window.ethereum.providers.find(p => p && typeof p.request === 'function' && !isKnownInjectedProvider(p));
+      if(other) return other;
+    }
+
+    if(window.ethereum && typeof window.ethereum.request === 'function' && !isKnownInjectedProvider(window.ethereum)) {
+      return window.ethereum;
+    }
+
+    return null;
+  }
+
   /* ─── legacy provider detection (fallback gdy brak EIP-6963) ── */
   function getLegacyProvider(walletType) {
     switch(walletType) {
@@ -2804,7 +2849,7 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
         }
         return null;
       case 'injected':
-        return window.ethereum || null;
+        return getOtherInjectedProvider();
       default:
         return null;
     }
@@ -2842,9 +2887,10 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
       eth = getLegacyProvider(walletType);
       if(eth) console.log('[Wallet] Legacy provider hit for', walletType);
     }
-    // 3. Ostateczny fallback: window.ethereum (ryzyko złego portfela)
-    if(!eth && walletType==='injected') {
-      eth = window.ethereum;
+    // 3. For "Other" never force window.ethereum fallback (can hijack MetaMask/Trust/Binance)
+    if(walletType==='injected' && !eth) {
+      setStatus('⚠ No OTHER injected wallet detected — use specific wallet button or WalletConnect','err');
+      return;
     }
 
     if(!eth || typeof eth.request !== 'function') {
@@ -2871,12 +2917,35 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
   }
 
   /* ─── WalletConnect ──────────────────────────── */
-  function clearWCSessions() {
+  async function clearWCSessions() {
+    const isWCKey = k => k.startsWith('wc@') || k.startsWith('W3M') || k.startsWith('walletconnect') || k.startsWith('wc2@');
+
     try {
-      Object.keys(localStorage).forEach(k => {
-        if(k.startsWith('wc@')||k.startsWith('W3M')||k.startsWith('walletconnect')||k.startsWith('wc2@')) localStorage.removeItem(k);
-      });
-    } catch(_){}
+      Object.keys(localStorage).forEach(k => { if(isWCKey(k)) localStorage.removeItem(k); });
+    } catch(_) {}
+
+    try {
+      Object.keys(sessionStorage).forEach(k => { if(isWCKey(k)) sessionStorage.removeItem(k); });
+    } catch(_) {}
+
+    try {
+      if(!window.indexedDB || typeof window.indexedDB.databases !== 'function') return;
+      const dbs = await window.indexedDB.databases();
+      await Promise.all((dbs || []).map(db => new Promise(resolve => {
+        const n = db?.name ? String(db.name) : '';
+        if(!n) return resolve();
+        const low = n.toLowerCase();
+        if(!(low.includes('walletconnect') || low.startsWith('wc') || low.includes('w3m'))) return resolve();
+        try {
+          const req = window.indexedDB.deleteDatabase(n);
+          req.onsuccess = () => resolve();
+          req.onerror = () => resolve();
+          req.onblocked = () => resolve();
+        } catch(_) {
+          resolve();
+        }
+      })));
+    } catch(_) {}
   }
 
   async function connectWC() {
@@ -2889,9 +2958,9 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
         setStatus("⚠ WalletConnect failed to load — try Ctrl+F5 or use injected wallet",'err');
         return;
       }
-      // Rozłącz starą sesję i wyczyść localStorage
+      // Rozłącz starą sesję i wyczyść local/session/indexedDB
       if(wcInstance) { try{await wcInstance.disconnect();}catch(_){} wcInstance=null; }
-      clearWCSessions();
+      await clearWCSessions();
 
       // WC 2.10.0 API: chains jest required, brak optionalChains
       const wc = await WCCtor.init({
@@ -2920,6 +2989,7 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
       wc.on('disconnect', () => disconnectWallet());
 
       setStatus("Scan QR code with your mobile wallet…",'warn');
+      showQRView();
       await wc.connect();
 
       const accounts = wc.accounts;
@@ -2978,7 +3048,7 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
   async function disconnectWallet() {
     connected=false; userAddr=null; provider=null; signer=null;
     if(wcInstance) { try{await wcInstance.disconnect();}catch(_){} wcInstance=null; }
-    clearWCSessions();
+    await clearWCSessions();
     if(addrEl)  { addrEl.textContent=''; addrEl.classList.remove('show'); }
     if(discBtn) discBtn.classList.remove('show');
     if(btn)     { btn.textContent='CONNECT WALLET'; btn.className='w-connect-btn'; btn.disabled=false; }
