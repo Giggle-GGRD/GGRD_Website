@@ -1842,7 +1842,7 @@ nav {
   width: min(1160px, 100%);
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(420px, 52%);
+  grid-template-columns: minmax(0, 1fr);
   gap: clamp(1.2rem, 4vw, 3.2rem);
   align-items: end;
   overflow: visible;
@@ -1927,37 +1927,6 @@ nav {
 .hero-btns,
 .hero-stats {
   justify-content: flex-start;
-}
-
-.hero-mascot-wrap {
-  position: relative;
-  justify-self: end;
-  align-self: end;
-  width: min(100%, 620px);
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  overflow: visible;
-  pointer-events: none;
-  z-index: 1;
-  background: transparent !important;
-  border: none !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  padding: 0 !important;
-}
-
-.hero-mascot {
-  display: block;
-  width: min(140%, 868px);
-  max-width: none;
-  flex: 0 0 auto;
-  height: auto;
-  max-height: none;
-  transform: translateX(10%);
-  filter: none;
-  opacity: 0.99;
-  user-select: none;
 }
 
 .stage-indicator {
@@ -2067,13 +2036,10 @@ nav {
 
 @media (max-width: 1100px) {
   .hero-layout {
-    grid-template-columns: minmax(0, 1fr) minmax(320px, 46%);
+    grid-template-columns: minmax(0, 1fr);
     gap: clamp(1rem, 3vw, 2rem);
   }
 
-  .hero-mascot-wrap {
-    width: min(100%, 520px);
-  }
 }
 
 @media (max-width: 860px) {
@@ -2105,23 +2071,7 @@ nav {
     justify-content: center;
   }
 
-  .hero-mascot-wrap {
-    width: min(82vw, 380px);
-    justify-content: center;
-    margin: 0.75rem auto 0;
-    z-index: 2;
-  }
 
-  .hero-mascot {
-    width: 100%;
-    transform: none;
-  }
-}
-
-@media (max-width: 540px) {
-  .hero-mascot-wrap {
-    width: min(92vw, 320px);
-  }
 }
 
 </style>
@@ -2362,10 +2312,6 @@ nav {
     </div>
   </div>
 
-    </div>
-    <div class="hero-mascot-wrap" aria-hidden="true">
-      <!-- Temporary mascot placeholder — replace with final transparent GGRD mascot SVG/WebP asset. -->
-      <img class="hero-mascot" src="public/assets/mascot/ggrd-bear-hero.svg" alt="" loading="lazy" decoding="async">
     </div>
   </div>
 </section>
