@@ -1842,18 +1842,17 @@ nav {
   width: min(1160px, 100%);
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: clamp(1rem, 3vw, 2rem);
-  align-items: center;
+  grid-template-columns: minmax(0, 1fr) minmax(340px, 48%);
+  gap: clamp(1.2rem, 4vw, 3.2rem);
+  align-items: end;
   overflow: visible;
-  padding-right: clamp(250px, 42vw, 560px);
-  min-height: clamp(380px, 48vw, 560px);
 }
 
 .hero-content {
   position: relative;
   z-index: 2;
   max-width: 640px;
+  padding-bottom: 0.8rem;
 }
 
 .hero-badge {
@@ -1931,23 +1930,42 @@ nav {
 }
 
 .hero-mascot-wrap {
-  position: absolute;
-  right: clamp(-72px, -4vw, -20px);
-  bottom: -18px;
-  width: min(52vw, 560px);
+  position: relative;
+  justify-self: end;
+  align-self: end;
+  width: min(100%, 560px);
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
   pointer-events: none;
   z-index: 1;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+.hero-mascot-wrap::before {
+  content: '';
+  position: absolute;
+  inset: auto 8% 10% auto;
+  width: clamp(210px, 34vw, 340px);
+  height: clamp(210px, 34vw, 340px);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,170,152,0.18) 0%, rgba(0,170,152,0.08) 42%, rgba(0,170,152,0) 74%);
+  pointer-events: none;
+  z-index: -1;
 }
 
 .hero-mascot {
-  width: 100%;
+  display: block;
+  width: min(100%, 560px);
   height: auto;
   max-height: none;
+  transform: translateX(4%);
   filter: drop-shadow(0 0 40px rgba(0,170,152,0.25));
-  opacity: 0.98;
+  opacity: 0.99;
   user-select: none;
 }
 
@@ -2058,13 +2076,12 @@ nav {
 
 @media (max-width: 1100px) {
   .hero-layout {
-    padding-right: clamp(220px, 45vw, 470px);
-    min-height: clamp(340px, 52vw, 480px);
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 44%);
+    gap: clamp(1rem, 3vw, 2rem);
   }
 
   .hero-mascot-wrap {
-    right: clamp(-56px, -4vw, -16px);
-    width: min(50vw, 460px);
+    width: min(100%, 460px);
   }
 }
 
@@ -2076,8 +2093,7 @@ nav {
   .hero-layout {
     grid-template-columns: 1fr;
     gap: 1.25rem;
-    padding-right: 0;
-    min-height: auto;
+    align-items: center;
   }
 
   .hero-content {
@@ -2085,6 +2101,7 @@ nav {
     flex-direction: column;
     align-items: center;
     max-width: none;
+    padding-bottom: 0;
   }
 
   .hero-tagline {
@@ -2098,9 +2115,6 @@ nav {
   }
 
   .hero-mascot-wrap {
-    position: relative;
-    right: auto;
-    bottom: auto;
     width: min(72vw, 320px);
     justify-content: center;
     margin: 0.75rem auto 0;
@@ -2109,6 +2123,7 @@ nav {
 
   .hero-mascot {
     width: 100%;
+    transform: none;
   }
 }
 
@@ -2358,7 +2373,7 @@ nav {
 
     </div>
     <div class="hero-mascot-wrap" aria-hidden="true">
-      <!-- Temporary mascot placeholder – replace with final GGRD mascot SVG/WebP asset. -->
+      <!-- Temporary mascot placeholder — replace with final transparent GGRD mascot SVG/WebP asset. -->
       <img class="hero-mascot" src="public/assets/mascot/ggrd-bear-hero.svg" alt="" loading="lazy" decoding="async">
     </div>
   </div>
