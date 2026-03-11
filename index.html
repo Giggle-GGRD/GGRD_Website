@@ -26,15 +26,15 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Giggle Reloaded","alternateName":"GGRD","url":"https://ggrd.me","logo":"https://ggrd.me/img/ggrd-logo-512.png","sameAs":["https://x.com/ContactGiggle","https://t.me/GGRDofficial"]}</script>
 <style>
 :root {
-  --yellow: #FFE000;
-  --green: #00FF41;
-  --red: #FF2233;
-  --bg: #080808;
-  --bg2: #0f0f0f;
-  --bg3: #141414;
-  --white: #F5F5F5;
-  --gray: #888;
-  --border: #222;
+  --yellow: #F3C512;
+  --green: #00AA98;
+  --red: #056F4B;
+  --bg: #0D0C0B;
+  --bg2: #121312;
+  --bg3: #171918;
+  --white: #F7FAFC;
+  --gray: rgba(247,250,252,0.72);
+  --border: rgba(0,170,152,0.18);
   --nav-offset: 60px;
 }
 
@@ -1350,7 +1350,7 @@ footer {
 .w-connect-btn:active { transform: translateY(0); }
 .w-connect-btn:disabled { background: #333; color: #666; cursor: not-allowed; transform: none; box-shadow: none; }
 
-.w-connect-btn.approve-mode { background: #FF8C00; }
+.w-connect-btn.approve-mode { background: var(--yellow); }
 .w-connect-btn.buying-mode { background: var(--green); }
 .w-connect-btn.error-mode { background: var(--red); color: #fff; }
 
@@ -1473,6 +1473,10 @@ footer {
 }
 
 .refund-content {}
+
+.refund-icon {
+  animation: none;
+}
 
 .refund-headline {
   font-family: 'Bangers', cursive;
@@ -1786,7 +1790,7 @@ footer {
   /* Legacy aliases to keep existing component structure untouched */
   --yellow: var(--ggrd-accent);
   --green: var(--ggrd-primary);
-  --red: #D66A58;
+  --red: var(--ggrd-primary);
   --bg: var(--ggrd-bg);
   --bg2: #121312;
   --bg3: #171918;
@@ -1811,8 +1815,8 @@ p {
   line-height: var(--ggrd-lh-body);
 }
 
-body::before { opacity: 0.18; }
-body::after { opacity: 0.22; }
+body::before { opacity: 0.04; }
+body::after { opacity: 0.08; }
 
 a:focus-visible,
 button:focus-visible,
@@ -1853,7 +1857,7 @@ nav {
 }
 
 .nav-cta:hover {
-  background: #f7cf3e !important;
+  background: var(--ggrd-accent) !important;
   color: var(--ggrd-dark) !important;
   box-shadow: 0 0 0 1px var(--ggrd-border-strong), 0 0 16px var(--ggrd-glow);
   transform: translateY(-1px);
@@ -2128,6 +2132,252 @@ nav {
 .addr-link:hover {
   background: var(--ggrd-accent);
   color: var(--ggrd-dark);
+}
+
+.ticker-wrap {
+  background: linear-gradient(90deg, rgba(0,170,152,0.14), rgba(5,111,75,0.16));
+  border-top: 1px solid var(--ggrd-border);
+  border-bottom: 1px solid var(--ggrd-border);
+}
+
+.ticker span {
+  color: var(--ggrd-text);
+}
+
+.widget-section {
+  background: linear-gradient(180deg, rgba(5,111,75,0.16) 0%, var(--ggrd-bg) 52%, var(--ggrd-bg) 100%);
+}
+
+.widget-section::before {
+  background: radial-gradient(ellipse 60% 52% at 50% 48%, rgba(0,170,152,0.1) 0%, transparent 72%);
+}
+
+.widget-wrap {
+  background: rgba(13,12,11,0.92);
+  border: 1px solid var(--ggrd-border);
+}
+
+.widget-header {
+  background: rgba(255,255,255,0.02);
+  border-bottom: 1px solid var(--ggrd-border);
+}
+
+.w-stage-row {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--ggrd-border);
+}
+
+.w-next-price,
+.wf-secure,
+.w-status,
+.w-min-note {
+  color: var(--ggrd-text-muted);
+}
+
+.w-progress-outer {
+  background: rgba(247,250,252,0.08);
+}
+
+.w-progress-inner {
+  background: linear-gradient(90deg, var(--ggrd-primary), var(--ggrd-depth));
+}
+
+.w-progress-inner::after {
+  background: rgba(243,197,18,0.22);
+}
+
+.w-softcap-line {
+  background: rgba(243,197,18,0.65);
+}
+
+.w-softcap-lbl {
+  color: var(--ggrd-accent);
+}
+
+.w-input-box {
+  background: rgba(255,255,255,0.015);
+  border-color: var(--ggrd-border);
+}
+
+.w-input-box:focus-within {
+  border-color: var(--ggrd-primary);
+}
+
+.w-input-field::placeholder {
+  color: rgba(247,250,252,0.4);
+}
+
+.w-connect-btn {
+  background: var(--ggrd-accent);
+  color: var(--ggrd-dark);
+}
+
+.w-connect-btn:hover {
+  box-shadow: 0 8px 22px var(--ggrd-glow);
+}
+
+.w-connect-btn.approve-mode {
+  background: var(--ggrd-accent);
+  color: var(--ggrd-dark);
+}
+
+.w-connect-btn.buying-mode {
+  background: var(--ggrd-primary);
+  color: var(--ggrd-dark);
+}
+
+.w-connect-btn.error-mode {
+  background: var(--ggrd-depth);
+  color: var(--ggrd-text);
+}
+
+.w-steps {
+  border-color: var(--ggrd-border);
+}
+
+.w-step {
+  border-right-color: var(--ggrd-border);
+  color: var(--ggrd-text-muted);
+}
+
+.w-step.active {
+  color: var(--ggrd-accent);
+  background: var(--ggrd-accent-soft);
+}
+
+.w-step.done {
+  color: var(--ggrd-primary);
+}
+
+.widget-footer {
+  border-top: 1px solid var(--ggrd-border);
+}
+
+.w-status.err,
+.w-status.warn {
+  color: var(--ggrd-accent);
+}
+
+.w-network-warn {
+  background: var(--ggrd-accent-soft);
+  border: 1px solid rgba(243,197,18,0.42);
+  color: var(--ggrd-accent);
+}
+
+.w-disconnect-btn {
+  border-color: var(--ggrd-border-strong);
+  color: var(--ggrd-text-muted);
+  background: rgba(247,250,252,0.03);
+}
+
+.w-disconnect-btn:hover {
+  background: rgba(0,170,152,0.14);
+  border-color: var(--ggrd-primary);
+  color: var(--ggrd-text);
+}
+
+.refund-banner {
+  background: linear-gradient(90deg, rgba(5,111,75,0.16) 0%, rgba(13,12,11,0.96) 50%, rgba(5,111,75,0.16) 100%);
+  border-top: 1px solid var(--ggrd-border-strong);
+  border-bottom: 1px solid var(--ggrd-border-strong);
+}
+
+.refund-banner::before {
+  background: repeating-linear-gradient(90deg, transparent, transparent 72px, rgba(0,170,152,0.06) 72px, rgba(0,170,152,0.06) 73px);
+}
+
+.refund-icon {
+  filter: drop-shadow(0 0 20px rgba(0,170,152,0.34));
+}
+
+.refund-icon {
+  animation: none;
+}
+
+.refund-headline {
+  color: var(--ggrd-primary);
+  text-shadow: 0 0 24px rgba(0,170,152,0.28);
+}
+
+.refund-headline span {
+  color: var(--ggrd-accent);
+}
+
+.refund-body,
+.rp-sub {
+  color: var(--ggrd-text-muted);
+}
+
+.refund-body strong,
+.rp-sub strong {
+  color: var(--ggrd-text);
+}
+
+.refund-proof {
+  background: var(--ggrd-bg-soft);
+  border: 1px solid var(--ggrd-border);
+}
+
+.rp-label {
+  color: var(--ggrd-primary);
+}
+
+.rp-value {
+  color: var(--ggrd-accent);
+}
+
+.rpill-red {
+  border-color: var(--ggrd-accent);
+  color: var(--ggrd-accent);
+}
+
+.rpill-green {
+  border-color: var(--ggrd-primary);
+  color: var(--ggrd-primary);
+}
+
+.wm-box {
+  background: var(--ggrd-dark);
+  border-color: var(--ggrd-border-strong);
+  box-shadow: 0 18px 46px rgba(0,0,0,0.62), 0 0 30px rgba(0,170,152,0.14);
+}
+
+.wm-title {
+  color: var(--ggrd-text);
+}
+
+.wm-close:hover {
+  border-color: var(--ggrd-primary);
+  color: var(--ggrd-primary);
+}
+
+.wm-wallet-btn:hover {
+  border-color: var(--ggrd-primary);
+  background: rgba(0,170,152,0.12);
+}
+
+.wm-badge-green {
+  border-color: var(--ggrd-primary);
+  color: var(--ggrd-primary);
+}
+
+.wm-badge-yellow {
+  border-color: var(--ggrd-accent);
+  color: var(--ggrd-accent);
+}
+
+.wm-qr-area canvas {
+  border: 2px solid var(--ggrd-primary);
+}
+
+.wm-back-btn:hover {
+  border-color: var(--ggrd-primary);
+  color: var(--ggrd-primary);
+}
+
+.wm-disclaimer {
+  background: rgba(243,197,18,0.12);
+  border: 1px solid rgba(243,197,18,0.34);
 }
 
 @media (min-width: 1024px) {
@@ -2725,10 +2975,10 @@ nav {
           </div>
         </div>
 
-        <div style="background:rgba(255,34,51,0.08);border:1px solid rgba(255,34,51,0.35);padding:0.5rem 0.75rem;margin-bottom:0.6rem;display:flex;align-items:center;gap:0.55rem">
+        <div style="background:rgba(243,197,18,0.12);border:1px solid rgba(243,197,18,0.38);padding:0.5rem 0.75rem;margin-bottom:0.6rem;display:flex;align-items:center;gap:0.55rem">
           <span style="font-size:1.1rem">🛡️</span>
           <span style="font-size:0.62rem;color:#ccc;line-height:1.38">
-            <strong style="color:var(--red)">SOFTCAP GUARANTEE:</strong> If presale doesn't reach $20,000 USDC — the contract lets you call <code style="color:var(--yellow)">refund()</code> for <strong style="color:var(--white)">100% of your USDC back.</strong>
+            <strong style="color:var(--ggrd-accent)">SOFTCAP GUARANTEE:</strong> If presale doesn't reach $20,000 USDC — the contract lets you call <code style="color:var(--yellow)">refund()</code> for <strong style="color:var(--white)">100% of your USDC back.</strong>
           </span>
         </div>
         <div class="w-min-note">Min <span>50 USDC</span> · Max <span>3,000 USDC</span> per wallet · Claim: 50% immediate + 50% over 60 days</div>
@@ -2759,7 +3009,7 @@ nav {
 
     <p style="text-align:center;font-size:0.68rem;color:#333;margin-top:1.5rem" class="fade-up">
       Presale contract: <a href="https://bscscan.com/address/0xd8983534dd3c369d85127f6C9B85d98768139387" target="_blank" rel="noopener" style="color:#444;text-decoration:underline">0xd8983534...9387 ↗</a>
-      · If softcap not reached → <strong style="color:var(--red)">100% refund</strong>
+      · If softcap not reached → <strong style="color:var(--ggrd-accent)">100% refund</strong>
     </p>
   </div>
 </section>
@@ -2773,18 +3023,18 @@ nav {
       <div class="pie-wrapper fade-up">
         <svg class="pie-svg" viewBox="0 0 200 200">
           <!-- Presale 30% -->
-          <circle r="80" cx="100" cy="100" fill="none" stroke="#FFE000" stroke-width="36"
+          <circle r="80" cx="100" cy="100" fill="none" stroke="#F3C512" stroke-width="36"
             stroke-dasharray="150.8 352.5" stroke-dashoffset="0" transform="rotate(-90 100 100)"/>
           <!-- Staking 30% -->
-          <circle r="80" cx="100" cy="100" fill="none" stroke="#00FF41" stroke-width="36"
+          <circle r="80" cx="100" cy="100" fill="none" stroke="#00AA98" stroke-width="36"
             stroke-dasharray="150.8 352.5" stroke-dashoffset="-150.8" transform="rotate(-90 100 100)"/>
           <!-- Charity 20% -->
-          <circle r="80" cx="100" cy="100" fill="none" stroke="#FF6B35" stroke-width="36"
+          <circle r="80" cx="100" cy="100" fill="none" stroke="#056F4B" stroke-width="36"
             stroke-dasharray="100.5 402.8" stroke-dashoffset="-301.6" transform="rotate(-90 100 100)"/>
           <!-- Ops+LP 20% -->
-          <circle r="80" cx="100" cy="100" fill="none" stroke="#8855FF" stroke-width="36"
+          <circle r="80" cx="100" cy="100" fill="none" stroke="#F7FAFC" stroke-width="36"
             stroke-dasharray="100.5 402.8" stroke-dashoffset="-402.1" transform="rotate(-90 100 100)"/>
-          <circle r="60" cx="100" cy="100" fill="#080808"/>
+          <circle r="60" cx="100" cy="100" fill="#0D0C0B"/>
         </svg>
         <div class="pie-center">
           <span class="pc-num">10M</span>
@@ -2793,36 +3043,36 @@ nav {
       </div>
       <ul class="token-slices fade-up">
         <li class="token-slice">
-          <div class="slice-dot" style="background:#FFE000"></div>
+          <div class="slice-dot" style="background:#F3C512"></div>
           <div class="slice-info">
             <div class="slice-name">PRESALE</div>
             <div class="slice-detail">3,000,000 GGRD · USDC escrow · 4-stage · on-chain cap</div>
           </div>
-          <span class="slice-pct" style="color:#FFE000">30%</span>
+          <span class="slice-pct" style="color:#F3C512">30%</span>
         </li>
         <li class="token-slice">
-          <div class="slice-dot" style="background:#00FF41"></div>
+          <div class="slice-dot" style="background:#00AA98"></div>
           <div class="slice-info">
             <div class="slice-name">STAKING REWARDS</div>
             <div class="slice-detail">3,000,000 GGRD · 10% APR · 730-day program · capped</div>
           </div>
-          <span class="slice-pct" style="color:#00FF41">30%</span>
+          <span class="slice-pct" style="color:#00AA98">30%</span>
         </li>
         <li class="token-slice">
-          <div class="slice-dot" style="background:#FF6B35"></div>
+          <div class="slice-dot" style="background:#056F4B"></div>
           <div class="slice-info">
             <div class="slice-name">CHARITY</div>
             <div class="slice-detail">2,000,000 GGRD · 1yr cliff · 3yr linear vest · 40/30/30 split</div>
           </div>
-          <span class="slice-pct" style="color:#FF6B35">20%</span>
+          <span class="slice-pct" style="color:#056F4B">20%</span>
         </li>
         <li class="token-slice">
-          <div class="slice-dot" style="background:#8855FF"></div>
+          <div class="slice-dot" style="background:#F7FAFC"></div>
           <div class="slice-info">
             <div class="slice-name">OPS + LIQUIDITY</div>
             <div class="slice-detail">2,000,000 GGRD · LP lock 12mo · GGRD/USDC pair</div>
           </div>
-          <span class="slice-pct" style="color:#8855FF">20%</span>
+          <span class="slice-pct" style="color:#F7FAFC">20%</span>
         </li>
       </ul>
     </div>
@@ -3401,8 +3651,8 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
     const qrApi = window.QRCode;
     if(qrApi && typeof qrApi.toCanvas === 'function') {
       const canvas = document.createElement('canvas');
-      canvas.style.cssText = 'border:3px solid #FFE000;display:block;margin:0 auto';
-      qrApi.toCanvas(canvas, uri, {width:220, margin:2, color:{dark:'#FFE000',light:'#0f0f0f'}}, err => {
+      canvas.style.cssText = 'border:2px solid #00AA98;display:block;margin:0 auto';
+      qrApi.toCanvas(canvas, uri, {width:220, margin:2, color:{dark:'#00AA98',light:'#0D0C0B'}}, err => {
         if(err) { fallbackQR(qrHost, uri); return; }
         qrHost.appendChild(canvas);
       });
@@ -3452,9 +3702,9 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
   function fallbackQR(wrap, uri) {
     // External API as last resort
     const img = document.createElement('img');
-    img.style.cssText = 'width:220px;height:220px;border:3px solid #FFE000;display:block;margin:0 auto';
+    img.style.cssText = 'width:220px;height:220px;border:2px solid #00AA98;display:block;margin:0 auto';
     img.alt = 'WalletConnect QR';
-    img.src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(uri)}&bgcolor=0f0f0f&color=FFE000&margin=2`;
+    img.src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(uri)}&bgcolor=0D0C0B&color=00AA98&margin=2`;
     img.onerror = () => { wrap.innerHTML = `<div style="color:#888;font-size:0.65rem;word-break:break-all;padding:1rem;border:1px solid #333;max-width:220px">${uri}</div>`; };
     wrap.appendChild(img);
   }
@@ -3705,7 +3955,7 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
         console.error('[WC] Package state:', typeof WCPkg, WCPkg ? Object.keys(WCPkg) : 'null');
         setStatus("⚠ WalletConnect failed to load — refresh page and try again",'err');
         const wrap = $('wm-qr-img-wrap');
-        if(wrap) wrap.innerHTML = '<div style="color:#f66;font-size:0.72rem;line-height:1.45">WalletConnect library failed to load.<br>Refresh page (Ctrl+F5) and try again.</div>';
+        if(wrap) wrap.innerHTML = '<div style="color:#F3C512;font-size:0.72rem;line-height:1.45">WalletConnect library failed to load.<br>Refresh page (Ctrl+F5) and try again.</div>';
         return;
       }
       // Rozłącz starą sesję i wyczyść local/session/indexedDB
@@ -3789,7 +4039,7 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
       const wrap = $('wm-qr-img-wrap');
       const detail = (msg || 'WalletConnect error').slice(0,140).replace(/[&<>]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[ch]));
       if(wrap) {
-        wrap.innerHTML = '<div style="color:#f66;font-size:0.72rem;line-height:1.45">WalletConnect error.<br>Try again or use another wallet option.<div style="color:#999;font-size:0.65rem;margin-top:0.75rem;word-break:break-word">' + detail + '</div></div>';
+        wrap.innerHTML = '<div style="color:#F3C512;font-size:0.72rem;line-height:1.45">WalletConnect error.<br>Try again or use another wallet option.<div style="color:rgba(247,250,252,0.72);font-size:0.65rem;margin-top:0.75rem;word-break:break-word">' + detail + '</div></div>';
       }
     }
   }
