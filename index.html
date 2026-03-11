@@ -2666,7 +2666,8 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
   }
 
   async function ensureQRCodeLib() {
-    if(typeof QRCode !== 'undefined' && QRCode?.toCanvas) return;
+    const qrApi = window.QRCode;
+    if(qrApi && typeof qrApi.toCanvas === 'function') return;
     qrLibPromise ??= (async () => {
       const urls = [
         'https://cdn.jsdelivr.net/npm/qrcode@1.5.4/lib/browser.min.js',
@@ -2676,7 +2677,8 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
       for(const url of urls) {
         try {
           await loadExternalScript(url);
-          if(typeof QRCode !== 'undefined' && QRCode?.toCanvas) return;
+          const loadedQrApi = window.QRCode;
+          if(loadedQrApi && typeof loadedQrApi.toCanvas === 'function') return;
         } catch(e) {
           lastErr = e;
         }
@@ -2726,10 +2728,11 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
     wrap.appendChild(qrHost);
 
     // Render QR on both desktop and mobile; mobile also gets deep links below.
-    if(typeof QRCode !== 'undefined' && QRCode.toCanvas) {
+    const qrApi = window.QRCode;
+    if(qrApi && typeof qrApi.toCanvas === 'function') {
       const canvas = document.createElement('canvas');
       canvas.style.cssText = 'border:3px solid #FFE000;display:block;margin:0 auto';
-      QRCode.toCanvas(canvas, uri, {width:220, margin:2, color:{dark:'#FFE000',light:'#0f0f0f'}}, err => {
+      qrApi.toCanvas(canvas, uri, {width:220, margin:2, color:{dark:'#FFE000',light:'#0f0f0f'}}, err => {
         if(err) { fallbackQR(qrHost, uri); return; }
         qrHost.appendChild(canvas);
       });
