@@ -35,6 +35,7 @@
   --white: #F5F5F5;
   --gray: #888;
   --border: #222;
+  --nav-offset: 60px;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -153,7 +154,7 @@ nav {
     flex-wrap: wrap;
     gap: 0.5rem 0.8rem;
   }
-  .ticker-wrap { margin-top: 110px; }
+  .ticker-wrap { margin-top: var(--nav-offset); }
 }
 
 /* ===== TICKER ===== */
@@ -161,7 +162,7 @@ nav {
   background: var(--yellow);
   overflow: hidden;
   padding: 8px 0;
-  margin-top: 60px;
+  margin-top: var(--nav-offset);
   position: relative;
   z-index: 100;
 }
@@ -1040,9 +1041,41 @@ footer {
   .footer-inner { grid-template-columns: 1fr; }
   .footer-links { align-items: flex-start; }
   .footer-copy { text-align: left; }
-  .countdown { gap: 0.8rem; }
+  .countdown { gap: 0.8rem; flex-wrap: wrap; }
   .cd-num { font-size: 2.2rem; min-width: 50px; }
+  .cd-sep { display: none; }
   .hero-stats { gap: 1.5rem; }
+}
+
+@media (max-width: 768px) {
+  section { padding: 4rem 1.25rem; }
+  .widget-section { padding: 3.5rem 1rem 4rem; }
+  .charity-vesting { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 540px) {
+  .w-stage-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+  .w-price-info { text-align: left; }
+  .w-input-grid { grid-template-columns: 1fr; }
+  .widget-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.45rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .hero h1 { font-size: clamp(2.5rem, 16vw, 4rem); letter-spacing: 2px; }
+  .countdown-box { padding: 1rem 0.75rem; }
+  .countdown-box::before { font-size: 0.55rem; letter-spacing: 1px; }
+  .cd-num { font-size: 1.8rem; min-width: 42px; }
+  .widget-header, .widget-body, .widget-footer { padding-left: 0.85rem; padding-right: 0.85rem; }
+  .w-connect-btn { font-size: 1.2rem; letter-spacing: 2px; }
+  .w-step { font-size: 0.52rem; padding-left: 0.25rem; padding-right: 0.25rem; }
 }
 /* ===== PRESALE WIDGET ===== */
 .widget-section {
@@ -2472,6 +2505,17 @@ function updateStage() {
   document.getElementById('liveStagePrice').textContent = 'ENDED';
 }
 updateStage();
+
+function syncTickerOffset() {
+  const nav = document.querySelector('nav');
+  if (!nav) return;
+  const navHeight = Math.ceil(nav.getBoundingClientRect().height || 60);
+  document.documentElement.style.setProperty('--nav-offset', `${Math.max(navHeight, 60)}px`);
+}
+
+syncTickerOffset();
+window.addEventListener('load', syncTickerOffset);
+window.addEventListener('resize', syncTickerOffset);
 
 // ===== SCROLL FADE =====
 const observer = new IntersectionObserver((entries) => {
