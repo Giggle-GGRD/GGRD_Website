@@ -1013,682 +1013,93 @@ footer {
   .cd-num { font-size: 2.2rem; min-width: 50px; }
   .hero-stats { gap: 1.5rem; }
 }
-/* ===== PRESALE WIDGET ===== */
-.widget-section {
-  background: linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%);
-  padding: 4rem 2rem 5rem;
-  position: relative;
-  overflow: hidden;
-}
-
-.widget-section::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 60% 50% at 50% 50%, rgba(255,224,0,0.05) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.widget-wrap {
-  max-width: 480px;
-  margin: 0 auto;
-  background: #0d0d0d;
-  border: 1px solid rgba(255,224,0,0.4);
-  box-shadow: 0 0 40px rgba(255,224,0,0.08), 0 0 80px rgba(0,0,0,0.6);
-  position: relative;
-}
-
-.widget-wrap::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--yellow), var(--green), var(--yellow));
-  background-size: 200%;
-  animation: shimmer 3s linear infinite;
-}
-
+/* ===== COMPACT PRESALE HERO WIDGET ===== */
+.hw { max-width:390px; margin:0 auto 2rem; background:linear-gradient(165deg,rgba(15,15,15,.95),rgba(8,8,8,.98)); border:1px solid rgba(255,224,0,.25); border-radius:22px; padding:1.4rem 1.5rem 1.2rem; box-shadow:0 0 60px rgba(255,224,0,.06),0 8px 32px rgba(0,0,0,.5); position:relative; overflow:hidden; backdrop-filter:blur(12px); }
+.hw::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--yellow),var(--green),var(--yellow)); background-size:200%; animation:shimmer 3s linear infinite; border-radius:22px 22px 0 0; }
 @keyframes shimmer { from{background-position:0%} to{background-position:200%} }
 
-.widget-header {
-  background: rgba(255,224,0,0.06);
-  border-bottom: 1px solid rgba(255,224,0,0.15);
-  padding: 1.2rem 1.5rem;
-  text-align: center;
-}
-
-.widget-title {
-  font-family: 'Bangers', cursive;
-  font-size: 1.5rem;
-  letter-spacing: 3px;
-  color: var(--yellow);
-  margin-bottom: 0.2rem;
-}
-
-.widget-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 0.62rem;
-  letter-spacing: 2px;
-  color: var(--green);
-  text-transform: uppercase;
-}
-
-.w-dot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--green);
-  animation: blink 1s ease-in-out infinite;
-}
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
-
-.widget-body { padding: 1.5rem; }
-
-/* Stage + Price row */
-.w-stage-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1.2rem;
-  padding: 0.8rem 1rem;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.06);
-}
-
-.w-stage-info .w-stage-lbl {
-  font-size: 0.58rem;
-  letter-spacing: 2px;
-  color: var(--gray);
-  text-transform: uppercase;
-}
-
-.w-stage-info .w-stage-val {
-  font-family: 'Bangers', cursive;
-  font-size: 1.3rem;
-  letter-spacing: 1px;
-  color: var(--green);
-}
-
-.w-price-info { text-align: right; }
-
-.w-price-info .w-price-lbl {
-  font-size: 0.58rem;
-  letter-spacing: 2px;
-  color: var(--gray);
-  text-transform: uppercase;
-}
-
-.w-price-info .w-price-val {
-  font-family: 'Bangers', cursive;
-  font-size: 1.3rem;
-  letter-spacing: 1px;
-  color: var(--yellow);
-}
-
-.w-next-price {
-  font-size: 0.6rem;
-  color: #555;
-}
-
-/* Progress */
-.w-raised-row {
-  margin-bottom: 0.6rem;
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.68rem;
-  color: var(--gray);
-}
-
-.w-raised-row strong { color: var(--white); }
-
-.w-progress-outer {
-  background: #1a1a1a;
-  height: 10px;
-  border-radius: 0;
-  margin-bottom: 1.4rem;
-  position: relative;
-  overflow: hidden;
-}
-
-.w-progress-inner {
-  height: 100%;
-  background: linear-gradient(90deg, var(--yellow), var(--green));
-  transition: width 1s ease;
-  position: relative;
-  min-width: 4px;
-}
-
-.w-progress-inner::after {
-  content: '';
-  position: absolute;
-  right: 0; top: 0; bottom: 0;
-  width: 20px;
-  background: rgba(255,255,255,0.3);
-  filter: blur(4px);
-  animation: progress-glow 1.5s ease-in-out infinite;
-}
-@keyframes progress-glow { 0%,100%{opacity:0.4} 50%{opacity:1} }
-
-.w-softcap-line {
-  position: absolute;
-  top: 0; bottom: 0;
-  width: 2px;
-  background: rgba(255,34,51,0.6);
-  left: 64%; /* 20000/31250 = 64% */
-}
-
-.w-softcap-lbl {
-  position: absolute;
-  top: -16px;
-  left: 64%;
-  transform: translateX(-50%);
-  font-size: 0.52rem;
-  color: var(--red);
-  letter-spacing: 1px;
-  white-space: nowrap;
-}
-
-/* Input area */
-.w-input-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin-bottom: 1rem;
-}
-
-.w-input-box {
-  background: #111;
-  border: 1px solid #222;
-  padding: 0.8rem;
-  transition: border-color 0.2s;
-  position: relative;
-}
-
-.w-input-box:focus-within { border-color: var(--yellow); }
-
-.w-input-lbl {
-  font-size: 0.58rem;
-  letter-spacing: 1.5px;
-  color: var(--gray);
-  text-transform: uppercase;
-  display: block;
-  margin-bottom: 4px;
-}
-
-.w-input-field {
-  background: none;
-  border: none;
-  outline: none;
-  color: var(--white);
-  font-family: 'Courier Prime', monospace;
-  font-size: 1.1rem;
-  font-weight: 700;
-  width: 100%;
-}
-
-.w-input-field::placeholder { color: #333; }
-
-.w-input-currency {
-  font-size: 0.65rem;
-  color: var(--yellow);
-  font-weight: 700;
-  letter-spacing: 1px;
-  margin-top: 2px;
-  display: block;
-}
-
-.w-output-val {
-  font-family: 'Courier Prime', monospace;
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--green);
-}
-
-.w-min-note {
-  font-size: 0.62rem;
-  color: #444;
-  text-align: center;
-  margin-bottom: 1rem;
-}
-.w-min-note span { color: var(--gray); }
-
-/* Wallet / Buy button */
-.w-connect-btn {
-  width: 100%;
-  background: var(--yellow);
-  color: #000;
-  font-family: 'Bangers', cursive;
-  font-size: 1.5rem;
-  letter-spacing: 3px;
-  padding: 14px 20px;
-  border: none;
-  cursor: pointer;
-  display: block;
-  text-align: center;
-  transition: transform 0.1s, box-shadow 0.1s, background 0.2s;
-  position: relative;
-  overflow: hidden;
-}
-
-.w-connect-btn::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
-  transform: translateX(-100%);
-  transition: transform 0.4s;
-}
-
-.w-connect-btn:hover::before { transform: translateX(100%); }
-.w-connect-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,224,0,0.3); }
-.w-connect-btn:active { transform: translateY(0); }
-.w-connect-btn:disabled { background: #333; color: #666; cursor: not-allowed; transform: none; box-shadow: none; }
-
-.w-connect-btn.approve-mode { background: #FF8C00; }
-.w-connect-btn.buying-mode { background: var(--green); }
-.w-connect-btn.error-mode { background: var(--red); color: #fff; }
-
-/* Steps */
-.w-steps {
-  display: flex;
-  justify-content: center;
-  gap: 0;
-  margin-top: 1.2rem;
-  border: 1px solid #1a1a1a;
-}
-
-.w-step {
-  flex: 1;
-  padding: 0.6rem 0;
-  text-align: center;
-  font-size: 0.58rem;
-  letter-spacing: 1px;
-  color: #333;
-  text-transform: uppercase;
-  border-right: 1px solid #1a1a1a;
-  transition: color 0.3s, background 0.3s;
-}
-.w-step:last-child { border-right: none; }
-.w-step.active { color: var(--yellow); background: rgba(255,224,0,0.05); }
-.w-step.done { color: var(--green); }
-
-/* Footer info */
-.widget-footer {
-  border-top: 1px solid #1a1a1a;
-  padding: 0.8rem 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.wf-claim {
-  font-size: 0.62rem;
-  color: var(--gray);
-}
-.wf-claim strong { color: var(--white); }
-
-.wf-secure {
-  font-size: 0.58rem;
-  color: #333;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-/* Status message */
-.w-status {
-  font-size: 0.7rem;
-  text-align: center;
-  min-height: 1.2rem;
-  margin: 0.5rem 0;
-  color: var(--gray);
-  font-family: 'Courier Prime', monospace;
-}
-.w-status.ok  { color: var(--green); }
-.w-status.err { color: var(--red); }
-.w-status.warn { color: var(--yellow); }
-
-/* Network warning */
-.w-network-warn {
-  background: rgba(255,34,51,0.1);
-  border: 1px solid rgba(255,34,51,0.3);
-  padding: 0.6rem 1rem;
-  font-size: 0.68rem;
-  color: var(--red);
-  text-align: center;
-  display: none;
-  margin-bottom: 0.8rem;
-}
-
-
-/* ===== REFUND BANNER ===== */
-.refund-banner {
-  background: linear-gradient(90deg, #0a0a0a 0%, #110000 50%, #0a0a0a 100%);
-  border-top: 2px solid var(--red);
-  border-bottom: 2px solid var(--red);
-  padding: 0;
-  overflow: hidden;
-  position: relative;
-}
-
-.refund-banner::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    90deg,
-    transparent,
-    transparent 60px,
-    rgba(255,34,51,0.03) 60px,
-    rgba(255,34,51,0.03) 61px
-  );
-  pointer-events: none;
-}
-
-.refund-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 2.5rem 2rem;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 2rem;
-  align-items: center;
-}
-
-.refund-icon {
-  font-size: 4rem;
-  line-height: 1;
-  filter: drop-shadow(0 0 20px rgba(255,34,51,0.6));
-  animation: icon-pulse 2s ease-in-out infinite;
-}
-@keyframes icon-pulse {
-  0%,100% { transform: scale(1); filter: drop-shadow(0 0 20px rgba(255,34,51,0.6)); }
-  50%      { transform: scale(1.08); filter: drop-shadow(0 0 35px rgba(255,34,51,0.9)); }
-}
-
-.refund-content {}
-
-.refund-headline {
-  font-family: 'Bangers', cursive;
-  font-size: clamp(1.8rem, 4vw, 3rem);
-  letter-spacing: 4px;
-  color: var(--red);
-  line-height: 1;
-  margin-bottom: 0.4rem;
-  text-shadow: 0 0 30px rgba(255,34,51,0.4);
-}
-
-.refund-headline span {
-  color: var(--yellow);
-}
-
-.refund-body {
-  font-size: 0.88rem;
-  color: #aaa;
-  line-height: 1.7;
-  max-width: 580px;
-}
-
-.refund-body strong { color: var(--white); }
-
-.refund-proof {
-  background: rgba(255,34,51,0.07);
-  border: 1px solid rgba(255,34,51,0.3);
-  padding: 1.2rem 1.5rem;
-  min-width: 200px;
-  text-align: center;
-}
-
-.rp-label {
-  font-size: 0.58rem;
-  letter-spacing: 2px;
-  color: var(--red);
-  text-transform: uppercase;
-  margin-bottom: 0.4rem;
-}
-
-.rp-val {
-  font-family: 'Bangers', cursive;
-  font-size: 2.8rem;
-  color: var(--white);
-  line-height: 1;
-  letter-spacing: 2px;
-}
-
-.rp-sub {
-  font-size: 0.68rem;
-  color: #666;
-  margin-top: 0.2rem;
-}
-
-.rp-sub strong { color: var(--green); }
-
-.refund-pills {
-  display: flex;
-  gap: 0.6rem;
-  flex-wrap: wrap;
-  margin-top: 0.8rem;
-}
-
-.rpill {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 0.65rem;
-  letter-spacing: 1px;
-  font-weight: 700;
-  text-transform: uppercase;
-  padding: 4px 10px;
-  border: 1px solid;
-}
-
-.rpill-red   { border-color: var(--red);   color: var(--red); }
-.rpill-green { border-color: var(--green); color: var(--green); }
-.rpill-white { border-color: #444;         color: #888; }
-
-@media (max-width: 768px) {
-  .refund-inner {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-    text-align: center;
-  }
-  .refund-icon { font-size: 3rem; }
-  .refund-pills { justify-content: center; }
-  .refund-proof { min-width: 0; }
-}
-
-
-/* ===== WALLET MODAL ===== */
-.wm-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.85);
-  backdrop-filter: blur(6px);
-  z-index: 10000;
-  align-items: center;
-  justify-content: center;
-}
-.wm-overlay.open { display: flex; }
-
-.wm-box {
-  background: #0f0f0f;
-  border: 1px solid rgba(255,224,0,0.35);
-  width: 100%;
-  max-width: 380px;
-  margin: 1rem;
-  position: relative;
-  animation: wm-in 0.2s ease;
-}
-@keyframes wm-in { from{transform:scale(0.94);opacity:0} to{transform:scale(1);opacity:1} }
-
-.wm-header {
-  padding: 1.2rem 1.5rem 1rem;
-  border-bottom: 1px solid #1a1a1a;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.wm-title {
-  font-family: 'Bangers', cursive;
-  font-size: 1.4rem;
-  letter-spacing: 3px;
-  color: var(--yellow);
-}
-.wm-close {
-  background: none;
-  border: 1px solid #333;
-  color: #666;
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
-  font-size: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: border-color 0.2s, color 0.2s;
-}
-.wm-close:hover { border-color: var(--red); color: var(--red); }
-
-.wm-body { padding: 1rem 1.2rem 1.5rem; }
-
-.wm-subtitle {
-  font-size: 0.68rem;
-  color: var(--gray);
-  letter-spacing: 1px;
-  margin-bottom: 1rem;
-  text-transform: uppercase;
-}
-
-.wm-wallets {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 1rem;
-}
-
-.wm-wallet-btn {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 0.9rem 1rem;
-  background: #141414;
-  border: 1px solid #222;
-  cursor: pointer;
-  transition: border-color 0.15s, background 0.15s;
-  width: 100%;
-  text-align: left;
-}
-.wm-wallet-btn:hover { border-color: var(--yellow); background: #1a1800; }
-.wm-wallet-btn:active { transform: scale(0.99); }
-
-.wm-wallet-icon {
-  width: 38px;
-  height: 38px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.4rem;
-  flex-shrink: 0;
-}
-
-.wm-wallet-info {}
-.wm-wallet-name {
-  font-family: 'Bangers', cursive;
-  font-size: 1.1rem;
-  letter-spacing: 1px;
-  color: var(--white);
-}
-.wm-wallet-desc {
-  font-size: 0.62rem;
-  color: var(--gray);
-  letter-spacing: 0.5px;
-}
-
-.wm-badge {
-  margin-left: auto;
-  font-size: 0.55rem;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  border: 1px solid;
-  padding: 2px 7px;
-  white-space: nowrap;
-}
-.wm-badge-green { border-color: var(--green); color: var(--green); }
-.wm-badge-yellow { border-color: var(--yellow); color: var(--yellow); }
-
-.wm-footer {
-  font-size: 0.6rem;
-  color: #333;
-  text-align: center;
-  border-top: 1px solid #1a1a1a;
-  padding-top: 0.8rem;
-}
-.wm-footer a { color: #444; }
-
-/* WC QR area */
-.wm-qr-area {
-  display: none;
-  text-align: center;
-  padding: 0.5rem 0;
-}
-.wm-qr-area.show { display: block; }
-.wm-qr-area canvas { border: 3px solid var(--yellow); }
-.wm-qr-uri {
-  font-size: 0.58rem;
-  color: #444;
-  word-break: break-all;
-  margin-top: 0.5rem;
-}
-.wm-back-btn {
-  background: none;
-  border: 1px solid #333;
-  color: var(--gray);
-  padding: 5px 14px;
-  cursor: pointer;
-  font-size: 0.7rem;
-  margin-top: 0.7rem;
-  letter-spacing: 1px;
-}
-.wm-back-btn:hover { border-color: var(--yellow); color: var(--yellow); }
-
-/* Widget button states */
-.w-connected-addr {
-  font-size: 0.68rem;
-  color: var(--green);
-  text-align: center;
-  margin-bottom: 0.5rem;
-  font-family: 'Courier Prime', monospace;
-  display: none;
-}
-.w-connected-addr.show { display: block; }
-
-
-/* Disconnect button */
-.w-disconnect-btn {
-  display: none;
-  background: rgba(255,34,51,0.08);
-  border: 1px solid rgba(255,34,51,0.5);
-  color: #FF6677;
-  font-family: 'Bangers', cursive;
-  font-size: 1rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  padding: 10px 20px;
-  cursor: pointer;
-  margin-top: 10px;
-  transition: background 0.15s, border-color 0.15s, color 0.15s;
-  width: 100%;
-}
-.w-disconnect-btn:hover {
-  background: rgba(255,34,51,0.2);
-  border-color: var(--red);
-  color: #fff;
-}
-.w-disconnect-btn.show { display: block; }
+.hw-badge { display:inline-flex; align-items:center; gap:5px; font-size:.55rem; letter-spacing:2px; color:var(--green); text-transform:uppercase; margin-bottom:.6rem; }
+.hw-dot { width:6px; height:6px; border-radius:50%; background:var(--green); animation:blink 1s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
+
+.hw-title { font-family:'Bangers',cursive; font-size:1.35rem; letter-spacing:2px; color:var(--yellow); margin-bottom:.8rem; line-height:1.2; }
+
+/* countdown */
+.hw-cd { display:flex; justify-content:center; gap:6px; margin-bottom:.9rem; }
+.hw-cd-unit { text-align:center; }
+.hw-cd-num { display:block; background:rgba(255,224,0,.08); border:1px solid rgba(255,224,0,.2); border-radius:8px; padding:6px 10px; font-family:'Black Han Sans',sans-serif; font-size:1.15rem; color:var(--yellow); min-width:42px; letter-spacing:1px; }
+.hw-cd-lbl { display:block; font-size:.45rem; color:var(--gray); text-transform:uppercase; letter-spacing:1.5px; margin-top:3px; }
+.hw-cd-sep { color:rgba(255,224,0,.3); font-size:1.1rem; padding-top:6px; }
+
+/* raised + progress */
+.hw-raised { display:flex; justify-content:space-between; font-size:.62rem; color:var(--gray); margin-bottom:5px; }
+.hw-raised strong { color:var(--white); }
+.hw-pbar { background:#1a1a1a; height:8px; border-radius:4px; margin-bottom:4px; position:relative; overflow:hidden; }
+.hw-pfill { height:100%; background:linear-gradient(90deg,var(--yellow),var(--green)); border-radius:4px; transition:width 1s ease; min-width:3px; position:relative; }
+.hw-pfill::after { content:''; position:absolute; right:0; top:0; bottom:0; width:16px; background:rgba(255,255,255,.3); filter:blur(3px); animation:pglow 1.5s ease-in-out infinite; }
+@keyframes pglow { 0%,100%{opacity:.4} 50%{opacity:1} }
+.hw-pct-row { display:flex; justify-content:space-between; font-size:.5rem; color:#444; margin-bottom:.7rem; }
+
+/* stage + price row */
+.hw-meta { display:flex; justify-content:space-between; align-items:center; padding:.55rem .7rem; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.06); border-radius:10px; margin-bottom:.7rem; }
+.hw-meta-lbl { font-size:.48rem; color:var(--gray); text-transform:uppercase; letter-spacing:1.5px; }
+.hw-meta-val { font-family:'Bangers',cursive; font-size:1rem; letter-spacing:1px; }
+.hw-stage-val { color:var(--green); }
+.hw-price-val { color:var(--yellow); }
+.hw-next { font-size:.5rem; color:#555; }
+
+/* input */
+.hw-input-row { display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:.6rem; }
+.hw-ibox { background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:10px; padding:.5rem .6rem; }
+.hw-ibox:focus-within { border-color:var(--yellow); }
+.hw-ilbl { font-size:.45rem; color:var(--gray); text-transform:uppercase; letter-spacing:1px; display:block; margin-bottom:2px; }
+.hw-ifield { background:none; border:none; color:var(--white); font-family:'Courier Prime',monospace; font-size:.85rem; font-weight:700; width:100%; outline:none; }
+.hw-ifield::placeholder { color:#444; }
+.hw-oval { font-family:'Courier Prime',monospace; font-size:.85rem; font-weight:700; color:var(--yellow); }
+.hw-icur { font-size:.48rem; color:#555; display:block; margin-top:1px; }
+
+/* network warn */
+.hw-nwarn { display:none; background:rgba(255,34,51,.1); border:1px solid rgba(255,34,51,.3); padding:.4rem .6rem; border-radius:8px; font-size:.6rem; color:var(--red); text-align:center; margin-bottom:.5rem; }
+.hw-nwarn.show { display:block; }
+
+/* status + address */
+.hw-addr { font-size:.55rem; color:var(--green); text-align:center; margin-bottom:4px; opacity:0; transition:opacity .3s; }
+.hw-addr.show { opacity:1; }
+.hw-status { font-size:.58rem; color:var(--gray); text-align:center; margin-bottom:.5rem; min-height:1em; }
+.hw-status.ok { color:var(--green); }
+.hw-status.warn { color:var(--yellow); }
+.hw-status.err { color:var(--red); }
+
+/* CTA button */
+.hw-btn { display:block; width:100%; padding:12px; background:linear-gradient(135deg,#FFE000,#FFC107); color:#000; font-family:'Bangers',cursive; font-size:1.05rem; letter-spacing:2px; border:none; border-radius:12px; cursor:pointer; font-weight:700; text-transform:uppercase; box-shadow:0 0 20px rgba(255,224,0,.2); transition:all .2s; }
+.hw-btn:hover { transform:translateY(-1px); box-shadow:0 0 30px rgba(255,224,0,.35); }
+.hw-btn:disabled { opacity:.5; cursor:not-allowed; transform:none; box-shadow:none; }
+.hw-btn.buying-mode { background:linear-gradient(135deg,var(--green),#00cc33); color:#000; box-shadow:0 0 20px rgba(0,255,65,.2); }
+
+.hw-disc { display:none; background:none; border:1px solid rgba(255,34,51,.4); color:var(--red); font-size:.55rem; padding:4px 12px; border-radius:6px; cursor:pointer; margin:6px auto 0; }
+.hw-disc.show { display:block; }
+
+/* steps */
+.hw-steps { display:flex; justify-content:center; gap:8px; margin-top:8px; font-size:.48rem; color:#444; letter-spacing:1px; }
+.hw-steps .active { color:var(--yellow); }
+.hw-steps .done { color:var(--green); }
+
+/* helper line */
+.hw-foot { text-align:center; margin-top:8px; font-size:.5rem; color:#444; }
+.hw-foot a { color:#555; text-decoration:underline; }
+
+/* refund note */
+.hw-refund { display:flex; align-items:center; gap:6px; background:rgba(255,34,51,.06); border:1px solid rgba(255,34,51,.2); border-radius:8px; padding:.4rem .6rem; margin-bottom:.5rem; font-size:.55rem; color:#aaa; }
+
+/* responsive */
+@media(max-width:500px) {
+  .hw { max-width:100%; margin-left:1rem; margin-right:1rem; border-radius:16px; padding:1.2rem 1rem 1rem; }
+  .hw-cd-num { font-size:1rem; min-width:36px; padding:5px 8px; }
+  .hw-title { font-size:1.15rem; }
+}
+
+/* keep old modal + wallet list CSS working */
+.w-network-warn { display:none; }
 
 </style>
 <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
@@ -1861,6 +1272,74 @@ footer {
   </div>
 
   <div class="hero-badge" role="status">🔴 PRESALE ACTIVE — BSC MAINNET</div>
+  <!-- PRESALE HERO WIDGET -->
+  <div class="hw" id="hw-widget">
+    <div class="hw-badge"><span class="hw-dot"></span> PRESALE LIVE · BSC MAINNET</div>
+    <div class="hw-title">BUY $GGRD IN PRESALE 🚀</div>
+
+    <!-- Countdown -->
+    <div class="hw-cd">
+      <div class="hw-cd-unit"><span class="hw-cd-num" id="cd-days">--</span><span class="hw-cd-lbl">Days</span></div>
+      <span class="hw-cd-sep">:</span>
+      <div class="hw-cd-unit"><span class="hw-cd-num" id="cd-hours">--</span><span class="hw-cd-lbl">Hours</span></div>
+      <span class="hw-cd-sep">:</span>
+      <div class="hw-cd-unit"><span class="hw-cd-num" id="cd-mins">--</span><span class="hw-cd-lbl">Mins</span></div>
+      <span class="hw-cd-sep">:</span>
+      <div class="hw-cd-unit"><span class="hw-cd-num" id="cd-secs">--</span><span class="hw-cd-lbl">Secs</span></div>
+    </div>
+
+    <!-- Raised + Progress -->
+    <div class="hw-raised">
+      <span>Raised: <strong id="w-raised-val">$0</strong></span>
+      <span><strong id="w-pct">0%</strong></span>
+    </div>
+    <div class="hw-pbar"><div class="hw-pfill" id="w-progress" style="width:0.5%"></div></div>
+    <div class="hw-pct-row"><span>$0</span><span>Softcap $20k</span><span>Hardcap $31,250</span></div>
+
+    <!-- Stage + Price -->
+    <div class="hw-meta">
+      <div><div class="hw-meta-lbl">Stage</div><div class="hw-meta-val hw-stage-val" id="w-stage-val">—</div></div>
+      <div style="text-align:right"><div class="hw-meta-lbl">Price</div><div class="hw-meta-val hw-price-val" id="w-price-val">—</div><div class="hw-next" id="w-next-price"></div></div>
+    </div>
+
+    <!-- Input -->
+    <div class="hw-input-row">
+      <div class="hw-ibox">
+        <span class="hw-ilbl">You Pay</span>
+        <input class="hw-ifield" id="w-usdc-in" type="number" min="50" max="3000" step="10" placeholder="100">
+        <span class="hw-icur">USDC (BSC)</span>
+      </div>
+      <div class="hw-ibox">
+        <span class="hw-ilbl">You Receive</span>
+        <div class="hw-oval" id="w-ggrd-out">0.00</div>
+        <span class="hw-icur">GGRD</span>
+      </div>
+    </div>
+
+    <!-- Network warning -->
+    <div class="hw-nwarn" id="w-network-warn">⚠ Wrong network <button id="w-switch-bsc-btn" style="background:var(--yellow);color:#000;border:none;padding:3px 10px;border-radius:4px;font-weight:700;font-size:.55rem;cursor:pointer;margin-left:4px">Switch to BSC</button></div>
+
+    <!-- Refund note -->
+    <div class="hw-refund"><span>🛡️</span><span><strong style="color:var(--red)">SOFTCAP GUARANTEE:</strong> Miss $20k → 100% refund on-chain</span></div>
+
+    <!-- Address + Status -->
+    <div class="hw-addr" id="w-addr"></div>
+    <div class="hw-status" id="w-status">Connect wallet to buy</div>
+
+    <!-- CTA -->
+    <button class="hw-btn" id="w-btn">CONNECT WALLET</button>
+    <button class="hw-disc" id="w-disconnect-btn">✕ Disconnect</button>
+
+    <!-- Steps -->
+    <div class="hw-steps">
+      <span id="ws-1" class="active">1. Connect</span>
+      <span id="ws-2">2. Approve</span>
+      <span id="ws-3">3. Buy</span>
+    </div>
+
+    <div class="hw-foot">Min 50 USDC · Max 3,000 · <a href="https://bscscan.com/address/0xd8983534dd3c369d85127f6C9B85d98768139387" target="_blank" rel="noopener">Contract ↗</a></div>
+  </div>
+
 
   <h1>
     <span class="glitch" data-text="GIGGLE">GIGGLE</span><br>
@@ -1870,29 +1349,7 @@ footer {
   <p class="hero-sub">$GGRD · BNB Smart Chain</p>
   <p class="hero-tagline">The meme coin that actually <span>does something</span>. Fixed supply. USDC presale. Charity vesting locked on-chain. No funny business — just funny.</p>
 
-  <div class="countdown-box">
-    <div class="countdown">
-      <div class="cd-unit">
-        <span class="cd-num" id="cd-days">--</span>
-        <span class="cd-label">days</span>
-      </div>
-      <span class="cd-sep">:</span>
-      <div class="cd-unit">
-        <span class="cd-num" id="cd-hours">--</span>
-        <span class="cd-label">hours</span>
-      </div>
-      <span class="cd-sep">:</span>
-      <div class="cd-unit">
-        <span class="cd-num" id="cd-mins">--</span>
-        <span class="cd-label">mins</span>
-      </div>
-      <span class="cd-sep">:</span>
-      <div class="cd-unit">
-        <span class="cd-num" id="cd-secs">--</span>
-        <span class="cd-label">secs</span>
-      </div>
-    </div>
-  </div>
+
 
   <div class="hero-btns">
     <a class="btn-primary" href="#buy">
@@ -1969,110 +1426,8 @@ footer {
 </section>
 
 
-<!-- PRESALE WIDGET -->
-<section class="widget-section" id="buy">
-  <div class="section-inner">
-    <h2 class="section-title fade-up">BUY $GGRD NOW 🚀</h2>
-    <p class="section-sub fade-up">Direct on-chain purchase. USDC only. Your wallet, your keys, your GGRD.</p>
-    <div class="widget-wrap fade-up">
-
-      <div class="widget-header">
-        <div class="widget-title">BUY $GGRD PRESALE</div>
-        <div class="widget-badge">
-          <span class="w-dot"></span>
-          PRESALE LIVE · BSC MAINNET
-        </div>
-      </div>
-
-      <div class="widget-body">
-
-        <!-- Stage + Price -->
-        <div class="w-stage-row">
-          <div class="w-stage-info">
-            <div class="w-stage-lbl">Current Stage</div>
-            <div class="w-stage-val" id="w-stage-val">—</div>
-          </div>
-          <div class="w-price-info">
-            <div class="w-price-lbl">Price</div>
-            <div class="w-price-val" id="w-price-val">—</div>
-            <div class="w-next-price" id="w-next-price"></div>
-          </div>
-        </div>
-
-        <!-- Progress -->
-        <div style="position:relative;margin-bottom:1.5rem">
-          <div class="w-softcap-lbl">SOFTCAP</div>
-          <div class="w-raised-row">
-            <span>Raised: <strong id="w-raised-val">Loading...</strong></span>
-            <span id="w-pct">0%</span> of $31,250
-          </div>
-          <div class="w-progress-outer">
-            <div class="w-progress-inner" id="w-progress" style="width:0.5%"></div>
-            <div class="w-softcap-line"></div>
-          </div>
-          <div style="display:flex;justify-content:space-between;font-size:0.58rem;color:#333;margin-top:3px">
-            <span>$0</span><span>Softcap $20k</span><span>Hardcap $31,250</span>
-          </div>
-        </div>
-
-        <!-- Network warning -->
-        <div class="w-network-warn" id="w-network-warn">
-          ⚠ Wrong network detected. 
-          <button id="w-switch-bsc-btn" style="background:var(--yellow);color:#000;border:none;padding:4px 12px;border-radius:4px;font-weight:700;font-size:0.65rem;cursor:pointer;margin-left:6px">Switch to BSC</button>
-        </div>
-
-        <!-- Input -->
-        <div class="w-input-grid">
-          <div class="w-input-box">
-            <span class="w-input-lbl">You Pay</span>
-            <input class="w-input-field" id="w-usdc-in" type="number" min="50" max="3000" step="10" placeholder="100" />
-            <span class="w-input-currency">USDC (BSC)</span>
-          </div>
-          <div class="w-input-box">
-            <span class="w-input-lbl">You Receive</span>
-            <div class="w-output-val" id="w-ggrd-out">0.00</div>
-            <span class="w-input-currency">GGRD</span>
-          </div>
-        </div>
-
-        <div style="background:rgba(255,34,51,0.08);border:1px solid rgba(255,34,51,0.35);padding:0.6rem 1rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:0.7rem">
-          <span style="font-size:1.4rem">🛡️</span>
-          <span style="font-size:0.68rem;color:#ccc;line-height:1.5">
-            <strong style="color:var(--red)">SOFTCAP GUARANTEE:</strong> If presale doesn't reach $20,000 USDC — the contract lets you call <code style="color:var(--yellow)">refund()</code> for <strong style="color:var(--white)">100% of your USDC back.</strong>
-          </span>
-        </div>
-        <div class="w-min-note">Min <span>50 USDC</span> · Max <span>3,000 USDC</span> per wallet · Claim: 50% immediate + 50% over 60 days</div>
-
-        <div class="w-connected-addr" id="w-addr"></div>
-        <!-- Status -->
-        <div class="w-status" id="w-status">Connect wallet to start</div>
-
-        <!-- Button -->
-        <button class="w-connect-btn" id="w-btn">CONNECT WALLET</button>
-        <button class="w-disconnect-btn" id="w-disconnect-btn">✕ Disconnect wallet</button>
-
-        <!-- Steps -->
-        <div class="w-steps">
-          <div class="w-step active" id="ws-1">1. Connect</div>
-          <div class="w-step" id="ws-2">2. Approve USDC</div>
-          <div class="w-step" id="ws-3">3. Buy GGRD</div>
-        </div>
-
-      </div><!-- /body -->
-
-      <div class="widget-footer">
-        <div class="wf-claim">Claim: <strong>50% instant</strong> + 50% over 60 days</div>
-        <div class="wf-secure">🔒 On-chain escrow · No intermediary</div>
-      </div>
-
-    </div><!-- /widget-wrap -->
-
-    <p style="text-align:center;font-size:0.68rem;color:#333;margin-top:1.5rem" class="fade-up">
-      Presale contract: <a href="https://bscscan.com/address/0xd8983534dd3c369d85127f6C9B85d98768139387" target="_blank" rel="noopener" style="color:#444;text-decoration:underline">0xd8983534...9387 ↗</a>
-      · If softcap not reached → <strong style="color:var(--red)">100% refund</strong>
-    </p>
-  </div>
-</section>
+<!-- COMPACT PRESALE HERO WIDGET -->
+<section id="buy" style="padding:0">
 
 <!-- TOKENOMICS -->
 <section class="tokenomics-section" id="tokenomics">
@@ -2451,9 +1806,9 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 </script>
 
 <script>
-// ===== PRESALE WIDGET WEB3 v7 =====
-// v6: WC 2.10.0 UMD, legacy provider detection
-// v7: local QR, mobile deeplinks, network warn, chain validation, ethers.parseUnits
+// ===== PRESALE WIDGET WEB3 v8 =====
+// v8: compact hero widget, bug A fix (fetchRaised→loadContractState),
+//     all audit fixes, redesigned UI, fault-tolerant init
 (function () {
 
   /* ─── stałe ─────────────────────────────────── */
@@ -2487,7 +1842,7 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
   const addrEl   = $('w-addr');
 
   function setStatus(msg, cls) {
-    if (stEl) { stEl.textContent = msg; stEl.className = 'w-status ' + (cls||''); }
+    if (stEl) { stEl.textContent = msg; stEl.className = 'hw-status ' + (cls||''); }
   }
   function setStep(n) {
     ['ws-1','ws-2','ws-3'].forEach((id,i) => {
@@ -2561,16 +1916,16 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
       if(isActiveHex) {
         const active = BigInt(isActiveHex) !== 0n;
         if(!active && btn && !connected) {
-          console.log('[GGRD v7] Presale not active on-chain');
+          console.log('[GGRD v8] Presale not active on-chain');
           // Don't disable — stages may not have started yet, let frontend STAGES handle timing
         }
       }
 
       // Log on-chain state
       const sold = totalSoldHex ? Number(BigInt(totalSoldHex))/1e18 : 0;
-      console.log(`[GGRD v7] On-chain: hardcap=$${onChainHardcap}, softcap=$${onChainSoftcap}, minBuy=$${onChainMinBuy}, sold=${sold.toFixed(0)} GGRD`);
+      console.log(`[GGRD v8] On-chain: hardcap=$${onChainHardcap}, softcap=$${onChainSoftcap}, minBuy=$${onChainMinBuy}, sold=${sold.toFixed(0)} GGRD`);
 
-    } catch(e) { console.warn('[GGRD v7] loadContractState error:', e); }
+    } catch(e) { console.warn('[GGRD v8] loadContractState error:', e); }
   }
 
   /* ─── modal ──────────────────────────────────── */
@@ -2696,10 +2051,10 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
     const warn = $('w-network-warn');
     if(!warn) return;
     if(isCorrectChain) {
-      warn.style.display = 'none';
+      warn.classList.remove('show');
       if(btn && connected) btn.disabled = false;
     } else {
-      warn.style.display = 'block';
+      warn.classList.add('show');
       if(btn && connected) { btn.disabled = true; setStatus('⚠ Switch to BSC to continue','err'); }
     }
   }
@@ -2918,7 +2273,7 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
     closeModal();
     const short = userAddr.slice(0,6)+'…'+userAddr.slice(-4);
     if(addrEl)  { addrEl.textContent=`✓ ${short}`; addrEl.classList.add('show'); }
-    if(btn)     { btn.textContent='🚀 BUY $GGRD NOW'; btn.className='w-connect-btn buying-mode'; btn.disabled=false; }
+    if(btn)     { btn.textContent='🚀 BUY $GGRD NOW'; btn.className='hw-btn buying-mode'; btn.disabled=false; }
     if(discBtn) discBtn.classList.add('show');
     setStatus("Ready! Enter USDC amount and click BUY",'ok');
     setStep(2);
@@ -2931,7 +2286,7 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
     clearWCSessions();
     if(addrEl)  { addrEl.textContent=''; addrEl.classList.remove('show'); }
     if(discBtn) discBtn.classList.remove('show');
-    if(btn)     { btn.textContent='CONNECT WALLET'; btn.className='w-connect-btn'; btn.disabled=false; }
+    if(btn)     { btn.textContent='CONNECT WALLET'; btn.className='hw-btn'; btn.disabled=false; }
     setStep(1);
     setStatus('Wallet disconnected. Click to reconnect.');
   }
@@ -2981,15 +2336,15 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
       await (await presale.buy(payAmount)).wait();
       const ggrd=calcGGRD(usdcVal);
       setStatus(`🎉 Done! ~${ggrd} GGRD headed your way!`,'ok');
-      btn.textContent="✅ ZAKUPIONO!"; btn.className='w-connect-btn'; setStep(3);
+      btn.textContent="✅ PURCHASED!"; btn.className='hw-btn'; setStep(3);
       loadContractState();
       ['🎉','🚀','😂','💸','🟡'].forEach((em,i)=>{
         setTimeout(()=>{const el=document.createElement('div');el.textContent=em;el.style.cssText=`position:fixed;left:${12+i*18}vw;top:80vh;font-size:2.5rem;pointer-events:none;z-index:99999;animation:floatUp 2.5s ease forwards`;document.body.appendChild(el);setTimeout(()=>el.remove(),2600);},i*120);
       });
     } catch(e) {
-      const msg=e.reason||e.data?.message||e.message||'Błąd';
+      const msg=e.reason||e.data?.message||e.message||'Error';
       setStatus(msg.slice(0,80),'err');
-      btn.textContent="🚀 BUY $GGRD NOW"; btn.className='w-connect-btn buying-mode'; btn.disabled=false;
+      btn.textContent="🚀 BUY $GGRD NOW"; btn.className='hw-btn buying-mode'; btn.disabled=false;
     }
   }
 
@@ -3011,7 +2366,7 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
     }
     const inp=$('w-usdc-in');
     if(inp) inp.addEventListener('input',()=>{ const out=$('w-ggrd-out'); if(out) out.textContent=calcGGRD(parseFloat(inp.value)||0); });
-    loadContractState(); setInterval(fetchRaised,30000);
+    loadContractState(); setInterval(loadContractState,30000);
     setStep(1); setStatus('Click button to select wallet');
     requestEIP6963();
     // Niektóre portfele injectują provider z opóźnieniem — powtórz po 500ms i 1.5s
@@ -3019,9 +2374,9 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
     setTimeout(()=>{ requestEIP6963(); updateWalletButtons(); }, 1500);
     // Log WC load status for debugging
     const wcPkg = window["@walletconnect/ethereum-provider"];
-    console.log('[GGRD v7] WC pkg loaded:', !!wcPkg, wcPkg ? (wcPkg.EthereumProvider ? 'EthereumProvider OK' : 'keys: '+Object.keys(wcPkg).join(',')) : 'null');
-    console.log('[GGRD v7] window.ethereum:', !!window.ethereum, window.ethereum?.isMetaMask?'MetaMask':'', window.ethereum?.isTrust?'Trust':'', window.ethereum?.providers?.length||0, 'sub-providers');
-    console.log('[GGRD v7] Mobile:', isMobile);
+    console.log('[GGRD v8] WC pkg loaded:', !!wcPkg, wcPkg ? (wcPkg.EthereumProvider ? 'EthereumProvider OK' : 'keys: '+Object.keys(wcPkg).join(',')) : 'null');
+    console.log('[GGRD v8] window.ethereum:', !!window.ethereum, window.ethereum?.isMetaMask?'MetaMask':'', window.ethereum?.isTrust?'Trust':'', window.ethereum?.providers?.length||0, 'sub-providers');
+    console.log('[GGRD v8] Mobile:', isMobile);
     const se=document.createElement('style');
     se.textContent='@keyframes floatUp{from{transform:translateY(0);opacity:1}to{transform:translateY(-60vh);opacity:0}}';
     document.head.appendChild(se);
