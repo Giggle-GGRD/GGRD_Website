@@ -1876,9 +1876,9 @@ nav {
   width: min(1160px, 100%);
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 560px);
   gap: clamp(1.2rem, 4vw, 3.2rem);
-  align-items: end;
+  align-items: start;
   overflow: visible;
 }
 
@@ -1887,6 +1887,26 @@ nav {
   z-index: 2;
   max-width: 660px;
   padding-bottom: 0.45rem;
+}
+
+.hero-widget-col {
+  width: 100%;
+  max-width: 560px;
+  justify-self: end;
+  align-self: start;
+  padding-top: 0.35rem;
+}
+
+.hero-widget-col .widget-wrap {
+  max-width: 100%;
+  margin: 0;
+}
+
+.hero-widget-footnote {
+  text-align: center;
+  font-size: 0.68rem;
+  color: #333;
+  margin-top: 0.9rem;
 }
 
 .hero-badge {
@@ -2573,6 +2593,12 @@ section {
     gap: clamp(1rem, 3vw, 2rem);
   }
 
+  .hero-widget-col {
+    justify-self: center;
+    max-width: 560px;
+    width: min(560px, 100%);
+  }
+
   .hero h1 {
     font-size: 40px;
   }
@@ -2656,6 +2682,10 @@ section {
   .hero-btns,
   .hero-stats {
     justify-content: center;
+  }
+
+  .hero-widget-col {
+    width: 100%;
   }
 
   .section-title {
@@ -2858,7 +2888,7 @@ section {
 
 
 <!-- HERO -->
-<section class="hero">
+<section class="hero" id="buy">
 
   <div class="stage-indicator">
     <div class="s-label">CURRENT STAGE</div>
@@ -2903,7 +2933,7 @@ section {
   </div>
 
   <div class="hero-btns">
-    <a class="btn-primary" href="#buy">
+    <a class="btn-primary" href="#buy-widget">
       🚀 BUY IN PRESALE
     </a>
     <a class="btn-secondary" href="https://t.me/GGRDofficial" target="_blank" rel="noopener">
@@ -2934,6 +2964,106 @@ section {
     </div>
   </div>
 
+    </div>
+
+    <div class="hero-widget-col fade-up" id="buy-widget">
+      <div class="widget-wrap">
+
+        <div class="widget-header">
+          <div class="widget-title">BUY $GGRD PRESALE</div>
+          <div class="widget-badge">
+            <span class="w-dot"></span>
+            PRESALE LIVE · BSC MAINNET
+          </div>
+        </div>
+
+        <div class="widget-body">
+
+          <!-- Stage + Price -->
+          <div class="w-stage-row">
+            <div class="w-stage-info">
+              <div class="w-stage-lbl">Current Stage</div>
+              <div class="w-stage-val" id="w-stage-val">—</div>
+            </div>
+            <div class="w-price-info">
+              <div class="w-price-lbl">Price</div>
+              <div class="w-price-val" id="w-price-val">—</div>
+              <div class="w-next-price" id="w-next-price"></div>
+            </div>
+          </div>
+
+          <!-- Progress -->
+          <div style="position:relative;margin-bottom:1rem">
+            <div class="w-softcap-lbl">SOFTCAP</div>
+            <div class="w-raised-row">
+              <span>Raised: <strong id="w-raised-val">Loading...</strong></span>
+              <span id="w-pct">0%</span> of $31,250
+            </div>
+            <div class="w-progress-outer">
+              <div class="w-progress-inner" id="w-progress" style="width:0.5%"></div>
+              <div class="w-softcap-line"></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:0.58rem;color:#333;margin-top:3px">
+              <span>$0</span><span>Softcap $20k</span><span>Hardcap $31,250</span>
+            </div>
+          </div>
+
+          <!-- Network warning -->
+          <div class="w-network-warn" id="w-network-warn">
+            ⚠ Wrong network detected.
+            <button id="w-switch-bsc-btn" style="background:var(--yellow);color:#000;border:none;padding:4px 12px;border-radius:4px;font-weight:700;font-size:0.65rem;cursor:pointer;margin-left:6px">Switch to BSC</button>
+          </div>
+
+          <!-- Input -->
+          <div class="w-input-grid">
+            <div class="w-input-box">
+              <span class="w-input-lbl">You Pay</span>
+              <input class="w-input-field" id="w-usdc-in" type="number" min="50" max="3000" step="10" placeholder="100" />
+              <span class="w-input-currency">USDC (BSC)</span>
+            </div>
+            <div class="w-input-box">
+              <span class="w-input-lbl">You Receive</span>
+              <div class="w-output-val" id="w-ggrd-out">0.00</div>
+              <span class="w-input-currency">GGRD</span>
+            </div>
+          </div>
+
+          <div style="background:rgba(243,197,18,0.12);border:1px solid rgba(243,197,18,0.38);padding:0.5rem 0.75rem;margin-bottom:0.6rem;display:flex;align-items:center;gap:0.55rem">
+            <span style="font-size:1.1rem">🛡️</span>
+            <span style="font-size:0.62rem;color:#ccc;line-height:1.38">
+              <strong style="color:var(--ggrd-accent)">SOFTCAP GUARANTEE:</strong> If presale doesn't reach $20,000 USDC — the contract lets you call <code style="color:var(--yellow)">refund()</code> for <strong style="color:var(--white)">100% of your USDC back.</strong>
+            </span>
+          </div>
+          <div class="w-min-note">Min <span>50 USDC</span> · Max <span>3,000 USDC</span> per wallet · Claim: 50% immediate + 50% over 60 days</div>
+
+          <div class="w-connected-addr" id="w-addr"></div>
+          <!-- Status -->
+          <div class="w-status" id="w-status">Connect wallet to start</div>
+
+          <!-- Button -->
+          <button class="w-connect-btn" id="w-btn">CONNECT WALLET</button>
+          <button class="w-disconnect-btn" id="w-disconnect-btn">✕ Disconnect wallet</button>
+
+          <!-- Steps -->
+          <div class="w-steps">
+            <div class="w-step active" id="ws-1">1. Connect</div>
+            <div class="w-step" id="ws-2">2. Approve USDC</div>
+            <div class="w-step" id="ws-3">3. Buy GGRD</div>
+          </div>
+
+        </div><!-- /body -->
+
+        <div class="widget-footer">
+          <div class="wf-claim">Claim: <strong>50% instant</strong> + 50% over 60 days</div>
+          <div class="wf-secure">🔒 On-chain escrow · No intermediary</div>
+        </div>
+
+      </div><!-- /widget-wrap -->
+
+      <p class="hero-widget-footnote">
+        Presale contract: <a href="https://bscscan.com/address/0xd8983534dd3c369d85127f6C9B85d98768139387" target="_blank" rel="noopener" style="color:#444;text-decoration:underline">0xd8983534...9387 ↗</a>
+        · If softcap not reached → <strong style="color:var(--ggrd-accent)">100% refund</strong>
+      </p>
     </div>
   </div>
 </section>
@@ -2978,111 +3108,6 @@ section {
   </div>
 </section>
 
-
-<!-- PRESALE WIDGET -->
-<section class="widget-section" id="buy">
-  <div class="section-inner">
-    <h2 class="section-title fade-up">BUY $GGRD NOW 🚀</h2>
-    <p class="section-sub fade-up">Direct on-chain purchase. USDC only. Your wallet, your keys, your GGRD.</p>
-    <div class="widget-wrap fade-up">
-
-      <div class="widget-header">
-        <div class="widget-title">BUY $GGRD PRESALE</div>
-        <div class="widget-badge">
-          <span class="w-dot"></span>
-          PRESALE LIVE · BSC MAINNET
-        </div>
-      </div>
-
-      <div class="widget-body">
-
-        <!-- Stage + Price -->
-        <div class="w-stage-row">
-          <div class="w-stage-info">
-            <div class="w-stage-lbl">Current Stage</div>
-            <div class="w-stage-val" id="w-stage-val">—</div>
-          </div>
-          <div class="w-price-info">
-            <div class="w-price-lbl">Price</div>
-            <div class="w-price-val" id="w-price-val">—</div>
-            <div class="w-next-price" id="w-next-price"></div>
-          </div>
-        </div>
-
-        <!-- Progress -->
-        <div style="position:relative;margin-bottom:1rem">
-          <div class="w-softcap-lbl">SOFTCAP</div>
-          <div class="w-raised-row">
-            <span>Raised: <strong id="w-raised-val">Loading...</strong></span>
-            <span id="w-pct">0%</span> of $31,250
-          </div>
-          <div class="w-progress-outer">
-            <div class="w-progress-inner" id="w-progress" style="width:0.5%"></div>
-            <div class="w-softcap-line"></div>
-          </div>
-          <div style="display:flex;justify-content:space-between;font-size:0.58rem;color:#333;margin-top:3px">
-            <span>$0</span><span>Softcap $20k</span><span>Hardcap $31,250</span>
-          </div>
-        </div>
-
-        <!-- Network warning -->
-        <div class="w-network-warn" id="w-network-warn">
-          ⚠ Wrong network detected. 
-          <button id="w-switch-bsc-btn" style="background:var(--yellow);color:#000;border:none;padding:4px 12px;border-radius:4px;font-weight:700;font-size:0.65rem;cursor:pointer;margin-left:6px">Switch to BSC</button>
-        </div>
-
-        <!-- Input -->
-        <div class="w-input-grid">
-          <div class="w-input-box">
-            <span class="w-input-lbl">You Pay</span>
-            <input class="w-input-field" id="w-usdc-in" type="number" min="50" max="3000" step="10" placeholder="100" />
-            <span class="w-input-currency">USDC (BSC)</span>
-          </div>
-          <div class="w-input-box">
-            <span class="w-input-lbl">You Receive</span>
-            <div class="w-output-val" id="w-ggrd-out">0.00</div>
-            <span class="w-input-currency">GGRD</span>
-          </div>
-        </div>
-
-        <div style="background:rgba(243,197,18,0.12);border:1px solid rgba(243,197,18,0.38);padding:0.5rem 0.75rem;margin-bottom:0.6rem;display:flex;align-items:center;gap:0.55rem">
-          <span style="font-size:1.1rem">🛡️</span>
-          <span style="font-size:0.62rem;color:#ccc;line-height:1.38">
-            <strong style="color:var(--ggrd-accent)">SOFTCAP GUARANTEE:</strong> If presale doesn't reach $20,000 USDC — the contract lets you call <code style="color:var(--yellow)">refund()</code> for <strong style="color:var(--white)">100% of your USDC back.</strong>
-          </span>
-        </div>
-        <div class="w-min-note">Min <span>50 USDC</span> · Max <span>3,000 USDC</span> per wallet · Claim: 50% immediate + 50% over 60 days</div>
-
-        <div class="w-connected-addr" id="w-addr"></div>
-        <!-- Status -->
-        <div class="w-status" id="w-status">Connect wallet to start</div>
-
-        <!-- Button -->
-        <button class="w-connect-btn" id="w-btn">CONNECT WALLET</button>
-        <button class="w-disconnect-btn" id="w-disconnect-btn">✕ Disconnect wallet</button>
-
-        <!-- Steps -->
-        <div class="w-steps">
-          <div class="w-step active" id="ws-1">1. Connect</div>
-          <div class="w-step" id="ws-2">2. Approve USDC</div>
-          <div class="w-step" id="ws-3">3. Buy GGRD</div>
-        </div>
-
-      </div><!-- /body -->
-
-      <div class="widget-footer">
-        <div class="wf-claim">Claim: <strong>50% instant</strong> + 50% over 60 days</div>
-        <div class="wf-secure">🔒 On-chain escrow · No intermediary</div>
-      </div>
-
-    </div><!-- /widget-wrap -->
-
-    <p style="text-align:center;font-size:0.68rem;color:#333;margin-top:1.5rem" class="fade-up">
-      Presale contract: <a href="https://bscscan.com/address/0xd8983534dd3c369d85127f6C9B85d98768139387" target="_blank" rel="noopener" style="color:#444;text-decoration:underline">0xd8983534...9387 ↗</a>
-      · If softcap not reached → <strong style="color:var(--ggrd-accent)">100% refund</strong>
-    </p>
-  </div>
-</section>
 
 <!-- TOKENOMICS -->
 <section class="tokenomics-section" id="tokenomics">
