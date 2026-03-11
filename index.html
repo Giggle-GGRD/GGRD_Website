@@ -2666,7 +2666,7 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
     qrLibPromise ??= (async () => {
       const urls = [
         'https://cdn.jsdelivr.net/npm/qrcode@1.5.4/lib/browser.min.js',
-        'https://unpkg.com/qrcode@1.5.4/lib/browser.min.js',
+        'https://unpkg.com/qrcode@1.5.4/lib/browser.js',
       ];
       let lastErr = null;
       for(const url of urls) {
