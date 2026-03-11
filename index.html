@@ -1754,6 +1754,347 @@ footer {
 }
 .w-disconnect-btn.show { display: block; }
 
+
+/* ===== GGRD Brand Theme Overrides ===== */
+:root {
+  --ggrd-primary: #00AA98;
+  --ggrd-depth: #056F4B;
+  --ggrd-dark: #0D0C0B;
+  --ggrd-accent: #F3C512;
+  --ggrd-text: #F7FAFC;
+  --ggrd-bg: #0D0C0B;
+  --ggrd-bg-soft: rgba(255,255,255,0.02);
+  --ggrd-border: rgba(0,170,152,0.18);
+  --ggrd-border-strong: rgba(0,170,152,0.35);
+  --ggrd-glow: rgba(0,170,152,0.22);
+  --ggrd-text-muted: rgba(247,250,252,0.72);
+  --ggrd-accent-soft: rgba(243,197,18,0.15);
+
+  /* Legacy aliases to keep existing component structure untouched */
+  --yellow: var(--ggrd-accent);
+  --green: var(--ggrd-primary);
+  --red: #D66A58;
+  --bg: var(--ggrd-bg);
+  --bg2: #121312;
+  --bg3: #171918;
+  --white: var(--ggrd-text);
+  --gray: var(--ggrd-text-muted);
+  --border: var(--ggrd-border);
+}
+
+body {
+  background:
+    radial-gradient(circle at 20% 10%, rgba(0,170,152,0.08), transparent 40%),
+    radial-gradient(circle at 82% 0%, rgba(5,111,75,0.09), transparent 45%),
+    #0D0C0B;
+  color: var(--ggrd-text);
+}
+
+body::before { opacity: 0.18; }
+body::after { opacity: 0.22; }
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--ggrd-primary);
+  outline-offset: 2px;
+}
+
+nav {
+  background: rgba(13,12,11,0.9);
+  border-bottom: 1px solid var(--ggrd-border);
+}
+
+.nav-logo { color: var(--ggrd-primary); }
+
+.nav-links a {
+  color: var(--ggrd-text-muted);
+}
+
+.nav-links a:hover,
+.nav-links a.nav-active {
+  color: var(--ggrd-primary);
+}
+
+.nav-cta {
+  background: var(--ggrd-accent);
+  color: var(--ggrd-dark) !important;
+  border: 1px solid rgba(243,197,18,0.35);
+}
+
+.nav-cta:hover {
+  background: #f7cf3e !important;
+  color: var(--ggrd-dark) !important;
+  box-shadow: 0 0 0 1px var(--ggrd-border-strong), 0 0 16px var(--ggrd-glow);
+  transform: translateY(-1px);
+}
+
+.hero {
+  text-align: left;
+  background:
+    radial-gradient(circle at 18% 12%, rgba(0,170,152,0.12), transparent 42%),
+    radial-gradient(circle at 84% 15%, rgba(5,111,75,0.12), transparent 46%),
+    var(--ggrd-bg);
+}
+
+.hero-layout {
+  width: min(1120px, 100%);
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(260px, 0.95fr);
+  gap: clamp(1rem, 4vw, 3rem);
+  align-items: center;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-badge {
+  background: rgba(0,170,152,0.2);
+  color: var(--ggrd-text);
+  border: 1px solid var(--ggrd-border-strong);
+}
+
+.hero h1 {
+  color: var(--ggrd-text);
+  text-shadow: 0 14px 36px rgba(0,170,152,0.22);
+}
+
+.hero h1 .glitch::before {
+  color: rgba(243,197,18,0.65);
+}
+
+.hero h1 .glitch::after {
+  color: rgba(0,170,152,0.65);
+}
+
+.hero-sub {
+  color: var(--ggrd-primary);
+}
+
+.hero-tagline {
+  color: var(--ggrd-text-muted);
+  max-width: 560px;
+}
+
+.hero-tagline span {
+  color: var(--ggrd-accent);
+}
+
+.countdown-box {
+  background: var(--ggrd-bg-soft);
+  border: 1px solid var(--ggrd-border-strong);
+  box-shadow: 0 0 0 1px rgba(0,170,152,0.12);
+}
+
+.countdown-box::before {
+  background: var(--ggrd-accent);
+  color: var(--ggrd-dark);
+}
+
+.cd-num,
+.cd-sep,
+.stat-val {
+  color: var(--ggrd-accent);
+}
+
+.btn-primary {
+  background: var(--ggrd-accent);
+  color: var(--ggrd-dark);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 8px 22px var(--ggrd-glow);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  color: var(--ggrd-primary);
+  border-color: var(--ggrd-primary);
+}
+
+.btn-secondary:hover {
+  background: rgba(0,170,152,0.18);
+  color: var(--ggrd-text);
+}
+
+.hero-btns,
+.hero-stats {
+  justify-content: flex-start;
+}
+
+.hero-mascot-wrap {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  pointer-events: none;
+}
+
+.hero-mascot {
+  width: min(100%, 420px);
+  max-height: 520px;
+  filter: drop-shadow(0 20px 36px var(--ggrd-glow));
+  opacity: 0.96;
+  user-select: none;
+}
+
+.stage-indicator {
+  background: var(--ggrd-bg-soft);
+  border: 1px solid var(--ggrd-border-strong);
+  box-shadow: 0 0 20px rgba(0,170,152,0.14);
+  z-index: 4;
+}
+
+.section-title {
+  color: var(--ggrd-text);
+  text-shadow: none;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 72px;
+  height: 3px;
+  border-radius: 999px;
+  margin: 0.55rem auto 0;
+  background: linear-gradient(90deg, var(--ggrd-primary), var(--ggrd-accent));
+}
+
+.why-grid,
+.staking-cards {
+  gap: 1rem;
+  background: transparent;
+  border: none;
+}
+
+.why-card,
+.sk-card {
+  background: var(--ggrd-bg-soft);
+  border: 1px solid var(--ggrd-border);
+  border-radius: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s, transform 0.2s;
+}
+
+.why-card:hover,
+.sk-card:hover {
+  background: rgba(255,255,255,0.035);
+  border-color: var(--ggrd-border-strong);
+  box-shadow: 0 0 20px rgba(0,170,152,0.15);
+  transform: translateY(-2px);
+}
+
+.why-card::before {
+  background: var(--ggrd-primary);
+}
+
+.why-title {
+  color: var(--ggrd-text);
+}
+
+.why-text,
+.sk-label {
+  color: var(--ggrd-text-muted);
+}
+
+.sk-val {
+  color: var(--ggrd-accent);
+}
+
+.widget-wrap {
+  border: 1px solid var(--ggrd-border-strong);
+  box-shadow: 0 0 30px rgba(0,170,152,0.12), 0 0 70px rgba(0,0,0,0.5);
+}
+
+.widget-wrap::before {
+  background: linear-gradient(90deg, var(--ggrd-primary), var(--ggrd-depth), var(--ggrd-primary));
+}
+
+.widget-title,
+.w-stage-info .w-stage-lbl,
+.w-price-info .w-price-lbl,
+.w-raised-row {
+  color: var(--ggrd-text-muted);
+}
+
+.w-stage-info .w-stage-val,
+.w-output-val,
+.w-status.ok,
+.w-step.done {
+  color: var(--ggrd-primary);
+}
+
+.w-price-info .w-price-val,
+.w-status.warn,
+.w-step.active,
+.addr-link {
+  color: var(--ggrd-accent);
+}
+
+.w-step.active {
+  background: var(--ggrd-accent-soft);
+}
+
+.addr-link {
+  border-color: rgba(243,197,18,0.35);
+}
+
+.addr-link:hover {
+  background: var(--ggrd-accent);
+  color: var(--ggrd-dark);
+}
+
+@media (max-width: 1100px) {
+  .hero-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(240px, 0.75fr);
+  }
+
+  .hero-mascot {
+    max-width: 320px;
+  }
+}
+
+@media (max-width: 860px) {
+  .hero {
+    text-align: center;
+  }
+
+  .hero-layout {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-tagline {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-btns,
+  .hero-stats {
+    justify-content: center;
+  }
+
+  .hero-mascot-wrap {
+    justify-content: center;
+    margin-top: 0.5rem;
+  }
+
+  .hero-mascot {
+    max-width: 260px;
+  }
+}
+
+@media (max-width: 540px) {
+  .hero-mascot {
+    max-width: 220px;
+  }
+}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@walletconnect/ethereum-provider@2.23.8/dist/index.umd.js"></script>
@@ -1845,7 +2186,7 @@ footer {
     GGRD
   </a>
   <ul class="nav-links">
-    <li><a href="#buy" style="color:var(--yellow);font-weight:700">BUY NOW ⚡</a></li><li><a href="#presale">Stages</a></li>
+    <li><a href="#buy" class="nav-active">BUY NOW ⚡</a></li><li><a href="#presale">Stages</a></li>
     <li><a href="#tokenomics">Tokenomics</a></li>
     <li><a href="#staking">Staking</a></li>
     <li><a href="#charity">Charity</a></li>
@@ -1924,6 +2265,8 @@ footer {
     <div class="s-price" id="liveStagePrice">0.0085 USDC</div>
   </div>
 
+  <div class="hero-layout">
+    <div class="hero-content">
   <div class="hero-badge" role="status">🔴 PRESALE ACTIVE — BSC MAINNET</div>
 
   <h1>
@@ -1990,6 +2333,12 @@ footer {
     </div>
   </div>
 
+    </div>
+    <div class="hero-mascot-wrap" aria-hidden="true">
+      <!-- Temporary mascot placeholder – replace with final GGRD mascot SVG/WebP asset. -->
+      <img class="hero-mascot" src="public/assets/mascot/ggrd-bear-hero.svg" alt="" loading="lazy" decoding="async">
+    </div>
+  </div>
 </section>
 
 <!-- WHY GGRD -->

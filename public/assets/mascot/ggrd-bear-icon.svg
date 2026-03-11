@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="GGRD bear icon placeholder">
+  <rect x="4" y="4" width="120" height="120" rx="30" fill="#0D0C0B" stroke="#00AA98" stroke-width="4"/>
+  <circle cx="42" cy="40" r="14" fill="#17201F" stroke="#00AA98"/>
+  <circle cx="86" cy="40" r="14" fill="#17201F" stroke="#00AA98"/>
+  <circle cx="64" cy="70" r="40" fill="#17201F" stroke="#00AA98" stroke-width="2.5"/>
+  <circle cx="50" cy="62" r="4.5" fill="#F7FAFC"/>
+  <circle cx="78" cy="62" r="4.5" fill="#F7FAFC"/>
+  <ellipse cx="64" cy="82" rx="12" ry="9" fill="#F7FAFC"/>
+  <path d="M57 82 L64 76 L71 82 Z" fill="#0D0C0B"/>
+</svg>

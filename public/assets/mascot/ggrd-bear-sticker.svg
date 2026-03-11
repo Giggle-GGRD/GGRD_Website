@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img" aria-label="GGRD bear sticker placeholder">
+  <circle cx="160" cy="160" r="150" fill="#0D0C0B" stroke="#00AA98" stroke-width="8"/>
+  <circle cx="104" cy="96" r="36" fill="#17201F" stroke="#00AA98"/>
+  <circle cx="216" cy="96" r="36" fill="#17201F" stroke="#00AA98"/>
+  <circle cx="160" cy="176" r="108" fill="#17201F" stroke="#00AA98" stroke-width="5"/>
+  <circle cx="122" cy="154" r="12" fill="#F7FAFC"/>
+  <circle cx="198" cy="154" r="12" fill="#F7FAFC"/>
+  <ellipse cx="160" cy="206" rx="30" ry="24" fill="#F7FAFC"/>
+  <path d="M142 205 L160 190 L178 205 Z" fill="#0D0C0B"/>
+  <path d="M136 226 Q160 244 184 226" fill="none" stroke="#0D0C0B" stroke-width="5" stroke-linecap="round"/>
+</svg>
