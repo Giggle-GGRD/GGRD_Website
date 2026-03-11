@@ -1769,6 +1769,19 @@ footer {
   --ggrd-glow: rgba(0,170,152,0.22);
   --ggrd-text-muted: rgba(247,250,252,0.72);
   --ggrd-accent-soft: rgba(243,197,18,0.15);
+  --ggrd-type-h1: 48px;
+  --ggrd-type-h2: 40px;
+  --ggrd-type-h3: 28px;
+  --ggrd-type-subhead: 20px;
+  --ggrd-type-body: 17px;
+  --ggrd-type-body-mobile: 16px;
+  --ggrd-type-small: 13px;
+  --ggrd-type-nav: 13px;
+  --ggrd-type-button: 20px;
+  --ggrd-type-countdown-num: 48px;
+  --ggrd-type-countdown-label: 11px;
+  --ggrd-lh-heading: 0.92;
+  --ggrd-lh-body: 1.68;
 
   /* Legacy aliases to keep existing component structure untouched */
   --yellow: var(--ggrd-accent);
@@ -1788,6 +1801,14 @@ body {
     radial-gradient(circle at 82% 0%, rgba(5,111,75,0.09), transparent 45%),
     #0D0C0B;
   color: var(--ggrd-text);
+  font-size: var(--ggrd-type-body);
+  line-height: var(--ggrd-lh-body);
+  letter-spacing: 0.01em;
+}
+
+p {
+  font-size: var(--ggrd-type-body);
+  line-height: var(--ggrd-lh-body);
 }
 
 body::before { opacity: 0.18; }
@@ -1805,10 +1826,16 @@ nav {
   border-bottom: 1px solid var(--ggrd-border);
 }
 
-.nav-logo { color: var(--ggrd-primary); }
+.nav-logo {
+  color: var(--ggrd-primary);
+  letter-spacing: 1.4px;
+}
 
 .nav-links a {
   color: var(--ggrd-text-muted);
+  font-size: var(--ggrd-type-nav);
+  letter-spacing: 0.08em;
+  line-height: 1.2;
 }
 
 .nav-links a:hover,
@@ -1820,6 +1847,9 @@ nav {
   background: var(--ggrd-accent);
   color: var(--ggrd-dark) !important;
   border: 1px solid rgba(243,197,18,0.35);
+  font-size: var(--ggrd-type-nav);
+  letter-spacing: 0.08em;
+  line-height: 1.1;
 }
 
 .nav-cta:hover {
@@ -1851,19 +1881,25 @@ nav {
 .hero-content {
   position: relative;
   z-index: 2;
-  max-width: 640px;
-  padding-bottom: 0.8rem;
+  max-width: 660px;
+  padding-bottom: 0.45rem;
 }
 
 .hero-badge {
   background: rgba(0,170,152,0.2);
   color: var(--ggrd-text);
   border: 1px solid var(--ggrd-border-strong);
+  letter-spacing: 0.14em;
+  font-size: var(--ggrd-type-small);
 }
 
 .hero h1 {
   color: var(--ggrd-text);
   text-shadow: 0 14px 36px rgba(0,170,152,0.22);
+  font-size: var(--ggrd-type-h1);
+  line-height: var(--ggrd-lh-heading);
+  letter-spacing: 0.035em;
+  margin-bottom: 0.65rem;
 }
 
 .hero h1 .glitch::before {
@@ -1876,11 +1912,19 @@ nav {
 
 .hero-sub {
   color: var(--ggrd-primary);
+  font-size: var(--ggrd-type-subhead);
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.85rem;
 }
 
 .hero-tagline {
   color: var(--ggrd-text-muted);
   max-width: 560px;
+  font-size: var(--ggrd-type-body);
+  line-height: var(--ggrd-lh-body);
+  letter-spacing: 0.015em;
+  margin-bottom: 1.35rem;
 }
 
 .hero-tagline span {
@@ -1891,17 +1935,44 @@ nav {
   background: var(--ggrd-bg-soft);
   border: 1px solid var(--ggrd-border-strong);
   box-shadow: 0 0 0 1px rgba(0,170,152,0.12);
+  padding: 1.75rem 1.1rem 1.2rem;
 }
 
 .countdown-box::before {
   background: var(--ggrd-accent);
   color: var(--ggrd-dark);
+  font-size: var(--ggrd-type-small);
+  letter-spacing: 0.12em;
+}
+
+.countdown {
+  gap: 1.1rem;
+  align-items: flex-end;
 }
 
 .cd-num,
 .cd-sep,
 .stat-val {
   color: var(--ggrd-accent);
+}
+
+.cd-num {
+  font-size: var(--ggrd-type-countdown-num);
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+}
+
+.cd-sep {
+  font-size: 42px;
+  line-height: 0.9;
+  opacity: 0.75;
+}
+
+.cd-label {
+  font-size: var(--ggrd-type-countdown-label);
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  color: var(--ggrd-text-muted);
 }
 
 .btn-primary {
@@ -1924,6 +1995,14 @@ nav {
   color: var(--ggrd-text);
 }
 
+.btn-primary,
+.btn-secondary {
+  font-size: var(--ggrd-type-button);
+  letter-spacing: 0.08em;
+  line-height: 1.05;
+  font-weight: 700;
+}
+
 .hero-btns,
 .hero-stats {
   justify-content: flex-start;
@@ -1939,6 +2018,10 @@ nav {
 .section-title {
   color: var(--ggrd-text);
   text-shadow: none;
+  font-size: var(--ggrd-type-h2);
+  line-height: 0.98;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.6rem;
 }
 
 .section-title::after {
@@ -1949,6 +2032,14 @@ nav {
   border-radius: 999px;
   margin: 0.55rem auto 0;
   background: linear-gradient(90deg, var(--ggrd-primary), var(--ggrd-accent));
+}
+
+.section-sub {
+  font-size: var(--ggrd-type-body);
+  line-height: 1.72;
+  letter-spacing: 0.02em;
+  max-width: 760px;
+  margin: 0.5rem auto 2rem;
 }
 
 .why-grid,
@@ -1980,11 +2071,16 @@ nav {
 
 .why-title {
   color: var(--ggrd-text);
+  font-size: 1.3rem;
+  letter-spacing: 0.04em;
+  line-height: 1.15;
 }
 
 .why-text,
 .sk-label {
   color: var(--ggrd-text-muted);
+  font-size: 1rem;
+  line-height: 1.68;
 }
 
 .sk-val {
@@ -2040,9 +2136,52 @@ nav {
     gap: clamp(1rem, 3vw, 2rem);
   }
 
+  .hero h1 {
+    font-size: 40px;
+  }
+
+  .hero-sub {
+    font-size: 18px;
+  }
+
+  .hero-tagline,
+  .section-sub {
+    font-size: 16px;
+  }
+
+  .section-title {
+    font-size: 34px;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    font-size: 18px;
+  }
+
+  .nav-links a,
+  .nav-cta {
+    font-size: 12px;
+    letter-spacing: 0.07em;
+  }
+
+  .cd-num {
+    font-size: 44px;
+  }
+
+  .cd-sep {
+    font-size: 36px;
+  }
 }
 
 @media (max-width: 860px) {
+  body {
+    font-size: var(--ggrd-type-body-mobile);
+  }
+
+  p {
+    font-size: var(--ggrd-type-body-mobile);
+  }
+
   .hero {
     text-align: center;
   }
@@ -2061,7 +2200,18 @@ nav {
     padding-bottom: 0;
   }
 
+  .hero h1 {
+    font-size: 32px;
+    line-height: 0.96;
+  }
+
+  .hero-sub {
+    font-size: 16px;
+  }
+
   .hero-tagline {
+    font-size: 16px;
+    line-height: 1.65;
     margin-left: auto;
     margin-right: auto;
   }
@@ -2071,7 +2221,42 @@ nav {
     justify-content: center;
   }
 
+  .section-title {
+    font-size: 28px;
+  }
 
+  .section-sub {
+    font-size: 15px;
+    line-height: 1.68;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    font-size: 17px;
+    letter-spacing: 0.06em;
+  }
+
+  .nav-links a {
+    font-size: 11px;
+    letter-spacing: 0.06em;
+  }
+
+  .countdown {
+    gap: 0.9rem;
+  }
+
+  .cd-num {
+    font-size: 36px;
+  }
+
+  .cd-sep {
+    font-size: 30px;
+  }
+
+  .cd-label {
+    font-size: 10px;
+    letter-spacing: 0.07em;
+  }
 }
 
 </style>
