@@ -2662,7 +2662,7 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
       });
       // Also add generic WC deep link
       const wcLink = document.createElement('a');
-      wcLink.href = `wc:${uri.replace('wc:','')}`;
+      wcLink.href = `wc://wc?uri=${encodeURIComponent(uri)}`;
       wcLink.textContent = 'Open any WC wallet';
       wcLink.style.cssText = 'display:block;padding:10px;text-align:center;border:1px solid #444;border-radius:8px;font-size:0.7rem;color:#aaa;margin-top:4px;text-decoration:none';
       container.appendChild(wcLink);
@@ -2699,9 +2699,22 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
   /* ─── BSC switch ─────────────────────────────── */
   let currentEthProvider = null; // track active provider for chain switch
 
+  function normalizeChainId(value) {
+    if (typeof value === 'number') return value;
+    if (typeof value === 'bigint') return Number(value);
+    if (typeof value === 'string') {
+      if (value.startsWith('0x')) return parseInt(value, 16);
+      if (value.startsWith('eip155:')) return parseInt(value.split(':')[1], 10);
+      const n = Number(value);
+      if (!Number.isNaN(n)) return n;
+    }
+    return null;
+  }
+
   async function ensureBSC(eth) {
-    const ch = await eth.request({method:'eth_chainId'});
-    if(parseInt(ch,16)===BSC_CHAIN_ID) { updateNetworkState(true); return; }
+    const chRaw = await eth.request({method:'eth_chainId'});
+    const chNum = normalizeChainId(chRaw);
+    if(chNum===BSC_CHAIN_ID) { updateNetworkState(true); return; }
     setStatus("Switching to BSC…",'warn');
     try {
       await eth.request({method:'wallet_switchEthereumChain',params:[{chainId:'0x38'}]});
@@ -2834,7 +2847,7 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
       eth = window.ethereum;
     }
 
-    if(!eth) {
+    if(!eth || typeof eth.request !== 'function') {
       const urls={metamask:'https://metamask.io/download/',trust:'https://trustwallet.com/download',binance:'https://www.bnbchain.org/en/binance-wallet'};
       setStatus(`⚠ ${walletType} not found — install it or use WalletConnect`,'err');
       if(urls[walletType]) window.open(urls[walletType],'_blank');
@@ -2894,11 +2907,16 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
       wcInstance = wc;
       console.log('[WC] Provider initialized OK');
 
-      // display_uri odpala gdy WC ma URI do wyświetlenia
-      wc.on('display_uri', uri => {
-        console.log('[WC] display_uri fired, length:', uri?.length);
+      // display_uri/uri odpalają się zależnie od implementacji walleta
+      let lastWcUri = '';
+      const onWcUri = (uri) => {
+        if(!uri || uri===lastWcUri) return;
+        lastWcUri = uri;
+        console.log('[WC] URI event fired, length:', uri?.length);
         showQRView(uri);
-      });
+      };
+      wc.on?.('display_uri', onWcUri);
+      wc.on?.('uri', onWcUri);
       wc.on('disconnect', () => disconnectWallet());
 
       setStatus("Scan QR code with your mobile wallet…",'warn');
@@ -2910,7 +2928,8 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
       currentEthProvider = wc;
 
       // BŁĄD 7: validate chain after WC connect
-      const wcChainId = wc.chainId || parseInt(await wc.request({method:'eth_chainId'}),16);
+      const wcChainRaw = wc.chainId ?? await wc.request({method:'eth_chainId'});
+      const wcChainId = normalizeChainId(wcChainRaw);
       if(wcChainId !== BSC_CHAIN_ID) {
         console.log('[WC] Wrong chain:', wcChainId, '— attempting switch to BSC');
         try {
