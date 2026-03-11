@@ -1767,12 +1767,12 @@ footer {
   --ggrd-accent: #F3C512;
   --ggrd-text: #F7FAFC;
   --ggrd-bg: #0D0C0B;
-  --ggrd-bg-soft: rgba(255,255,255,0.02);
-  --ggrd-border: rgba(0,170,152,0.18);
-  --ggrd-border-strong: rgba(0,170,152,0.35);
-  --ggrd-glow: rgba(0,170,152,0.22);
-  --ggrd-text-muted: rgba(247,250,252,0.72);
-  --ggrd-accent-soft: rgba(243,197,18,0.15);
+  --ggrd-bg-soft: rgba(255,255,255,0.04);
+  --ggrd-border: rgba(0,170,152,0.22);
+  --ggrd-border-strong: rgba(0,170,152,0.42);
+  --ggrd-glow: rgba(0,170,152,0.28);
+  --ggrd-text-muted: rgba(247,250,252,0.78);
+  --ggrd-accent-soft: rgba(243,197,18,0.2);
   --ggrd-type-h1: 48px;
   --ggrd-type-h2: 40px;
   --ggrd-type-h3: 28px;
@@ -1826,7 +1826,7 @@ input:focus-visible {
 }
 
 nav {
-  background: rgba(13,12,11,0.9);
+  background: rgba(21,20,19,0.86);
   border-bottom: 1px solid var(--ggrd-border);
 }
 
@@ -2380,6 +2380,76 @@ nav {
   border: 1px solid rgba(243,197,18,0.34);
 }
 
+
+/* ===== Mood Lift (Friendlier Premium Dark) ===== */
+body {
+  background:
+    radial-gradient(circle at 18% 8%, rgba(0,170,152,0.12), transparent 42%),
+    radial-gradient(circle at 78% 6%, rgba(243,197,18,0.08), transparent 44%),
+    radial-gradient(circle at 84% 0%, rgba(5,111,75,0.14), transparent 48%),
+    #151412;
+}
+
+.hero {
+  background:
+    radial-gradient(circle at 18% 12%, rgba(0,170,152,0.16), transparent 42%),
+    radial-gradient(circle at 76% 10%, rgba(243,197,18,0.08), transparent 44%),
+    radial-gradient(circle at 84% 15%, rgba(5,111,75,0.14), transparent 48%),
+    linear-gradient(180deg, rgba(255,255,255,0.012) 0%, rgba(255,255,255,0.006) 100%),
+    var(--ggrd-bg);
+}
+
+.ticker span {
+  color: rgba(247,250,252,0.92);
+}
+
+section {
+  padding-top: clamp(4.8rem, 8vw, 6.6rem);
+  padding-bottom: clamp(4.8rem, 8vw, 6.6rem);
+}
+
+.section-inner {
+  width: min(1140px, 100%);
+}
+
+.why-section,
+.tokenomics-section,
+.presale-section,
+.staking-section,
+.charity-section,
+.addresses-section,
+.disclaimer-section {
+  background: linear-gradient(180deg, rgba(255,255,255,0.018) 0%, rgba(255,255,255,0.008) 100%);
+}
+
+.why-card,
+.sk-card,
+.stage-card,
+.token-slice,
+.charity-note,
+.refund-proof {
+  background: rgba(247,250,252,0.045);
+  border-color: var(--ggrd-border);
+}
+
+.stage-card,
+.token-slice,
+.why-card,
+.sk-card {
+  box-shadow: 0 10px 22px rgba(0,0,0,0.22);
+}
+
+.stage-card:hover,
+.token-slice:hover,
+.addr-table tr:hover td {
+  background: rgba(247,250,252,0.06);
+}
+
+.stage-card.active {
+  background: linear-gradient(155deg, rgba(0,170,152,0.2), rgba(247,250,252,0.05));
+  border-color: var(--ggrd-border-strong);
+  box-shadow: 0 0 28px rgba(0,170,152,0.18);
+}
 @media (min-width: 1024px) {
   .widget-section {
     padding: 2.4rem 2rem 3rem;
