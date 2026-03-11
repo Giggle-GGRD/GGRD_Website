@@ -1,0 +1,372 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - heading "Giggle Reloaded (GGRD) Whitepaper v3.1" [level=1] [ref=e4]
+    - paragraph [ref=e5]: BSC Mainnet Deployment Specification and Operations Reference
+    - generic [ref=e6]:
+      - generic [ref=e7]:
+        - strong [ref=e8]: "Version:"
+        - text: v3.1 (BSC)
+      - generic [ref=e9]:
+        - strong [ref=e10]: "Network:"
+        - text: BNB Smart Chain Mainnet (chainId 56)
+      - generic [ref=e11]:
+        - strong [ref=e12]: "Token:"
+        - text: Giggle Reloaded (GGRD)
+      - generic [ref=e13]:
+        - strong [ref=e14]: "Total Supply:"
+        - text: 10,000,000 fixed
+      - generic [ref=e15]:
+        - strong [ref=e16]: "Last update:"
+        - text: 2026-03-10
+      - generic [ref=e17]:
+        - strong [ref=e18]: "Official site:"
+        - link "ggrd.me" [ref=e19] [cursor=pointer]:
+          - /url: https://ggrd.me
+  - generic [ref=e20]:
+    - heading "Table of Contents" [level=2] [ref=e21]
+    - list [ref=e22]:
+      - listitem [ref=e23]:
+        - link "1. Scope and source of truth" [ref=e24] [cursor=pointer]:
+          - /url: "#scope"
+      - listitem [ref=e25]:
+        - link "2. Token specification" [ref=e26] [cursor=pointer]:
+          - /url: "#token"
+      - listitem [ref=e27]:
+        - link "3. Mainnet addresses" [ref=e28] [cursor=pointer]:
+          - /url: "#addresses"
+      - listitem [ref=e29]:
+        - link "4. Presale escrow model (USDC)" [ref=e30] [cursor=pointer]:
+          - /url: "#presale"
+      - listitem [ref=e31]:
+        - link "5. Governance model" [ref=e32] [cursor=pointer]:
+          - /url: "#governance"
+      - listitem [ref=e33]:
+        - link "6. Charity vesting" [ref=e34] [cursor=pointer]:
+          - /url: "#charity"
+      - listitem [ref=e35]:
+        - link "7. Staking v1" [ref=e36] [cursor=pointer]:
+          - /url: "#staking"
+      - listitem [ref=e37]:
+        - link "8. Airdrop framework" [ref=e38] [cursor=pointer]:
+          - /url: "#airdrop"
+      - listitem [ref=e39]:
+        - link "9. Liquidity and LP lock plan" [ref=e40] [cursor=pointer]:
+          - /url: "#lp"
+      - listitem [ref=e41]:
+        - link "10. Risk and legal notices" [ref=e42] [cursor=pointer]:
+          - /url: "#risk"
+  - generic [ref=e43]:
+    - heading "1. Scope and Source of Truth" [level=2] [ref=e44]
+    - paragraph [ref=e45]: This document describes GGRD tokenomics and smart-contract behavior for BNB Smart Chain mainnet, aligned with project brief v3.1 and deployed contract logic.
+    - list [ref=e46]:
+      - listitem [ref=e47]: Fixed supply token with no post-deploy mint.
+      - listitem [ref=e48]: 0% transfer tax.
+      - listitem [ref=e49]: No blacklist and no freeze logic.
+      - listitem [ref=e50]: Governance via Safe multisig plus timelocks.
+      - listitem [ref=e51]: USDC presale escrow with success/fail settlement paths.
+    - generic [ref=e52]:
+      - strong [ref=e53]: "Reference repositories:"
+      - text: smart contracts and deployment artifacts maintained in the official project repositories, with production addresses verifiable on BscScan.
+  - generic [ref=e54]:
+    - heading "2. Token Specification" [level=2] [ref=e55]
+    - table [ref=e57]:
+      - rowgroup [ref=e58]:
+        - row "Field Value" [ref=e59]:
+          - columnheader "Field" [ref=e60]
+          - columnheader "Value" [ref=e61]
+      - rowgroup [ref=e62]:
+        - row "Name Giggle Reloaded" [ref=e63]:
+          - cell "Name" [ref=e64]
+          - cell "Giggle Reloaded" [ref=e65]
+        - row "Symbol GGRD" [ref=e66]:
+          - cell "Symbol" [ref=e67]
+          - cell "GGRD" [ref=e68]
+        - row "Standard ERC-20" [ref=e69]:
+          - cell "Standard" [ref=e70]
+          - cell "ERC-20" [ref=e71]
+        - row "Network BNB Smart Chain mainnet" [ref=e72]:
+          - cell "Network" [ref=e73]
+          - cell "BNB Smart Chain mainnet" [ref=e74]
+        - row "Decimals 18" [ref=e75]:
+          - cell "Decimals" [ref=e76]
+          - cell "18" [ref=e77]
+        - row "Total supply 10,000,000 GGRD (fixed)" [ref=e78]:
+          - cell "Total supply" [ref=e79]
+          - cell "10,000,000 GGRD (fixed)" [ref=e80]
+        - row "Transfer tax 0%" [ref=e81]:
+          - cell "Transfer tax" [ref=e82]
+          - cell "0%" [ref=e83]
+        - row "Post-deploy mint Not available" [ref=e84]:
+          - cell "Post-deploy mint" [ref=e85]
+          - cell "Not available" [ref=e86]
+        - row "Blacklist / freeze Not available" [ref=e87]:
+          - cell "Blacklist / freeze" [ref=e88]
+          - cell "Not available" [ref=e89]
+    - heading "Core allocation model" [level=3] [ref=e90]
+    - table [ref=e92]:
+      - rowgroup [ref=e93]:
+        - row "Component Amount Share Implementation anchor" [ref=e94]:
+          - columnheader "Component" [ref=e95]
+          - columnheader "Amount" [ref=e96]
+          - columnheader "Share" [ref=e97]
+          - columnheader "Implementation anchor" [ref=e98]
+      - rowgroup [ref=e99]:
+        - row "Presale allocation cap 3,000,000 GGRD 30% PresaleEscrow8020.tokenCap()" [ref=e100]:
+          - cell "Presale allocation cap" [ref=e101]
+          - cell "3,000,000 GGRD" [ref=e102]
+          - cell "30%" [ref=e103]
+          - cell "PresaleEscrow8020.tokenCap()" [ref=e104]:
+            - code [ref=e105]: PresaleEscrow8020.tokenCap()
+        - row "Charity allocation 2,000,000 GGRD 20% Charity vesting model 40/30/30" [ref=e106]:
+          - cell "Charity allocation" [ref=e107]
+          - cell "2,000,000 GGRD" [ref=e108]
+          - cell "20%" [ref=e109]
+          - cell "Charity vesting model 40/30/30" [ref=e110]
+        - row "Staking reward cap 3,000,000 GGRD 30% GGRDStakingMultiV1.REWARD_POOL_CAP()" [ref=e111]:
+          - cell "Staking reward cap" [ref=e112]
+          - cell "3,000,000 GGRD" [ref=e113]
+          - cell "30%" [ref=e114]
+          - cell "GGRDStakingMultiV1.REWARD_POOL_CAP()" [ref=e115]:
+            - code [ref=e116]: GGRDStakingMultiV1.REWARD_POOL_CAP()
+        - row "Operations and liquidity 2,000,000 GGRD 20% Governance-managed distribution" [ref=e117]:
+          - cell "Operations and liquidity" [ref=e118]
+          - cell "2,000,000 GGRD" [ref=e119]
+          - cell "20%" [ref=e120]
+          - cell "Governance-managed distribution" [ref=e121]
+  - generic [ref=e122]:
+    - heading "3. Mainnet Addresses" [level=2] [ref=e123]
+    - table [ref=e125]:
+      - rowgroup [ref=e126]:
+        - row "Component Address Explorer" [ref=e127]:
+          - columnheader "Component" [ref=e128]
+          - columnheader "Address" [ref=e129]
+          - columnheader "Explorer" [ref=e130]
+      - rowgroup [ref=e131]:
+        - row "GGRD Token 0xA0d5663d57b7D7EF975D2F02BcAEaf5c94c671f9 BscScan" [ref=e132]:
+          - cell "GGRD Token" [ref=e133]
+          - cell "0xA0d5663d57b7D7EF975D2F02BcAEaf5c94c671f9" [ref=e134]:
+            - code [ref=e135]: "0xA0d5663d57b7D7EF975D2F02BcAEaf5c94c671f9"
+          - cell "BscScan" [ref=e136]:
+            - link "BscScan" [ref=e137] [cursor=pointer]:
+              - /url: https://bscscan.com/token/0xA0d5663d57b7D7EF975D2F02BcAEaf5c94c671f9
+        - row "PresaleEscrow8020 0xd8983534dd3c369d85127f6C9B85d98768139387 BscScan" [ref=e138]:
+          - cell "PresaleEscrow8020" [ref=e139]
+          - cell "0xd8983534dd3c369d85127f6C9B85d98768139387" [ref=e140]:
+            - code [ref=e141]: "0xd8983534dd3c369d85127f6C9B85d98768139387"
+          - cell "BscScan" [ref=e142]:
+            - link "BscScan" [ref=e143] [cursor=pointer]:
+              - /url: https://bscscan.com/address/0xd8983534dd3c369d85127f6C9B85d98768139387
+        - row "GGRDStakingMultiV1 0x05d803135bc09e9E5006CA75C533377D7Ea0A34b BscScan" [ref=e144]:
+          - cell "GGRDStakingMultiV1" [ref=e145]
+          - cell "0x05d803135bc09e9E5006CA75C533377D7Ea0A34b" [ref=e146]:
+            - code [ref=e147]: "0x05d803135bc09e9E5006CA75C533377D7Ea0A34b"
+          - cell "BscScan" [ref=e148]:
+            - link "BscScan" [ref=e149] [cursor=pointer]:
+              - /url: https://bscscan.com/address/0x05d803135bc09e9E5006CA75C533377D7Ea0A34b
+        - row "CharityVesting403030 0xE2993F0C8D2020dD9866E2d6dC5AA1D62b7C8fDC BscScan" [ref=e150]:
+          - cell "CharityVesting403030" [ref=e151]
+          - cell "0xE2993F0C8D2020dD9866E2d6dC5AA1D62b7C8fDC" [ref=e152]:
+            - code [ref=e153]: "0xE2993F0C8D2020dD9866E2d6dC5AA1D62b7C8fDC"
+          - cell "BscScan" [ref=e154]:
+            - link "BscScan" [ref=e155] [cursor=pointer]:
+              - /url: https://bscscan.com/address/0xE2993F0C8D2020dD9866E2d6dC5AA1D62b7C8fDC
+        - row "MerkleAirdrop 0x9F64E78185ee697783E0c9ebA0F66131FFCedBD6 BscScan" [ref=e156]:
+          - cell "MerkleAirdrop" [ref=e157]
+          - cell "0x9F64E78185ee697783E0c9ebA0F66131FFCedBD6" [ref=e158]:
+            - code [ref=e159]: "0x9F64E78185ee697783E0c9ebA0F66131FFCedBD6"
+          - cell "BscScan" [ref=e160]:
+            - link "BscScan" [ref=e161] [cursor=pointer]:
+              - /url: https://bscscan.com/address/0x9F64E78185ee697783E0c9ebA0F66131FFCedBD6
+        - row "Timelock Short (48h) 0xBC4655E8D5A4A4B16bD30db2fFBC94Ed05AbcE87 BscScan" [ref=e162]:
+          - cell "Timelock Short (48h)" [ref=e163]
+          - cell "0xBC4655E8D5A4A4B16bD30db2fFBC94Ed05AbcE87" [ref=e164]:
+            - code [ref=e165]: "0xBC4655E8D5A4A4B16bD30db2fFBC94Ed05AbcE87"
+          - cell "BscScan" [ref=e166]:
+            - link "BscScan" [ref=e167] [cursor=pointer]:
+              - /url: https://bscscan.com/address/0xBC4655E8D5A4A4B16bD30db2fFBC94Ed05AbcE87
+        - row "Timelock Long (72h) 0xd4b5f94f7cF8Eb79bEd2f3Aa5693d9F97D573E31 BscScan" [ref=e168]:
+          - cell "Timelock Long (72h)" [ref=e169]
+          - cell "0xd4b5f94f7cF8Eb79bEd2f3Aa5693d9F97D573E31" [ref=e170]:
+            - code [ref=e171]: "0xd4b5f94f7cF8Eb79bEd2f3Aa5693d9F97D573E31"
+          - cell "BscScan" [ref=e172]:
+            - link "BscScan" [ref=e173] [cursor=pointer]:
+              - /url: https://bscscan.com/address/0xd4b5f94f7cF8Eb79bEd2f3Aa5693d9F97D573E31
+        - row "USDC pay token 0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d BscScan" [ref=e174]:
+          - cell "USDC pay token" [ref=e175]
+          - cell "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d" [ref=e176]:
+            - code [ref=e177]: "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d"
+          - cell "BscScan" [ref=e178]:
+            - link "BscScan" [ref=e179] [cursor=pointer]:
+              - /url: https://bscscan.com/token/0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d
+        - row "Governance Safe (2/3) 0x28218d08f6D2084eBd7CeF3f582139E7417b6300 BscScan" [ref=e180]:
+          - cell "Governance Safe (2/3)" [ref=e181]
+          - cell "0x28218d08f6D2084eBd7CeF3f582139E7417b6300" [ref=e182]:
+            - code [ref=e183]: "0x28218d08f6D2084eBd7CeF3f582139E7417b6300"
+          - cell "BscScan" [ref=e184]:
+            - link "BscScan" [ref=e185] [cursor=pointer]:
+              - /url: https://bscscan.com/address/0x28218d08f6D2084eBd7CeF3f582139E7417b6300
+        - row "Liquidity Safe (2/3) 0x7677AC2712d161e7F75fC4316E8B3dC3FaC01009 BscScan" [ref=e186]:
+          - cell "Liquidity Safe (2/3)" [ref=e187]
+          - cell "0x7677AC2712d161e7F75fC4316E8B3dC3FaC01009" [ref=e188]:
+            - code [ref=e189]: "0x7677AC2712d161e7F75fC4316E8B3dC3FaC01009"
+          - cell "BscScan" [ref=e190]:
+            - link "BscScan" [ref=e191] [cursor=pointer]:
+              - /url: https://bscscan.com/address/0x7677AC2712d161e7F75fC4316E8B3dC3FaC01009
+        - row "Marketing Safe (2/3) 0xF2922343AdF6F2631A2f1e9b9b11c9d269f3874D BscScan" [ref=e192]:
+          - cell "Marketing Safe (2/3)" [ref=e193]
+          - cell "0xF2922343AdF6F2631A2f1e9b9b11c9d269f3874D" [ref=e194]:
+            - code [ref=e195]: "0xF2922343AdF6F2631A2f1e9b9b11c9d269f3874D"
+          - cell "BscScan" [ref=e196]:
+            - link "BscScan" [ref=e197] [cursor=pointer]:
+              - /url: https://bscscan.com/address/0xF2922343AdF6F2631A2f1e9b9b11c9d269f3874D
+        - row "Charity Safe A 0xd58B8D79deC67F8731267B929D24A4923Bac59a3 BscScan" [ref=e198]:
+          - cell "Charity Safe A" [ref=e199]
+          - cell "0xd58B8D79deC67F8731267B929D24A4923Bac59a3" [ref=e200]:
+            - code [ref=e201]: "0xd58B8D79deC67F8731267B929D24A4923Bac59a3"
+          - cell "BscScan" [ref=e202]:
+            - link "BscScan" [ref=e203] [cursor=pointer]:
+              - /url: https://bscscan.com/address/0xd58B8D79deC67F8731267B929D24A4923Bac59a3
+  - generic [ref=e204]:
+    - heading "4. Presale Escrow Model (USDC)" [level=2] [ref=e205]
+    - heading "Key parameters" [level=3] [ref=e206]
+    - list [ref=e207]:
+      - listitem [ref=e208]: "Accepted asset: USDC on BSC."
+      - listitem [ref=e209]: "Duration: 21 days."
+      - listitem [ref=e210]: "Softcap: 20,000 USDC."
+      - listitem [ref=e211]: "Hardcap: 31,250 USDC."
+      - listitem [ref=e212]: "Minimum buy: 50 USDC."
+      - listitem [ref=e213]: "Global max per wallet: 3,000 USDC."
+      - listitem [ref=e214]: "Configured window: 2026-03-10 01:15:19 UTC to 2026-03-31 01:15:19 UTC."
+    - heading "Current on-chain status snapshot" [level=3] [ref=e215]
+    - list [ref=e216]:
+      - listitem [ref=e217]: "Snapshot time: 2026-03-10 03:00 UTC."
+      - listitem [ref=e218]: "Presale state: live and not finalized."
+      - listitem [ref=e219]: "Active stage at snapshot: Stage 1."
+      - listitem [ref=e220]: "Raised amount at snapshot: 0 USDC."
+      - listitem [ref=e221]: "Sold amount at snapshot: 0 GGRD."
+      - listitem [ref=e222]:
+        - text: "Live tracker:"
+        - link "ggrd.me/#presale" [ref=e223] [cursor=pointer]:
+          - /url: https://ggrd.me/#presale
+        - text: (on-chain refresh).
+    - heading "Stage table" [level=3] [ref=e224]
+    - table [ref=e226]:
+      - rowgroup [ref=e227]:
+        - row "Stage Window (UTC) Allocation Price Wallet cap Status at snapshot" [ref=e228]:
+          - columnheader "Stage" [ref=e229]
+          - columnheader "Window (UTC)" [ref=e230]
+          - columnheader "Allocation" [ref=e231]
+          - columnheader "Price" [ref=e232]
+          - columnheader "Wallet cap" [ref=e233]
+          - columnheader "Status at snapshot" [ref=e234]
+      - rowgroup [ref=e235]:
+        - row "1 2026-03-10 01:15:19 -> 2026-03-15 01:15:19 1,000,000 GGRD 0.0085 USDC 500 USDC Active" [ref=e236]:
+          - cell "1" [ref=e237]
+          - cell "2026-03-10 01:15:19 -> 2026-03-15 01:15:19" [ref=e238]
+          - cell "1,000,000 GGRD" [ref=e239]
+          - cell "0.0085 USDC" [ref=e240]
+          - cell "500 USDC" [ref=e241]
+          - cell "Active" [ref=e242]
+        - row "2 2026-03-15 01:15:19 -> 2026-03-20 01:15:19 800,000 GGRD 0.0100 USDC 750 USDC Upcoming" [ref=e243]:
+          - cell "2" [ref=e244]
+          - cell "2026-03-15 01:15:19 -> 2026-03-20 01:15:19" [ref=e245]
+          - cell "800,000 GGRD" [ref=e246]
+          - cell "0.0100 USDC" [ref=e247]
+          - cell "750 USDC" [ref=e248]
+          - cell "Upcoming" [ref=e249]
+        - row "3 2026-03-20 01:15:19 -> 2026-03-26 01:15:19 700,000 GGRD 0.0115 USDC 1,000 USDC Upcoming" [ref=e250]:
+          - cell "3" [ref=e251]
+          - cell "2026-03-20 01:15:19 -> 2026-03-26 01:15:19" [ref=e252]
+          - cell "700,000 GGRD" [ref=e253]
+          - cell "0.0115 USDC" [ref=e254]
+          - cell "1,000 USDC" [ref=e255]
+          - cell "Upcoming" [ref=e256]
+        - row "4 2026-03-26 01:15:19 -> 2026-03-31 01:15:19 500,000 GGRD 0.0134 USDC 1,500 USDC Upcoming" [ref=e257]:
+          - cell "4" [ref=e258]
+          - cell "2026-03-26 01:15:19 -> 2026-03-31 01:15:19" [ref=e259]
+          - cell "500,000 GGRD" [ref=e260]
+          - cell "0.0134 USDC" [ref=e261]
+          - cell "1,500 USDC" [ref=e262]
+          - cell "Upcoming" [ref=e263]
+    - heading "Settlement logic" [level=3] [ref=e264]
+    - list [ref=e265]:
+      - listitem [ref=e266]: If presale succeeds, finalize transfers raised USDC as 80% to liquidity wallet and 20% to marketing wallet.
+      - listitem [ref=e267]: If presale fails (below softcap), each buyer can claim 100% refund in USDC.
+      - listitem [ref=e268]: On success, buyer claim schedule is 50% immediate plus 50% linear over 60 days.
+  - generic [ref=e269]:
+    - heading "5. Governance Model" [level=2] [ref=e270]
+    - list [ref=e271]:
+      - listitem [ref=e272]: "Operational governance actor: Safe multisig with 2/3 threshold."
+      - listitem [ref=e273]: "Timelock short: 48h for selected operations."
+      - listitem [ref=e274]: "Timelock long: 72h for high-impact operations."
+      - listitem [ref=e275]: Ownership targets include staking and airdrop modules as configured during deployment.
+    - generic [ref=e276]: Governance model is designed to reduce single-signer risk and enforce explicit delay for critical actions.
+  - generic [ref=e277]:
+    - heading "6. Charity Vesting" [level=2] [ref=e278]
+    - list [ref=e279]:
+      - listitem [ref=e280]: "Allocation target: 2,000,000 GGRD (20% of total supply)."
+      - listitem [ref=e281]: "Split: 40% / 30% / 30% across A/B/C beneficiary addresses."
+      - listitem [ref=e282]: "Cliff: 12 months."
+      - listitem [ref=e283]: "Linear release period: 24 months after cliff start reference."
+    - paragraph [ref=e284]: Current operational setup may map A/B/C to the same wallet. This preserves vesting logic while allowing simplified wallet operations.
+  - generic [ref=e285]:
+    - heading "7. Staking v1" [level=2] [ref=e286]
+    - table [ref=e288]:
+      - rowgroup [ref=e289]:
+        - row "Parameter Value" [ref=e290]:
+          - columnheader "Parameter" [ref=e291]
+          - columnheader "Value" [ref=e292]
+      - rowgroup [ref=e293]:
+        - row "Model Multi-position staking" [ref=e294]:
+          - cell "Model" [ref=e295]
+          - cell "Multi-position staking" [ref=e296]
+        - row "APR 10%" [ref=e297]:
+          - cell "APR" [ref=e298]
+          - cell "10%" [ref=e299]
+        - row "Minimum lock for rewards 30 days" [ref=e300]:
+          - cell "Minimum lock for rewards" [ref=e301]
+          - cell "30 days" [ref=e302]
+        - row "Early withdraw penalty 10% and zero rewards" [ref=e303]:
+          - cell "Early withdraw penalty" [ref=e304]
+          - cell "10% and zero rewards" [ref=e305]
+        - row "Program duration 24 months" [ref=e306]:
+          - cell "Program duration" [ref=e307]
+          - cell "24 months" [ref=e308]
+        - row "Max total staked 5,000,000 GGRD" [ref=e309]:
+          - cell "Max total staked" [ref=e310]
+          - cell "5,000,000 GGRD" [ref=e311]
+        - row "Lifetime reward funding cap 3,000,000 GGRD" [ref=e312]:
+          - cell "Lifetime reward funding cap" [ref=e313]
+          - cell "3,000,000 GGRD" [ref=e314]
+  - generic [ref=e315]:
+    - heading "8. Airdrop Framework" [level=2] [ref=e316]
+    - list [ref=e317]:
+      - listitem [ref=e318]: "Contract type: multi-round Merkle airdrop."
+      - listitem [ref=e319]: Each round defines root, time window and funded amount.
+      - listitem [ref=e320]: Expired leftovers can be swept by governance after deadline.
+      - listitem [ref=e321]: This model supports deterministic, auditable campaign distributions.
+  - generic [ref=e322]:
+    - heading "9. Liquidity and LP Lock Plan" [level=2] [ref=e323]
+    - list [ref=e324]:
+      - listitem [ref=e325]: "Main pair target: GGRD / USDC."
+      - listitem [ref=e326]: "Reference launch ratio from spec: 25,000 USDC paired with about 1,200,000 GGRD."
+      - listitem [ref=e327]: "LP lock target: 12 months."
+      - listitem [ref=e328]: LP locker publication follows pair creation and lock transaction execution.
+    - generic [ref=e329]: At whitepaper update time, LP locker address can be pending until LP token exists.
+  - generic [ref=e330]:
+    - heading "10. Risk and Legal Notices" [level=2] [ref=e331]
+    - list [ref=e332]:
+      - listitem [ref=e333]: GGRD is a high-risk crypto asset with potential total loss.
+      - listitem [ref=e334]: This document is not investment, legal or tax advice.
+      - listitem [ref=e335]: Smart-contract execution depends on chain conditions and external infrastructure.
+      - listitem [ref=e336]: Users should verify every address and transaction independently before acting.
+  - generic [ref=e337]:
+    - text: "Official website:"
+    - link "ggrd.me" [ref=e338] [cursor=pointer]:
+      - /url: https://ggrd.me
+    - text: "| Donation policy:"
+    - link "donation-policy.html" [ref=e339] [cursor=pointer]:
+      - /url: donation-policy.html
+    - text: "BscScan token:"
+    - link "0xA0d5663d57b7D7EF975D2F02BcAEaf5c94c671f9" [ref=e340] [cursor=pointer]:
+      - /url: https://bscscan.com/token/0xA0d5663d57b7D7EF975D2F02BcAEaf5c94c671f9
