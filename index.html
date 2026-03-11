@@ -1013,170 +1013,686 @@ footer {
   .cd-num { font-size: 2.2rem; min-width: 50px; }
   .hero-stats { gap: 1.5rem; }
 }
-/* ===== PRESALE HERO WIDGET v9 ===== */
-.hw {
-  max-width:380px; margin:0 auto 2rem;
-  background: linear-gradient(170deg, #0d1117 0%, #080b10 100%);
-  border:1px solid rgba(0,255,65,.15);
-  border-radius:24px;
-  padding:1.6rem 1.4rem 1.2rem;
-  box-shadow: 0 0 80px rgba(0,255,65,.04), 0 12px 40px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.04);
-  position:relative; overflow:hidden;
+/* ===== PRESALE WIDGET ===== */
+.widget-section {
+  background: linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%);
+  padding: 4rem 2rem 5rem;
+  position: relative;
+  overflow: hidden;
 }
-.hw::before {
-  content:''; position:absolute; top:0; left:0; right:0; height:2px;
-  background:linear-gradient(90deg,var(--green),var(--yellow),var(--green));
-  background-size:200%; animation:shimmer 3s linear infinite;
-  border-radius:24px 24px 0 0;
+
+.widget-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 50%, rgba(255,224,0,0.05) 0%, transparent 70%);
+  pointer-events: none;
 }
+
+.widget-wrap {
+  max-width: 480px;
+  margin: 0 auto;
+  background: #0d0d0d;
+  border: 1px solid rgba(255,224,0,0.4);
+  box-shadow: 0 0 40px rgba(255,224,0,0.08), 0 0 80px rgba(0,0,0,0.6);
+  position: relative;
+}
+
+.widget-wrap::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--yellow), var(--green), var(--yellow));
+  background-size: 200%;
+  animation: shimmer 3s linear infinite;
+}
+
 @keyframes shimmer { from{background-position:0%} to{background-position:200%} }
 
-.hw-badge { display:flex; align-items:center; justify-content:center; gap:6px; font-size:.52rem; letter-spacing:2.5px; color:var(--green); text-transform:uppercase; margin-bottom:.5rem; }
-.hw-dot { width:7px; height:7px; border-radius:50%; background:var(--green); box-shadow:0 0 6px var(--green); animation:blink 1s ease-in-out infinite; }
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.15} }
-
-.hw-title {
-  font-family:'Bangers',cursive; font-size:1.45rem;
-  letter-spacing:3px; color:var(--yellow);
-  text-align:center; margin-bottom:1rem; line-height:1.15;
-  text-shadow: 0 0 20px rgba(255,224,0,.15);
+.widget-header {
+  background: rgba(255,224,0,0.06);
+  border-bottom: 1px solid rgba(255,224,0,0.15);
+  padding: 1.2rem 1.5rem;
+  text-align: center;
 }
 
-/* countdown */
-.hw-cd { display:flex; justify-content:center; gap:8px; margin-bottom:1.1rem; }
-.hw-cd-unit { text-align:center; }
-.hw-cd-num {
-  display:flex; align-items:center; justify-content:center;
-  background: rgba(0,255,65,.06); border:1.5px solid rgba(0,255,65,.2);
-  border-radius:10px; padding:8px 0; min-width:52px;
-  font-family:'Black Han Sans',sans-serif; font-size:1.4rem;
-  color:#fff; letter-spacing:1px;
+.widget-title {
+  font-family: 'Bangers', cursive;
+  font-size: 1.5rem;
+  letter-spacing: 3px;
+  color: var(--yellow);
+  margin-bottom: 0.2rem;
 }
-.hw-cd-lbl { display:block; font-size:.42rem; color:var(--gray); text-transform:uppercase; letter-spacing:2px; margin-top:4px; }
-.hw-cd-sep { color:rgba(0,255,65,.25); font-size:1.2rem; padding-top:8px; font-weight:700; }
 
-/* raised + progress */
-.hw-raised-block { text-align:center; margin-bottom:.6rem; }
-.hw-raised-label { font-size:.5rem; color:var(--gray); text-transform:uppercase; letter-spacing:2px; margin-bottom:2px; }
-.hw-raised-val { font-family:'Black Han Sans',sans-serif; font-size:1.15rem; color:#fff; }
-.hw-raised-val .hw-target { color:var(--gray); font-size:.9rem; }
-.hw-pbar { background:#1a1a1a; height:10px; border-radius:5px; margin-bottom:.6rem; position:relative; overflow:hidden; }
-.hw-pfill { height:100%; background:linear-gradient(90deg,var(--green),#00cc66); border-radius:5px; transition:width 1s ease; min-width:3px; position:relative; }
-.hw-pfill::after { content:''; position:absolute; right:0; top:0; bottom:0; width:20px; background:rgba(255,255,255,.25); filter:blur(4px); animation:pglow 1.5s ease-in-out infinite; }
-@keyframes pglow { 0%,100%{opacity:.3} 50%{opacity:1} }
-
-.hw-price-line { text-align:center; font-size:.75rem; color:var(--gray); margin-bottom:.8rem; padding:.4rem 0; border-top:1px solid rgba(255,255,255,.05); border-bottom:1px solid rgba(255,255,255,.05); }
-.hw-price-line strong { color:var(--yellow); font-family:'Black Han Sans',sans-serif; font-size:.9rem; }
-
-/* status + address */
-.hw-addr { font-size:.55rem; color:var(--green); text-align:center; margin-bottom:3px; opacity:0; transition:opacity .3s; }
-.hw-addr.show { opacity:1; }
-.hw-status { font-size:.58rem; color:var(--gray); text-align:center; margin-bottom:.6rem; min-height:1em; }
-.hw-status.ok { color:var(--green); }
-.hw-status.warn { color:var(--yellow); }
-.hw-status.err { color:var(--red); }
-
-/* CTA button */
-.hw-btn {
-  display:block; width:100%; padding:14px;
-  background: linear-gradient(135deg, #FFE000 0%, #FFC107 100%);
-  color:#000; font-family:'Bangers',cursive; font-size:1.15rem;
-  letter-spacing:3px; border:none; border-radius:14px;
-  cursor:pointer; font-weight:700; text-transform:uppercase;
-  box-shadow: 0 0 30px rgba(255,224,0,.2), 0 4px 15px rgba(0,0,0,.3);
-  transition: all .2s;
+.widget-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.62rem;
+  letter-spacing: 2px;
+  color: var(--green);
+  text-transform: uppercase;
 }
-.hw-btn:hover { transform:translateY(-2px); box-shadow: 0 0 40px rgba(255,224,0,.35), 0 8px 25px rgba(0,0,0,.4); }
-.hw-btn:disabled { opacity:.45; cursor:not-allowed; transform:none; box-shadow:none; }
-.hw-btn.buying-mode { background:linear-gradient(135deg,var(--green),#00cc33); box-shadow:0 0 30px rgba(0,255,65,.2); }
 
-.hw-sub-btn { display:block; text-align:center; font-size:.55rem; color:var(--gray); margin-top:6px; cursor:pointer; background:none; border:none; }
-.hw-sub-btn:hover { color:var(--red); }
-
-.hw-disc { display:none; background:none; border:none; color:var(--gray); font-size:.55rem; padding:0; cursor:pointer; }
-.hw-disc.show { display:inline; }
-
-/* network warn */
-.hw-nwarn { display:none; background:rgba(255,34,51,.08); border:1px solid rgba(255,34,51,.25); padding:.45rem .7rem; border-radius:10px; font-size:.58rem; color:var(--red); text-align:center; margin-bottom:.5rem; }
-.hw-nwarn.show { display:block; }
-
-/* footer */
-.hw-foot { text-align:center; margin-top:10px; font-size:.48rem; color:#444; }
-.hw-foot a { color:#555; text-decoration:underline; }
-
-/* responsive */
-@media(max-width:500px) {
-  .hw { max-width:100%; margin-left:.8rem; margin-right:.8rem; border-radius:18px; padding:1.2rem 1rem 1rem; }
-  .hw-cd-num { font-size:1.15rem; min-width:44px; padding:6px 0; }
-  .hw-title { font-size:1.2rem; letter-spacing:2px; }
+.w-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: blink 1s ease-in-out infinite;
 }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+.widget-body { padding: 1.5rem; }
+
+/* Stage + Price row */
+.w-stage-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.2rem;
+  padding: 0.8rem 1rem;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.w-stage-info .w-stage-lbl {
+  font-size: 0.58rem;
+  letter-spacing: 2px;
+  color: var(--gray);
+  text-transform: uppercase;
+}
+
+.w-stage-info .w-stage-val {
+  font-family: 'Bangers', cursive;
+  font-size: 1.3rem;
+  letter-spacing: 1px;
+  color: var(--green);
+}
+
+.w-price-info { text-align: right; }
+
+.w-price-info .w-price-lbl {
+  font-size: 0.58rem;
+  letter-spacing: 2px;
+  color: var(--gray);
+  text-transform: uppercase;
+}
+
+.w-price-info .w-price-val {
+  font-family: 'Bangers', cursive;
+  font-size: 1.3rem;
+  letter-spacing: 1px;
+  color: var(--yellow);
+}
+
+.w-next-price {
+  font-size: 0.6rem;
+  color: #555;
+}
+
+/* Progress */
+.w-raised-row {
+  margin-bottom: 0.6rem;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.68rem;
+  color: var(--gray);
+}
+
+.w-raised-row strong { color: var(--white); }
+
+.w-progress-outer {
+  background: #1a1a1a;
+  height: 10px;
+  border-radius: 0;
+  margin-bottom: 1.4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.w-progress-inner {
+  height: 100%;
+  background: linear-gradient(90deg, var(--yellow), var(--green));
+  transition: width 1s ease;
+  position: relative;
+  min-width: 4px;
+}
+
+.w-progress-inner::after {
+  content: '';
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 20px;
+  background: rgba(255,255,255,0.3);
+  filter: blur(4px);
+  animation: progress-glow 1.5s ease-in-out infinite;
+}
+@keyframes progress-glow { 0%,100%{opacity:0.4} 50%{opacity:1} }
+
+.w-softcap-line {
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 2px;
+  background: rgba(255,34,51,0.6);
+  left: 64%; /* 20000/31250 = 64% */
+}
+
+.w-softcap-lbl {
+  position: absolute;
+  top: -16px;
+  left: 64%;
+  transform: translateX(-50%);
+  font-size: 0.52rem;
+  color: var(--red);
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+/* Input area */
+.w-input-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 1rem;
+}
+
+.w-input-box {
+  background: #111;
+  border: 1px solid #222;
+  padding: 0.8rem;
+  transition: border-color 0.2s;
+  position: relative;
+}
+
+.w-input-box:focus-within { border-color: var(--yellow); }
+
+.w-input-lbl {
+  font-size: 0.58rem;
+  letter-spacing: 1.5px;
+  color: var(--gray);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.w-input-field {
+  background: none;
+  border: none;
+  outline: none;
+  color: var(--white);
+  font-family: 'Courier Prime', monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  width: 100%;
+}
+
+.w-input-field::placeholder { color: #333; }
+
+.w-input-currency {
+  font-size: 0.65rem;
+  color: var(--yellow);
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-top: 2px;
+  display: block;
+}
+
+.w-output-val {
+  font-family: 'Courier Prime', monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--green);
+}
+
+.w-min-note {
+  font-size: 0.62rem;
+  color: #444;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.w-min-note span { color: var(--gray); }
+
+/* Wallet / Buy button */
+.w-connect-btn {
+  width: 100%;
+  background: var(--yellow);
+  color: #000;
+  font-family: 'Bangers', cursive;
+  font-size: 1.5rem;
+  letter-spacing: 3px;
+  padding: 14px 20px;
+  border: none;
+  cursor: pointer;
+  display: block;
+  text-align: center;
+  transition: transform 0.1s, box-shadow 0.1s, background 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.w-connect-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.4s;
+}
+
+.w-connect-btn:hover::before { transform: translateX(100%); }
+.w-connect-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,224,0,0.3); }
+.w-connect-btn:active { transform: translateY(0); }
+.w-connect-btn:disabled { background: #333; color: #666; cursor: not-allowed; transform: none; box-shadow: none; }
+
+.w-connect-btn.approve-mode { background: #FF8C00; }
+.w-connect-btn.buying-mode { background: var(--green); }
+.w-connect-btn.error-mode { background: var(--red); color: #fff; }
+
+/* Steps */
+.w-steps {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin-top: 1.2rem;
+  border: 1px solid #1a1a1a;
+}
+
+.w-step {
+  flex: 1;
+  padding: 0.6rem 0;
+  text-align: center;
+  font-size: 0.58rem;
+  letter-spacing: 1px;
+  color: #333;
+  text-transform: uppercase;
+  border-right: 1px solid #1a1a1a;
+  transition: color 0.3s, background 0.3s;
+}
+.w-step:last-child { border-right: none; }
+.w-step.active { color: var(--yellow); background: rgba(255,224,0,0.05); }
+.w-step.done { color: var(--green); }
+
+/* Footer info */
+.widget-footer {
+  border-top: 1px solid #1a1a1a;
+  padding: 0.8rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.wf-claim {
+  font-size: 0.62rem;
+  color: var(--gray);
+}
+.wf-claim strong { color: var(--white); }
+
+.wf-secure {
+  font-size: 0.58rem;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Status message */
+.w-status {
+  font-size: 0.7rem;
+  text-align: center;
+  min-height: 1.2rem;
+  margin: 0.5rem 0;
+  color: var(--gray);
+  font-family: 'Courier Prime', monospace;
+}
+.w-status.ok  { color: var(--green); }
+.w-status.err { color: var(--red); }
+.w-status.warn { color: var(--yellow); }
+
+/* Network warning */
+.w-network-warn {
+  background: rgba(255,34,51,0.1);
+  border: 1px solid rgba(255,34,51,0.3);
+  padding: 0.6rem 1rem;
+  font-size: 0.68rem;
+  color: var(--red);
+  text-align: center;
+  display: none;
+  margin-bottom: 0.8rem;
+}
+
+
+/* ===== REFUND BANNER ===== */
+.refund-banner {
+  background: linear-gradient(90deg, #0a0a0a 0%, #110000 50%, #0a0a0a 100%);
+  border-top: 2px solid var(--red);
+  border-bottom: 2px solid var(--red);
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.refund-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 60px,
+    rgba(255,34,51,0.03) 60px,
+    rgba(255,34,51,0.03) 61px
+  );
+  pointer-events: none;
+}
+
+.refund-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 2rem;
+  align-items: center;
+}
+
+.refund-icon {
+  font-size: 4rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 20px rgba(255,34,51,0.6));
+  animation: icon-pulse 2s ease-in-out infinite;
+}
+@keyframes icon-pulse {
+  0%,100% { transform: scale(1); filter: drop-shadow(0 0 20px rgba(255,34,51,0.6)); }
+  50%      { transform: scale(1.08); filter: drop-shadow(0 0 35px rgba(255,34,51,0.9)); }
+}
+
+.refund-content {}
+
+.refund-headline {
+  font-family: 'Bangers', cursive;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  letter-spacing: 4px;
+  color: var(--red);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+  text-shadow: 0 0 30px rgba(255,34,51,0.4);
+}
+
+.refund-headline span {
+  color: var(--yellow);
+}
+
+.refund-body {
+  font-size: 0.88rem;
+  color: #aaa;
+  line-height: 1.7;
+  max-width: 580px;
+}
+
+.refund-body strong { color: var(--white); }
+
+.refund-proof {
+  background: rgba(255,34,51,0.07);
+  border: 1px solid rgba(255,34,51,0.3);
+  padding: 1.2rem 1.5rem;
+  min-width: 200px;
+  text-align: center;
+}
+
+.rp-label {
+  font-size: 0.58rem;
+  letter-spacing: 2px;
+  color: var(--red);
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.rp-val {
+  font-family: 'Bangers', cursive;
+  font-size: 2.8rem;
+  color: var(--white);
+  line-height: 1;
+  letter-spacing: 2px;
+}
+
+.rp-sub {
+  font-size: 0.68rem;
+  color: #666;
+  margin-top: 0.2rem;
+}
+
+.rp-sub strong { color: var(--green); }
+
+.refund-pills {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-top: 0.8rem;
+}
+
+.rpill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.65rem;
+  letter-spacing: 1px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border: 1px solid;
+}
+
+.rpill-red   { border-color: var(--red);   color: var(--red); }
+.rpill-green { border-color: var(--green); color: var(--green); }
+.rpill-white { border-color: #444;         color: #888; }
+
+@media (max-width: 768px) {
+  .refund-inner {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    text-align: center;
+  }
+  .refund-icon { font-size: 3rem; }
+  .refund-pills { justify-content: center; }
+  .refund-proof { min-width: 0; }
+}
+
 
 /* ===== WALLET MODAL ===== */
 .wm-overlay {
-  position:fixed; inset:0; z-index:10000;
-  background:rgba(0,0,0,.7); backdrop-filter:blur(6px);
-  display:flex; align-items:center; justify-content:center;
-  opacity:0; pointer-events:none; transition:opacity .25s;
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(6px);
+  z-index: 10000;
+  align-items: center;
+  justify-content: center;
 }
-.wm-overlay.open { opacity:1; pointer-events:auto; }
+.wm-overlay.open { display: flex; }
 
 .wm-box {
-  background:#0d1117; border:1px solid rgba(0,255,65,.2);
-  border-radius:20px; width:90%; max-width:380px;
-  box-shadow:0 20px 60px rgba(0,0,0,.6), 0 0 40px rgba(0,255,65,.05);
-  overflow:hidden;
+  background: #0f0f0f;
+  border: 1px solid rgba(255,224,0,0.35);
+  width: 100%;
+  max-width: 380px;
+  margin: 1rem;
+  position: relative;
+  animation: wm-in 0.2s ease;
 }
+@keyframes wm-in { from{transform:scale(0.94);opacity:0} to{transform:scale(1);opacity:1} }
 
 .wm-header {
-  display:flex; justify-content:space-between; align-items:center;
-  padding:1rem 1.2rem; border-bottom:1px solid rgba(255,255,255,.06);
+  padding: 1.2rem 1.5rem 1rem;
+  border-bottom: 1px solid #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-.wm-title { font-family:'Bangers',cursive; font-size:1rem; letter-spacing:2px; color:var(--yellow); }
-.wm-close { background:none; border:none; color:var(--gray); font-size:1.2rem; cursor:pointer; padding:4px; }
-.wm-close:hover { color:var(--white); }
+.wm-title {
+  font-family: 'Bangers', cursive;
+  font-size: 1.4rem;
+  letter-spacing: 3px;
+  color: var(--yellow);
+}
+.wm-close {
+  background: none;
+  border: 1px solid #333;
+  color: #666;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s, color 0.2s;
+}
+.wm-close:hover { border-color: var(--red); color: var(--red); }
 
-.wm-body { padding:1rem 1.2rem; }
-.wm-subtitle { font-size:.6rem; color:var(--gray); letter-spacing:1px; margin-bottom:.8rem; text-align:center; }
+.wm-body { padding: 1rem 1.2rem 1.5rem; }
 
-.wm-wallets { display:flex; flex-direction:column; gap:6px; }
+.wm-subtitle {
+  font-size: 0.68rem;
+  color: var(--gray);
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.wm-wallets {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 1rem;
+}
+
 .wm-wallet-btn {
-  display:flex; align-items:center; gap:10px;
-  width:100%; padding:10px 12px; background:rgba(255,255,255,.03);
-  border:1px solid rgba(255,255,255,.06); border-radius:12px;
-  cursor:pointer; transition:all .15s; color:var(--white); text-align:left;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 1rem;
+  background: #141414;
+  border: 1px solid #222;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  width: 100%;
+  text-align: left;
 }
-.wm-wallet-btn:hover { background:rgba(255,224,0,.06); border-color:rgba(255,224,0,.2); }
-.wm-wallet-icon { width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:1.2rem; flex-shrink:0; }
-.wm-wallet-info { flex:1; min-width:0; }
-.wm-wallet-name { font-size:.75rem; font-weight:700; color:var(--white); }
-.wm-wallet-desc { font-size:.52rem; color:var(--gray); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.wm-wallet-badge-status { font-size:.5rem !important; letter-spacing:1px; color:var(--green); }
-.wm-badge { font-size:.45rem; letter-spacing:1px; background:rgba(255,224,0,.1); color:var(--yellow); padding:2px 6px; border-radius:4px; }
+.wm-wallet-btn:hover { border-color: var(--yellow); background: #1a1800; }
+.wm-wallet-btn:active { transform: scale(0.99); }
 
-.wm-qr-area { display:none; text-align:center; padding:.5rem 0; }
-.wm-qr-area.show { display:block; }
-
-.wm-back-btn {
-  display:block; width:100%; padding:8px; margin-top:6px;
-  background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08);
-  border-radius:8px; color:var(--gray); font-size:.65rem; cursor:pointer;
-  text-align:center;
+.wm-wallet-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  flex-shrink: 0;
 }
-.wm-back-btn:hover { background:rgba(255,255,255,.08); color:var(--white); }
+
+.wm-wallet-info {}
+.wm-wallet-name {
+  font-family: 'Bangers', cursive;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  color: var(--white);
+}
+.wm-wallet-desc {
+  font-size: 0.62rem;
+  color: var(--gray);
+  letter-spacing: 0.5px;
+}
+
+.wm-badge {
+  margin-left: auto;
+  font-size: 0.55rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: 1px solid;
+  padding: 2px 7px;
+  white-space: nowrap;
+}
+.wm-badge-green { border-color: var(--green); color: var(--green); }
+.wm-badge-yellow { border-color: var(--yellow); color: var(--yellow); }
 
 .wm-footer {
-  padding:.8rem 1.2rem; border-top:1px solid rgba(255,255,255,.04);
-  font-size:.48rem; color:#444; text-align:center; line-height:1.5;
+  font-size: 0.6rem;
+  color: #333;
+  text-align: center;
+  border-top: 1px solid #1a1a1a;
+  padding-top: 0.8rem;
 }
-.wm-footer a { color:var(--gray); }
+.wm-footer a { color: #444; }
 
-/* hide old class */
-.w-network-warn { display:none; }
+/* WC QR area */
+.wm-qr-area {
+  display: none;
+  text-align: center;
+  padding: 0.5rem 0;
+}
+.wm-qr-area.show { display: block; }
+.wm-qr-area canvas { border: 3px solid var(--yellow); }
+.wm-qr-uri {
+  font-size: 0.58rem;
+  color: #444;
+  word-break: break-all;
+  margin-top: 0.5rem;
+}
+.wm-back-btn {
+  background: none;
+  border: 1px solid #333;
+  color: var(--gray);
+  padding: 5px 14px;
+  cursor: pointer;
+  font-size: 0.7rem;
+  margin-top: 0.7rem;
+  letter-spacing: 1px;
+}
+.wm-back-btn:hover { border-color: var(--yellow); color: var(--yellow); }
+
+/* Widget button states */
+.w-connected-addr {
+  font-size: 0.68rem;
+  color: var(--green);
+  text-align: center;
+  margin-bottom: 0.5rem;
+  font-family: 'Courier Prime', monospace;
+  display: none;
+}
+.w-connected-addr.show { display: block; }
+
+
+/* Disconnect button */
+.w-disconnect-btn {
+  display: none;
+  background: rgba(255,34,51,0.08);
+  border: 1px solid rgba(255,34,51,0.5);
+  color: #FF6677;
+  font-family: 'Bangers', cursive;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  width: 100%;
+}
+.w-disconnect-btn:hover {
+  background: rgba(255,34,51,0.2);
+  border-color: var(--red);
+  color: #fff;
+}
+.w-disconnect-btn.show { display: block; }
 
 </style>
 <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@walletconnect/ethereum-provider@2.10.0/dist/index.umd.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@walletconnect/ethereum-provider@2.17.3/dist/index.umd.js"></script>
 </head>
 <body>
 
@@ -1232,7 +1748,7 @@ footer {
           <div class="wm-wallet-icon" style="background:#3B99FC20">📱</div>
           <div class="wm-wallet-info">
             <div class="wm-wallet-name">WalletConnect</div>
-            <div class="wm-wallet-desc">QR code — 300+ mobile wallets</div>
+            <div class="wm-wallet-desc">QR code — 300+ portfeli mobilnych</div>
           </div>
           <span class="wm-badge wm-badge-yellow">Mobile</span>
         </button>
@@ -1241,12 +1757,12 @@ footer {
 
       <!-- WC QR -->
       <div class="wm-qr-area" id="wm-qr-area">
-        <p style="font-size:0.65rem;color:var(--gray);margin-bottom:0.8rem;letter-spacing:1px;text-align:center">Scan with your mobile wallet</p>
+        <p style="font-size:0.65rem;color:var(--gray);margin-bottom:0.8rem;letter-spacing:1px;text-align:center">Zeskanuj telefonem z portfelem</p>
         <div id="wm-qr-img-wrap" style="min-height:226px;display:flex;align-items:center;justify-content:center">
-          <div style="color:#444;font-size:0.75rem">⏳ Generating QR…</div>
+          <div style="color:#444;font-size:0.75rem">⏳ Generuję QR…</div>
         </div>
-        <button class="wm-back-btn" id="wm-copy-uri" style="display:none;margin-top:0.5rem;width:100%">📋 Copy URI</button>
-        <button class="wm-back-btn" id="wm-qr-back" style="margin-top:0.5rem;width:100%">← Back to wallet list</button>
+        <button class="wm-back-btn" id="wm-copy-uri" style="display:none;margin-top:0.5rem;width:100%">📋 Kopiuj URI</button>
+        <button class="wm-back-btn" id="wm-qr-back" style="margin-top:0.5rem;width:100%">← Wróć do listy</button>
       </div>
 
     </div><!-- /body -->
@@ -1270,7 +1786,7 @@ footer {
     <li><a href="#charity">Charity</a></li>
     <li><a href="#addresses">Contracts</a></li>
     <li><a href="GGRD_Whitepaper_EN.html">Whitepaper</a></li>
-    <li><a class="nav-cta" href="#tokenomics">BUY GGRD ⚡</a></li>
+    <li><a class="nav-cta" href="#buy">BUY GGRD ⚡</a></li>
   </ul>
 </nav>
 
@@ -1337,53 +1853,13 @@ footer {
 <!-- HERO -->
 <section class="hero">
 
-  <div class="hero-badge" role="status">🔴 PRESALE ACTIVE — BSC MAINNET</div>
-  <!-- PRESALE HERO WIDGET -->
-  <div class="hw" id="hw-widget">
-    <div class="hw-badge"><span class="hw-dot"></span> PRESALE LIVE · BSC MAINNET</div>
-    <div class="hw-title">BUY $GGRD IN PRESALE NOW!</div>
-
-    <!-- Countdown -->
-    <div class="hw-cd">
-      <div class="hw-cd-unit"><span class="hw-cd-num" id="cd-days">--</span><span class="hw-cd-lbl">Days</span></div>
-      <span class="hw-cd-sep">:</span>
-      <div class="hw-cd-unit"><span class="hw-cd-num" id="cd-hours">--</span><span class="hw-cd-lbl">Hours</span></div>
-      <span class="hw-cd-sep">:</span>
-      <div class="hw-cd-unit"><span class="hw-cd-num" id="cd-mins">--</span><span class="hw-cd-lbl">Mins</span></div>
-      <span class="hw-cd-sep">:</span>
-      <div class="hw-cd-unit"><span class="hw-cd-num" id="cd-secs">--</span><span class="hw-cd-lbl">Secs</span></div>
-    </div>
-
-    <!-- Raised -->
-    <div class="hw-raised-block">
-      <div class="hw-raised-label">USDC Raised</div>
-      <div class="hw-raised-val"><span id="w-raised-val">$0</span> <span class="hw-target">/ $31,250</span></div>
-    </div>
-
-    <!-- Progress -->
-    <div class="hw-pbar"><div class="hw-pfill" id="w-progress" style="width:0.5%"></div></div>
-
-    <!-- Price -->
-    <div class="hw-price-line">1 $GGRD = <strong id="w-price-val">—</strong></div>
-
-    <!-- Network warning -->
-    <div class="hw-nwarn" id="w-network-warn">⚠ Wrong network <button id="w-switch-bsc-btn" style="background:var(--yellow);color:#000;border:none;padding:3px 10px;border-radius:4px;font-weight:700;font-size:.55rem;cursor:pointer;margin-left:4px">Switch to BSC</button></div>
-
-    <!-- Address + Status -->
-    <div class="hw-addr" id="w-addr"></div>
-    <div class="hw-status" id="w-status"></div>
-
-    <!-- CTA -->
-    <button class="hw-btn" id="w-btn">CONNECT WALLET</button>
-    <div style="text-align:center;margin-top:6px">
-      <button class="hw-sub-btn hw-disc" id="w-disconnect-btn">✕ Disconnect wallet</button>
-    </div>
-
-    <div class="hw-foot">
-      Softcap miss = 100% refund · <a href="https://bscscan.com/address/0xd8983534dd3c369d85127f6C9B85d98768139387" target="_blank" rel="noopener">Verify contract ↗</a>
-    </div>
+  <div class="stage-indicator">
+    <div class="s-label">CURRENT STAGE</div>
+    <div class="s-num" id="liveStageNum">1</div>
+    <div class="s-price" id="liveStagePrice">0.0085 USDC</div>
   </div>
 
+  <div class="hero-badge" role="status">🔴 PRESALE ACTIVE — BSC MAINNET</div>
 
   <h1>
     <span class="glitch" data-text="GIGGLE">GIGGLE</span><br>
@@ -1393,7 +1869,29 @@ footer {
   <p class="hero-sub">$GGRD · BNB Smart Chain</p>
   <p class="hero-tagline">The meme coin that actually <span>does something</span>. Fixed supply. USDC presale. Charity vesting locked on-chain. No funny business — just funny.</p>
 
-
+  <div class="countdown-box">
+    <div class="countdown">
+      <div class="cd-unit">
+        <span class="cd-num" id="cd-days">--</span>
+        <span class="cd-label">days</span>
+      </div>
+      <span class="cd-sep">:</span>
+      <div class="cd-unit">
+        <span class="cd-num" id="cd-hours">--</span>
+        <span class="cd-label">hours</span>
+      </div>
+      <span class="cd-sep">:</span>
+      <div class="cd-unit">
+        <span class="cd-num" id="cd-mins">--</span>
+        <span class="cd-label">mins</span>
+      </div>
+      <span class="cd-sep">:</span>
+      <div class="cd-unit">
+        <span class="cd-num" id="cd-secs">--</span>
+        <span class="cd-label">secs</span>
+      </div>
+    </div>
+  </div>
 
   <div class="hero-btns">
     <a class="btn-primary" href="#buy">
@@ -1470,8 +1968,109 @@ footer {
 </section>
 
 
-<!-- COMPACT PRESALE HERO WIDGET -->
-<section id="buy" style="padding:0">
+<!-- PRESALE WIDGET -->
+<section class="widget-section" id="buy">
+  <div class="section-inner">
+    <h2 class="section-title fade-up">BUY $GGRD NOW 🚀</h2>
+    <p class="section-sub fade-up">Direct on-chain purchase. USDC only. Your wallet, your keys, your GGRD.</p>
+    <div class="widget-wrap fade-up">
+
+      <div class="widget-header">
+        <div class="widget-title">BUY $GGRD PRESALE</div>
+        <div class="widget-badge">
+          <span class="w-dot"></span>
+          PRESALE LIVE · BSC MAINNET
+        </div>
+      </div>
+
+      <div class="widget-body">
+
+        <!-- Stage + Price -->
+        <div class="w-stage-row">
+          <div class="w-stage-info">
+            <div class="w-stage-lbl">Current Stage</div>
+            <div class="w-stage-val" id="w-stage-val">—</div>
+          </div>
+          <div class="w-price-info">
+            <div class="w-price-lbl">Price</div>
+            <div class="w-price-val" id="w-price-val">—</div>
+            <div class="w-next-price" id="w-next-price"></div>
+          </div>
+        </div>
+
+        <!-- Progress -->
+        <div style="position:relative;margin-bottom:1.5rem">
+          <div class="w-softcap-lbl">SOFTCAP</div>
+          <div class="w-raised-row">
+            <span>Raised: <strong id="w-raised-val">Loading...</strong></span>
+            <span id="w-pct">0%</span> of $31,250
+          </div>
+          <div class="w-progress-outer">
+            <div class="w-progress-inner" id="w-progress" style="width:0.5%"></div>
+            <div class="w-softcap-line"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:0.58rem;color:#333;margin-top:3px">
+            <span>$0</span><span>Softcap $20k</span><span>Hardcap $31,250</span>
+          </div>
+        </div>
+
+        <!-- Network warning -->
+        <div class="w-network-warn" id="w-network-warn">
+          ⚠ Wrong network. Please switch to BNB Smart Chain (chainId 56).
+        </div>
+
+        <!-- Input -->
+        <div class="w-input-grid">
+          <div class="w-input-box">
+            <span class="w-input-lbl">You Pay</span>
+            <input class="w-input-field" id="w-usdc-in" type="number" min="50" max="3000" step="10" placeholder="100" />
+            <span class="w-input-currency">USDC (BSC)</span>
+          </div>
+          <div class="w-input-box">
+            <span class="w-input-lbl">You Receive</span>
+            <div class="w-output-val" id="w-ggrd-out">0.00</div>
+            <span class="w-input-currency">GGRD</span>
+          </div>
+        </div>
+
+        <div style="background:rgba(255,34,51,0.08);border:1px solid rgba(255,34,51,0.35);padding:0.6rem 1rem;margin-bottom:0.8rem;display:flex;align-items:center;gap:0.7rem">
+          <span style="font-size:1.4rem">🛡️</span>
+          <span style="font-size:0.68rem;color:#ccc;line-height:1.5">
+            <strong style="color:var(--red)">SOFTCAP GUARANTEE:</strong> If presale doesn't reach $20,000 USDC — the contract lets you call <code style="color:var(--yellow)">refund()</code> for <strong style="color:var(--white)">100% of your USDC back.</strong>
+          </span>
+        </div>
+        <div class="w-min-note">Min <span>50 USDC</span> · Max <span>3,000 USDC</span> per wallet · Claim: 50% immediate + 50% over 60 days</div>
+
+        <div class="w-connected-addr" id="w-addr"></div>
+        <!-- Status -->
+        <div class="w-status" id="w-status">Connect wallet to start</div>
+
+        <!-- Button -->
+        <button class="w-connect-btn" id="w-btn">CONNECT WALLET</button>
+        <button class="w-disconnect-btn" id="w-disconnect-btn">✕ Disconnect wallet</button>
+
+        <!-- Steps -->
+        <div class="w-steps">
+          <div class="w-step active" id="ws-1">1. Connect</div>
+          <div class="w-step" id="ws-2">2. Approve USDC</div>
+          <div class="w-step" id="ws-3">3. Buy GGRD</div>
+        </div>
+
+      </div><!-- /body -->
+
+      <div class="widget-footer">
+        <div class="wf-claim">Claim: <strong>50% instant</strong> + 50% over 60 days</div>
+        <div class="wf-secure">🔒 On-chain escrow · No intermediary</div>
+      </div>
+
+    </div><!-- /widget-wrap -->
+
+    <p style="text-align:center;font-size:0.68rem;color:#333;margin-top:1.5rem" class="fade-up">
+      Presale contract: <a href="https://bscscan.com/address/0xd8983534dd3c369d85127f6C9B85d98768139387" target="_blank" rel="noopener" style="color:#444;text-decoration:underline">0xd8983534...9387 ↗</a>
+      · If softcap not reached → <strong style="color:var(--red)">100% refund</strong>
+    </p>
+  </div>
+</section>
 
 <!-- TOKENOMICS -->
 <section class="tokenomics-section" id="tokenomics">
@@ -1850,9 +2449,7 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 </script>
 
 <script>
-// ===== PRESALE WIDGET WEB3 v9 =====
-// v9: compact $LIQUID-style hero card, wallet modal CSS restored,
-//     prompt-based buy flow, clean design, all bugs fixed
+// ===== PRESALE WIDGET WEB3 v5 =====
 (function () {
 
   /* ─── stałe ─────────────────────────────────── */
@@ -1886,7 +2483,7 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
   const addrEl   = $('w-addr');
 
   function setStatus(msg, cls) {
-    if (stEl) { stEl.textContent = msg; stEl.className = 'hw-status ' + (cls||''); }
+    if (stEl) { stEl.textContent = msg; stEl.className = 'w-status ' + (cls||''); }
   }
   function setStep(n) {
     ['ws-1','ws-2','ws-3'].forEach((id,i) => {
@@ -1904,72 +2501,21 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
     const s=getStage(); if(!s) return "0.00";
     return (v/(s.priceScaled/1e8)).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
   }
-  function toPayAmount(v) { return ethers.parseUnits(String(v), 18); }
+  function toBigInt18(v) { return BigInt(Math.round(v*1e6))*BigInt(1_000_000_000_000); }
 
-  /* ─── on-chain state (BŁĄD 5 partial) ──────── */
-  // Contract view selectors (discovered via RPC probing)
-  const SEL = {
-    totalRaised: '0xc5c4744c',
-    totalSold:   '0x9106d7ba',
-    hardcap:     '0xb071cbe6',
-    softcap:     '0xf89be593',
-    minBuy:      '0x7107d7a6',
-    isActive:    '0xb3f05b97',
-  };
-
-  let onChainHardcap = 31250; // fallback
-  let onChainSoftcap = 20000;
-  let onChainMinBuy  = 50;
-
-  async function rpcCall(selector) {
-    const r = await fetch(BSC_RPC,{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({jsonrpc:'2.0',id:1,method:'eth_call',params:[{to:PRESALE_ADDR,data:selector},'latest']})});
-    const j = await r.json();
-    if(!j.result||j.result==='0x') return null;
-    return j.result;
-  }
-
-  async function loadContractState() {
+  async function fetchRaised() {
     try {
-      // Parallel reads
-      const [raisedHex, hardcapHex, softcapHex, minBuyHex, isActiveHex, totalSoldHex] = await Promise.all([
-        rpcCall(SEL.totalRaised),
-        rpcCall(SEL.hardcap),
-        rpcCall(SEL.softcap),
-        rpcCall(SEL.minBuy),
-        rpcCall(SEL.isActive),
-        rpcCall(SEL.totalSold),
-      ]);
-
-      // Parse on-chain values
-      if(hardcapHex) onChainHardcap = Number(BigInt(hardcapHex))/1e18;
-      if(softcapHex) onChainSoftcap = Number(BigInt(softcapHex))/1e18;
-      if(minBuyHex)  onChainMinBuy  = Number(BigInt(minBuyHex))/1e18;
-
-      // Update raised display
-      if(raisedHex) {
-        const usdc = Number(BigInt(raisedHex))/1e18;
-        const pct  = Math.min(usdc/onChainHardcap*100,100);
-        const rEl=$('w-raised-val'),pEl=$('w-pct'),prEl=$('w-progress');
-        if(rEl)  rEl.textContent =`$${usdc.toLocaleString('en-US',{maximumFractionDigits:0})} USDC`;
-        if(pEl)  pEl.textContent = pct.toFixed(1)+'%';
-        if(prEl) prEl.style.width= Math.max(pct,0.5)+'%';
-      }
-
-      // isActive check — disable widget if presale not active on-chain
-      if(isActiveHex) {
-        const active = BigInt(isActiveHex) !== 0n;
-        if(!active && btn && !connected) {
-          console.log('[GGRD v9] Presale not active on-chain');
-          // Don't disable — stages may not have started yet, let frontend STAGES handle timing
-        }
-      }
-
-      // Log on-chain state
-      const sold = totalSoldHex ? Number(BigInt(totalSoldHex))/1e18 : 0;
-      console.log(`[GGRD v9] On-chain: hardcap=$${onChainHardcap}, softcap=$${onChainSoftcap}, minBuy=$${onChainMinBuy}, sold=${sold.toFixed(0)} GGRD`);
-
-    } catch(e) { console.warn('[GGRD v9] loadContractState error:', e); }
+      const r = await fetch(BSC_RPC,{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({jsonrpc:'2.0',id:1,method:'eth_call',params:[{to:PRESALE_ADDR,data:'0xc5c4744c'},'latest']})});
+      const j = await r.json();
+      if(!j.result||j.result==='0x') return;
+      const usdc = Number(BigInt(j.result))/1e18;
+      const pct  = Math.min(usdc/31250*100,100);
+      const rEl=$('w-raised-val'),pEl=$('w-pct'),prEl=$('w-progress');
+      if(rEl)  rEl.textContent =`$${usdc.toLocaleString('en-US',{maximumFractionDigits:0})} USDC`;
+      if(pEl)  pEl.textContent = pct.toFixed(1)+'%';
+      if(prEl) prEl.style.width= Math.max(pct,0.5)+'%';
+    } catch(_){}
   }
 
   /* ─── modal ──────────────────────────────────── */
@@ -1999,221 +2545,101 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
     showWalletList();
     // anuluj WC jeśli w toku
     if(wcInstance) { try{wcInstance.disconnect();}catch(_){} wcInstance=null; }
-    setStatus('Select wallet');
+    setStatus('Wybierz portfel');
   });
 
-  /* ─── mobile detection ─────────────────────────── */
-  const isMobile = /Android|iPhone|iPad|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
-  /* ─── QR renderer (local — no external API) ──── */
+  /* ─── QR renderer (pure canvas — zero deps) ─── */
   function renderQR(uri) {
+    // Użyj API qrserver jako img — niezawodne, nie wymaga JS lib
     const wrap = $('wm-qr-img-wrap');
     if(!wrap) return;
     wrap.innerHTML = '';
-
-    // Mobile: show deep link buttons instead of QR
-    if(isMobile) {
-      const wcUri = encodeURIComponent(uri);
-      const links = [
-        {name:'Trust Wallet', url:`https://link.trustwallet.com/wc?uri=${wcUri}`, color:'#3375BB'},
-        {name:'MetaMask', url:`https://metamask.app.link/wc?uri=${wcUri}`, color:'#F6851B'},
-        {name:'Binance', url:`bnc://wc?uri=${wcUri}`, color:'#F0B90B'},
-      ];
-      const container = document.createElement('div');
-      container.style.cssText = 'display:flex;flex-direction:column;gap:8px;width:100%;padding:0 1rem';
-      links.forEach(l => {
-        const a = document.createElement('a');
-        a.href = l.url;
-        a.textContent = `Open ${l.name}`;
-        a.style.cssText = `display:block;padding:12px;text-align:center;border-radius:8px;font-weight:700;font-size:0.8rem;color:#fff;background:${l.color};text-decoration:none`;
-        container.appendChild(a);
-      });
-      // Also add generic WC deep link
-      const wcLink = document.createElement('a');
-      wcLink.href = `wc:${uri.replace('wc:','')}`;
-      wcLink.textContent = 'Open any WC wallet';
-      wcLink.style.cssText = 'display:block;padding:10px;text-align:center;border:1px solid #444;border-radius:8px;font-size:0.7rem;color:#aaa;margin-top:4px;text-decoration:none';
-      container.appendChild(wcLink);
-      wrap.appendChild(container);
-    } else {
-      // Desktop: generate QR locally
-      if(typeof QRCode !== 'undefined' && QRCode.toCanvas) {
-        const canvas = document.createElement('canvas');
-        canvas.style.cssText = 'border:3px solid #FFE000;display:block;margin:0 auto';
-        QRCode.toCanvas(canvas, uri, {width:220, margin:2, color:{dark:'#FFE000',light:'#0f0f0f'}}, err => {
-          if(err) { fallbackQR(wrap, uri); return; }
-          wrap.appendChild(canvas);
-        });
-      } else {
-        // Fallback if qrcode.js didn't load
-        fallbackQR(wrap, uri);
-      }
-    }
-    // Copy URI button
-    const copyBtn = $('wm-copy-uri');
-    if(copyBtn) { copyBtn.style.display='block'; copyBtn.onclick=()=>{navigator.clipboard.writeText(uri).then(()=>{copyBtn.textContent='✓ Copied!';setTimeout(()=>{copyBtn.textContent='📋 Copy URI';},2000);}); }; }
-  }
-
-  function fallbackQR(wrap, uri) {
-    // External API as last resort
     const img = document.createElement('img');
-    img.style.cssText = 'width:220px;height:220px;border:3px solid #FFE000;display:block;margin:0 auto';
+    img.style.cssText = 'width:220px;height:220px;border:3px solid #FFE000;display:block;';
     img.alt = 'WalletConnect QR';
+    // qrserver.com — darmowe publiczne API, działa zawsze
     img.src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(uri)}&bgcolor=0f0f0f&color=FFE000&margin=2`;
-    img.onerror = () => { wrap.innerHTML = `<div style="color:#888;font-size:0.65rem;word-break:break-all;padding:1rem;border:1px solid #333;max-width:220px">${uri}</div>`; };
+    img.onerror = () => {
+      // fallback: pokaż URI do skopiowania
+      wrap.innerHTML = `<div style="color:#888;font-size:0.65rem;word-break:break-all;padding:1rem;border:1px solid #333;max-width:220px">${uri}</div>`;
+    };
     wrap.appendChild(img);
+    // kopiuj URI
+    const copyBtn = $('wm-copy-uri');
+    if(copyBtn) { copyBtn.style.display='block'; copyBtn.onclick=()=>{navigator.clipboard.writeText(uri).then(()=>{copyBtn.textContent='✓ Skopiowano!';setTimeout(()=>{copyBtn.textContent='📋 Kopiuj URI';},2000);}); }; }
   }
 
   /* ─── BSC switch ─────────────────────────────── */
-  let currentEthProvider = null; // track active provider for chain switch
-
   async function ensureBSC(eth) {
     const ch = await eth.request({method:'eth_chainId'});
-    if(parseInt(ch,16)===BSC_CHAIN_ID) { updateNetworkState(true); return; }
-    setStatus("Switching to BSC…",'warn');
+    if(parseInt(ch,16)===BSC_CHAIN_ID) return;
+    setStatus("Przełączam na BSC…",'warn');
     try {
       await eth.request({method:'wallet_switchEthereumChain',params:[{chainId:'0x38'}]});
-      updateNetworkState(true);
     } catch(e) {
-      if(e.code===4902) {
-        await eth.request({method:'wallet_addEthereumChain',params:[{
-          chainId:'0x38',chainName:'BNB Smart Chain',
-          nativeCurrency:{name:'BNB',symbol:'BNB',decimals:18},
-          rpcUrls:['https://bsc-dataseed1.binance.org/'],
-          blockExplorerUrls:['https://bscscan.com/']
-        }]});
-        updateNetworkState(true);
-      } else {
-        updateNetworkState(false);
-        throw e;
-      }
+      if(e.code===4902) await eth.request({method:'wallet_addEthereumChain',params:[{
+        chainId:'0x38',chainName:'BNB Smart Chain',
+        nativeCurrency:{name:'BNB',symbol:'BNB',decimals:18},
+        rpcUrls:['https://bsc-dataseed1.binance.org/'],
+        blockExplorerUrls:['https://bscscan.com/']
+      }]});
+      else throw e;
     }
   }
-
-  /* ─── centralized network state (BŁĄD 4) ──────── */
-  function updateNetworkState(isCorrectChain) {
-    const warn = $('w-network-warn');
-    if(!warn) return;
-    if(isCorrectChain) {
-      warn.classList.remove('show');
-      if(btn && connected) btn.disabled = false;
-    } else {
-      warn.classList.add('show');
-      if(btn && connected) { btn.disabled = true; setStatus('⚠ Switch to BSC to continue','err'); }
-    }
-  }
-
-  // Switch button handler
-  $('w-switch-bsc-btn')?.addEventListener('click', async () => {
-    const eth = currentEthProvider || (wcInstance) || window.ethereum;
-    if(!eth) { setStatus('No wallet connected','err'); return; }
-    try {
-      await ensureBSC(eth);
-      setStatus('Ready! Enter USDC amount and click BUY','ok');
-    } catch(e) {
-      setStatus('Failed to switch network — do it manually in your wallet','err');
-    }
-  });
 
   /* ─── EIP-6963: wykryj dostępne portfele ──────── */
   const eip6963Providers = {};
   window.addEventListener('eip6963:announceProvider', e => {
     const {info, provider: p} = e.detail;
     eip6963Providers[info.rdns] = {info, provider: p};
+    // zaktualizuj przycisk jeśli jest już widoczny
     updateWalletButtons();
   });
   function requestEIP6963() {
     window.dispatchEvent(new Event('eip6963:requestProvider'));
   }
 
-  /* ─── legacy provider detection (fallback gdy brak EIP-6963) ── */
-  function getLegacyProvider(walletType) {
-    switch(walletType) {
-      case 'metamask':
-        // MetaMask ustawia isMetaMask=true na window.ethereum
-        if(window.ethereum?.isMetaMask && !window.ethereum?.isTrust && !window.ethereum?.isBinance) return window.ethereum;
-        // MetaMask może być w providers[] gdy jest wiele rozszerzeń
-        if(window.ethereum?.providers) {
-          const mm = window.ethereum.providers.find(p => p.isMetaMask && !p.isTrust && !p.isBinance);
-          if(mm) return mm;
-        }
-        return null;
-      case 'trust':
-        // Trust Wallet: dedykowany global
-        if(window.trustwallet?.provider) return window.trustwallet.provider;
-        if(window.trustwallet) return window.trustwallet;
-        // Trust Wallet ustawia isTrust=true
-        if(window.ethereum?.isTrust) return window.ethereum;
-        if(window.ethereum?.providers) {
-          const tw = window.ethereum.providers.find(p => p.isTrust);
-          if(tw) return tw;
-        }
-        return null;
-      case 'binance':
-        // Binance Web3 Wallet: dedykowany global
-        if(window.BinanceChain) return window.BinanceChain;
-        if(window.ethereum?.isBinance) return window.ethereum;
-        if(window.ethereum?.providers) {
-          const bw = window.ethereum.providers.find(p => p.isBinance);
-          if(bw) return bw;
-        }
-        return null;
-      case 'injected':
-        return window.ethereum || null;
-      default:
-        return null;
-    }
-  }
-
-  function isWalletAvailable(walletType) {
-    const rdnsMap = {metamask:'io.metamask',trust:'com.trustwallet.app',binance:'com.binance.wallet'};
-    const rdns = rdnsMap[walletType];
-    if(rdns && rdns in eip6963Providers) return true;
-    return !!getLegacyProvider(walletType);
-  }
-
   function updateWalletButtons() {
+    // oznacz dostępne portfele zieloną ikoną
     document.querySelectorAll('.wm-wallet-btn[data-rdns]').forEach(btn => {
-      const wt = btn.dataset.wallet;
-      const available = isWalletAvailable(wt);
+      const rdns = btn.dataset.rdns;
+      const available = rdns in eip6963Providers || (rdns==='io.metamask' && !!window.ethereum?.isMetaMask);
       const badge = btn.querySelector('.wm-wallet-badge-status');
-      if(badge) { badge.textContent = available ? '● DETECTED' : ''; badge.style.color = available ? 'var(--green)' : ''; }
+      if(badge) badge.textContent = available ? '● DETECTED' : '';
+      if(badge) badge.style.color = available ? 'var(--green)' : '';
     });
   }
 
-  /* ─── połącz injected (EIP-6963 → legacy → fallback) ──────── */
+  /* ─── połącz injected (EIP-6963 first) ──────── */
   async function connectInjected(walletType) {
-    const rdnsMap = {metamask:'io.metamask',trust:'com.trustwallet.app',binance:'com.binance.wallet',injected:null};
+    // Mapowanie typ → rdns EIP-6963
+    const rdnsMap = {
+      metamask: 'io.metamask',
+      trust:    'com.trustwallet.app',
+      binance:  'com.binance.wallet',
+      injected: null
+    };
     const rdns = rdnsMap[walletType];
     let eth = null;
 
-    // 1. EIP-6963 (najlepsza metoda — dokładnie ten portfel)
+    // Spróbuj EIP-6963 (dokładnie ten portfel)
     if(rdns && eip6963Providers[rdns]) {
       eth = eip6963Providers[rdns].provider;
-      console.log('[Wallet] EIP-6963 hit for', walletType);
     }
-    // 2. Legacy globals (Trust→window.trustwallet, Binance→window.BinanceChain)
-    if(!eth) {
-      eth = getLegacyProvider(walletType);
-      if(eth) console.log('[Wallet] Legacy provider hit for', walletType);
-    }
-    // 3. Ostateczny fallback: window.ethereum (ryzyko złego portfela)
-    if(!eth && walletType==='injected') {
-      eth = window.ethereum;
-    }
+    // Fallback: window.ethereum
+    if(!eth) eth = window.ethereum;
 
     if(!eth) {
       const urls={metamask:'https://metamask.io/download/',trust:'https://trustwallet.com/download',binance:'https://www.bnbchain.org/en/binance-wallet'};
-      setStatus(`⚠ ${walletType} not found — install it or use WalletConnect`,'err');
+      setStatus(`⚠ ${walletType} nie znaleziony — instaluję…`,'err');
       if(urls[walletType]) window.open(urls[walletType],'_blank');
       return;
     }
     try {
-      setStatus("Waiting for wallet confirmation…",'warn');
+      setStatus("Czekam na potwierdzenie w portfelu…",'warn');
       const accounts = await eth.request({method:'eth_requestAccounts'});
-      if(!accounts?.length) throw new Error("No accounts returned");
+      if(!accounts?.length) throw new Error("Brak kont");
       userAddr = accounts[0];
-      currentEthProvider = eth;
       await ensureBSC(eth);
       provider = new ethers.BrowserProvider(eth);
       signer   = await provider.getSigner();
@@ -2221,7 +2647,7 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
       eth.on?.('accountsChanged', accs => { if(!accs.length) disconnectWallet(); else if(accs[0]!==userAddr) location.reload(); });
       eth.on?.('chainChanged', ()=>location.reload());
     } catch(e) {
-      setStatus((e.message||'Cancelled').slice(0,70),'err');
+      setStatus((e.message||'Anulowano').slice(0,70),'err');
     }
   }
 
@@ -2235,63 +2661,45 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
   }
 
   async function connectWC() {
-    setStatus("Initializing WalletConnect…",'warn');
+    // Nie zamykaj modalu — pokażemy QR wewnątrz
+    setStatus("Inicjalizuję WalletConnect…",'warn');
     try {
       const WCPkg  = window["@walletconnect/ethereum-provider"];
       const WCCtor = WCPkg?.EthereumProvider || WCPkg?.default || WCPkg;
       if(!WCCtor || typeof WCCtor.init !== 'function') {
-        console.error('[WC] Package state:', typeof WCPkg, WCPkg ? Object.keys(WCPkg) : 'null');
-        setStatus("⚠ WalletConnect failed to load — try Ctrl+F5 or use injected wallet",'err');
+        setStatus("⚠ WalletConnect nie załadowany — odśwież (Ctrl+F5)",'err');
         return;
       }
       // Rozłącz starą sesję i wyczyść localStorage
       if(wcInstance) { try{await wcInstance.disconnect();}catch(_){} wcInstance=null; }
       clearWCSessions();
 
-      // WC 2.10.0 API: chains jest required, brak optionalChains
       const wc = await WCCtor.init({
         projectId:      WC_PROJECT_ID,
         chains:         [BSC_CHAIN_ID],
+        optionalChains: [BSC_CHAIN_ID],
         rpcMap:         {[BSC_CHAIN_ID]: BSC_RPC},
-        showQrModal:    false,
+        showQrModal:    false,   // własny QR w naszym modalu
         metadata: {
           name:'Giggle Reloaded Presale', description:'GGRD Presale — BSC',
           url:'https://ggrd.me', icons:['https://ggrd.me/img/ggrd-logo-512.png']
         }
       });
       wcInstance = wc;
-      console.log('[WC] Provider initialized OK');
 
       // display_uri odpala gdy WC ma URI do wyświetlenia
       wc.on('display_uri', uri => {
-        console.log('[WC] display_uri fired, length:', uri?.length);
+        console.log('[WC] display_uri:', uri);
         showQRView(uri);
       });
       wc.on('disconnect', () => disconnectWallet());
 
-      setStatus("Scan QR code with your mobile wallet…",'warn');
+      setStatus("Skanuj QR telefonem…",'warn');
       await wc.connect();
 
       const accounts = wc.accounts;
-      if(!accounts?.length) throw new Error("No accounts after connect");
+      if(!accounts?.length) throw new Error("Brak kont po połączeniu");
       userAddr = accounts[0];
-      currentEthProvider = wc;
-
-      // BŁĄD 7: validate chain after WC connect
-      const wcChainId = wc.chainId || parseInt(await wc.request({method:'eth_chainId'}),16);
-      if(wcChainId !== BSC_CHAIN_ID) {
-        console.log('[WC] Wrong chain:', wcChainId, '— attempting switch to BSC');
-        try {
-          await wc.request({method:'wallet_switchEthereumChain',params:[{chainId:'0x38'}]});
-          updateNetworkState(true);
-        } catch(switchErr) {
-          console.warn('[WC] Chain switch failed:', switchErr);
-          updateNetworkState(false);
-        }
-      } else {
-        updateNetworkState(true);
-      }
-
       provider = new ethers.BrowserProvider(wc);
       signer   = await provider.getSigner();
       onConnected();
@@ -2305,7 +2713,7 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
         setStatus(msg.slice(0,80)||'WalletConnect error','err');
         console.error('[WC] error:', e);
       } else {
-        setStatus('Cancelled','warn');
+        setStatus('Anulowano','warn');
       }
       showWalletList();
     }
@@ -2317,9 +2725,10 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
     closeModal();
     const short = userAddr.slice(0,6)+'…'+userAddr.slice(-4);
     if(addrEl)  { addrEl.textContent=`✓ ${short}`; addrEl.classList.add('show'); }
-    if(btn)     { btn.textContent='🚀 BUY $GGRD NOW'; btn.className='hw-btn buying-mode'; btn.disabled=false; }
+    if(btn)     { btn.textContent='🚀 BUY $GGRD NOW'; btn.className='w-connect-btn buying-mode'; btn.disabled=false; }
     if(discBtn) discBtn.classList.add('show');
-    setStatus("Connected! Click BUY to enter amount",'ok');
+    setStatus("Gotowe! Wpisz kwotę USDC i kliknij BUY",'ok');
+    setStep(2);
   }
 
   /* ─── rozłącz ────────────────────────────────── */
@@ -2329,9 +2738,9 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
     clearWCSessions();
     if(addrEl)  { addrEl.textContent=''; addrEl.classList.remove('show'); }
     if(discBtn) discBtn.classList.remove('show');
-    if(btn)     { btn.textContent='CONNECT WALLET'; btn.className='hw-btn'; btn.disabled=false; }
+    if(btn)     { btn.textContent='CONNECT WALLET'; btn.className='w-connect-btn'; btn.disabled=false; }
     setStep(1);
-    setStatus('Wallet disconnected. Click to reconnect.');
+    setStatus('Portfel rozłączony. Kliknij aby połączyć ponownie.');
   }
 
   /* ─── dispatcher ─────────────────────────────── */
@@ -2345,52 +2754,37 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
   /* ─── approve + buy ──────────────────────────── */
   async function approveThenBuy() {
-    // Prompt for USDC amount (compact widget has no inline input)
-    const input = prompt(`Enter USDC amount (min ${onChainMinBuy}, max 3000):`);
-    if(!input) return;
-    const usdcVal = parseFloat(input);
-    if(isNaN(usdcVal)||usdcVal<onChainMinBuy)  { setStatus(`Minimum: ${onChainMinBuy} USDC`,'err');    return; }
+    const usdcVal = parseFloat($('w-usdc-in')?.value||'0');
+    if(isNaN(usdcVal)||usdcVal<50)  { setStatus("Minimum: 50 USDC",'err');    return; }
     if(usdcVal>3000)                 { setStatus("Maximum: 3,000 USDC",'err'); return; }
-    if(!signer)                      { setStatus("Wallet disconnected",'err');   return; }
-
-    // Chain check before TX (BŁĄD 7)
-    try {
-      const net = await provider.getNetwork();
-      if(Number(net.chainId) !== BSC_CHAIN_ID) {
-        updateNetworkState(false);
-        setStatus("⚠ Wrong network — switch to BSC first",'err');
-        btn.disabled=false;
-        return;
-      }
-    } catch(_) {}
-
+    if(!signer)                      { setStatus("Portfel rozłączony",'err');   return; }
     btn.disabled=true;
     try {
-      setStatus("Checking allowance…",'warn');
+      setStatus("Sprawdzam allowance…",'warn');
       const usdc      = new ethers.Contract(USDC_ADDR,ERC20_ABI,signer);
-      const payAmount = toPayAmount(usdcVal);
+      const payAmount = toBigInt18(usdcVal);
       const allowance = BigInt(await usdc.allowance(userAddr,PRESALE_ADDR));
       if(allowance<payAmount) {
-        setStatus("Step 1/2 — Approve USDC in wallet…",'warn');
-        btn.textContent="⏳ APPROVING…"; setStep(2);
+        setStatus("Krok 1/2 — Zatwierdź USDC w portfelu…",'warn');
+        btn.textContent="⏳ ZATWIERDZANIE…"; setStep(2);
         await (await usdc.approve(PRESALE_ADDR,payAmount)).wait();
-        setStatus("✓ Approved!",'ok');
+        setStatus("✓ Zatwierdzone!",'ok');
       }
-      setStatus("Step 2/2 — Confirm purchase in wallet…",'warn');
-      btn.textContent="⏳ BUYING…"; setStep(3);
+      setStatus("Krok 2/2 — Potwierdź zakup w portfelu…",'warn');
+      btn.textContent="⏳ KUPOWANIE…"; setStep(3);
       const presale = new ethers.Contract(PRESALE_ADDR,BUY_ABI,signer);
       await (await presale.buy(payAmount)).wait();
       const ggrd=calcGGRD(usdcVal);
-      setStatus(`🎉 Done! ~${ggrd} GGRD headed your way!`,'ok');
-      btn.textContent="✅ PURCHASED!"; btn.className='hw-btn'; setStep(3);
-      loadContractState();
+      setStatus(`🎉 Gotowe! ~${ggrd} GGRD leci do Ciebie!`,'ok');
+      btn.textContent="✅ ZAKUPIONO!"; btn.className='w-connect-btn'; setStep(3);
+      fetchRaised();
       ['🎉','🚀','😂','💸','🟡'].forEach((em,i)=>{
         setTimeout(()=>{const el=document.createElement('div');el.textContent=em;el.style.cssText=`position:fixed;left:${12+i*18}vw;top:80vh;font-size:2.5rem;pointer-events:none;z-index:99999;animation:floatUp 2.5s ease forwards`;document.body.appendChild(el);setTimeout(()=>el.remove(),2600);},i*120);
       });
     } catch(e) {
-      const msg=e.reason||e.data?.message||e.message||'Error';
+      const msg=e.reason||e.data?.message||e.message||'Błąd';
       setStatus(msg.slice(0,80),'err');
-      btn.textContent="🚀 BUY $GGRD NOW"; btn.className='hw-btn buying-mode'; btn.disabled=false;
+      btn.textContent="🚀 BUY $GGRD NOW"; btn.className='w-connect-btn buying-mode'; btn.disabled=false;
     }
   }
 
@@ -2401,23 +2795,20 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
   (function init() {
     const s=getStage();
     if(s) {
-      const pv=$('w-price-val');
+      const sv=$('w-stage-val'),pv=$('w-price-val'),np=$('w-next-price');
+      if(sv) sv.textContent=s.label;
       if(pv) pv.textContent=`$${(s.priceScaled/1e8).toFixed(4)} USDC`;
+      if(np) np.textContent=s.next!=='—'?`Next stage: $${s.next}`:'Last stage!';
     } else {
-      if($('w-price-val')) $('w-price-val').textContent="ENDED";
+      if($('w-stage-val')) $('w-stage-val').textContent="ENDED";
+      if($('w-price-val')) $('w-price-val').textContent="—";
       if(btn) { btn.disabled=true; btn.textContent="PRESALE ENDED"; }
     }
-    loadContractState(); setInterval(loadContractState,30000);
-    setStatus('');
-    requestEIP6963();
-    // Niektóre portfele injectują provider z opóźnieniem — powtórz po 500ms i 1.5s
-    setTimeout(()=>{ requestEIP6963(); updateWalletButtons(); }, 500);
-    setTimeout(()=>{ requestEIP6963(); updateWalletButtons(); }, 1500);
-    // Log WC load status for debugging
-    const wcPkg = window["@walletconnect/ethereum-provider"];
-    console.log('[GGRD v9] WC pkg loaded:', !!wcPkg, wcPkg ? (wcPkg.EthereumProvider ? 'EthereumProvider OK' : 'keys: '+Object.keys(wcPkg).join(',')) : 'null');
-    console.log('[GGRD v9] window.ethereum:', !!window.ethereum, window.ethereum?.isMetaMask?'MetaMask':'', window.ethereum?.isTrust?'Trust':'', window.ethereum?.providers?.length||0, 'sub-providers');
-    console.log('[GGRD v9] Mobile:', isMobile);
+    const inp=$('w-usdc-in');
+    if(inp) inp.addEventListener('input',()=>{ const out=$('w-ggrd-out'); if(out) out.textContent=calcGGRD(parseFloat(inp.value)||0); });
+    fetchRaised(); setInterval(fetchRaised,30000);
+    setStep(1); setStatus('Kliknij przycisk aby wybrać portfel');
+    requestEIP6963(); // wykryj dostępne portfele
     const se=document.createElement('style');
     se.textContent='@keyframes floatUp{from{transform:translateY(0);opacity:1}to{transform:translateY(-60vh);opacity:0}}';
     document.head.appendChild(se);
