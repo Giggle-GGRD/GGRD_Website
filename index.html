@@ -8,6 +8,9 @@
 <title>Giggle Reloaded (GGRD) — BSC Meme Token · Fixed Supply · 20% Charity On-Chain 😂</title>
 <meta name="description" content="GGRD is the BSC meme coin with purpose. 10M fixed supply. 20% of supply locked in charity vesting contract. Safe multisig governance. 0% tax. No rugs.">
 <link rel="canonical" href="https://ggrd.me/">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
 <link rel="icon" type="image/png" href="img/ggrd-logo-512.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -712,6 +715,10 @@ section {
 }
 
 .stage-card.active .stage-price { color: var(--green); }
+
+.stage-card.ended { opacity: 0.5; }
+.stage-card.ended .stage-price { color: var(--gray); }
+.stage-card.ended::after { content: 'ENDED'; position: absolute; top: 10px; right: 10px; background: rgba(247,250,252,0.15); color: var(--gray); font-size: 0.55rem; font-weight: 700; letter-spacing: 1px; padding: 2px 6px; animation: none; }
 
 .stage-tokens {
   font-size: 0.75rem;
@@ -2868,7 +2875,7 @@ section {
         <span class="rpill rpill-red">🔒 On-chain escrow</span>
         <span class="rpill rpill-green">✓ Auto refund() function</span>
         <span class="rpill rpill-white">No team discretion</span>
-        <span class="rpill rpill-white">OpenZeppelin audited</span>
+        <span class="rpill rpill-white">OpenZeppelin primitives</span>
       </div>
     </div>
 
@@ -3304,7 +3311,8 @@ section {
       </div>
       <div class="charity-note fade-up">
         <strong>Vesting timeline:</strong> Start 2026-03-10 · Cliff 2027-03-10 · Full release 2029-03-09<br>
-        Contract: <code style="color:var(--green);font-size:0.68rem">0xE2993F0C8D2020dD9866E2d6dC5AA1D62b7C8fDC</code>
+        Contract: <code style="color:var(--green);font-size:0.68rem">0xE2993F0C8D2020dD9866E2d6dC5AA1D62b7C8fDC</code><br>
+        <a href="donation-policy.html" style="color:var(--green);font-size:0.75rem">📄 Read full Donation Policy →</a>
       </div>
     </div>
   </div>
@@ -3749,15 +3757,15 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
       }
 
       if(currentStageHex && onChainStageId === 0 && btn && !connected) {
-        console.log('[GGRD v7] Presale not active on-chain');
+        // production: silent;
       }
 
       // Log on-chain state
       const sold = totalSoldHex ? Number(BigInt(totalSoldHex))/1e18 : 0;
-      console.log(`[GGRD v7] On-chain: hardcap=$${onChainHardcap}, softcap=$${onChainSoftcap}, minBuy=$${onChainMinBuy}, sold=${sold.toFixed(0)} GGRD`);
+      // production: silent;
       refreshQuoteAndValidation();
 
-    } catch(e) { console.warn('[GGRD v7] loadContractState error:', e); }
+    } catch(e) { /* silent */ }
   }
 
   /* ─── modal ──────────────────────────────────── */
@@ -4141,12 +4149,12 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
     // 1. EIP-6963 (najlepsza metoda — dokładnie ten portfel)
     if(rdns && eip6963Providers[rdns]) {
       eth = eip6963Providers[rdns].provider;
-      console.log('[Wallet] EIP-6963 hit for', walletType);
+      // production: silent;
     }
     // 2. Legacy globals (Trust→window.trustwallet, Binance→window.BinanceChain)
     if(!eth) {
       eth = getLegacyProvider(walletType);
-      if(eth) console.log('[Wallet] Legacy provider hit for', walletType);
+      // production: silent;
     }
     // 3. For "Other" never force window.ethereum fallback (can hijack MetaMask/Trust/Binance)
     if(walletType==='injected' && !eth) {
@@ -4234,7 +4242,7 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
         }
       });
       wcProviderSingleton = wc;
-      console.log('[WC] Provider initialized OK');
+      // production: silent;
       return wc;
     })().catch(err => {
       wcProviderInitPromise = null;
@@ -4274,7 +4282,7 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
         if(!isCurrentAttempt()) return;
         if(!uri || uri===lastWcUri) return;
         lastWcUri = uri;
-        console.log('[WC] URI event fired, length:', uri?.length);
+        // production: silent;
         showQRView(uri);
       };
       wc.on?.('display_uri', wcUriListener);
@@ -4298,12 +4306,12 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
       const wcChainRaw = wc.chainId ?? await wc.request({method:'eth_chainId'});
       const wcChainId = normalizeChainId(wcChainRaw);
       if(wcChainId !== BSC_CHAIN_ID) {
-        console.log('[WC] Wrong chain:', wcChainId, '— attempting switch to BSC');
+        // production: silent;
         try {
           await wc.request({method:'wallet_switchEthereumChain',params:[{chainId:'0x38'}]});
           updateNetworkState(true);
         } catch(switchErr) {
-          console.warn('[WC] Chain switch failed:', switchErr);
+          // production: silent;
           updateNetworkState(false);
         }
       } else {
@@ -4339,7 +4347,7 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
       }
 
       setStatus(msg.slice(0,80)||'WalletConnect error','err');
-      console.error('[WC] error:', e);
+      // production: silent;
       showQRView();
       const wrap = $('wm-qr-img-wrap');
       const detail = (msg || 'WalletConnect error').slice(0,140).replace(/[&<>]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[ch]));
@@ -4516,6 +4524,28 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
   if (rh) rh.innerHTML = '🏁 PRESALE ENDED — SOFTCAP STATUS PENDING';
   const rb = document.querySelector('.refund-body');
   if (rb) rb.innerHTML = 'The presale period has concluded. If the <strong>$20,000 USDC softcap</strong> was not reached, the escrow contract allows every buyer to call <code>refund()</code> and receive <strong>100% of their USDC back</strong>. Check the contract on BscScan for the current state.';
+
+  // Stage cards — mark all as ended
+  document.querySelectorAll('.stage-card').forEach(el => {
+    el.classList.remove('active');
+    el.classList.add('ended');
+  });
+
+  // Presale stages section header
+  const stagesH2 = document.querySelector('#presale')?.querySelector('h2');
+  if (stagesH2) stagesH2.textContent = 'PRESALE STAGES (ENDED) ⚡';
+
+  // Buy widget — disable input and button
+  const usdcInput = document.getElementById('w-usdc-in');
+  if (usdcInput) { usdcInput.disabled = true; usdcInput.placeholder = 'Presale ended'; }
+
+  // Nav CTA — update text
+  document.querySelectorAll('.nav-cta, .nav-active').forEach(el => {
+    if (el.textContent.includes('BUY')) {
+      el.textContent = '📊 Status';
+      el.href = '#buy';
+    }
+  });
 })();
 
 </script>
