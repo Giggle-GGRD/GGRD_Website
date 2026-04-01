@@ -1,0 +1,26 @@
+{
+  "name": "Giggle Reloaded",
+  "short_name": "GGRD",
+  "description": "BSC meme token with fixed supply, on-chain charity, and Safe multisig governance.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0D0C0B",
+  "theme_color": "#080808",
+  "icons": [
+    {
+      "src": "/img/ggrd-logo-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/img/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/img/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    }
+  ]
+}
