@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="index,follow">
 <meta name="theme-color" content="#080808">
-<title>Giggle Reloaded (GGRD) — The Meme Token That Gives Back 😂💸</title>
-<meta name="description" content="GGRD is the BSC meme coin that actually does something. Fixed supply, USDC presale live NOW, charity vesting on-chain. No rugs. Just giggling to the moon.">
+<title>Giggle Reloaded (GGRD) — BSC Meme Token · Fixed Supply · 20% Charity On-Chain 😂</title>
+<meta name="description" content="GGRD is the BSC meme coin with purpose. 10M fixed supply. 20% of supply locked in charity vesting contract. Safe multisig governance. 0% tax. No rugs.">
 <link rel="canonical" href="https://ggrd.me/">
 <link rel="icon" type="image/png" href="img/ggrd-logo-512.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,13 +15,13 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Giggle Reloaded">
 <meta property="og:url" content="https://ggrd.me/">
-<meta property="og:title" content="Giggle Reloaded ($GGRD) — BSC Presale Live · 20% Charity · 100% Refund Guarantee 😂">
-<meta property="og:description" content="USDC presale live on BNB Smart Chain. 20% of supply locked in charity vesting contract. Softcap miss = 100% refund on-chain. 0% tax. Stage 1: $0.0085 USDC.">
+<meta property="og:title" content="Giggle Reloaded ($GGRD) — BSC Meme Token · 20% Charity On-Chain · Fixed Supply 😂">
+<meta property="og:description" content="GGRD is the BSC meme coin with purpose. 10M fixed supply. 20% charity vesting on-chain. Safe multisig governance. 0% tax. No rugs. DYOR.">
 <meta property="og:image" content="https://ggrd.me/img/ggrd-og-banner.png?v=4">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@ContactGiggle">
-<meta name="twitter:title" content="$GGRD Presale Live on BSC · 20% Charity · Softcap Miss = 100% Refund 😂">
-<meta name="twitter:description" content="Stage 1: $0.0085 USDC. 20% charity locked on-chain. Miss softcap = full refund. 0% tax. ggrd.me/#buy">
+<meta name="twitter:title" content="$GGRD — BSC Meme Token · 20% Charity · Fixed Supply · No Rugs 😂">
+<meta name="twitter:description" content="10M fixed supply. 20% charity locked on-chain. Safe multisig governance. 0% tax. DYOR · ggrd.me">
 <meta name="twitter:image" content="https://ggrd.me/img/ggrd-og-banner.png?v=4">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Giggle Reloaded","alternateName":"GGRD","url":"https://ggrd.me","logo":"https://ggrd.me/img/ggrd-logo-512.png","sameAs":["https://x.com/ContactGiggle","https://t.me/GGRDofficial"]}</script>
 <style>
@@ -2821,6 +2821,7 @@ section {
     <li><a href="#staking">Staking</a></li>
     <li><a href="#charity">Charity</a></li>
     <li><a href="#addresses">Contracts</a></li>
+    <li><a href="donation-policy.html">Charity Policy</a></li>
     <li><a href="GGRD_Whitepaper_EN.html">Whitepaper</a></li>
     <li><a class="nav-cta" href="#buy">BUY GGRD ⚡</a></li>
   </ul>
@@ -3405,23 +3406,28 @@ section {
         <img src="img/ggrd-logo-512.png" alt="GGRD">
         GIGGLE RELOADED
       </a>
-      <p class="footer-desc">The meme token that gives back. Fixed supply. On-chain charity. Safe governance. BSC mainnet. Presale live until March 31, 2026.</p>
+      <p class="footer-desc">The meme token that gives back. Fixed supply. On-chain charity. Safe governance. BSC mainnet.</p>
     </div>
     <div class="footer-links">
       <div class="footer-social">
-        <a class="social-btn" href="https://t.me/GGRDofficial" target="_blank" rel="noopener">
+        <a class="social-btn" href="https://t.me/GGRDofficial" target="_blank" rel="noopener noreferrer">
           ✈️ Telegram
         </a>
-        <a class="social-btn" href="https://x.com/ContactGiggle" target="_blank" rel="noopener">
+        <a class="social-btn" href="https://x.com/ContactGiggle" target="_blank" rel="noopener noreferrer">
           𝕏 Twitter
         </a>
-        <a class="social-btn" href="https://github.com/Giggle-GGRD" target="_blank" rel="noopener">
+        <a class="social-btn" href="https://github.com/Giggle-GGRD" target="_blank" rel="noopener noreferrer">
           ⌨ GitHub
         </a>
       </div>
       <a class="social-btn" href="GGRD_Whitepaper_EN.html" style="justify-content:center">
         📄 Whitepaper v4.0
       </a>
+      <div class="footer-legal" style="display:flex;gap:1.5rem;justify-content:center;margin-top:0.5rem;font-size:0.75rem;opacity:0.6">
+        <a href="terms.html" style="color:var(--gray);text-decoration:none">Terms of Service</a>
+        <a href="privacy.html" style="color:var(--gray);text-decoration:none">Privacy Policy</a>
+        <a href="donation-policy.html" style="color:var(--gray);text-decoration:none">Charity Policy</a>
+      </div>
       <p class="footer-copy">© 2026 Giggle Reloaded · ggrd.me · BSC chainId 56<br>Contracts deployed 2026-03-10</p>
     </div>
   </div>
@@ -4466,16 +4472,50 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
     // Niektóre portfele injectują provider z opóźnieniem — powtórz po 500ms i 1.5s
     setTimeout(()=>{ requestEIP6963(); updateWalletButtons(); }, 500);
     setTimeout(()=>{ requestEIP6963(); updateWalletButtons(); }, 1500);
-    // Log WC load status for debugging
-    const wcPkg = window["@walletconnect/ethereum-provider"];
-    console.log('[GGRD v7] WC pkg loaded:', !!wcPkg, wcPkg ? (wcPkg.EthereumProvider ? 'EthereumProvider OK' : 'keys: '+Object.keys(wcPkg).join(',')) : 'null');
-    console.log('[GGRD v7] window.ethereum:', !!window.ethereum, window.ethereum?.isMetaMask?'MetaMask':'', window.ethereum?.isTrust?'Trust':'', window.ethereum?.providers?.length||0, 'sub-providers');
-    console.log('[GGRD v7] Mobile:', isMobile);
+    // WC + wallet detection init
     const se=document.createElement('style');
     se.textContent='@keyframes floatUp{from{transform:translateY(0);opacity:1}to{transform:translateY(-60vh);opacity:0}}';
     document.head.appendChild(se);
   })();
 
+})();
+
+/* ═══ POST-PRESALE STATE HANDLER ═══ */
+(function postPresaleHandler() {
+  const PRESALE_END_MS = new Date('2026-03-31T01:15:19Z').getTime();
+  if (Date.now() < PRESALE_END_MS) return; // presale still active
+
+  // Ticker: replace "PRESALE LIVE NOW" with "PRESALE ENDED"
+  document.querySelectorAll('.ticker span').forEach(el => {
+    if (el.textContent.includes('PRESALE LIVE NOW'))
+      el.textContent = '🏁 PRESALE ENDED';
+    if (el.textContent.includes('STAGE'))
+      el.textContent = '⏳ RESULTS PENDING';
+  });
+
+  // Hero badge
+  const badge = document.querySelector('.hero-badge');
+  if (badge) {
+    badge.textContent = '🏁 PRESALE ENDED — RESULTS PENDING';
+    badge.style.background = 'rgba(243,197,18,0.12)';
+    badge.style.borderColor = 'rgba(243,197,18,0.3)';
+  }
+
+  // Buy widget header
+  const wh = document.querySelector('.w-header-label');
+  if (wh) wh.textContent = 'PRESALE ENDED';
+  const wsub = document.querySelector('.w-header-sub');
+  if (wsub) wsub.textContent = 'RESULTS PENDING · BSC MAINNET';
+
+  // Footer text
+  const fd = document.querySelector('.footer-desc');
+  if (fd) fd.textContent = 'The meme token that gives back. Fixed supply. On-chain charity. Safe governance. BSC mainnet. Presale ended March 31, 2026.';
+
+  // Refund banner — update tense
+  const rh = document.querySelector('.refund-headline');
+  if (rh) rh.innerHTML = '🏁 PRESALE ENDED — SOFTCAP STATUS PENDING';
+  const rb = document.querySelector('.refund-body');
+  if (rb) rb.innerHTML = 'The presale period has concluded. If the <strong>$20,000 USDC softcap</strong> was not reached, the escrow contract allows every buyer to call <code>refund()</code> and receive <strong>100% of their USDC back</strong>. Check the contract on BscScan for the current state.';
 })();
 
 </script>
