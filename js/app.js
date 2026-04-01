@@ -1075,6 +1075,122 @@ document.querySelectorAll('.addr-hash').forEach(el => {
   });
 });
 
+/* ═══ PRESALE V2 — 30 STAGES DATA + CHART + TABLE ═══ */
+(function presaleV2() {
+  const STAGES = [
+    {n:1,t:18238,p:0.005,r:91,m:'sellout',wc:50},
+    {n:2,t:20062,p:0.006,r:121,m:'sellout',wc:50},
+    {n:3,t:22068,p:0.0073,r:161,m:'sellout',wc:50},
+    {n:4,t:24274,p:0.0088,r:214,m:'sellout',wc:50},
+    {n:5,t:26702,p:0.0107,r:284,m:'sellout',wc:50},
+    {n:6,t:29372,p:0.0129,r:378,m:'sellout',wc:50},
+    {n:7,t:32309,p:0.0155,r:502,m:'sellout',wc:50},
+    {n:8,t:35540,p:0.0188,r:667,m:'sellout',wc:100},
+    {n:9,t:39094,p:0.0227,r:887,m:'sellout',wc:100},
+    {n:10,t:43004,p:0.0274,r:1178,m:'sellout',wc:150},
+    {n:11,t:47304,p:0.0331,r:1565,m:'sellout',wc:200},
+    {n:12,t:52034,p:0.04,r:2080,m:'sellout',wc:250},
+    {n:13,t:57238,p:0.0483,r:2764,m:'sellout',wc:350},
+    {n:14,t:62962,p:0.0583,r:3673,m:'sellout',wc:450},
+    {n:15,t:69258,p:0.0705,r:4881,m:'sellout',wc:600},
+    {n:16,t:76184,p:0.0851,r:6486,m:'sellout',wc:800},
+    {n:17,t:83802,p:0.1029,r:8619,m:'sellout',wc:1050},
+    {n:18,t:92182,p:0.1242,r:11453,m:'sellout',wc:1350},
+    {n:19,t:101400,p:0.1501,r:15219,m:'sellout',wc:1850},
+    {n:20,t:111540,p:0.1813,r:20223,m:'sellout',wc:2450},
+    {n:21,t:122694,p:0.219,r:26873,m:'sellout',wc:3200},
+    {n:22,t:134964,p:0.2646,r:35710,m:'sellout',wc:4300},
+    {n:23,t:148460,p:0.3196,r:47452,m:'sellout',wc:5700},
+    {n:24,t:163306,p:0.3861,r:63056,m:'sellout',wc:7550},
+    {n:25,t:179637,p:0.4664,r:83791,m:'sellout',wc:10050},
+    {n:26,t:197601,p:0.5635,r:111344,m:'timed',wc:13350},
+    {n:27,t:217361,p:0.6807,r:147957,m:'timed',wc:17750},
+    {n:28,t:239097,p:0.8223,r:196609,m:'timed',wc:23600},
+    {n:29,t:263006,p:0.9934,r:261259,m:'timed',wc:31350},
+    {n:30,t:289307,p:1.20,r:347168,m:'timed',wc:41650}
+  ];
+
+  // Populate table
+  const tbody = document.getElementById('stagesTableBody');
+  if (tbody) {
+    let cumR = 0;
+    STAGES.forEach(s => {
+      cumR += s.r;
+      const cls = s.m === 'timed' ? ' class="row-timed"' : '';
+      const modeHtml = s.m === 'sellout'
+        ? '<span class="mode-sell">Sell-out</span>'
+        : '<span class="mode-time">Timed</span>';
+      tbody.innerHTML += `<tr${cls}>
+        <td><strong>${s.n}</strong></td>
+        <td>${modeHtml}</td>
+        <td>${s.t.toLocaleString()} GGRD</td>
+        <td class="price-col">$${s.p < 0.01 ? s.p.toFixed(4) : s.p < 0.1 ? s.p.toFixed(4) : s.p.toFixed(4)}</td>
+        <td class="raise-col">$${s.r.toLocaleString()}</td>
+        <td>$${s.wc.toLocaleString()}</td>
+      </tr>`;
+    });
+  }
+
+  // Chart
+  const canvas = document.getElementById('presaleChart');
+  if (canvas && typeof Chart !== 'undefined') {
+    new Chart(canvas, {
+      type: 'bar',
+      data: {
+        labels: STAGES.map(s => s.n),
+        datasets: [
+          {
+            label: 'Tokens',
+            data: STAGES.map(s => s.t),
+            backgroundColor: STAGES.map(s => s.m === 'sellout' ? '#00AA98' : '#F3C512'),
+            borderRadius: 2,
+            yAxisID: 'y',
+            order: 2
+          },
+          {
+            label: 'Price',
+            data: STAGES.map(s => s.p),
+            type: 'line',
+            borderColor: '#E24B4A',
+            backgroundColor: 'rgba(226,75,74,0.08)',
+            fill: true,
+            tension: 0.3,
+            pointRadius: 2,
+            pointBackgroundColor: '#E24B4A',
+            borderWidth: 2,
+            yAxisID: 'y1',
+            order: 1
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: {
+            grid: { display: false },
+            ticks: { color: '#888', font: { size: 10 } },
+            title: { display: true, text: 'Stage', color: '#888', font: { size: 11 } }
+          },
+          y: {
+            position: 'left',
+            grid: { color: 'rgba(255,255,255,0.05)' },
+            ticks: { color: '#888', font: { size: 10 }, callback: v => (v/1000).toFixed(0)+'K' },
+            title: { display: true, text: 'Tokens', color: '#888', font: { size: 11 } }
+          },
+          y1: {
+            position: 'right',
+            grid: { drawOnChartArea: false },
+            ticks: { color: '#E24B4A', font: { size: 10 }, callback: v => '$'+v.toFixed(2) },
+            title: { display: true, text: 'Price (USDC)', color: '#E24B4A', font: { size: 11 } }
+          }
+        }
+      }
+    });
+  }
+})();
+
 /* ═══ POST-PRESALE STATE HANDLER ═══ */
 (function postPresaleHandler() {
   const PRESALE_END_MS = new Date('2026-03-31T01:15:19Z').getTime();

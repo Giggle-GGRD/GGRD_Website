@@ -539,6 +539,8 @@ section {
 @media (max-width: 768px) {
   .token-grid { grid-template-columns: 1fr; }
   .stage-indicator { display: none; }
+  .presale-modes { grid-template-columns: 1fr; }
+  .presale-stats { grid-template-columns: repeat(3, 1fr); }
 }
 
 .pie-wrapper {
@@ -967,6 +969,40 @@ section {
 .faq-a-inner { padding: 0 0 1.2rem; font-size: 0.8rem; color: var(--gray); line-height: 1.7; }
 .faq-a-inner a { color: var(--green); }
 .faq-a-inner strong { color: var(--white); }
+
+/* ===== PRESALE V2 (30 stages) ===== */
+.presale-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin: 2rem 0; }
+.ps-stat { background: var(--bg2); border: 1px solid var(--border); padding: 1rem; text-align: center; }
+.ps-val { font-family: 'Bangers', cursive; font-size: 1.8rem; color: var(--yellow); letter-spacing: 1px; }
+.ps-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px; color: var(--gray); margin-top: 0.2rem; }
+
+.presale-modes { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+.pm-card { background: var(--bg2); border: 1px solid var(--border); padding: 1.5rem; position: relative; }
+.pm-sellout { border-top: 3px solid var(--green); }
+.pm-timed { border-top: 3px solid var(--yellow); }
+.pm-badge { font-size: 0.55rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.5rem; }
+.pm-sellout .pm-badge { color: var(--green); }
+.pm-timed .pm-badge { color: var(--yellow); }
+.pm-title { font-family: 'Bangers', cursive; font-size: 1.3rem; letter-spacing: 2px; margin-bottom: 0.5rem; }
+.pm-desc { font-size: 0.75rem; color: var(--gray); line-height: 1.6; }
+
+.presale-chart-wrap { background: var(--bg2); border: 1px solid var(--border); padding: 1.5rem; margin: 1.5rem 0; }
+.presale-chart-header { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px; color: var(--gray); margin-bottom: 1rem; }
+.presale-chart-legend { display: flex; gap: 1.5rem; margin-top: 1rem; font-size: 0.65rem; color: var(--gray); }
+.presale-chart-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 4px; vertical-align: middle; }
+
+.stages-table-wrap { overflow-x: auto; margin: 1.5rem 0; max-height: 480px; overflow-y: auto; border: 1px solid var(--border); }
+.stages-table { width: 100%; border-collapse: collapse; font-size: 0.72rem; }
+.stages-table thead { position: sticky; top: 0; z-index: 2; }
+.stages-table th { background: var(--bg2); color: var(--gray); font-size: 0.55rem; text-transform: uppercase; letter-spacing: 1px; padding: 0.7rem 0.8rem; text-align: left; border-bottom: 2px solid var(--border); }
+.stages-table td { padding: 0.5rem 0.8rem; border-bottom: 1px solid rgba(0,170,152,0.08); color: var(--white); }
+.stages-table tr:hover { background: rgba(0,170,152,0.05); }
+.stages-table tr.row-timed { background: rgba(243,197,18,0.04); }
+.stages-table tr.row-timed:hover { background: rgba(243,197,18,0.08); }
+.stages-table .mode-sell { color: var(--green); font-weight: 700; font-size: 0.6rem; text-transform: uppercase; }
+.stages-table .mode-time { color: var(--yellow); font-weight: 700; font-size: 0.6rem; text-transform: uppercase; }
+.stages-table .price-col { color: var(--yellow); font-family: 'Courier Prime', monospace; }
+.stages-table .raise-col { color: var(--gray); }
 
 /* ===== DISCLAIMER ===== */
 .disclaimer-section {

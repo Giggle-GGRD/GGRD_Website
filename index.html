@@ -532,55 +532,62 @@
 <!-- PRESALE STAGES -->
 <section class="presale-section" id="presale">
   <div class="section-inner">
-    <h2 class="section-title fade-up">PRESALE STAGES ⚡</h2>
-    <p class="section-sub fade-up">4 stages. Each one more expensive than the last. Degen math: buy earlier, pay less. Minimum 50 USDC.</p>
-    <div class="stages-grid fade-up">
-      <div class="stage-card active">
-        <span class="stage-num">01</span>
-        <div class="stage-label">Stage 1</div>
-        <div class="stage-dates">Mar 10 → Mar 15, 2026</div>
-        <div class="stage-price">$0.0085</div>
-        <div class="stage-tokens">1,000,000 GGRD available</div>
-        <div class="stage-wallet">Max per wallet: <strong>500 USDC</strong></div>
+    <h2 class="section-title fade-up">PRESALE — 30 STAGES ⚡</h2>
+    <p class="section-sub fade-up">$0.005 → $1.20 · 240x price growth · Buy early, pay less. Stages 1–25 sell out, stages 26–30 are timed.</p>
+
+    <div class="presale-stats fade-up">
+      <div class="ps-stat"><div class="ps-val">$0.005</div><div class="ps-label">Starting Price</div></div>
+      <div class="ps-stat"><div class="ps-val">$1.20</div><div class="ps-label">Final Price</div></div>
+      <div class="ps-stat"><div class="ps-val">240x</div><div class="ps-label">Early Bird Advantage</div></div>
+      <div class="ps-stat"><div class="ps-val">3M</div><div class="ps-label">GGRD For Sale</div></div>
+      <div class="ps-stat"><div class="ps-val">$1.4M</div><div class="ps-label">Target Raise</div></div>
+      <div class="ps-stat"><div class="ps-val">$1.1M+</div><div class="ps-label">LP Pool (80%)</div></div>
+    </div>
+
+    <div class="presale-modes fade-up">
+      <div class="pm-card pm-sellout">
+        <div class="pm-badge">STAGES 1–25</div>
+        <div class="pm-title">SELL-OUT MODE</div>
+        <p class="pm-desc">No time limit. Each stage lasts until all tokens are sold. Price increases automatically when a stage sells out.</p>
       </div>
-      <div class="stage-card">
-        <span class="stage-num">02</span>
-        <div class="stage-label">Stage 2</div>
-        <div class="stage-dates">Mar 15 → Mar 20, 2026</div>
-        <div class="stage-price">$0.0100</div>
-        <div class="stage-tokens">800,000 GGRD available</div>
-        <div class="stage-wallet">Max per wallet: <strong>750 USDC</strong></div>
-      </div>
-      <div class="stage-card">
-        <span class="stage-num">03</span>
-        <div class="stage-label">Stage 3</div>
-        <div class="stage-dates">Mar 20 → Mar 26, 2026</div>
-        <div class="stage-price">$0.0115</div>
-        <div class="stage-tokens">700,000 GGRD available</div>
-        <div class="stage-wallet">Max per wallet: <strong>1,000 USDC</strong></div>
-      </div>
-      <div class="stage-card">
-        <span class="stage-num">04</span>
-        <div class="stage-label">Stage 4</div>
-        <div class="stage-dates">Mar 26 → Mar 31, 2026</div>
-        <div class="stage-price">$0.0134</div>
-        <div class="stage-tokens">500,000 GGRD available</div>
-        <div class="stage-wallet">Max per wallet: <strong>1,500 USDC</strong></div>
+      <div class="pm-card pm-timed">
+        <div class="pm-badge">STAGES 26–30</div>
+        <div class="pm-title">COUNTDOWN MODE</div>
+        <p class="pm-desc">Fixed deadline per stage. Unsold tokens roll over to the next stage. After stage 30, remaining tokens are burned.</p>
       </div>
     </div>
+
+    <div class="presale-chart-wrap fade-up">
+      <div class="presale-chart-header">Price curve &amp; token allocation</div>
+      <div style="position:relative;width:100%;height:280px">
+        <canvas id="presaleChart"></canvas>
+      </div>
+      <div class="presale-chart-legend">
+        <span><i style="background:#00AA98"></i> Sell-out stages</span>
+        <span><i style="background:#F3C512"></i> Timed stages</span>
+        <span><i style="background:#E24B4A"></i> Price (USDC)</span>
+      </div>
+    </div>
+
+    <div class="stages-table-wrap fade-up">
+      <table class="stages-table">
+        <thead>
+          <tr>
+            <th>#</th><th>Mode</th><th>Tokens</th><th>Price</th><th>Stage Raise</th><th>Wallet Cap</th>
+          </tr>
+        </thead>
+        <tbody id="stagesTableBody"></tbody>
+      </table>
+    </div>
+
     <div class="caps-row fade-up">
       <div class="cap-box">
-        <div class="cap-label">Softcap</div>
-        <div class="cap-val">20,000 USDC</div>
-        <div class="cap-desc">Miss this → 100% refund to all buyers</div>
+        <div class="cap-label">Total raise target</div>
+        <div class="cap-val">~$1,400,000</div>
+        <div class="cap-desc">From all 30 stages combined</div>
       </div>
       <div class="cap-box">
-        <div class="cap-label">Hardcap</div>
-        <div class="cap-val">31,250 USDC</div>
-        <div class="cap-desc">Hit this → presale closes immediately</div>
-      </div>
-      <div class="cap-box">
-        <div class="cap-label">On success: USDC split</div>
+        <div class="cap-label">USDC split on success</div>
         <div class="cap-val">80% / 20%</div>
         <div class="cap-desc">80% to liquidity LP · 20% to marketing</div>
       </div>
@@ -588,6 +595,11 @@
         <div class="cap-label">Claim vesting</div>
         <div class="cap-val">50% + 50%</div>
         <div class="cap-desc">50% immediate · 50% linear over 60 days</div>
+      </div>
+      <div class="cap-box">
+        <div class="cap-label">Unsold tokens</div>
+        <div class="cap-val">BURNED</div>
+        <div class="cap-desc">Permanent supply reduction · deflationary</div>
       </div>
     </div>
   </div>
@@ -721,9 +733,9 @@
       </div>
       <div class="rm-item done">
         <div class="rm-phase">Phase 2 — Presale</div>
-        <div class="rm-title">USDC PRESALE (4 STAGES)</div>
+        <div class="rm-title">30-STAGE HYBRID PRESALE</div>
         <div class="rm-desc">
-          4-stage USDC presale with on-chain escrow. <strong>Softcap $20K</strong> / hardcap $31.25K. 100% refund guarantee if softcap missed. Presale period: Mar 10–31, 2026.
+          30-stage USDC presale: stages 1–25 sell-out based (no time limit), stages 26–30 countdown with rollover. Price: <strong>$0.005 → $1.20</strong> (240x growth). Target raise: ~$1.4M. Unsold tokens burned.
         </div>
       </div>
       <div class="rm-item active">
@@ -848,8 +860,8 @@
         <div class="faq-a"><div class="faq-a-inner">GGRD (Giggle Reloaded) is a <strong>fixed-supply meme token</strong> on BNB Smart Chain with 10,000,000 tokens. It combines meme culture with real on-chain mechanisms: charity vesting, staking, and multisig governance. It is <strong>not</strong> a security or investment product.</div></div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">What happened with the presale?</div>
-        <div class="faq-a"><div class="faq-a-inner">The presale ran from March 10–31, 2026 in 4 stages. The smart contract enforces two paths: if the <strong>$20,000 USDC softcap</strong> was reached, funds are split 80/20 (liquidity/marketing). If not, every buyer can call <code>refund()</code> to get 100% of their USDC back. Check the <a href="https://bscscan.com/address/0xd8983534dd3c369d85127f6C9B85d98768139387#readContract" target="_blank" rel="noopener noreferrer">presale contract on BscScan</a> for the current state.</div></div>
+        <div class="faq-q">How does the presale work?</div>
+        <div class="faq-a"><div class="faq-a-inner">The presale has <strong>30 stages</strong> with prices from $0.005 to $1.20 (240x growth). Stages 1–25 are <strong>sell-out based</strong> — no time limit, each stage ends when its token pool is sold. Stages 26–30 have <strong>fixed deadlines</strong> with unsold tokens rolling to the next stage. After stage 30, any remaining tokens are <strong>burned permanently</strong>. Target raise: ~$1.4M USDC, with 80% going to the liquidity pool.</div></div>
       </div>
       <div class="faq-item">
         <div class="faq-q">How does the charity mechanism work?</div>
@@ -923,6 +935,7 @@
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <script src="js/app.js" defer></script>
 </body>
 </html>
