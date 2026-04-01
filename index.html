@@ -943,6 +943,53 @@ section {
   margin-top: 0.3rem;
 }
 
+/* ===== TRANSPARENCY / AUDIT ===== */
+.trust-section { background: var(--bg); }
+.trust-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+.trust-card { background: var(--bg2); border: 1px solid var(--border); padding: 1.5rem; position: relative; }
+.trust-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.trust-card-title { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--green); margin-bottom: 0.5rem; }
+.trust-card p { font-size: 0.8rem; color: var(--gray); line-height: 1.6; }
+.trust-card a { color: var(--green); text-decoration: none; }
+
+/* ===== TEAM ===== */
+.team-section { background: var(--bg2); }
+.team-inner { max-width: 680px; margin: 0 auto; }
+.team-note { background: var(--bg); border: 1px solid var(--border); padding: 1.5rem; margin-top: 1.5rem; font-size: 0.8rem; color: var(--gray); line-height: 1.7; }
+.team-note strong { color: var(--white); }
+.team-wallets { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+.team-wallet-card { background: var(--bg2); border: 1px solid var(--border); padding: 1rem; text-align: center; }
+.team-wallet-card .tw-role { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px; color: var(--green); margin-bottom: 0.3rem; }
+.team-wallet-card .tw-label { font-size: 0.85rem; color: var(--white); }
+
+/* ===== ROADMAP ===== */
+.roadmap-section { background: var(--bg); }
+.roadmap-timeline { position: relative; margin-top: 2rem; padding-left: 2rem; }
+.roadmap-timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: var(--border); }
+.rm-item { position: relative; margin-bottom: 2rem; padding-left: 1.5rem; }
+.rm-item::before { content: ''; position: absolute; left: -2rem; top: 6px; width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--green); background: var(--bg); z-index: 1; }
+.rm-item.done::before { background: var(--green); }
+.rm-item.active::before { background: var(--yellow); border-color: var(--yellow); box-shadow: 0 0 8px rgba(243,197,18,0.4); }
+.rm-phase { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px; color: var(--green); margin-bottom: 0.2rem; }
+.rm-item.active .rm-phase { color: var(--yellow); }
+.rm-title { font-family: 'Bangers', cursive; font-size: 1.3rem; color: var(--white); letter-spacing: 1px; margin-bottom: 0.3rem; }
+.rm-desc { font-size: 0.8rem; color: var(--gray); line-height: 1.6; }
+.rm-desc strong { color: var(--white); }
+
+/* ===== FAQ ===== */
+.faq-section { background: var(--bg2); }
+.faq-list { max-width: 720px; margin: 2rem auto 0; }
+.faq-item { border-bottom: 1px solid var(--border); }
+.faq-q { display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 0; cursor: pointer; font-size: 0.9rem; color: var(--white); font-weight: 700; gap: 1rem; }
+.faq-q:hover { color: var(--green); }
+.faq-q::after { content: '+'; font-size: 1.3rem; color: var(--green); flex-shrink: 0; transition: transform 0.2s; }
+.faq-item.open .faq-q::after { content: '−'; }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+.faq-item.open .faq-a { max-height: 500px; }
+.faq-a-inner { padding: 0 0 1.2rem; font-size: 0.8rem; color: var(--gray); line-height: 1.7; }
+.faq-a-inner a { color: var(--green); }
+.faq-a-inner strong { color: var(--white); }
+
 /* ===== DISCLAIMER ===== */
 .disclaimer-section {
   background: var(--bg2);
@@ -2827,7 +2874,10 @@ section {
     <li><a href="#tokenomics">Tokenomics</a></li>
     <li><a href="#staking">Staking</a></li>
     <li><a href="#charity">Charity</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#addresses">Contracts</a></li>
+    <li><a href="#faq">FAQ</a></li>
     <li><a href="donation-policy.html">Charity Policy</a></li>
     <li><a href="GGRD_Whitepaper_EN.html">Whitepaper</a></li>
     <li><a class="nav-cta" href="#buy">BUY GGRD ⚡</a></li>
@@ -3116,6 +3166,47 @@ section {
 </section>
 
 
+<!-- TRANSPARENCY & SECURITY -->
+<section class="trust-section" id="transparency">
+  <div class="section-inner">
+    <h2 class="section-title fade-up">TRANSPARENCY & SECURITY 🛡️</h2>
+    <p class="section-sub fade-up">Don't trust — verify. Everything is on-chain and open-source.</p>
+    <div class="trust-grid">
+      <div class="trust-card fade-up">
+        <div class="trust-icon">📜</div>
+        <div class="trust-card-title">OpenZeppelin Primitives</div>
+        <p>All smart contracts are built on <strong>audited OpenZeppelin v5 libraries</strong> — ERC20, Ownable, ReentrancyGuard, SafeERC20. Industry-standard, battle-tested code.</p>
+      </div>
+      <div class="trust-card fade-up">
+        <div class="trust-icon">🔓</div>
+        <div class="trust-card-title">100% Open Source</div>
+        <p>Every contract is <strong>verified on BscScan</strong> and the full source code is public on <a href="https://github.com/Giggle-GGRD" target="_blank" rel="noopener noreferrer">GitHub</a>. Read every line before you interact.</p>
+      </div>
+      <div class="trust-card fade-up">
+        <div class="trust-icon">🏦</div>
+        <div class="trust-card-title">Multisig + Timelock</div>
+        <p><strong>2-of-3 Safe multisig</strong> controls all treasury wallets. Critical actions require <strong>48h–72h timelocks</strong>. No single key can move funds.</p>
+      </div>
+      <div class="trust-card fade-up">
+        <div class="trust-icon">🚫</div>
+        <div class="trust-card-title">No Hidden Functions</div>
+        <p>No post-deploy mint. No blacklist. No freeze. No fee switch. No trading lock. No upgrade proxy. The token contract has <strong>zero admin functions</strong>.</p>
+      </div>
+      <div class="trust-card fade-up">
+        <div class="trust-icon">🧪</div>
+        <div class="trust-card-title">Tested & Verified</div>
+        <p>Contracts tested with <strong>Hardhat + Foundry</strong> test suites. Deployed artifacts and constructor params documented in the <a href="GGRD_Whitepaper_EN.html" target="_blank">Whitepaper v4.0</a>.</p>
+      </div>
+      <div class="trust-card fade-up">
+        <div class="trust-icon">🔍</div>
+        <div class="trust-card-title">Verify Yourself</div>
+        <p>All <a href="#addresses">contract addresses</a> are published below. Cross-check every address on <strong>BscScan</strong> before signing any transaction. DYOR.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 <!-- TOKENOMICS -->
 <section class="tokenomics-section" id="tokenomics">
   <div class="section-inner">
@@ -3298,21 +3389,113 @@ section {
       <div class="charity-vesting fade-up">
         <div class="cv-cell">
           <div class="cv-pct">40%</div>
-          <div class="cv-name">Charity A</div>
+          <div class="cv-name">Beneficiary 1</div>
         </div>
         <div class="cv-cell">
           <div class="cv-pct">30%</div>
-          <div class="cv-name">Charity B</div>
+          <div class="cv-name">Beneficiary 2</div>
         </div>
         <div class="cv-cell">
           <div class="cv-pct">30%</div>
-          <div class="cv-name">Charity C</div>
+          <div class="cv-name">Beneficiary 3</div>
         </div>
       </div>
+      <p style="font-size:0.72rem;color:var(--gray);text-align:center;margin-top:0.8rem;line-height:1.6" class="fade-up">
+        Beneficiaries are selected through <strong style="color:var(--white)">community governance</strong> — nomination, vetting, and voting. See the <a href="donation-policy.html" style="color:var(--green)">Donation Policy</a> for eligibility criteria and the full selection process.
+      </p>
       <div class="charity-note fade-up">
         <strong>Vesting timeline:</strong> Start 2026-03-10 · Cliff 2027-03-10 · Full release 2029-03-09<br>
         Contract: <code style="color:var(--green);font-size:0.68rem">0xE2993F0C8D2020dD9866E2d6dC5AA1D62b7C8fDC</code><br>
         <a href="donation-policy.html" style="color:var(--green);font-size:0.75rem">📄 Read full Donation Policy →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team-section" id="team">
+  <div class="section-inner">
+    <h2 class="section-title fade-up">THE TEAM 👤</h2>
+    <p class="section-sub fade-up">Pseudonymous builders, transparent actions.</p>
+    <div class="team-inner">
+      <div class="team-note fade-up">
+        <p>GGRD is built by a <strong>pseudonymous team</strong> — which is standard in DeFi and memecoin projects. We believe <strong>code transparency matters more than personal fame</strong>.</p>
+        <p style="margin-top:0.8rem">What you <em>can</em> verify:</p>
+        <p style="margin-top:0.5rem">
+          ✅ All contracts are <strong>verified and open-source</strong> on BscScan<br>
+          ✅ All treasury wallets use <strong>2/3 Safe multisig</strong> — no single key<br>
+          ✅ Critical actions require <strong>48h–72h timelocks</strong> before execution<br>
+          ✅ Token has <strong>zero admin functions</strong> — no mint, no freeze, no blacklist<br>
+          ✅ Full source code on <a href="https://github.com/Giggle-GGRD" target="_blank" rel="noopener noreferrer">GitHub</a><br>
+          ✅ Whitepaper is <strong>contract-aligned</strong> — every claim matches deployed code
+        </p>
+        <p style="margin-top:0.8rem;font-style:italic">We don't ask you to trust us. We ask you to <strong>read the contracts</strong>.</p>
+      </div>
+      <div class="team-wallets fade-up">
+        <div class="team-wallet-card">
+          <div class="tw-role">Governance</div>
+          <div class="tw-label">2/3 Safe Multisig</div>
+        </div>
+        <div class="team-wallet-card">
+          <div class="tw-role">Liquidity</div>
+          <div class="tw-label">2/3 Safe Multisig</div>
+        </div>
+        <div class="team-wallet-card">
+          <div class="tw-role">Marketing</div>
+          <div class="tw-label">2/3 Safe Multisig</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section class="roadmap-section" id="roadmap">
+  <div class="section-inner">
+    <h2 class="section-title fade-up">ROADMAP 🗺️</h2>
+    <p class="section-sub fade-up">Where we've been, where we're going.</p>
+    <div class="roadmap-timeline fade-up">
+      <div class="rm-item done">
+        <div class="rm-phase">Phase 1 — Foundation</div>
+        <div class="rm-title">BUILD & DEPLOY</div>
+        <div class="rm-desc">
+          Token contract, presale escrow, staking engine, charity vesting, governance Safe multisigs, timelocks — all <strong>deployed on BSC mainnet</strong>. Whitepaper v4.0 published. Website live.
+        </div>
+      </div>
+      <div class="rm-item done">
+        <div class="rm-phase">Phase 2 — Presale</div>
+        <div class="rm-title">USDC PRESALE (4 STAGES)</div>
+        <div class="rm-desc">
+          4-stage USDC presale with on-chain escrow. <strong>Softcap $20K</strong> / hardcap $31.25K. 100% refund guarantee if softcap missed. Presale period: Mar 10–31, 2026.
+        </div>
+      </div>
+      <div class="rm-item active">
+        <div class="rm-phase">Phase 3 — Post-Presale</div>
+        <div class="rm-title">SETTLEMENT & LISTING</div>
+        <div class="rm-desc">
+          Presale settlement (success path or refund path). <strong>DEX liquidity deployment</strong> (PancakeSwap GGRD/USDC). LP tokens locked 12 months. CoinGecko + CoinMarketCap listing applications.
+        </div>
+      </div>
+      <div class="rm-item">
+        <div class="rm-phase">Phase 4 — Growth</div>
+        <div class="rm-title">STAKING & COMMUNITY</div>
+        <div class="rm-desc">
+          Staking program activation (10% APR, 730 days). Community campaigns. <strong>Telegram bot</strong> and engagement tools. DEXScreener / GeckoTerminal integration. Marketing push.
+        </div>
+      </div>
+      <div class="rm-item">
+        <div class="rm-phase">Phase 5 — Charity</div>
+        <div class="rm-title">FIRST DONATION</div>
+        <div class="rm-desc">
+          <strong>1-year cliff ends Mar 2027.</strong> Community governance vote to select verified pediatric oncology charities. First on-chain charity distribution. Public donation reports published.
+        </div>
+      </div>
+      <div class="rm-item">
+        <div class="rm-phase">Phase 6 — Long-term</div>
+        <div class="rm-title">VESTING & ECOSYSTEM</div>
+        <div class="rm-desc">
+          Continued charity vesting through 2029. Ecosystem expansion — bridges, partnerships, new utility. <strong>Community-driven governance</strong> for treasury operations.
+        </div>
       </div>
     </div>
   </div>
@@ -3394,6 +3577,48 @@ section {
     <p style="font-size:0.7rem;color:var(--gray);margin-top:1.5rem;text-align:center" class="fade-up">
       USDC on BSC: <code style="color:var(--green)">0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d</code> — always verify pay token before approving
     </p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="section-inner">
+    <h2 class="section-title fade-up">FAQ ❓</h2>
+    <p class="section-sub fade-up">Quick answers to common questions.</p>
+    <div class="faq-list fade-up">
+      <div class="faq-item">
+        <div class="faq-q">What is GGRD?</div>
+        <div class="faq-a"><div class="faq-a-inner">GGRD (Giggle Reloaded) is a <strong>fixed-supply meme token</strong> on BNB Smart Chain with 10,000,000 tokens. It combines meme culture with real on-chain mechanisms: charity vesting, staking, and multisig governance. It is <strong>not</strong> a security or investment product.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What happened with the presale?</div>
+        <div class="faq-a"><div class="faq-a-inner">The presale ran from March 10–31, 2026 in 4 stages. The smart contract enforces two paths: if the <strong>$20,000 USDC softcap</strong> was reached, funds are split 80/20 (liquidity/marketing). If not, every buyer can call <code>refund()</code> to get 100% of their USDC back. Check the <a href="https://bscscan.com/address/0xd8983534dd3c369d85127f6C9B85d98768139387#readContract" target="_blank" rel="noopener noreferrer">presale contract on BscScan</a> for the current state.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How does the charity mechanism work?</div>
+        <div class="faq-a"><div class="faq-a-inner">2,000,000 GGRD (20% of supply) is locked in the <strong>CharityVesting403030</strong> contract with a 1-year cliff and 3-year linear vesting. Funds are split 40/30/30 across three beneficiaries selected through community governance. No tokens can be claimed before March 2027. Read the full <a href="donation-policy.html">Donation Policy</a>.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How does staking work?</div>
+        <div class="faq-a"><div class="faq-a-inner"><strong>10% APR</strong> with a 30-day minimum lock period. The reward pool is capped at 3,000,000 GGRD (hardcoded on-chain). Maximum total staked: 5,000,000 GGRD. Early exit incurs a <strong>10% penalty</strong>. Program duration: 730 days.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Who controls the funds?</div>
+        <div class="faq-a"><div class="faq-a-inner">All treasury wallets (governance, liquidity, marketing) are controlled by <strong>2-of-3 Safe multisig</strong> wallets. Critical operations require <strong>48h or 72h timelocks</strong>. No single person can move funds unilaterally. All multisig addresses are listed in the <a href="#addresses">Contracts</a> section.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Is there a transfer tax?</div>
+        <div class="faq-a"><div class="faq-a-inner"><strong>0% tax.</strong> There is no fee mechanism in the token contract. No buy tax, no sell tax, no transfer tax. The contract does not contain any fee-related functions.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Can more tokens be minted?</div>
+        <div class="faq-a"><div class="faq-a-inner"><strong>No.</strong> The total supply of 10,000,000 GGRD was minted once in the constructor. The contract contains <strong>no mint function</strong>. Supply is fixed forever.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Where can I verify the contracts?</div>
+        <div class="faq-a"><div class="faq-a-inner">All contracts are verified on <strong>BscScan</strong> — see the <a href="#addresses">Contract Addresses</a> section below. Full source code is also available on <a href="https://github.com/Giggle-GGRD" target="_blank" rel="noopener noreferrer">GitHub</a>. The <a href="GGRD_Whitepaper_EN.html">Whitepaper v4.0</a> documents every parameter with contract-level references.</div></div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -4487,6 +4712,16 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
   })();
 
 })();
+
+/* ═══ FAQ ACCORDION ═══ */
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.parentElement;
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  });
+});
 
 /* ═══ POST-PRESALE STATE HANDLER ═══ */
 (function postPresaleHandler() {
