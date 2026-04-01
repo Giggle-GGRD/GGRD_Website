@@ -1,50 +1,6 @@
-// ===== COUNTDOWN =====
-const PRESALE_END = new Date('2026-03-31T01:15:19Z').getTime();
-
-function updateCountdown() {
-  const now = Date.now();
-  const diff = PRESALE_END - now;
-  if (diff <= 0) {
-    document.querySelector('.countdown-box').innerHTML = '<div style="font-family:Bangers,cursive;font-size:2rem;color:var(--red);letter-spacing:3px">PRESALE ENDED</div>';
-    return;
-  }
-  const d = Math.floor(diff / 86400000);
-  const h = Math.floor((diff % 86400000) / 3600000);
-  const m = Math.floor((diff % 3600000) / 60000);
-  const s = Math.floor((diff % 60000) / 1000);
-  document.getElementById('cd-days').textContent  = String(d).padStart(2,'0');
-  document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
-  document.getElementById('cd-mins').textContent  = String(m).padStart(2,'0');
-  document.getElementById('cd-secs').textContent  = String(s).padStart(2,'0');
-}
-updateCountdown();
-setInterval(updateCountdown, 1000);
-
-// ===== LIVE STAGE =====
-const STAGES = [
-  { end: new Date('2026-03-15T01:15:19Z'), num: 1, price: '0.0085 USDC' },
-  { end: new Date('2026-03-20T01:15:19Z'), num: 2, price: '0.0100 USDC' },
-  { end: new Date('2026-03-26T01:15:19Z'), num: 3, price: '0.0115 USDC' },
-  { end: new Date('2026-03-31T01:15:19Z'), num: 4, price: '0.0134 USDC' },
-];
-
-function updateStage() {
-  const now = new Date();
-  for (const s of STAGES) {
-    if (now < s.end) {
-      document.getElementById('liveStageNum').textContent = s.num;
-      document.getElementById('liveStagePrice').textContent = s.price;
-      // update ticker
-      document.querySelectorAll('.ticker span').forEach((el, i) => {
-        if (i === 6 || i === 14) el.textContent = `⚡ STAGE ${s.num} — ${s.price}`;
-      });
-      return;
-    }
-  }
-  document.getElementById('liveStageNum').textContent = '—';
-  document.getElementById('liveStagePrice').textContent = 'ENDED';
-}
-updateStage();
+// ===== PRESALE V2 — CURRENT STAGE (sell-out based) =====
+// Stage is determined by smart contract, this is display-only
+// Values will be read from contract on-chain when deployed
 
 function syncTickerOffset() {
   const nav = document.querySelector('nav');
@@ -1191,63 +1147,4 @@ document.querySelectorAll('.addr-hash').forEach(el => {
   }
 })();
 
-/* ═══ POST-PRESALE STATE HANDLER ═══ */
-(function postPresaleHandler() {
-  const PRESALE_END_MS = new Date('2026-03-31T01:15:19Z').getTime();
-  if (Date.now() < PRESALE_END_MS) return; // presale still active
-
-  // Ticker: replace "PRESALE LIVE NOW" with "PRESALE ENDED"
-  document.querySelectorAll('.ticker span').forEach(el => {
-    if (el.textContent.includes('PRESALE LIVE NOW'))
-      el.textContent = '🏁 PRESALE ENDED';
-    if (el.textContent.includes('STAGE'))
-      el.textContent = '⏳ RESULTS PENDING';
-  });
-
-  // Hero badge
-  const badge = document.querySelector('.hero-badge');
-  if (badge) {
-    badge.textContent = '🏁 PRESALE ENDED — RESULTS PENDING';
-    badge.style.background = 'rgba(243,197,18,0.12)';
-    badge.style.borderColor = 'rgba(243,197,18,0.3)';
-  }
-
-  // Buy widget header
-  const wh = document.querySelector('.w-header-label');
-  if (wh) wh.textContent = 'PRESALE ENDED';
-  const wsub = document.querySelector('.w-header-sub');
-  if (wsub) wsub.textContent = 'RESULTS PENDING · BSC MAINNET';
-
-  // Footer text
-  const fd = document.querySelector('.footer-desc');
-  if (fd) fd.textContent = 'The meme token that gives back. Fixed supply. On-chain charity. Safe governance. BSC mainnet. Presale ended March 31, 2026.';
-
-  // Refund banner — update tense
-  const rh = document.querySelector('.refund-headline');
-  if (rh) rh.innerHTML = '🏁 PRESALE ENDED — SOFTCAP STATUS PENDING';
-  const rb = document.querySelector('.refund-body');
-  if (rb) rb.innerHTML = 'The presale period has concluded. If the <strong>$20,000 USDC softcap</strong> was not reached, the escrow contract allows every buyer to call <code>refund()</code> and receive <strong>100% of their USDC back</strong>. Check the contract on BscScan for the current state.';
-
-  // Stage cards — mark all as ended
-  document.querySelectorAll('.stage-card').forEach(el => {
-    el.classList.remove('active');
-    el.classList.add('ended');
-  });
-
-  // Presale stages section header
-  const stagesH2 = document.querySelector('#presale')?.querySelector('h2');
-  if (stagesH2) stagesH2.textContent = 'PRESALE STAGES (ENDED) ⚡';
-
-  // Buy widget — disable input and button
-  const usdcInput = document.getElementById('w-usdc-in');
-  if (usdcInput) { usdcInput.disabled = true; usdcInput.placeholder = 'Presale ended'; }
-
-  // Nav CTA — update text
-  document.querySelectorAll('.nav-cta, .nav-active').forEach(el => {
-    if (el.textContent.includes('BUY')) {
-      el.textContent = '📊 Status';
-      el.href = '#buy';
-    }
-  });
-})();
 
