@@ -145,20 +145,20 @@
 <div class="ticker-wrap" aria-hidden="true">
   <div class="ticker">
     <span>😂 GIGGLE RELOADED</span>
-    <span>🚀 30-STAGE PRESALE</span>
+    <span>🚀 4-STAGE USDC PRESALE</span>
     <span>💸 10,000,000 FIXED SUPPLY</span>
     <span>🔒 NO MINT · NO RUG</span>
     <span>❤️ CHARITY ON-CHAIN</span>
     <span>🏦 SAFE MULTISIG GOVERNANCE</span>
-    <span>⚡ STAGE 1 — $0.005 USDC</span>
+    <span>⚡ LIVE CONTRACT DATA · BSC</span>
     <span>🐂 BSC MAINNET</span>
     <span>😂 GIGGLE RELOADED</span>
-    <span>🚀 30-STAGE PRESALE</span>
+    <span>🚀 4-STAGE USDC PRESALE</span>
     <span>💸 10,000,000 FIXED SUPPLY</span>
     <span>🔒 NO MINT · NO RUG</span>
     <span>❤️ CHARITY ON-CHAIN</span>
     <span>🏦 SAFE MULTISIG GOVERNANCE</span>
-    <span>⚡ STAGE 1 — $0.005 USDC</span>
+    <span>⚡ LIVE CONTRACT DATA · BSC</span>
     <span>🐂 BSC MAINNET</span>
   </div>
 </div>
@@ -170,25 +170,22 @@
     <div class="refund-icon">🚀</div>
 
     <div class="refund-content">
-      <div class="refund-headline">30-STAGE PRESALE — <span>$0.005 ENTRY</span></div>
-      <p class="refund-body">
-        Not vibes. Not promises. <strong>Hard-coded in the presale contract.</strong>
-        30 stages from <strong>$0.005 to $1.20</strong> — that's a <strong>240x price increase</strong>.
-        Stages 1–25 sell out organically. Stages 26–30 have deadlines with rollover.
-        Unsold tokens are <strong>burned permanently</strong>. On-chain. Verifiable.
+      <div class="refund-headline" id="refund-headline">Contract-aligned presale</div>
+      <p class="refund-body" id="refund-body">
+        Loading live presale data directly from the BNB Chain contract.
       </p>
       <div class="refund-pills">
         <span class="rpill rpill-red">🔒 On-chain escrow</span>
-        <span class="rpill rpill-green">✓ 240x early bird advantage</span>
-        <span class="rpill rpill-white">Unsold = burned</span>
+        <span class="rpill rpill-green">✓ Contract-enforced caps</span>
+        <span class="rpill rpill-white">Refund path below softcap</span>
         <span class="rpill rpill-white">OpenZeppelin primitives</span>
       </div>
     </div>
 
     <div class="refund-proof">
-      <div class="rp-label">Stage 1 price</div>
-      <div class="rp-val">$0.005</div>
-      <div class="rp-sub">Stage 30 → <strong>$1.20</strong></div>
+      <div class="rp-label" id="refund-proof-label">Contract read</div>
+      <div class="rp-val" id="refund-proof-value">Loading</div>
+      <div class="rp-sub" id="refund-proof-sub">Waiting for BNB Chain state</div>
     </div>
 
   </div>
@@ -199,14 +196,14 @@
 <section class="hero" id="buy">
 
   <div class="stage-indicator">
-    <div class="s-label">CURRENT STAGE</div>
-    <div class="s-num" id="liveStageNum">1</div>
-    <div class="s-price" id="liveStagePrice">$0.005</div>
+    <div class="s-label" id="liveStageLabel">CONTRACT STATUS</div>
+    <div class="s-num" id="liveStageNum">Loading</div>
+    <div class="s-price" id="liveStagePrice">Reading BNB Chain</div>
   </div>
 
   <div class="hero-layout">
     <div class="hero-content">
-  <div class="hero-badge" role="status">🟢 PRESALE ACTIVE — STAGE 1 — BSC MAINNET</div>
+  <div class="hero-badge" id="hero-badge" role="status">LIVE CONTRACT STATUS - LOADING - BSC MAINNET</div>
 
   <h1>
     <span class="glitch" data-text="GIGGLE">GIGGLE</span><br>
@@ -214,18 +211,18 @@
   </h1>
 
   <p class="hero-sub">$GGRD · BNB Smart Chain</p>
-  <p class="hero-tagline">The meme coin that actually <span>does something</span>. Fixed 10M supply. 30-stage USDC presale. Charity vesting on-chain. No funny business — just funny.</p>
+  <p class="hero-tagline">The meme coin that actually <span>does something</span>. Fixed 10M supply. 4-stage USDC presale. Charity vesting on-chain. No funny business — just funny.</p>
 
   <div class="countdown-box" style="text-align:center">
-    <div style="font-size:0.55rem;text-transform:uppercase;letter-spacing:3px;color:var(--gray);margin-bottom:0.3rem">Current stage</div>
-    <div style="font-family:'Bangers',cursive;font-size:3.5rem;color:var(--green);letter-spacing:3px;line-height:1">1 <span style="font-size:1.2rem;color:var(--gray)">/30</span></div>
-    <div style="font-size:0.8rem;color:var(--yellow);margin-top:0.3rem">$0.005 USDC</div>
-    <div style="font-size:0.6rem;color:var(--gray);margin-top:0.2rem">18,238 GGRD available · Sell-out mode</div>
+    <div id="hero-live-status-label" style="font-size:0.55rem;text-transform:uppercase;letter-spacing:3px;color:var(--gray);margin-bottom:0.3rem">Contract status</div>
+    <div id="hero-live-status-main" style="font-family:'Bangers',cursive;font-size:3.5rem;color:var(--green);letter-spacing:3px;line-height:1">Loading</div>
+    <div id="hero-live-status-secondary" style="font-size:0.8rem;color:var(--yellow);margin-top:0.3rem">Reading on-chain values</div>
+    <div id="hero-live-status-sub" style="font-size:0.6rem;color:var(--gray);margin-top:0.2rem">Live widget waits for the presale contract</div>
   </div>
 
   <div class="hero-btns">
     <a class="btn-primary" href="#buy-widget">
-      🚀 BUY STAGE 1
+      🚀 OPEN LIVE WIDGET
     </a>
     <a class="btn-secondary" href="https://t.me/GGRDofficial" target="_blank" rel="noopener">
       💬 JOIN TELEGRAM
@@ -262,9 +259,9 @@
 
         <div class="widget-header">
           <div class="widget-title">BUY $GGRD</div>
-          <div class="widget-badge">
+          <div class="widget-badge" id="widget-badge-text">
             <span class="w-dot"></span>
-            STAGE 1 OF 30 · BSC
+            LIVE CONTRACT STATUS · BSC
           </div>
         </div>
 
@@ -274,34 +271,34 @@
           <div class="w-stage-row">
             <div class="w-stage-info">
               <div class="w-stage-lbl">Current Stage</div>
-              <div class="w-stage-val" id="w-stage-val">1 of 30</div>
+              <div class="w-stage-val" id="w-stage-val">Loading live data</div>
             </div>
             <div class="w-price-info">
               <div class="w-price-lbl">Price</div>
-              <div class="w-price-val" id="w-price-val">$0.0050 USDC</div>
-              <div class="w-next-price" id="w-next-price">Next: $0.0060</div>
+              <div class="w-price-val" id="w-price-val">Waiting for contract</div>
+              <div class="w-next-price" id="w-next-price">Live values will populate here</div>
             </div>
           </div>
 
           <!-- Total Progress -->
           <div style="position:relative;margin-bottom:0.8rem">
             <div class="w-raised-row">
-              <span>Raised: <strong id="w-raised-val" style="color:var(--green)">$0</strong></span>
-              <span><span id="w-pct">0.0%</span> of $1.4M</span>
+              <span>Raised: <strong id="w-raised-val" style="color:var(--green)">Loading</strong></span>
+              <span><span id="w-pct">0.0%</span> of <strong id="w-target-val">Loading</strong></span>
             </div>
             <div class="w-progress-outer">
-              <div class="w-progress-inner" id="w-progress" style="width:0.5%"></div>
+              <div class="w-progress-inner" id="w-progress" style="width:0%"></div>
             </div>
           </div>
 
           <!-- Stage progress -->
           <div style="background:rgba(0,170,152,0.06);border:1px solid rgba(0,170,152,0.15);padding:0.5rem 0.7rem;margin-bottom:0.8rem;border-radius:4px">
             <div style="display:flex;justify-content:space-between;font-size:0.6rem;color:#aaa;margin-bottom:4px">
-              <span>Stage 1 · sell-out mode</span>
-              <span style="color:var(--green)">0 / 18,238 GGRD</span>
+              <span id="w-stage-progress-label">Current stage allocation</span>
+              <span id="w-stage-progress-value" style="color:var(--green)">Loading</span>
             </div>
             <div class="w-progress-outer" style="height:5px">
-              <div class="w-progress-inner" style="width:0.5%;background:var(--green)"></div>
+              <div class="w-progress-inner" id="w-stage-progress-bar" style="width:0%;background:var(--green)"></div>
             </div>
           </div>
 
@@ -315,22 +312,22 @@
           <div class="w-input-grid">
             <div class="w-input-box">
               <span class="w-input-lbl">You Pay</span>
-              <input class="w-input-field" id="w-usdc-in" type="number" min="1" max="50" step="1" placeholder="10" />
-              <span class="w-input-currency">USDC (BSC)</span>
+              <input class="w-input-field" id="w-usdc-in" type="number" min="0" step="0.01" placeholder="Loading" />
+              <span class="w-input-currency"><span class="js-pay-token-symbol">USDC</span> (BSC)</span>
             </div>
             <div class="w-input-box">
               <span class="w-input-lbl">You Receive</span>
               <div class="w-output-val" id="w-ggrd-out">0.00</div>
-              <span class="w-input-currency">GGRD</span>
+              <span class="w-input-currency"><span class="js-sale-token-symbol">GGRD</span></span>
             </div>
           </div>
 
-          <div class="w-min-note" id="w-min-note">Wallet cap: $50 (Stage 1) · Claim: 50% instant + 50% over 60 days</div>
+          <div class="w-min-note" id="w-min-note">Loading live contract constraints</div>
 
           <div class="w-connected-addr" id="w-addr"></div>
-          <div class="w-status" id="w-status">Connect wallet to buy $GGRD</div>
+          <div class="w-status" id="w-status">Loading live contract data from BNB Chain.</div>
 
-          <button class="w-connect-btn" id="w-btn">CONNECT WALLET</button>
+          <button class="w-connect-btn" id="w-btn">LOADING LIVE DATA</button>
           <button class="w-disconnect-btn" id="w-disconnect-btn">✕ Disconnect</button>
 
           <div class="w-steps">
@@ -342,15 +339,15 @@
         </div>
 
         <div class="widget-footer">
-          <div class="wf-claim">240x early bird advantage · <strong>$0.005 → $1.20</strong></div>
-          <div class="wf-secure">🔒 On-chain escrow · Unsold tokens burned</div>
+          <div class="wf-claim" id="widget-footer-claim">Loading caps</div>
+          <div class="wf-secure" id="widget-footer-secure">Loading settlement rules</div>
         </div>
 
       </div><!-- /widget-wrap -->
 
-      <p class="hero-widget-footnote">
+      <p class="hero-widget-footnote" id="hero-widget-footnote">
         Presale contract: <a href="https://bscscan.com/address/0xd8983534dd3c369d85127f6C9B85d98768139387" target="_blank" rel="noopener" style="color:#444;text-decoration:underline">0xd8983534...9387 ↗</a>
-        · 30 stages · <strong style="color:var(--green)">$0.005 → $1.20</strong>
+        · loading live constraints
       </p>
     </div>
   </div>
@@ -374,8 +371,8 @@
       </div>
       <div class="why-card fade-up">
         <span class="why-emoji">💰</span>
-        <div class="why-title">30-STAGE PRESALE</div>
-        <p class="why-text">You buy with USDC. Escrow contract holds it. <strong>$0.005 entry → $1.20 final price.</strong> 240x early bird advantage. On-chain. No "trust us bro".</p>
+        <div class="why-title">CONTRACT-ALIGNED PRESALE</div>
+        <p class="why-text">You buy with <strong><span class="js-pay-token-symbol">USDC</span></strong>. The escrow contract enforces stage price, caps, and wallet limits directly on-chain. The website reads the live contract before enabling buys.</p>
       </div>
       <div class="why-card fade-up">
         <span class="why-emoji">❤️</span>
@@ -506,28 +503,28 @@
 <!-- PRESALE STAGES -->
 <section class="presale-section" id="presale">
   <div class="section-inner">
-    <h2 class="section-title fade-up">PRESALE — 30 STAGES ⚡</h2>
-    <p class="section-sub fade-up">$0.005 → $1.20 · 240x price growth · Buy early, pay less. Stages 1–25 sell out, stages 26–30 are timed.</p>
+    <h2 class="section-title fade-up">PRESALE — LIVE CONTRACT VIEW ⚡</h2>
+    <p class="section-sub fade-up">This section reflects the live BNB Chain presale contract. If contract data cannot be verified, the buy flow stays blocked and the UI avoids presenting stale business values as truth.</p>
 
     <div class="presale-stats fade-up">
-      <div class="ps-stat"><div class="ps-val">$0.005</div><div class="ps-label">Starting Price</div></div>
-      <div class="ps-stat"><div class="ps-val">$1.20</div><div class="ps-label">Final Price</div></div>
-      <div class="ps-stat"><div class="ps-val">240x</div><div class="ps-label">Early Bird Advantage</div></div>
-      <div class="ps-stat"><div class="ps-val">3M</div><div class="ps-label">GGRD For Sale</div></div>
-      <div class="ps-stat"><div class="ps-val">$1.4M</div><div class="ps-label">Target Raise</div></div>
-      <div class="ps-stat"><div class="ps-val">$1.1M+</div><div class="ps-label">LP Pool (80%)</div></div>
+      <div class="ps-stat"><div class="ps-val" id="ps-start-price">--</div><div class="ps-label">Starting Price</div></div>
+      <div class="ps-stat"><div class="ps-val" id="ps-final-price">--</div><div class="ps-label">Final Price</div></div>
+      <div class="ps-stat"><div class="ps-val" id="ps-stage-count">--</div><div class="ps-label">Configured Stages</div></div>
+      <div class="ps-stat"><div class="ps-val" id="ps-token-cap">--</div><div class="ps-label">Token Cap</div></div>
+      <div class="ps-stat"><div class="ps-val" id="ps-softcap">--</div><div class="ps-label">Softcap</div></div>
+      <div class="ps-stat"><div class="ps-val" id="ps-hardcap">--</div><div class="ps-label">Hardcap</div></div>
     </div>
 
     <div class="presale-modes fade-up">
       <div class="pm-card pm-sellout">
-        <div class="pm-badge">STAGES 1–25</div>
-        <div class="pm-title">SELL-OUT MODE</div>
-        <p class="pm-desc">No time limit. Each stage lasts until all tokens are sold. Price increases automatically when a stage sells out.</p>
+        <div class="pm-badge" id="pm-window-badge">On-chain stages</div>
+        <div class="pm-title" id="pm-window-title">Waiting for live window</div>
+        <p class="pm-desc" id="pm-window-desc">Loading the presale lifecycle directly from the contract.</p>
       </div>
       <div class="pm-card pm-timed">
-        <div class="pm-badge">STAGES 26–30</div>
-        <div class="pm-title">COUNTDOWN MODE</div>
-        <p class="pm-desc">Fixed deadline per stage. Unsold tokens roll over to the next stage. After stage 30, remaining tokens are burned.</p>
+        <div class="pm-badge" id="pm-caps-badge">Min buy pending</div>
+        <div class="pm-title" id="pm-caps-title">Stage caps loading</div>
+        <p class="pm-desc" id="pm-caps-desc">Wallet limits and token caps are rendered from live contract reads.</p>
       </div>
     </div>
 
@@ -537,9 +534,9 @@
         <canvas id="presaleChart"></canvas>
       </div>
       <div class="presale-chart-legend">
-        <span><i style="background:#00AA98"></i> Sell-out stages</span>
-        <span><i style="background:#F3C512"></i> Timed stages</span>
-        <span><i style="background:#E24B4A"></i> Price (USDC)</span>
+        <span><i style="background:#00AA98"></i> Current stage highlight</span>
+        <span><i style="background:#F3C512"></i> Allocation bars</span>
+        <span><i style="background:#E24B4A"></i> Price (<span class="js-pay-token-symbol">USDC</span>)</span>
       </div>
     </div>
 
@@ -547,7 +544,7 @@
       <table class="stages-table">
         <thead>
           <tr>
-            <th>#</th><th>Mode</th><th>Tokens</th><th>Price</th><th>Stage Raise</th><th>Wallet Cap</th>
+            <th>#</th><th>Allocation</th><th>Price</th><th>Wallet Cap</th><th>Raised</th><th>Sold</th>
           </tr>
         </thead>
         <tbody id="stagesTableBody"></tbody>
@@ -556,24 +553,24 @@
 
     <div class="caps-row fade-up">
       <div class="cap-box">
-        <div class="cap-label">Total raise target</div>
-        <div class="cap-val">~$1,400,000</div>
-        <div class="cap-desc">From all 30 stages combined</div>
+        <div class="cap-label">Softcap</div>
+        <div class="cap-val" id="cap-softcap">--</div>
+        <div class="cap-desc">Refund path stays available below softcap</div>
+      </div>
+      <div class="cap-box">
+        <div class="cap-label">Hardcap</div>
+        <div class="cap-val" id="cap-hardcap">--</div>
+        <div class="cap-desc">Contract-enforced maximum raise</div>
       </div>
       <div class="cap-box">
         <div class="cap-label">USDC split on success</div>
-        <div class="cap-val">80% / 20%</div>
-        <div class="cap-desc">80% to liquidity LP · 20% to marketing</div>
+        <div class="cap-val" id="cap-split">--</div>
+        <div class="cap-desc">Liquidity and marketing settlement ratio</div>
       </div>
       <div class="cap-box">
         <div class="cap-label">Claim vesting</div>
-        <div class="cap-val">50% + 50%</div>
-        <div class="cap-desc">50% immediate · 50% linear over 60 days</div>
-      </div>
-      <div class="cap-box">
-        <div class="cap-label">Unsold tokens</div>
-        <div class="cap-val">BURNED</div>
-        <div class="cap-desc">Permanent supply reduction · deflationary</div>
+        <div class="cap-val" id="cap-claim">--</div>
+        <div class="cap-desc">Immediate unlock plus 60-day linear release</div>
       </div>
     </div>
   </div>
@@ -707,9 +704,9 @@
       </div>
       <div class="rm-item done">
         <div class="rm-phase">Phase 2 — Presale</div>
-        <div class="rm-title">30-STAGE HYBRID PRESALE</div>
+        <div class="rm-title">4-STAGE CONTRACT PRESALE</div>
         <div class="rm-desc">
-          30-stage USDC presale: stages 1–25 sell-out based (no time limit), stages 26–30 countdown with rollover. Price: <strong>$0.005 → $1.20</strong> (240x growth). Target raise: ~$1.4M. Unsold tokens burned.
+          4-stage <span class="js-pay-token-symbol">USDC</span> presale with on-chain stage pricing, wallet caps, softcap/hardcap enforcement, and escrowed settlement. The frontend now reads the live contract before presenting stage, price, and buy-state information.
         </div>
       </div>
       <div class="rm-item active">
@@ -817,8 +814,8 @@
         </tbody>
       </table>
     </div>
-    <p style="font-size:0.7rem;color:var(--gray);margin-top:1.5rem;text-align:center" class="fade-up">
-      USDC on BSC: <code style="color:var(--green)">0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d</code> — always verify pay token before approving
+    <p style="font-size:0.7rem;color:var(--gray);margin-top:1.5rem;text-align:center" class="fade-up" id="pay-token-address-note">
+      Live pay token on BSC is loading from the presale contract.
     </p>
   </div>
 </section>
@@ -835,7 +832,7 @@
       </div>
       <div class="faq-item">
         <div class="faq-q">How does the presale work?</div>
-        <div class="faq-a"><div class="faq-a-inner">The presale has <strong>30 stages</strong> with prices from $0.005 to $1.20 (240x growth). Stages 1–25 are <strong>sell-out based</strong> — no time limit, each stage ends when its token pool is sold. Stages 26–30 have <strong>fixed deadlines</strong> with unsold tokens rolling to the next stage. After stage 30, any remaining tokens are <strong>burned permanently</strong>. Target raise: ~$1.4M USDC, with 80% going to the liquidity pool.</div></div>
+        <div class="faq-a"><div class="faq-a-inner">The live presale is enforced by the on-chain escrow contract. The widget reads the configured stages, prices, wallet caps, softcap, hardcap, and pay token directly from BNB Chain before allowing a purchase. If the contract is inactive, finalized, unreadable, or your wallet is on the wrong chain, the buy flow remains blocked with a specific reason.</div></div>
       </div>
       <div class="faq-item">
         <div class="faq-q">How does the charity mechanism work?</div>
@@ -910,6 +907,7 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="js/presale-config.js" defer></script>
 <script src="js/app.js" defer></script>
 </body>
 </html>

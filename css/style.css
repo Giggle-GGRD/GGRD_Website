@@ -276,7 +276,7 @@ nav {
 }
 
 .countdown-box::before {
-  content: '⚡ PRESALE ENDS IN ⚡';
+  content: 'LIVE CONTRACT STATUS';
   position: absolute;
   top: -11px;
   left: 50%;
@@ -970,7 +970,7 @@ section {
 .faq-a-inner a { color: var(--green); }
 .faq-a-inner strong { color: var(--white); }
 
-/* ===== PRESALE V2 (30 stages) ===== */
+/* ===== PRESALE V2 ===== */
 .presale-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin: 2rem 0; }
 .ps-stat { background: var(--bg2); border: 1px solid var(--border); padding: 1rem; text-align: center; }
 .ps-val { font-family: 'Bangers', cursive; font-size: 1.8rem; color: var(--yellow); letter-spacing: 1px; }
@@ -2793,4 +2793,3 @@ section {
     letter-spacing: 0.07em;
   }
 }
-
