@@ -82,7 +82,7 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
   let wcConnectAttempt = 0;
   let connected = false;
   let currentStageIdx = 0; // 0-based index, default to stage 1
-  const MAX_BUY_USDC = 50; // stage 1 cap, updated from contract
+  const MAX_BUY_USDC = 41650; // global max (Stage 30 cap), per-stage caps in STAGES array
 
   let onChainStageId = 0;
   let onChainStageWalletCap = null;
@@ -127,7 +127,7 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
   }
   function getCurrentStageWalletCap() {
     const stageId = getEffectiveStageId();
-    const fallbackCap = stageId > 0 ? (STAGE_WALLET_CAPS[stageId] || MAX_BUY_USDC) : MAX_BUY_USDC;
+    const fallbackCap = stageId > 0 && STAGES[stageId-1] ? (STAGES[stageId-1].walletCap || MAX_BUY_USDC) : MAX_BUY_USDC;
     const stageCap = Number.isFinite(onChainStageWalletCap) && onChainStageWalletCap > 0 ? onChainStageWalletCap : fallbackCap;
     return Math.min(stageCap, MAX_BUY_USDC);
   }
