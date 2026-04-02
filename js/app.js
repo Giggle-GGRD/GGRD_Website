@@ -37,10 +37,36 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
   const WC_OPTIONAL_EVENTS = ['message'];
 
   const STAGES = [
-    { end: new Date('2026-03-15T01:15:19Z'), priceScaled: 850000,  label: "Stage 1", next: "0.0100" },
-    { end: new Date('2026-03-20T01:15:19Z'), priceScaled: 1000000, label: "Stage 2", next: "0.0115" },
-    { end: new Date('2026-03-26T01:15:19Z'), priceScaled: 1150000, label: "Stage 3", next: "0.0134" },
-    { end: new Date('2026-03-31T01:15:19Z'), priceScaled: 1340000, label: "Stage 4", next: "—" },
+    { num:1,  priceScaled: 500000,   tokens:18238,  label:"Stage 1",  next:"0.0060", walletCap:50 },
+    { num:2,  priceScaled: 600000,   tokens:20062,  label:"Stage 2",  next:"0.0073", walletCap:50 },
+    { num:3,  priceScaled: 730000,   tokens:22068,  label:"Stage 3",  next:"0.0088", walletCap:50 },
+    { num:4,  priceScaled: 880000,   tokens:24274,  label:"Stage 4",  next:"0.0107", walletCap:50 },
+    { num:5,  priceScaled: 1060000,  tokens:26702,  label:"Stage 5",  next:"0.0129", walletCap:50 },
+    { num:6,  priceScaled: 1290000,  tokens:29372,  label:"Stage 6",  next:"0.0155", walletCap:50 },
+    { num:7,  priceScaled: 1550000,  tokens:32309,  label:"Stage 7",  next:"0.0188", walletCap:50 },
+    { num:8,  priceScaled: 1880000,  tokens:35540,  label:"Stage 8",  next:"0.0227", walletCap:100 },
+    { num:9,  priceScaled: 2270000,  tokens:39094,  label:"Stage 9",  next:"0.0274", walletCap:100 },
+    { num:10, priceScaled: 2740000,  tokens:43004,  label:"Stage 10", next:"0.0331", walletCap:150 },
+    { num:11, priceScaled: 3310000,  tokens:47304,  label:"Stage 11", next:"0.0400", walletCap:200 },
+    { num:12, priceScaled: 4000000,  tokens:52034,  label:"Stage 12", next:"0.0483", walletCap:250 },
+    { num:13, priceScaled: 4830000,  tokens:57238,  label:"Stage 13", next:"0.0583", walletCap:350 },
+    { num:14, priceScaled: 5830000,  tokens:62962,  label:"Stage 14", next:"0.0705", walletCap:450 },
+    { num:15, priceScaled: 7050000,  tokens:69258,  label:"Stage 15", next:"0.0851", walletCap:600 },
+    { num:16, priceScaled: 8510000,  tokens:76184,  label:"Stage 16", next:"0.1029", walletCap:800 },
+    { num:17, priceScaled: 10290000, tokens:83802,  label:"Stage 17", next:"0.1242", walletCap:1050 },
+    { num:18, priceScaled: 12420000, tokens:92182,  label:"Stage 18", next:"0.1501", walletCap:1350 },
+    { num:19, priceScaled: 15010000, tokens:101400, label:"Stage 19", next:"0.1813", walletCap:1850 },
+    { num:20, priceScaled: 18130000, tokens:111540, label:"Stage 20", next:"0.2190", walletCap:2450 },
+    { num:21, priceScaled: 21900000, tokens:122694, label:"Stage 21", next:"0.2646", walletCap:3200 },
+    { num:22, priceScaled: 26460000, tokens:134964, label:"Stage 22", next:"0.3196", walletCap:4300 },
+    { num:23, priceScaled: 31960000, tokens:148460, label:"Stage 23", next:"0.3861", walletCap:5700 },
+    { num:24, priceScaled: 38610000, tokens:163306, label:"Stage 24", next:"0.4664", walletCap:7550 },
+    { num:25, priceScaled: 46640000, tokens:179637, label:"Stage 25", next:"0.5635", walletCap:10050 },
+    { num:26, priceScaled: 56350000, tokens:197601, label:"Stage 26", next:"0.6807", walletCap:13350 },
+    { num:27, priceScaled: 68070000, tokens:217361, label:"Stage 27", next:"0.8223", walletCap:17750 },
+    { num:28, priceScaled: 82230000, tokens:239097, label:"Stage 28", next:"0.9934", walletCap:23600 },
+    { num:29, priceScaled: 99340000, tokens:263006, label:"Stage 29", next:"1.2000", walletCap:31350 },
+    { num:30, priceScaled: 120000000,tokens:289307, label:"Stage 30", next:"—",      walletCap:41650 },
   ];
   const ERC20_ABI = [
     "function allowance(address,address) view returns (uint256)",
@@ -55,8 +81,9 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
   let wcUriListener = null;
   let wcConnectAttempt = 0;
   let connected = false;
-  const MAX_BUY_USDC = 3000;
-  const STAGE_WALLET_CAPS = {1: 500, 2: 750, 3: 1000, 4: 1500};
+  let currentStageIdx = 0; // 0-based index, default to stage 1
+  const MAX_BUY_USDC = 50; // stage 1 cap, updated from contract
+
   let onChainStageId = 0;
   let onChainStageWalletCap = null;
   let onChainStagePriceScaled = null;
@@ -84,12 +111,9 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
   function formatUsdc(v) {
     return Number(v).toLocaleString('en-US',{maximumFractionDigits:0});
   }
-  function getStage() { return STAGES.find(s => new Date() < s.end) || null; }
+  function getStage() { return STAGES[currentStageIdx] || STAGES[0]; }
   function getFallbackStageId() {
-    const s = getStage();
-    if(!s) return 0;
-    const idx = STAGES.indexOf(s);
-    return idx >= 0 ? idx + 1 : 0;
+    return currentStageIdx + 1;
   }
   function getEffectiveStageId() {
     return onChainStageId || getFallbackStageId();
@@ -193,9 +217,8 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
     stageConfig: '0x4f72540b',
   };
 
-  let onChainHardcap = 31250; // fallback
-  let onChainSoftcap = 20000;
-  let onChainMinBuy  = 50;
+  let onChainHardcap = 1400000; // new target: $1.4M
+  let onChainMinBuy  = 1;
 
   function encodeUint256(value) {
     return BigInt(value).toString(16).padStart(64,'0');
@@ -226,55 +249,23 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
   }
 
   async function loadContractState() {
+    // New presale contract not yet deployed — use fallback STAGES data
+    // When new contract is deployed, update PRESALE_ADDR and this function
     try {
-      // Parallel reads
-      const [raisedHex, hardcapHex, softcapHex, minBuyHex, currentStageHex, totalSoldHex] = await Promise.all([
-        rpcCall(SEL.totalRaised),
-        rpcCall(SEL.hardcap),
-        rpcCall(SEL.softcap),
-        rpcCall(SEL.minBuy),
-        rpcCall(SEL.currentStageId),
-        rpcCall(SEL.totalSold),
-      ]);
-
-      // Parse on-chain values
-      if(hardcapHex) onChainHardcap = Number(BigInt(hardcapHex))/1e18;
-      if(softcapHex) onChainSoftcap = Number(BigInt(softcapHex))/1e18;
-      if(minBuyHex)  onChainMinBuy  = Number(BigInt(minBuyHex))/1e18;
-      onChainStageId = currentStageHex ? Number(BigInt(currentStageHex)) : 0;
-
-      if(onChainStageId > 0) {
-        const stageConfigHex = await rpcCall(SEL.stageConfig + encodeUint256(onChainStageId));
-        const stageConfig = parseStageConfig(stageConfigHex);
-        if(stageConfig) {
-          onChainStageWalletCap = Number(stageConfig.walletCap)/1e18;
-          onChainStagePriceScaled = Number(stageConfig.priceScaled);
-        }
-      } else {
-        onChainStageWalletCap = null;
-        onChainStagePriceScaled = null;
-      }
+      const s = getStage();
+      if(!s) return;
       syncBuyWidgetMeta();
 
-      // Update raised display
-      if(raisedHex) {
-        const usdc = Number(BigInt(raisedHex))/1e18;
-        const pct  = Math.min(usdc/onChainHardcap*100,100);
-        const rEl=$('w-raised-val'),pEl=$('w-pct'),prEl=$('w-progress');
-        if(rEl)  rEl.textContent =`$${usdc.toLocaleString('en-US',{maximumFractionDigits:0})} USDC`;
-        if(pEl)  pEl.textContent = pct.toFixed(1)+'%';
-        if(prEl) prEl.style.width= Math.max(pct,0.5)+'%';
-      }
+      // Display static raised amount (will be live when contract deploys)
+      const rEl=$('w-raised-val'),pEl=$('w-pct'),prEl=$('w-progress');
+      const raised = 0; // Will read from contract when deployed
+      const target = onChainHardcap;
+      const pct = Math.min(raised/target*100, 100);
+      if(rEl) rEl.textContent = `$${raised.toLocaleString('en-US',{maximumFractionDigits:0})} USDC`;
+      if(pEl) pEl.textContent = pct.toFixed(1)+'%';
+      if(prEl) prEl.style.width = Math.max(pct, 0.5)+'%';
 
-      if(currentStageHex && onChainStageId === 0 && btn && !connected) {
-        // production: silent;
-      }
-
-      // Log on-chain state
-      const sold = totalSoldHex ? Number(BigInt(totalSoldHex))/1e18 : 0;
-      // production: silent;
       refreshQuoteAndValidation();
-
     } catch(e) { /* silent */ }
   }
 
@@ -969,17 +960,16 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
   /* ─── init ───────────────────────────────────── */
   (function init() {
+    currentStageIdx = 0; // Stage 1
     const s=getStage();
     if(s) {
       const sv=$('w-stage-val'),pv=$('w-price-val'),np=$('w-next-price');
-      if(sv) sv.textContent=s.label;
-      if(pv) pv.textContent=`$${(s.priceScaled/1e8).toFixed(4)} USDC`;
-      if(np) np.textContent=s.next!=='—'?`Next stage: $${s.next}`:'Last stage!';
-    } else {
-      if($('w-stage-val')) $('w-stage-val').textContent="ENDED";
-      if($('w-price-val')) $('w-price-val').textContent="—";
-      if(btn) { btn.disabled=true; btn.textContent="PRESALE ENDED"; }
+      if(sv) sv.textContent='1 of 30';
+      if(pv) pv.textContent='$0.0050 USDC';
+      if(np) np.textContent='Next: $0.0060';
     }
+    // Ensure button is NEVER disabled on init
+    if(btn) { btn.disabled = false; btn.textContent = 'CONNECT WALLET'; }
     const inp=$('w-usdc-in');
     if(inp) inp.addEventListener('input',()=>{
       const validation = refreshQuoteAndValidation();
